@@ -4,7 +4,7 @@ import {listSubjects,loadSubject,ROOT} from './lib.mjs';
 const SETS={gui:'java.awt.* java.awt.event.* java.awt.geom.* javax.swing.* java.io.* javax.imageio.*',sql:'java.sql.* javax.sql.* javax.sql.rowset.*',beans:'java.beans.* java.io.*',rmi:'java.rmi.* java.rmi.server.* java.rmi.registry.*'};
 const pick=src=>{const k=/ResultSet|Connection|DriverManager|RowSet/.test(src)?'sql':/Remote|Naming|Registry/.test(src)?'rmi':/Property|Bean|Introspector|XMLEncoder|Serializable/.test(src)&&!/JFrame|JPanel/.test(src)?'beans':'gui';return SETS[k].split(' ').map(i=>`import ${i};`).join('')+'\n'};
 const jar=path.join(ROOT,'tools/lib/servlet-api.jar');let ok=0,bad=0,skip=0;
-for(const s of listSubjects()){const S=loadSubject(s);if(!/java/i.test(s))continue;
+for(const s of listSubjects()){const S=loadSubject(s);if((S.subject.codeLang||'')!=='java')continue;
  for(const c of S.cards){if(!c.code)continue;let src=c.code.lines.join('\n');const own=/^import /m.test(src);const IMPORTS=own?'':pick(src);
   if(/<%|<html|<!DOCTYPE/i.test(src)||(/javax\.servlet|HttpServlet/.test(src)&&!fs.existsSync(jar))){skip++;continue}
   let name='Snip';const m=src.match(/public\s+(?:class|interface)\s+(\w+)/);

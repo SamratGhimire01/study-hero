@@ -11,7 +11,12 @@
   "papers": "node tools/papers.mjs",
   "all": "npm run build && npm run papers && npm run pdf && node tools/build.mjs",
   "check:java": "node tools/check-java.mjs",
-  "cards": "for f in subjects/*/src/*.mjs; do node $f; done"
+  "cards": "node tools/cards.mjs",
+  "new": "node tools/new-subject.mjs",
+  "check:code": "node tools/check-java.mjs",
+  "guard": "node tools/guard.mjs",
+  "publish:list": "node tools/publish-list.mjs",
+  "subject": "npm run cards && npm run check:code && npm run all && npm run guard"
  },
  "devDependencies": {
   "playwright": "*"

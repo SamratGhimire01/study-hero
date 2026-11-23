@@ -31,5 +31,7 @@
    }
   ],
   "note": "Format assumed from syllabus + sample paper; confirm with owner."
- }
+ },
+ "codeLang": "java",
+ "defaultSource": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs"
 }

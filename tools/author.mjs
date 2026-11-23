@@ -30,7 +30,7 @@ export function writer(subject){const S=loadSubject(subject);const t={};S.syllab
   return function card(c){const i=S.order.indexOf(c.topic);if(i<0)throw Error('bad topic '+c.topic);
     const prev=t[S.order[i-1]],next=t[S.order[i+1]];
     const out={id:`${c.topic}.${c.slug}`,topic:c.topic,kind:c.kind||'lesson',title:c.title,subtitle:c.sub||t[c.topic],marks:c.marks||'[5]',
-      confidence:c.conf||'draft – check against textbook',source:c.src||'Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs',
+      confidence:c.conf||'draft – check against textbook',source:c.src||S.subject.defaultSource||'Standard textbook for this subject',
       last:c.last||(prev?`${prev}. ${c.link||''}`.trim():'Start of the subject.'),next:c.next||(next?`${next}. ${c.nextWhy||''}`.trim():'End of the syllabus. Go to EXAM-RESCUE.'),
       actors:c.actors,scenes:c.scenes,mnemonics:c.mn,code:c.code||null,answer_html:c.ans,quiz:{q:c.q[0],options:c.q[1],answer:c.q[2],why:c.q[3]}};
     const dir=path.join(S.dir,'topics','unit'+c.topic.split('.')[0].slice(1));fs.mkdirSync(dir,{recursive:true});

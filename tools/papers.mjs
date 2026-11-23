@@ -3,7 +3,7 @@ import fs from 'fs';import path from 'path';
 import {listSubjects,loadSubject,readJSON} from './lib.mjs';
 export function priority(S){
   const qf=path.join(S.dir,'analysis/questions.json');if(!fs.existsSync(qf))return null;
-  const Q=readJSON(qf);const hours={};S.syllabus.units.forEach(u=>hours[u.id]=u.hours);
+  const Q=readJSON(qf);if(!Q.questions||!Q.questions.length)return null;const hours={};S.syllabus.units.forEach(u=>hours[u.id]=u.hours);
   const total=Object.values(hours).reduce((a,b)=>a+b,0);const nPapers=Math.max(1,Q.papers.length);
   const topic={};
   for(const q of Q.questions){const share=q.marks/q.topics.length;for(const t of q.topics){const o=topic[t]=topic[t]||{topic:t,asked:0,marks:0,qs:[]};o.asked++;o.marks+=share;o.qs.push(q.q)}}
