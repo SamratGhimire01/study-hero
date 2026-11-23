@@ -1,0 +1,182 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>u3 – Advanced Java Programming</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,600&display=swap"><style>@page{size:A4;margin:14mm}
+*{box-sizing:border-box}body{font:10.5pt/1.5 Inter,"DejaVu Sans",Arial,sans-serif;color:#141414;margin:0}
+.pg{page-break-after:always;min-height:0;position:relative}.pg:last-child{page-break-after:auto}
+h1,h2{font-family:"Source Serif 4",Georgia,"DejaVu Serif",serif;font-weight:600}
+h1{font-size:28pt;margin:0 0 6px;line-height:1.1}h2{font-size:17pt;margin:4px 0 8px;padding-bottom:4px;border-bottom:1.5px solid #141414}
+h3{font-size:9pt;margin:14px 0 4px;color:#5c5c5c;text-transform:uppercase;letter-spacing:.1em}
+.hd{display:flex;justify-content:space-between;font-size:8.5pt;color:#5c5c5c;border-bottom:1px solid #e4e4e0;padding-bottom:3px;margin-bottom:10px;text-transform:uppercase;letter-spacing:.08em}
+.cover{border:1.5px solid #141414;padding:50mm 16mm;border-radius:6px;min-height:255mm}
+.cover h1{font-size:38pt}.cover p{font-size:13pt;color:#5c5c5c}
+table{border-collapse:collapse;width:100%;font-size:10pt;margin:4px 0}td,th{border-bottom:1px solid #e4e4e0;padding:5px 6px;text-align:left;vertical-align:top}th{border-bottom:1.5px solid #141414;font-size:8.5pt;text-transform:uppercase;letter-spacing:.05em;color:#5c5c5c}
+.mn{background:#fff1b8;padding:7px 11px;margin:8px 0;border-radius:6px}.mn big{font-family:"Source Serif 4",Georgia,serif;font-size:13.5pt;font-weight:600;display:block}.mn b{color:#7a4b00;text-decoration:underline}
+.link{border:1px solid #e4e4e0;background:#f6f6f3;border-radius:6px;padding:6px 10px;font-size:10pt;margin:6px 0}
+pre{background:#f6f6f3;border:1px solid #e4e4e0;border-radius:6px;padding:7px;font:8.5pt/1.35 "DejaVu Sans Mono",monospace;white-space:pre-wrap;margin:4px 0}
+.film{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:6px 0}.fr{border:1px solid #e4e4e0;border-radius:6px;padding:4px;text-align:center;font-size:8.5pt}.fr span{font-size:18pt;display:block}
+.tag{display:inline-block;border:1px solid #141414;border-radius:4px;padding:0 6px;font:9pt Inter,sans-serif;vertical-align:middle}
+.ck{border-top:1.5px solid #141414;padding:6px 0 0;margin-top:10px;font-size:10.5pt}
+.map{display:grid;grid-template-columns:1fr 1fr;gap:8px}.u{border:1px solid #e4e4e0;border-radius:6px;padding:8px}
+.big td{font-size:10.5pt}.ft{margin-top:8px;font-size:9pt;color:#5c5c5c;text-align:center;border-top:1px solid #e4e4e0;padding-top:3px}.note{color:#5c5c5c;font-size:9pt}
+
+html{background:#fff}body{max-width:760px;margin:0 auto;padding:16px max(16px,env(safe-area-inset-left,0px)) 60px;font-size:16px;overflow-wrap:anywhere}.pg{padding:24px 0;border-bottom:1px solid #e4e4e0}pre{overflow-x:auto;white-space:pre}.cover{min-height:0;padding:28px 18px}.film{grid-template-columns:repeat(2,1fr)}table{display:block;overflow-x:auto}
+.back{display:inline-block;padding:10px 0;color:#141414}</style></head><body><a class="back" href="../index.html">← All topics</a><div class="pg"><div class="hd"><span>Advanced Java Programming</span><span>Unit 3</span></div><h2>Unit 3 · JavaBeans (7 hrs)</h2><table><tr><th>#</th><th>Topic (syllabus order)</th><th>Status</th></tr><tr><td>1</td><td>What Is a Java Bean?</td><td>✔ ready</td></tr><tr><td>2</td><td>Advantages of Java Beans</td><td>✔ ready</td></tr><tr><td>3</td><td>Introspection</td><td>✔ ready</td></tr><tr><td>4</td><td>Properties, Events, and Methods Design Patterns</td><td>✔ ready</td></tr><tr><td>5</td><td>Using BeanInfo Interface</td><td>✔ ready</td></tr><tr><td>6</td><td>Bound and Constrained Properties</td><td>✔ ready</td></tr><tr><td>7</td><td>Persistence</td><td>✔ ready</td></tr><tr><td>8</td><td>Customizers</td><td>✔ ready</td></tr><tr><td>9</td><td>The Java Beans API</td><td>✔ ready</td></tr><tr><td>10</td><td>Writing JavaBeans</td><td>✔ ready</td></tr></table></div><div class="pg"><div class="hd"><span>JavaBeans</span><span>What Is a Java Bean?</span></div><div class="link">⬅️ <b>Last:</b> Row Sets. Unit 2 is done (a RowSet is a bean). Now: what is a bean?<br>➡️ <b>Next:</b> Advantages of Java Beans. Why should we use beans? Their advantages.</div>
+  <h2>What Is a Java Bean? <span class="tag">[2.5]</span></h2><p>🎬 Animation: <code>lessons/u3-what-is-java-bean.html</code></p>
+  <h3>Definition</h3><p>A <b>JavaBean</b> is a reusable Java class (software component) that follows simple rules so tools and programs can use it easily.</p><h3>Rules of a JavaBean</h3><ul><li>Has a <b>public no-argument constructor</b>.</li><li>Fields (properties) are <b>private</b>.</li><li>Properties are accessed with public <b>getter/setter</b> methods (<code>getX()</code>, <code>setX()</code>, <code>isX()</code> for boolean).</li><li>Implements <b>Serializable</b> so its state can be saved.</li><li>Can fire and listen to <b>events</b>.</li></ul><h3>Example</h3><pre>public class Student implements java.io.Serializable {
+    private String name;
+    private int age;
+    public Student() { }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public int getAge() { return age; }
+    public void setAge(int age) { this.age = age; }
+}</pre><div class="film"><div class="fr"><span>🫘</span>A reusable Java class</div><div class="fr"><span>🚪</span>Rule 1: public no-arg constructor</div><div class="fr"><span>🔒</span>Rule 2: private fields</div><div class="fr"><span>🔑</span>Rule 3: public getters/setters</div></div>
+  <div class="mn"><span style="font-size:10pt">Topic trick</span><big><b>B</b>ean = <b>L</b>EGO <b>b</b>lock = reusable component</big></div><div class="mn"><span style="font-size:10pt">Points trick (4 rules)</span><big><b>N</b>o <b>P</b>rivate <b>G</b>ate <b>S</b>huts = No-arg constructor · Private fields · Getters/setters · Serializable</big></div>
+  <h3>Code (Program: Student bean)</h3><pre> 1  public class Student implements java.io.Serializable {
+ 2      private String name;
+ 3      private int age;
+ 4      public Student() { }
+ 5      public String getName() { return name; }
+ 6      public void setName(String name) { this.name = name; }
+ 7      public int getAge() { return age; }
+ 8      public void setAge(int age) { this.age = age; }
+ 9  }</pre><table><tr><th>Step</th><th>What happens</th></tr><tr><td>1</td><td>A public class that implements Serializable (rule 4).</td></tr><tr><td>2</td><td>Private fields (rule 2): name and age are hidden.</td></tr><tr><td>3</td><td>Public no-argument constructor (rule 1).</td></tr><tr><td>4</td><td>Getter and setter for property "name" (rule 3).</td></tr><tr><td>5</td><td>Property "age". Tools find properties by these names.</td></tr></table>
+  <div class="ck">✅ <b>Quick check:</b> Which is NOT a JavaBean rule? <i>(Public fields)</i></div></div><div class="pg"><div class="hd"><span>JavaBeans</span><span>Advantages of Java Beans</span></div><div class="link">⬅️ <b>Last:</b> What Is a Java Bean?. We know what a bean is.<br>➡️ <b>Next:</b> Introspection. How do tools find a bean’s properties? Introspection.</div>
+  <h2>Advantages of Java Beans <span class="tag">[3]</span></h2><p>🎬 Animation: <code>lessons/u3-advantages-javabeans.html</code></p>
+  <h3>Definition</h3><p><b>JavaBeans</b> are reusable Java classes with a no-argument constructor, private variables, public getter/setter methods and Serializable support.</p><h3>Advantages of JavaBeans</h3><ul><li>Easy to <b>reuse</b> in different apps and GUI tools.</li><li>Hides internal data using getters and setters (<b>encapsulation</b>).</li><li>Supports saving/sending object state via <b>Serializable</b> (persistence).</li><li>Supports <b>event</b> listening out of the box.</li><li><b>Builder tools</b> can inspect and customize them (introspection, customizers).</li><li><b>Platform independent</b> (pure Java).</li></ul><div class="film"><div class="fr"><span>♻️</span>Reusable</div><div class="fr"><span>🔒</span>Encapsulation</div><div class="fr"><span>💾</span>Persistence</div><div class="fr"><span>📣</span>Events</div></div>
+  <div class="mn"><span style="font-size:10pt">Topic trick</span><big><b>B</b>eans <b>M</b>ake <b>B</b>uilding <b>E</b>asy</big></div><div class="mn"><span style="font-size:10pt">Points trick (6 advantages)</span><big><b>R</b>eal <b>E</b>asy <b>P</b>ets <b>E</b>at <b>T</b>asty <b>P</b>ies = Reusable · Encapsulation · Persistence · Events · Tool support · Portable</big></div>
+  
+  <div class="ck">✅ <b>Quick check:</b> Which advantage lets a bean save its state? <i>(Persistence (Serializable))</i></div></div><div class="pg"><div class="hd"><span>JavaBeans</span><span>Introspection</span></div><div class="link">⬅️ <b>Last:</b> Advantages of Java Beans. Beans are great for tools. But how does a tool know what is inside?<br>➡️ <b>Next:</b> Properties, Events, and Methods Design Patterns. Introspection works by naming patterns. Next: those patterns.</div>
+  <h2>Introspection <span class="tag">[5]</span></h2><p>🎬 Animation: <code>lessons/u3-introspection.html</code></p>
+  <h3>Definition</h3><p><b>Introspection</b> is the process by which a builder tool finds out a bean’s <b>properties, methods and events</b> at run time.</p><h3>Key points</h3><ul><li>Done by the class <b>java.beans.Introspector</b>.</li><li>Uses <b>naming patterns</b> (getX/setX, addXListener) via reflection.</li><li>Or uses an explicit <b>BeanInfo</b> class if the developer provides one.</li><li>Result is a BeanInfo object with PropertyDescriptor, MethodDescriptor, EventSetDescriptor.</li></ul><h3>Figure</h3><pre>Builder tool → Introspector.getBeanInfo(Bean.class) → BeanInfo → properties / methods / events</pre><div class="film"><div class="fr"><span>🧑‍🔬</span>A tool gets an unknown bean</div><div class="fr"><span>🩻</span>It uses the Introspector</div><div class="fr"><span>🏷️</span>Finds properties</div><div class="fr"><span>📣</span>Finds methods and events</div></div>
+  <div class="mn"><span style="font-size:10pt">Topic trick</span><big><b>I</b>ntrospection = <b>X</b>-ray = Look inside a bean at run time</big></div><div class="mn"><span style="font-size:10pt">Points trick (what it finds)</span><big><b>P</b>lease <b>M</b>eet <b>E</b>veryone = Properties · Methods · Events</big></div><div class="mn"><span style="font-size:10pt">How it finds</span><big><b>N</b>ames <b>o</b>r <b>B</b>eanInfo = Design patterns (reflection) or explicit BeanInfo</big></div>
+  <h3>Code (Program: list properties of a bean)</h3><pre> 1  public class IntroDemo {
+ 2      public static void main(String[] args) throws Exception {
+ 3          BeanInfo info = Introspector.getBeanInfo(Student.class, Object.class);
+ 4          for (PropertyDescriptor pd : info.getPropertyDescriptors()) {
+ 5              System.out.println(pd.getName());
+ 6          }
+ 7      }
+ 8  }
+ 9  class Student {
+10      private String name; private int age;
+11      public String getName() { return name; }
+12      public void setName(String n) { name = n; }
+13      public int getAge() { return age; }
+14      public void setAge(int a) { age = a; }
+15  }</pre><table><tr><th>Step</th><th>What happens</th></tr><tr><td>1</td><td>Ask the Introspector to X-ray Student (stop at Object).</td></tr><tr><td>2</td><td>Get one PropertyDescriptor per property it found.</td></tr><tr><td>3</td><td>Print each property name.</td></tr><tr><td>4</td><td>It found "name" because of getName/setName (naming pattern).</td></tr></table>
+  <div class="ck">✅ <b>Quick check:</b> Which class performs introspection? <i>(Introspector)</i></div></div><div class="pg"><div class="hd"><span>JavaBeans</span><span>Properties, Events, and Methods Design Patterns</span></div><div class="link">⬅️ <b>Last:</b> Introspection. Introspection reads names. Here are the naming rules.<br>➡️ <b>Next:</b> Using BeanInfo Interface. If names are not enough, write a BeanInfo.</div>
+  <h2>Properties, Events, and Methods Design Patterns <span class="tag">[5]</span></h2><p>🎬 Animation: <code>lessons/u3-design-patterns.html</code></p>
+  <h3>Definition</h3><p><b>Design patterns</b> are naming rules for methods. Introspection uses them to find a bean’s properties, events and methods automatically.</p><table><tr><th>Feature</th><th>Pattern</th><th>Example</th></tr><tr><td>Simple property</td><td>T getX(); void setX(T)</td><td>getName(), setName(String)</td></tr><tr><td>Boolean property</td><td>boolean isX(); void setX(boolean)</td><td>isActive()</td></tr><tr><td>Indexed property</td><td>T getX(int); void setX(int, T)</td><td>getMark(int i)</td></tr><tr><td>Event</td><td>addXListener(); removeXListener()</td><td>addActionListener()</td></tr><tr><td>Method</td><td>any public method</td><td>calculate()</td></tr></table><div class="film"><div class="fr"><span>🏷️</span>Simple property</div><div class="fr"><span>✅</span>Boolean property</div><div class="fr"><span>🔢</span>Indexed property</div><div class="fr"><span>📣</span>Event pattern</div></div>
+  <div class="mn"><span style="font-size:10pt">Topic trick (property methods)</span><big><b>G</b>et <b>S</b>et <b>I</b>s = getX · setX · isX (boolean)</big></div><div class="mn"><span style="font-size:10pt">Points trick (event methods)</span><big><b>A</b>dd <b>R</b>emove = addXListener · removeXListener</big></div><div class="mn"><span style="font-size:10pt">Property kinds</span><big><b>S</b>imple <b>I</b>ndexed <b>B</b>ound <b>C</b>onstrained = "Sister In Big City"</big></div>
+  
+  <div class="ck">✅ <b>Quick check:</b> What is the getter name for boolean property "active"? <i>(isActive())</i></div></div><div class="pg"><div class="hd"><span>JavaBeans</span><span>Using BeanInfo Interface</span></div><div class="link">⬅️ <b>Last:</b> Properties, Events, and Methods Design Patterns. Naming patterns are automatic. BeanInfo lets you control what tools see.<br>➡️ <b>Next:</b> Bound and Constrained Properties. Some properties notify others: bound and constrained.</div>
+  <h2>Using BeanInfo Interface <span class="tag">[5]</span></h2><p>🎬 Animation: <code>lessons/u3-beaninfo.html</code></p>
+  <h3>Definition</h3><p>The <b>BeanInfo</b> interface (java.beans) lets a developer <b>explicitly</b> describe a bean’s properties, methods, events, icon and customizer, instead of relying only on naming patterns.</p><h3>Key points</h3><ul><li>BeanInfo class name = <b>BeanName + "BeanInfo"</b> (e.g. StudentBeanInfo).</li><li>Usually <b>extends SimpleBeanInfo</b> and overrides only needed methods.</li><li>Methods: <code>getPropertyDescriptors()</code>, <code>getMethodDescriptors()</code>, <code>getEventSetDescriptors()</code>, <code>getBeanDescriptor()</code>, <code>getIcon()</code>.</li><li>Used to hide properties, give display names, set icons and customizers.</li></ul><div class="film"><div class="fr"><span>📝</span>Write StudentBeanInfo</div><div class="fr"><span>🧩</span>extends SimpleBeanInfo</div><div class="fr"><span>🏷️</span>getPropertyDescriptors()</div><div class="fr"><span>⚙️</span>getMethodDescriptors(), getEventSetDescriptors()</div></div>
+  <div class="mn"><span style="font-size:10pt">Topic trick</span><big><b>B</b>eanInfo = <b>B</b>ean’s <b>I</b>D <b>c</b>ard</big></div><div class="mn"><span style="font-size:10pt">Points trick (methods)</span><big><b>P</b>lease <b>M</b>eet <b>E</b>very <b>B</b>ean <b>I</b>n = getPropertyDescriptors · getMethodDescriptors · getEventSetDescriptors · getBeanDescriptor · getIcon</big></div>
+  <h3>Code (Program: BeanInfo shows only "name")</h3><pre> 1  public class StudentBeanInfo extends SimpleBeanInfo {
+ 2      public PropertyDescriptor[] getPropertyDescriptors() {
+ 3          try {
+ 4              PropertyDescriptor name = new PropertyDescriptor("name", Student.class);
+ 5              return new PropertyDescriptor[] { name };
+ 6          } catch (IntrospectionException e) {
+ 7              return null;
+ 8          }
+ 9      }
+10  }
+11  class Student {
+12      private String name; private int age;
+13      public String getName() { return name; }
+14      public void setName(String n) { name = n; }
+15      public int getAge() { return age; }
+16      public void setAge(int a) { age = a; }
+17  }</pre><table><tr><th>Step</th><th>What happens</th></tr><tr><td>1</td><td>Name = Student + BeanInfo, so Introspector finds it automatically.</td></tr><tr><td>2</td><td>Start from SimpleBeanInfo (defaults).</td></tr><tr><td>3</td><td>Override: we decide the property list.</td></tr><tr><td>4</td><td>Describe only "name".</td></tr><tr><td>5</td><td>Tools now show ONLY "name", even though age has get/set.</td></tr></table>
+  <div class="ck">✅ <b>Quick check:</b> What should the BeanInfo class for bean "Car" be named? <i>(CarBeanInfo)</i></div></div><div class="pg"><div class="hd"><span>JavaBeans</span><span>Bound and Constrained Properties</span></div><div class="link">⬅️ <b>Last:</b> Using BeanInfo Interface. Beans have properties. Some of them tell others when they change.<br>➡️ <b>Next:</b> Persistence. How a bean’s state is saved: persistence.</div>
+  <h2>Bound and Constrained Properties <span class="tag">[2+3]</span></h2><p>🎬 Animation: <code>lessons/u3-bound-constrained.html</code></p>
+  <h3>Definition</h3><p><b>Bound</b> and <b>constrained</b> properties are bean properties that notify other objects when their value changes.</p><table><tr><th>Point</th><th>Bound Property</th><th>Constrained Property</th></tr><tr><td>Listener interface</td><td>PropertyChangeListener</td><td>VetoableChangeListener</td></tr><tr><td>Event class</td><td>PropertyChangeEvent</td><td>PropertyChangeEvent with veto check</td></tr><tr><td>Timing</td><td>After the value changes</td><td>Before the change is finalized</td></tr><tr><td>Rejecting changes</td><td>Cannot stop a change</td><td>Can reject by throwing PropertyVetoException</td></tr><tr><td>Main purpose</td><td>Notify that a value changed</td><td>Validate or restrict a value</td></tr></table><h3>Helper classes</h3><code>PropertyChangeSupport</code> (firePropertyChange) and <code>VetoableChangeSupport</code> (fireVetoableChange).<div class="film"><div class="fr"><span>🫘</span>A bean property changes</div><div class="fr"><span>📢</span>BOUND: tell others AFTER</div><div class="fr"><span>✅</span>Bound listeners cannot stop it</div><div class="fr"><span>🛑</span>CONSTRAINED: ask BEFORE</div></div>
+  <div class="mn"><span style="font-size:10pt">Topic trick</span><big><b>B</b>ound = <b>B</b>ehind, <b>C</b>onstrained = <b>C</b>an <b>s</b>top = Bound tells after; Constrained asks before and can veto</big></div><div class="mn"><span style="font-size:10pt">Points trick (listeners)</span><big><b>P</b>lease <b>C</b>hange / <b>V</b>ery <b>C</b>areful = PropertyChangeListener (bound) · VetoableChangeListener (constrained)</big></div><div class="mn"><span style="font-size:10pt">Exception trick</span><big><b>V</b>eto <b>T</b>hrows <b>P</b>VE = PropertyVetoException</big></div>
+  <h3>Code (Program: bound property with PropertyChangeSupport)</h3><pre> 1  public class Employee {
+ 2      private int salary;
+ 3      private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+ 4      public void addPropertyChangeListener(PropertyChangeListener l) {
+ 5          pcs.addPropertyChangeListener(l);
+ 6      }
+ 7      public void setSalary(int newSalary) {
+ 8          int old = salary;
+ 9          salary = newSalary;
+10          pcs.firePropertyChange("salary", old, newSalary);
+11      }
+12      public int getSalary() { return salary; }
+13  }</pre><table><tr><th>Step</th><th>What happens</th></tr><tr><td>1</td><td>A helper that keeps the listener list and fires events.</td></tr><tr><td>2</td><td>Other objects register to hear about changes.</td></tr><tr><td>3</td><td><b>💰 setSalary(2000)</b> → Someone calls setSalary(2000).</td></tr><tr><td>4</td><td>Value changes FIRST…</td></tr><tr><td>5</td><td>…THEN listeners are told (bound = after).</td></tr></table>
+  <div class="ck">✅ <b>Quick check:</b> Which property can reject a change? <i>(Constrained)</i></div></div><div class="pg"><div class="hd"><span>JavaBeans</span><span>Persistence</span></div><div class="link">⬅️ <b>Last:</b> Bound and Constrained Properties. Beans hold state. Can we save it and load it later?<br>➡️ <b>Next:</b> Customizers. Builder tools can also edit beans with a customizer.</div>
+  <h2>Persistence <span class="tag">[2.5]</span></h2><p>🎬 Animation: <code>lessons/u3-persistence.html</code></p>
+  <h3>Definition</h3><p><b>Persistence</b> is the ability of a bean to save its state (property values) and restore it later.</p><h3>Key points</h3><ul><li>By <b>Serialization</b>: bean implements Serializable; save with ObjectOutputStream, load with ObjectInputStream.</li><li>By <b>XMLEncoder / XMLDecoder</b>: saves bean properties as XML (long-term persistence).</li><li><b>transient</b> fields are not saved.</li><li>Builder tools use persistence to store a designed GUI.</li></ul><div class="film"><div class="fr"><span>🫘</span>A bean with data</div><div class="fr"><span>📦</span>Way 1: Serialization</div><div class="fr"><span>📄</span>Way 2: XMLEncoder</div><div class="fr"><span>🙈</span>transient fields are skipped</div></div>
+  <div class="mn"><span style="font-size:10pt">Topic trick</span><big><b>P</b>ersistence = <b>P</b>ause <b>a</b>nd <b>R</b>esume = save state, load later</big></div><div class="mn"><span style="font-size:10pt">Points trick (3 points)</span><big><b>S</b>weet <b>X</b>mas <b>T</b>reats = Serializable · XMLEncoder/XMLDecoder · transient fields not saved</big></div>
+  <h3>Code (Program: save a bean as XML)</h3><pre> 1  public class SaveBean {
+ 2      public static void main(String[] args) throws Exception {
+ 3          Student s = new Student();
+ 4          s.setName("Samrat");
+ 5          XMLEncoder enc = new XMLEncoder(new FileOutputStream("student.xml"));
+ 6          enc.writeObject(s);
+ 7          enc.close();
+ 8      }
+ 9  }
+10  
+11  class Student implements java.io.Serializable {
+12      private String name;
+13      private int age;
+14      public Student() { }
+15      public String getName() { return name; }
+16      public void setName(String name) { this.name = name; }
+17      public int getAge() { return age; }
+18      public void setAge(int age) { this.age = age; }
+19  }</pre><table><tr><th>Step</th><th>What happens</th></tr><tr><td>1</td><td>Make a bean with the no-arg constructor.</td></tr><tr><td>2</td><td>Set its property.</td></tr><tr><td>3</td><td>Open an XML encoder to a file.</td></tr><tr><td>4</td><td>Writes the bean’s properties as XML.</td></tr><tr><td>5</td><td>Save and close.</td></tr></table>
+  <div class="ck">✅ <b>Quick check:</b> Which keyword stops a field from being saved? <i>(transient)</i></div></div><div class="pg"><div class="hd"><span>JavaBeans</span><span>Customizers</span></div><div class="link">⬅️ <b>Last:</b> Persistence. Builder tools edit bean properties. Sometimes a simple property sheet is not enough.<br>➡️ <b>Next:</b> The Java Beans API. All these classes belong to the JavaBeans API.</div>
+  <h2>Customizers <span class="tag">[2.5]</span></h2><p>🎬 Animation: <code>lessons/u3-customizers.html</code></p>
+  <h3>Definition</h3><p>A <b>Customizer</b> is a GUI class that gives a full, user-friendly editor (wizard) for a bean inside a builder tool, instead of the simple property sheet.</p><h3>Key points</h3><ul><li>Implements <b>java.beans.Customizer</b> and extends <b>Component</b> (usually JPanel).</li><li>Must have a public no-arg constructor.</li><li>Methods: <code>setObject(Object bean)</code>, <code>addPropertyChangeListener()</code>, <code>removePropertyChangeListener()</code>.</li><li>Registered in BeanInfo: <code>new BeanDescriptor(beanClass, customizerClass)</code>.</li><li>Property editors edit ONE property; a customizer edits the WHOLE bean.</li></ul><div class="film"><div class="fr"><span>🧑‍🔧</span>Builder tool</div><div class="fr"><span>🪄</span>Customizer = a wizard</div><div class="fr"><span>🧩</span>implements Customizer</div><div class="fr"><span>🎯</span>setObject(bean)</div></div>
+  <div class="mn"><span style="font-size:10pt">Topic trick</span><big><b>C</b>ustomizer = <b>W</b>izard <b>d</b>ressing <b>t</b>he <b>b</b>ean</big></div><div class="mn"><span style="font-size:10pt">Points trick (3 points)</span><big><b>P</b>enguins <b>S</b>ell <b>B</b>ananas = Panel (extends Component) · setObject(bean) · BeanDescriptor links it</big></div>
+  
+  <div class="ck">✅ <b>Quick check:</b> Which method gives the bean to a customizer? <i>(setObject())</i></div></div><div class="pg"><div class="hd"><span>JavaBeans</span><span>The Java Beans API</span></div><div class="link">⬅️ <b>Last:</b> Customizers. We used many bean classes. They all live in java.beans.<br>➡️ <b>Next:</b> Writing JavaBeans. Now put it all together and write a bean.</div>
+  <h2>The Java Beans API <span class="tag">[5]</span></h2><p>🎬 Animation: <code>lessons/u3-javabeans-api.html</code></p>
+  <h3>Definition</h3><p>The <b>JavaBeans API</b> is the set of classes and interfaces in the <b>java.beans</b> package used to create, inspect and manage beans.</p><table><tr><th>Class / Interface</th><th>Use</th></tr><tr><td>Introspector</td><td>Analyses a bean</td></tr><tr><td>BeanInfo / SimpleBeanInfo</td><td>Explicit bean information</td></tr><tr><td>PropertyDescriptor</td><td>Describes a property</td></tr><tr><td>EventSetDescriptor, MethodDescriptor</td><td>Describe events, methods</td></tr><tr><td>PropertyChangeListener / Event / Support</td><td>Bound properties</td></tr><tr><td>VetoableChangeListener, PropertyVetoException</td><td>Constrained properties</td></tr><tr><td>PropertyEditor, Customizer</td><td>Editing in builder tools</td></tr><tr><td>XMLEncoder, XMLDecoder</td><td>Persistence as XML</td></tr><tr><td>Beans</td><td>Utility, e.g. Beans.instantiate()</td></tr></table><div class="film"><div class="fr"><span>🩻</span>Introspector, BeanInfo, SimpleBeanInfo</div><div class="fr"><span>🏷️</span>PropertyDescriptor, MethodDescriptor, EventSetDescriptor, BeanDescriptor</div><div class="fr"><span>📢</span>PropertyChangeListener / Event / Support</div><div class="fr"><span>🛑</span>VetoableChangeListener, PropertyVetoException</div></div>
+  <div class="mn"><span style="font-size:10pt">Topic trick</span><big><b>j</b>ava.beans = <b>B</b>ean <b>t</b>oolbox</big></div><div class="mn"><span style="font-size:10pt">Points trick (groups)</span><big><b>I</b>n <b>D</b>ark <b>P</b>laces <b>V</b>ery <b>E</b>asy <b>X</b>ylophones = Introspection · Descriptors · PropertyChange · Veto · Editors/Customizer · XML</big></div>
+  
+  <div class="ck">✅ <b>Quick check:</b> Which package holds the JavaBeans API? <i>(java.beans)</i></div></div><div class="pg"><div class="hd"><span>JavaBeans</span><span>Writing JavaBeans</span></div><div class="link">⬅️ <b>Last:</b> The Java Beans API. We know all the parts. Now write and use a complete bean.<br>➡️ <b>Next:</b> Background. Unit 4: Servlets and JSP (server-side Java).</div>
+  <h2>Writing JavaBeans <span class="tag">[5]</span></h2><p>🎬 Animation: <code>lessons/u3-writing-javabeans.html</code></p>
+  <h3>Definition</h3><p><b>Writing a JavaBean</b> means creating a reusable class that follows bean rules so tools and programs can use it.</p><h3>Steps</h3><ul><li>Create a <b>public class</b> that implements <b>Serializable</b>.</li><li>Add a <b>public no-arg constructor</b>.</li><li>Make fields <b>private</b>.</li><li>Add <b>getters/setters</b> (and events/bound properties if needed).</li><li>Compile and package into a <b>JAR</b> with manifest entry <code>Java-Bean: True</code>.</li></ul><h3>Example</h3><pre>public class Student implements java.io.Serializable {
+    private String name;
+    private int age;
+    public Student() { }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public int getAge() { return age; }
+    public void setAge(int age) { this.age = age; }
+}</pre><div class="film"><div class="fr"><span>📄</span>1. public class  implements Serializable</div><div class="fr"><span>🚪</span>2. public no-arg constructor</div><div class="fr"><span>🔒</span>3. private fields</div><div class="fr"><span>🔑</span>4. getters and setters</div></div>
+  <div class="mn"><span style="font-size:10pt">Topic trick (5 steps)</span><big><b>C</b>ool <b>C</b>ats <b>F</b>ind <b>G</b>ood <b>J</b>am = Class · Constructor · Fields · Get/Set · JAR</big></div>
+  <h3>Code (Program: write and use a bean)</h3><pre> 1  public class BeanTest {
+ 2      public static void main(String[] args) {
+ 3          Student s = new Student();
+ 4          s.setName("Samrat");
+ 5          s.setAge(21);
+ 6          System.out.println(s.getName() + " is " + s.getAge());
+ 7      }
+ 8  }
+ 9  
+10  class Student implements java.io.Serializable {
+11      private String name;
+12      private int age;
+13      public Student() { }
+14      public String getName() { return name; }
+15      public void setName(String name) { this.name = name; }
+16      public int getAge() { return age; }
+17      public void setAge(int age) { this.age = age; }
+18  }</pre><table><tr><th>Step</th><th>What happens</th></tr><tr><td>1</td><td>The bean: Serializable, no-arg constructor, private fields, get/set.</td></tr><tr><td>2</td><td>Create the bean with the no-arg constructor.</td></tr><tr><td>3</td><td>Set properties only through setters.</td></tr><tr><td>4</td><td>Read with getters.</td></tr></table>
+  <div class="ck">✅ <b>Quick check:</b> What is step 5 of writing a bean? <i>(Package into a JAR)</i></div></div><div class="pg"><div class="hd"><span>Unit 3</span><span>Memory sheet</span></div><h2>Memorize in 5 minutes</h2><table><tr><th>Topic</th><th>Trick</th></tr><tr><td>What Is a Java Bean?: Topic trick</td><td>Bean = LEGO block = reusable component</td></tr><tr><td>What Is a Java Bean?: Points trick (4 rules)</td><td>No Private Gate Shuts = No-arg constructor · Private fields · Getters/setters · Serializable</td></tr><tr><td>Advantages of Java Beans: Topic trick</td><td>Beans Make Building Easy</td></tr><tr><td>Advantages of Java Beans: Points trick (6 advantages)</td><td>Real Easy Pets Eat Tasty Pies = Reusable · Encapsulation · Persistence · Events · Tool support · Portable</td></tr><tr><td>Introspection: Topic trick</td><td>Introspection = X-ray = Look inside a bean at run time</td></tr><tr><td>Introspection: Points trick (what it finds)</td><td>Please Meet Everyone = Properties · Methods · Events</td></tr><tr><td>Introspection: How it finds</td><td>Names or BeanInfo = Design patterns (reflection) or explicit BeanInfo</td></tr><tr><td>Properties, Events, and Methods Design Patterns: Topic trick (property methods)</td><td>Get Set Is = getX · setX · isX (boolean)</td></tr><tr><td>Properties, Events, and Methods Design Patterns: Points trick (event methods)</td><td>Add Remove = addXListener · removeXListener</td></tr><tr><td>Properties, Events, and Methods Design Patterns: Property kinds</td><td>Simple Indexed Bound Constrained = "Sister In Big City"</td></tr><tr><td>Using BeanInfo Interface: Topic trick</td><td>BeanInfo = Bean’s ID card</td></tr><tr><td>Using BeanInfo Interface: Points trick (methods)</td><td>Please Meet Every Bean In = getPropertyDescriptors · getMethodDescriptors · getEventSetDescriptors · getBeanDescriptor · getIcon</td></tr><tr><td>Bound and Constrained Properties: Topic trick</td><td>Bound = Behind, Constrained = Can stop = Bound tells after; Constrained asks before and can veto</td></tr><tr><td>Bound and Constrained Properties: Points trick (listeners)</td><td>Please Change / Very Careful = PropertyChangeListener (bound) · VetoableChangeListener (constrained)</td></tr><tr><td>Bound and Constrained Properties: Exception trick</td><td>Veto Throws PVE = PropertyVetoException</td></tr><tr><td>Persistence: Topic trick</td><td>Persistence = Pause and Resume = save state, load later</td></tr><tr><td>Persistence: Points trick (3 points)</td><td>Sweet Xmas Treats = Serializable · XMLEncoder/XMLDecoder · transient fields not saved</td></tr><tr><td>Customizers: Topic trick</td><td>Customizer = Wizard dressing the bean</td></tr><tr><td>Customizers: Points trick (3 points)</td><td>Penguins Sell Bananas = Panel (extends Component) · setObject(bean) · BeanDescriptor links it</td></tr><tr><td>The Java Beans API: Topic trick</td><td>java.beans = Bean toolbox</td></tr><tr><td>The Java Beans API: Points trick (groups)</td><td>In Dark Places Very Easy Xylophones = Introspection · Descriptors · PropertyChange · Veto · Editors/Customizer · XML</td></tr><tr><td>Writing JavaBeans: Topic trick (5 steps)</td><td>Cool Cats Find Good Jam = Class · Constructor · Fields · Get/Set · JAR</td></tr></table></div><div class="pg"><div class="hd"><span>Unit 3</span><span>Mnemonic story</span></div><pre style="white-space:pre-wrap;font:11pt/1.5 sans-serif;background:#fff;border:0"># Unit 3 story: JavaBeans (hero: Mo the Mad Mouse)
+
+1. Mo finds a magic **bean** at a gate: **No Private Gate Shuts**, and **Real Easy Pets Eat Tasty Pies** behind it. *(No-arg constructor, Private fields, Getters/setters, Serializable · Reusable, Encapsulation, Persistence, Events, Tool support, Portable)*
+2. A doctor X-rays the bean and says **Please Meet Everyone**, then reads its **Get Set Is** name tag. *(Introspection finds Properties, Methods, Events · getX, setX, isX)*
+3. The bean shows its ID card: **Please Meet Every Bean In** town. *(BeanInfo: Property, Method, EventSet, Bean descriptors, Icon)*
+4. The bean's price changes. A loudspeaker shouts it **after** (Bound = Behind), and a guard with a red sign **can stop** it (Constrained = Can stop). *(PropertyChangeListener · VetoableChangeListener → PropertyVetoException)*
+5. Mo saves the bean with **Sweet Xmas Treats**, **Penguins Sell Bananas** to dress it, and **Cool Cats Find Good Jam** to pack it in a jar. *(Serializable, XMLEncoder, transient · Panel, setObject, BeanDescriptor · Class, Constructor, Fields, Get/Set, JAR)*
+
+## Video prompt (paste into any AI video tool)
+Funny colorful 3D cartoon, 50 seconds, no talking, upbeat music, big captions. Hero: Mo, a small angry-cute mouse, in every scene. 1) Mo finds a glowing magic bean at a gate that never shuts; pets eat tasty pies behind it. Captions "No Private Gate Shuts", "Real Easy Pets Eat Tasty Pies". 2) A doctor X-rays the bean; the bean wears a name tag "Get Set Is". Caption "Please Meet Everyone". 3) The bean shows an ID card to the whole town. Caption "Please Meet Every Bean In". 4) A price tag changes; a loudspeaker shouts afterwards, while a guard holds a big red STOP sign before the change. Captions "Bound = Behind", "Constrained = Can stop". 5) Mo wraps the bean in Christmas paper, penguins sell bananas, cats put jam and the bean in a jar. Captions "Sweet Xmas Treats", "Penguins Sell Bananas", "Cool Cats Find Good Jam". End with all captions for 5 seconds.
+</pre></div><a class="back" href="../index.html">← All topics</a></body></html>

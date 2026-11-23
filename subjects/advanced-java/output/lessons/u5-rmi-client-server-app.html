@@ -194,7 +194,7 @@ add('Done',`<div class="eyebrow">Topic done · full summary</div><h1>${C.tab}</h
  ${tricks.slice(1).map(trickHTML).join('')}
  ${C.code?`<h2 style="font-size:22px">Code: ${esc(C.code.title)}</h2><div class="code">${C.code.lines.map((x,k)=>`<div><i>${k+1}</i>${esc(x)}</div>`).join('')}</div>`:''}
  <div class="box"><b>Quick check:</b> ${C.q[0]}<br><span class="mut">Answer:</span> ${C.q[1][C.q[2]]}</div>
- <div class="chain"><div class="now">${NAV.next?`Next topic: ${esc(NAV.next.title)}`:'This was the last topic.'}</div><div><a href="../${C.uid}.pdf">Open the Unit ${C.uid.slice(1)} PDF</a> · <a href="#s2">Watch the story again</a></div></div>
+ <div class="chain"><div class="now">${NAV.next?`Next topic: ${esc(NAV.next.title)}`:'This was the last topic.'}</div><div><a href="../book/${C.uid}.html">Read Unit ${C.uid.slice(1)} as a book</a> · <a href="#s2">Watch the story again</a></div></div>
  <p class="mut" style="font-size:13px">${esc(C.src||'')}</p>`,()=>{snd('ding');try{localStorage.setItem('sh:done:'+location.pathname.split('/').pop(),'1')}catch(e){}});
 
 // ---- section chips

@@ -28,7 +28,12 @@ const unitHTML=(S,u)=>{
   return road+cards.map(c=>cardPage(S,c,u,tt[c.topic])).join('')+sheet+story};
 for(const slug of listSubjects()){
   const S=loadSubject(slug);fs.mkdirSync(S.out,{recursive:true});const b=await chromium.launch();const p=await b.newPage();
-  const make=async(name,html)=>{await p.setContent(doc(html));await p.pdf({path:path.join(S.out,name),format:'A4',printBackground:true,margin:{top:'14mm',bottom:'14mm',left:'14mm',right:'14mm'}});console.log('wrote',name)};
+  const make=async(name,html)=>{await p.setContent(doc(html));await p.pdf({path:path.join(S.out,name),format:'A4',printBackground:true,margin:{top:'14mm',bottom:'14mm',left:'14mm',right:'14mm'}});console.log('wrote',name);
+    // phone-friendly HTML copy of the same book (PDFs do not show inside some phone viewers)
+    fs.mkdirSync(path.join(S.out,'book'),{recursive:true});
+    fs.writeFileSync(path.join(S.out,'book',name.replace('.pdf','.html')),`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(name.replace('.pdf',''))} – ${esc(S.subject.title)}</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,600&display=swap"><style>${css}
+html{background:#fff}body{max-width:760px;margin:0 auto;padding:16px max(16px,env(safe-area-inset-left,0px)) 60px;font-size:16px;overflow-wrap:anywhere}.pg{padding:24px 0;border-bottom:1px solid #e4e4e0}pre{overflow-x:auto;white-space:pre}.cover{min-height:0;padding:28px 18px}.film{grid-template-columns:repeat(2,1fr)}table{display:block;overflow-x:auto}
+.back{display:inline-block;padding:10px 0;color:#141414}</style></head><body><a class="back" href="../index.html">← All topics</a>${html}<a class="back" href="../index.html">← All topics</a></body></html>`)};
   for(const u of S.syllabus.units)if(S.cards.some(c=>c.topic.startsWith(u.id+'.')))await make(`${u.id}.pdf`,unitHTML(S,u));
   const cover=`<div class="pg"><div class="cover"><p>Study Hero · draft</p><h1>${esc(S.subject.title)}</h1><p>${esc(S.subject.code)} · ${esc(S.subject.program)}</p><p style="margin-top:30mm">Memorize Book · every topic in simple English</p></div></div>`;
   await make('WHOLE-BOOK.pdf',cover+S.syllabus.units.map(u=>unitHTML(S,u)).join(''));

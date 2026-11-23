@@ -35,7 +35,7 @@ for(const slug of subs){
 <div><div class="eyebrow">${esc(S.subject.code)} · ${esc(S.subject.program||'')}</div><h1 style="margin-top:6px">${esc(S.subject.title)}</h1><p class="lead mut" style="margin:10px 0 0">Every topic in syllabus order. Open one, then just keep pressing Next.</p></div>
 <div class="cont" id="cont"><div class="eyebrow">Start here</div><h2>${esc(first.title)}</h2><a class="btn" href="lessons/${lessonFile(first)}">Start lesson 1 →</a></div>
 <div><div class="eyebrow" style="margin-bottom:4px">Units</div>${units}</div>
-<div class="files"><div class="eyebrow" style="margin-bottom:8px">Read as PDF</div>${pdfs.map(([f,t,d])=>`<a href="${f}"><span>${t}</span><span>${esc(d)}</span></a>`).join('')}</div>
+<div class="files"><div class="eyebrow" style="margin-bottom:8px">Read as a book (same as the PDFs)</div>${pdfs.map(([f,t,d])=>`<a href="book/${f.replace('.pdf','.html')}"><span>${t.replace(' PDF','')}</span><span>${esc(d)}</span></a>`).join('')}</div>
 </main>`,homeScript));
   rootRows.push(`<li><a href="subjects/${slug}/output/index.html"><span class="tt">${esc(S.subject.title)}</span><span class="tag">${esc(S.subject.code)} · ${S.cards.length} lessons</span></a></li>`);
   console.log(`built ${slug}: ${S.cards.length} lessons`);

@@ -1,0 +1,299 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>u1 – Advanced Java Programming</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,600&display=swap"><style>@page{size:A4;margin:14mm}
+*{box-sizing:border-box}body{font:10.5pt/1.5 Inter,"DejaVu Sans",Arial,sans-serif;color:#141414;margin:0}
+.pg{page-break-after:always;min-height:0;position:relative}.pg:last-child{page-break-after:auto}
+h1,h2{font-family:"Source Serif 4",Georgia,"DejaVu Serif",serif;font-weight:600}
+h1{font-size:28pt;margin:0 0 6px;line-height:1.1}h2{font-size:17pt;margin:4px 0 8px;padding-bottom:4px;border-bottom:1.5px solid #141414}
+h3{font-size:9pt;margin:14px 0 4px;color:#5c5c5c;text-transform:uppercase;letter-spacing:.1em}
+.hd{display:flex;justify-content:space-between;font-size:8.5pt;color:#5c5c5c;border-bottom:1px solid #e4e4e0;padding-bottom:3px;margin-bottom:10px;text-transform:uppercase;letter-spacing:.08em}
+.cover{border:1.5px solid #141414;padding:50mm 16mm;border-radius:6px;min-height:255mm}
+.cover h1{font-size:38pt}.cover p{font-size:13pt;color:#5c5c5c}
+table{border-collapse:collapse;width:100%;font-size:10pt;margin:4px 0}td,th{border-bottom:1px solid #e4e4e0;padding:5px 6px;text-align:left;vertical-align:top}th{border-bottom:1.5px solid #141414;font-size:8.5pt;text-transform:uppercase;letter-spacing:.05em;color:#5c5c5c}
+.mn{background:#fff1b8;padding:7px 11px;margin:8px 0;border-radius:6px}.mn big{font-family:"Source Serif 4",Georgia,serif;font-size:13.5pt;font-weight:600;display:block}.mn b{color:#7a4b00;text-decoration:underline}
+.link{border:1px solid #e4e4e0;background:#f6f6f3;border-radius:6px;padding:6px 10px;font-size:10pt;margin:6px 0}
+pre{background:#f6f6f3;border:1px solid #e4e4e0;border-radius:6px;padding:7px;font:8.5pt/1.35 "DejaVu Sans Mono",monospace;white-space:pre-wrap;margin:4px 0}
+.film{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:6px 0}.fr{border:1px solid #e4e4e0;border-radius:6px;padding:4px;text-align:center;font-size:8.5pt}.fr span{font-size:18pt;display:block}
+.tag{display:inline-block;border:1px solid #141414;border-radius:4px;padding:0 6px;font:9pt Inter,sans-serif;vertical-align:middle}
+.ck{border-top:1.5px solid #141414;padding:6px 0 0;margin-top:10px;font-size:10.5pt}
+.map{display:grid;grid-template-columns:1fr 1fr;gap:8px}.u{border:1px solid #e4e4e0;border-radius:6px;padding:8px}
+.big td{font-size:10.5pt}.ft{margin-top:8px;font-size:9pt;color:#5c5c5c;text-align:center;border-top:1px solid #e4e4e0;padding-top:3px}.note{color:#5c5c5c;font-size:9pt}
+
+html{background:#fff}body{max-width:760px;margin:0 auto;padding:16px max(16px,env(safe-area-inset-left,0px)) 60px;font-size:16px;overflow-wrap:anywhere}.pg{padding:24px 0;border-bottom:1px solid #e4e4e0}pre{overflow-x:auto;white-space:pre}.cover{min-height:0;padding:28px 18px}.film{grid-template-columns:repeat(2,1fr)}table{display:block;overflow-x:auto}
+.back{display:inline-block;padding:10px 0;color:#141414}</style></head><body><a class="back" href="../index.html">← All topics</a><div class="pg"><div class="hd"><span>Advanced Java Programming</span><span>Unit 1</span></div><h2>Unit 1 · GUI Programming (12 hrs)</h2><table><tr><th>#</th><th>Topic (syllabus order)</th><th>Status</th></tr><tr><td>1</td><td>Introducing Swing</td><td>✔ ready</td></tr><tr><td>2</td><td>Creating a Frame</td><td>✔ ready</td></tr><tr><td>3</td><td>Displaying Information in a Component</td><td>✔ ready</td></tr><tr><td>4</td><td>Working with 2D Shapes</td><td>✔ ready</td></tr><tr><td>5</td><td>Using Color</td><td>✔ ready</td></tr><tr><td>6</td><td>Using Special Fonts for Text</td><td>✔ ready</td></tr><tr><td>7</td><td>Displaying Images</td><td>✔ ready</td></tr><tr><td>8</td><td>Event Handling Basics</td><td>✔ ready</td></tr><tr><td>9</td><td>Event Classes</td><td>✔ ready</td></tr><tr><td>10</td><td>Event Listeners</td><td>✔ ready</td></tr><tr><td>11</td><td>Adapter Classes</td><td>✔ ready</td></tr><tr><td>12</td><td>Swing and the MVC Design Pattern</td><td>✔ ready</td></tr><tr><td>13</td><td>Layout Management</td><td>✔ ready</td></tr><tr><td>14</td><td>Basic Swing Components</td><td>✔ ready</td></tr></table></div><div class="pg"><div class="hd"><span>GUI Programming</span><span>Introducing Swing</span></div><div class="link">⬅️ <b>Last:</b> Start of the subject.<br>➡️ <b>Next:</b> Creating a Frame. Every Swing app needs a window first.</div>
+  <h2>Introducing Swing <span class="tag">[5]</span></h2><p>🎬 Animation: <code>lessons/u1-introducing-swing.html</code></p>
+  <h3>Definition</h3><p><b>Swing</b> is a Java GUI toolkit (package <code>javax.swing</code>) used to build windows, buttons, text boxes and other graphical parts. It is built on top of AWT and is written fully in Java.</p><h3>Features of Swing</h3><ul><li><b>Lightweight</b>: components are drawn by Java, not by the operating system.</li><li><b>Pluggable look and feel</b>: the style can be changed at run time.</li><li><b>MVC based</b>: data (model) is separate from display (view).</li><li><b>Platform independent</b>: looks the same on all OS.</li><li><b>Rich components</b>: JTable, JTree, JTabbedPane, etc. (names start with J).</li></ul><h3>Figure (class hierarchy)</h3><pre>Object → Component → Container → JComponent → JButton, JLabel, JPanel …</pre><table><tr><th>AWT</th><th>Swing</th></tr><tr><td>Heavyweight (uses OS peers)</td><td>Lightweight (pure Java)</td></tr><tr><td>Look depends on OS</td><td>Same look on every OS, can change</td></tr><tr><td>Package java.awt</td><td>Package javax.swing</td></tr><tr><td>Fewer components</td><td>Many rich components</td></tr><tr><td>Button, Label</td><td>JButton, JLabel</td></tr></table><div class="film"><div class="fr"><span>🏚️</span>Old way: AWT</div><div class="fr"><span>🪶</span>New way: Swing</div><div class="fr"><span>🎨</span>Pluggable look and feel</div><div class="fr"><span>🧱</span>Names start with J</div></div>
+  <div class="mn"><span style="font-size:10pt">Topic trick</span><big><b>A</b>WT <b>H</b>eavy, <b>S</b>wing <b>L</b>ight = AWT uses OS parts, Swing is pure Java</big></div><div class="mn"><span style="font-size:10pt">Points trick (4 features)</span><big><b>L</b>ittle <b>P</b>igs <b>M</b>ake <b>J</b>am = Lightweight · Pluggable look · MVC based · J-prefix names</big></div>
+  <h3>Code (Program: first Swing window)</h3><pre> 1  import javax.swing.*;
+ 2  public class SwingDemo {
+ 3      public static void main(String[] args) {
+ 4          JFrame f = new JFrame("Swing Demo");
+ 5          JButton b = new JButton("Hello Swing");
+ 6          f.add(b);
+ 7          f.setSize(250, 120);
+ 8          f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+ 9          f.setVisible(true);
+10      }
+11  }</pre><table><tr><th>Step</th><th>What happens</th></tr><tr><td>1</td><td>All Swing classes live in the package javax.swing.</td></tr><tr><td>2</td><td>Program starts at main().</td></tr><tr><td>3</td><td>A JFrame (the window) is made in memory.</td></tr><tr><td>4</td><td>A JButton is made. Note the J at the start: it is a Swing component.</td></tr><tr><td>5</td><td>The button is put inside the window.</td></tr><tr><td>6</td><td>Size is set and the window appears.</td></tr></table>
+  <div class="ck">✅ <b>Quick check:</b> Why is Swing called lightweight? <i>(Its components are drawn by Java, not the OS)</i></div></div><div class="pg"><div class="hd"><span>GUI Programming</span><span>Creating a Frame</span></div><div class="link">⬅️ <b>Last:</b> Start of Unit 1 (GUI Programming). Before buttons or events, we need a place to put them.<br>➡️ <b>Next:</b> Event Handling – the window exists, but nothing happens when you click. Next we learn how Java reacts.</div>
+  <h2>Frame <span class="tag">[Group C – 10]</span></h2><p>🎬 Animation: <code>lessons/u1-frame.html</code></p>
+  <h3>Definition</h3><p>A <b>frame</b> is a main application window (<code>Frame</code> in AWT or <code>JFrame</code> in Swing) with a title bar, border, and close/minimize/maximize buttons.</p>
+<h3>Ways to create a frame</h3><ul><li><b>By Inheritance</b> (extends JFrame or Frame): make your class extend JFrame/Frame and set size, layout and visibility in the constructor.</li><li><b>By Composition</b> (creating an object): create a JFrame/Frame object inside a class or <code>main()</code> and add components to it.</li></ul><div class="film"><div class="fr"><span>🧑‍🔧</span>Every app needs a HOME</div><div class="fr"><span>🏠</span>new JFrame("My Window") = build the house</div><div class="fr"><span>📏</span>setSize(300, 200) = measure it</div><div class="fr"><span>🔌</span>setDefaultCloseOperation(EXIT_ON_CLOSE) = power switch</div></div>
+  <div class="mn"><span style="font-size:10pt">4 steps to show a frame:</span><big><b>C</b>ats <b>S</b>it <b>C</b>losely <b>V</b>ery = <b>C</b>reate → <b>S</b>ize → <b>C</b>lose-operation → <b>V</b>isible</big></div><div class="mn"><span style="font-size:10pt">2 ways:</span><big><b>I</b>nherit (extends) or <b>C</b>reate object (new) = "I am a house" or "I own a house"</big></div>
+  <h3>Code (Program: simple frame)</h3><pre> 1  public class MyFrame {
+ 2      public static void main(String[] args) {
+ 3          JFrame f = new JFrame("My Window");
+ 4          f.setSize(300, 200);
+ 5          f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+ 6          f.setVisible(true);
+ 7      }
+ 8  }</pre><table><tr><th>Step</th><th>What happens</th></tr><tr><td>1</td><td>Java starts here: main(). Every program begins at main.</td></tr><tr><td>2</td><td>new JFrame("My Window") builds the window object in memory with the title. Not visible yet.</td></tr><tr><td>3</td><td>Sets width 300, height 200 (pixels).</td></tr><tr><td>4</td><td>Says: when user clicks X, stop the whole program.</td></tr><tr><td>5</td><td>Window now appears on screen. Done!</td></tr></table>
+  <div class="ck">✅ <b>Quick check:</b> What does setVisible(true) do? <i>(Shows the window on screen)</i></div></div><div class="pg"><div class="hd"><span>GUI Programming</span><span>Displaying Information in a Component</span></div><div class="link">⬅️ <b>Last:</b> Creating a Frame. We have a window. Now we write or draw inside it.<br>➡️ <b>Next:</b> Working with 2D Shapes. After text, we draw shapes.</div>
+  <h2>Displaying Information in a Component <span class="tag">[5]</span></h2><p>🎬 Animation: <code>lessons/u1-displaying-information.html</code></p>
+  <h3>Definition</h3><p>To display information in a component, we make a class that extends <b>JPanel</b> (or JComponent) and override <b>paintComponent(Graphics g)</b>. Java calls this method automatically whenever the component needs to be drawn.</p><h3>Key points</h3><ul><li><b>paintComponent(Graphics g)</b> is called by Java, not by us.</li><li>Call <b>super.paintComponent(g)</b> first to clear the background.</li><li>The <b>Graphics</b> object is the pen: <code>drawString()</code>, <code>drawLine()</code>, <code>drawRect()</code>.</li><li>Coordinates are in pixels; (0,0) is the top-left corner.</li><li>To redraw, call <b>repaint()</b>.</li></ul><h3>Figure</h3><pre>Window opens/resizes → Java → paintComponent(g) → g.drawString("Hello", x, y) → text on screen</pre><div class="film"><div class="fr"><span>🖼️</span>Take a blank board</div><div class="fr"><span>🖌️</span>Java calls paintComponent(g)</div><div class="fr"><span>🧽</span>Clean first: super.paintComponent(g)</div><div class="fr"><span>✍️</span>Write: g.drawString("Hi", x, y)</div></div>
+  <div class="mn"><span style="font-size:10pt">Topic trick</span><big><b>P</b>aint <b>P</b>en <b>P</b>osition = paintComponent · Graphics pen · x,y position</big></div><div class="mn"><span style="font-size:10pt">Points trick (3 rules)</span><big><b>S</b>ad <b>D</b>ogs <b>R</b>un = Super first · Draw with g · Repaint to update</big></div>
+  <h3>Code (Program: write text in a panel)</h3><pre> 1  class MessagePanel extends JPanel {
+ 2      protected void paintComponent(Graphics g) {
+ 3          super.paintComponent(g);
+ 4          g.drawString("Hello, Swing!", 75, 100);
+ 5      }
+ 6  }
+ 7  public class DrawText {
+ 8      public static void main(String[] args) {
+ 9          JFrame f = new JFrame("Text");
+10          f.add(new MessagePanel());
+11          f.setSize(300, 200);
+12          f.setVisible(true);
+13      }
+14  }</pre><table><tr><th>Step</th><th>What happens</th></tr><tr><td>1</td><td>Program starts at main() and makes a frame.</td></tr><tr><td>2</td><td>Our own panel (a JPanel child) is added into the frame.</td></tr><tr><td>3</td><td>Window shows. Java now needs to draw the panel…</td></tr><tr><td>4</td><td><b>🪟 The window opens</b> → …so Java calls paintComponent(g) BY ITSELF. g = the pen.</td></tr><tr><td>5</td><td>First clear the background.</td></tr><tr><td>6</td><td>Write the text at x=75, y=100.</td></tr></table>
+  <div class="ck">✅ <b>Quick check:</b> How should you redraw a component when data changes? <i>(Call repaint())</i></div></div><div class="pg"><div class="hd"><span>GUI Programming</span><span>Working with 2D Shapes</span></div><div class="link">⬅️ <b>Last:</b> Displaying Information in a Component. We can write text. Now we draw shapes.<br>➡️ <b>Next:</b> Using Color. Shapes look better with color.</div>
+  <h2>Working with 2D Shapes <span class="tag">[5]</span></h2><p>🎬 Animation: <code>lessons/u1-2d-shapes.html</code></p>
+  <h3>Definition</h3><p><b>Java 2D</b> lets us draw shapes using the <b>Graphics2D</b> class and shape classes from <code>java.awt.geom</code>, like <b>Line2D</b>, <b>Rectangle2D</b> and <b>Ellipse2D</b>.</p><h3>Key points</h3><ul><li>Cast <code>Graphics</code> to <b>Graphics2D</b>.</li><li>Create a shape object, e.g. <code>new Rectangle2D.Double(x, y, w, h)</code>.</li><li>Use <b>draw(shape)</b> for outline and <b>fill(shape)</b> to fill it.</li><li>Shape classes have <b>.Double</b> and <b>.Float</b> versions.</li></ul><table><tr><th>Shape class</th><th>Made with</th></tr><tr><td>Line2D</td><td>(x1, y1, x2, y2)</td></tr><tr><td>Rectangle2D</td><td>(x, y, width, height)</td></tr><tr><td>Ellipse2D</td><td>bounding box (x, y, width, height)</td></tr></table><div class="film"><div class="fr"><span>🖌️</span>Old pen: Graphics</div><div class="fr"><span>🖋️</span>Better pen: Graphics2D</div><div class="fr"><span>📏</span>Line2D.Double</div><div class="fr"><span>⬛</span>Rectangle2D.Double</div></div>
+  <div class="mn"><span style="font-size:10pt">Topic trick (shapes)</span><big><b>L</b>azy <b>R</b>abbits <b>E</b>at = Line2D · Rectangle2D · Ellipse2D (java.awt.geom)</big></div><div class="mn"><span style="font-size:10pt">Points trick (3 steps)</span><big><b>C</b>ats <b>C</b>atch <b>D</b>ogs = Cast g to Graphics2D · Create shape object · Draw or fill it</big></div>
+  <h3>Code (Program: draw a rectangle, ellipse and line)</h3><pre> 1  class ShapePanel extends JPanel {
+ 2      protected void paintComponent(Graphics g) {
+ 3          super.paintComponent(g);
+ 4          Graphics2D g2 = (Graphics2D) g;
+ 5          Rectangle2D rect = new Rectangle2D.Double(50, 40, 150, 80);
+ 6          g2.draw(rect);
+ 7          Ellipse2D oval = new Ellipse2D.Double(50, 40, 150, 80);
+ 8          g2.draw(oval);
+ 9          g2.draw(new Line2D.Double(50, 40, 200, 120));
+10      }
+11  }</pre><table><tr><th>Step</th><th>What happens</th></tr><tr><td>1</td><td>Java calls paintComponent(g) when the panel must be drawn.</td></tr><tr><td>2</td><td>Cast the pen to Graphics2D to get the better tools.</td></tr><tr><td>3</td><td>Create a rectangle object: x=50, y=40, width=150, height=80. Not drawn yet!</td></tr><tr><td>4</td><td>Now it is drawn (outline).</td></tr><tr><td>5</td><td>An ellipse in the same box (fits inside the rectangle).</td></tr><tr><td>6</td><td>Ellipse drawn.</td></tr><tr><td>7</td><td>A diagonal line from corner to corner.</td></tr></table>
+  <div class="ck">✅ <b>Quick check:</b> Which method fills the inside of a shape? <i>(g2.fill())</i></div></div><div class="pg"><div class="hd"><span>GUI Programming</span><span>Using Color</span></div><div class="link">⬅️ <b>Last:</b> Working with 2D Shapes. We can draw shapes. Now we color them.<br>➡️ <b>Next:</b> Using Special Fonts for Text. Text can also get special fonts.</div>
+  <h2>Using Color <span class="tag">[2.5]</span></h2><p>🎬 Animation: <code>lessons/u1-using-color.html</code></p>
+  <h3>Definition</h3><p>The <b>Color</b> class (in <code>java.awt</code>) represents colors using <b>RGB</b> values (Red, Green, Blue), each from 0 to 255.</p><h3>Key points</h3><ul><li>Make a color: <code>new Color(r, g, b)</code>.</li><li>Use constants: <code>Color.RED</code>, <code>Color.BLUE</code>, etc.</li><li>Set drawing color: <code>g2.setPaint(c)</code> or <code>g.setColor(c)</code>, then draw/fill.</li><li>Component colors: <code>setBackground(c)</code>, <code>setForeground(c)</code>.</li><li><code>brighter()</code> and <code>darker()</code> give lighter/darker shades.</li></ul><div class="film"><div class="fr"><span>🎨</span>The Color class</div><div class="fr"><span>🔴</span>new Color(r, g, b)</div><div class="fr"><span>🏷️</span>Ready colors</div><div class="fr"><span>🖌️</span>g2.setPaint(Color.RED)</div></div>
+  <div class="mn"><span style="font-size:10pt">Topic trick</span><big><b>R</b>eally <b>G</b>ood <b>B</b>ananas = Red · Green · Blue, each 0–255</big></div><div class="mn"><span style="font-size:10pt">Points trick (order)</span><big><b>P</b>ick <b>T</b>hen <b>P</b>aint = setPaint/setColor first, then draw/fill</big></div>
+  <h3>Code (Program: red filled rectangle)</h3><pre> 1  protected void paintComponent(Graphics g) {
+ 2      super.paintComponent(g);
+ 3      Graphics2D g2 = (Graphics2D) g;
+ 4      g2.setPaint(Color.RED);
+ 5      g2.fill(new Rectangle2D.Double(40, 40, 120, 60));
+ 6      g2.setPaint(new Color(0, 128, 255));
+ 7      g2.drawString("Blue text", 40, 140);
+ 8  }</pre><table><tr><th>Step</th><th>What happens</th></tr><tr><td>1</td><td>Java calls paintComponent when drawing.</td></tr><tr><td>2</td><td>Pick red paint (a ready constant).</td></tr><tr><td>3</td><td>Fill a rectangle: it comes out red.</td></tr><tr><td>4</td><td>Make our own color: R=0, G=128, B=255 → sky blue.</td></tr><tr><td>5</td><td>Text is drawn in blue.</td></tr></table>
+  <div class="ck">✅ <b>Quick check:</b> new Color(0, 0, 255) gives which color? <i>(Blue)</i></div></div><div class="pg"><div class="hd"><span>GUI Programming</span><span>Using Special Fonts for Text</span></div><div class="link">⬅️ <b>Last:</b> Using Color. We can color text. Now we change its font.<br>➡️ <b>Next:</b> Displaying Images. After text and shapes, we show pictures.</div>
+  <h2>Using Special Fonts for Text <span class="tag">[2.5]</span></h2><p>🎬 Animation: <code>lessons/u1-special-fonts.html</code></p>
+  <h3>Definition</h3><p>The <b>Font</b> class (in <code>java.awt</code>) is used to draw text in a special typeface, style and size.</p><h3>Key points</h3><ul><li>Create: <code>new Font(name, style, size)</code>.</li><li>Styles: <b>Font.PLAIN</b>, <b>Font.BOLD</b>, <b>Font.ITALIC</b>.</li><li>Logical font names: Serif, SansSerif, Monospaced, Dialog, DialogInput.</li><li>Apply: <code>g2.setFont(f)</code> (drawing) or <code>component.setFont(f)</code>.</li><li>List installed fonts: <code>GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames()</code>.</li></ul><h3>Example</h3><pre>Font f = new Font("Serif", Font.BOLD, 24);
+g2.setFont(f);
+g2.drawString("Exam Hero", 40, 80);</pre><div class="film"><div class="fr"><span>🔤</span>The Font class</div><div class="fr"><span>🏷️</span>1. Font name</div><div class="fr"><span>🅱️</span>2. Style</div><div class="fr"><span>📐</span>3. Size in points</div></div>
+  <div class="mn"><span style="font-size:10pt">Topic trick (constructor)</span><big><b>N</b>ice <b>S</b>oft <b>S</b>ofa = new Font(Name, Style, Size)</big></div><div class="mn"><span style="font-size:10pt">Points trick (styles)</span><big><b>P</b>lease <b>B</b>e <b>I</b>nteresting = PLAIN · BOLD · ITALIC</big></div>
+  <h3>Code (Program: bold serif text)</h3><pre> 1  protected void paintComponent(Graphics g) {
+ 2      super.paintComponent(g);
+ 3      Graphics2D g2 = (Graphics2D) g;
+ 4      Font f = new Font("Serif", Font.BOLD, 24);
+ 5      g2.setFont(f);
+ 6      g2.drawString("Exam Hero", 40, 80);
+ 7  }</pre><table><tr><th>Step</th><th>What happens</th></tr><tr><td>1</td><td>Java calls paintComponent.</td></tr><tr><td>2</td><td>Create a font: name Serif, style BOLD, size 24.</td></tr><tr><td>3</td><td>Tell the pen to use this font.</td></tr><tr><td>4</td><td>Text drawn big and bold.</td></tr></table>
+  <div class="ck">✅ <b>Quick check:</b> What are the 3 parts of new Font(...)? <i>(Name, Style, Size)</i></div></div><div class="pg"><div class="hd"><span>GUI Programming</span><span>Displaying Images</span></div><div class="link">⬅️ <b>Last:</b> Using Special Fonts for Text. We can draw text and shapes. Now we show pictures.<br>➡️ <b>Next:</b> Event Handling Basics. Our window looks good. Next: make it react to the user.</div>
+  <h2>Displaying Images <span class="tag">[2.5]</span></h2><p>🎬 Animation: <code>lessons/u1-displaying-images.html</code></p>
+  <h3>Definition</h3><p>Java can display images (JPG, PNG, GIF) by loading them with <b>ImageIO.read()</b> or <b>ImageIcon</b> and drawing them with <b>drawImage()</b>.</p><h3>Key points</h3><ul><li>Load: <code>Image img = ImageIO.read(new File("cat.jpg"));</code></li><li>Draw in paintComponent: <code>g.drawImage(img, x, y, null);</code></li><li>Easy way: <code>new JLabel(new ImageIcon("cat.jpg"))</code>.</li><li>Can scale: <code>g.drawImage(img, x, y, width, height, null)</code>.</li></ul><div class="film"><div class="fr"><span>📁</span>Picture file</div><div class="fr"><span>📥</span>Load it</div><div class="fr"><span>🖌️</span>Java calls paintComponent</div><div class="fr"><span>🖼️</span>g.drawImage(img, x, y, null)</div></div>
+  <div class="mn"><span style="font-size:10pt">Topic trick</span><big><b>L</b>oad <b>T</b>hen <b>D</b>raw = ImageIO.read() → g.drawImage()</big></div><div class="mn"><span style="font-size:10pt">Points trick (formats)</span><big><b>J</b>ust <b>P</b>retty <b>G</b>raphics = JPG · PNG · GIF</big></div>
+  <h3>Code (Program: show an image)</h3><pre> 1  class ImagePanel extends JPanel {
+ 2      private Image img;
+ 3      ImagePanel() throws IOException {
+ 4          img = ImageIO.read(new File("cat.jpg"));
+ 5      }
+ 6      protected void paintComponent(Graphics g) {
+ 7          super.paintComponent(g);
+ 8          g.drawImage(img, 20, 20, null);
+ 9      }
+10  }</pre><table><tr><th>Step</th><th>What happens</th></tr><tr><td>1</td><td>Constructor runs when the panel is made.</td></tr><tr><td>2</td><td>Load cat.jpg from disk into memory. (May throw IOException.)</td></tr><tr><td>3</td><td>Window opens → Java calls paintComponent.</td></tr><tr><td>4</td><td>Draw the picture at x=20, y=20.</td></tr></table>
+  <div class="ck">✅ <b>Quick check:</b> Which method draws a picture? <i>(drawImage())</i></div></div><div class="pg"><div class="hd"><span>GUI Programming</span><span>Event Handling Basics</span></div><div class="link">⬅️ <b>Last:</b> Displaying Images. The window looks good, but clicking does nothing yet.<br>➡️ <b>Next:</b> Event Classes. Each event has its own class (like KeyEvent).</div>
+  <h2>Event Handling Basics <span class="tag">[5]</span></h2><p>🎬 Animation: <code>lessons/u1-event-handling-basics.html</code></p>
+  <h3>Definition</h3><p><b>Event handling</b> is the way a Java program reacts to user actions like clicks and key presses. Java uses the <b>Delegation Event Model</b>: a source sends an event object to registered listeners.</p><h3>Parts of the Delegation Event Model</h3><ul><li><b>Event Source</b>: component that generates the event (JButton).</li><li><b>Event Object</b>: holds information about the event (ActionEvent).</li><li><b>Event Listener</b>: interface whose method runs when the event occurs (ActionListener).</li></ul><h3>Figure</h3><pre>[Event Source] --event object--&gt; [Registered Listener] --&gt; handler method runs</pre><h3>Steps to handle an event</h3><ol><li><b>Implement</b> the listener interface.</li><li><b>Register</b> it: <code>source.addXxxListener(listener)</code>.</li><li><b>Override</b> its method (e.g. <code>actionPerformed</code>).</li></ol><div class="film"><div class="fr"><span>🔔</span>Event Source</div><div class="fr"><span>👆</span>User acts</div><div class="fr"><span>📩</span>Event object is made</div><div class="fr"><span>🧑‍🍳</span>Sent to the Listener</div></div>
+  <div class="mn"><span style="font-size:10pt">Topic trick (model)</span><big><b>S</b>ome <b>E</b>lephants <b>L</b>isten = Source → Event → Listener (Delegation Event Model)</big></div><div class="mn"><span style="font-size:10pt">Points trick (3 coding steps)</span><big><b>I</b>ce <b>R</b>eaches <b>O</b>cean = Implement interface · Register (addXxxListener) · Override method</big></div>
+  <h3>Code (Program: count clicks)</h3><pre> 1  public class Counter extends JFrame implements ActionListener {
+ 2      JButton b = new JButton("Click");
+ 3      int count = 0;
+ 4      Counter() {
+ 5          setLayout(new FlowLayout());
+ 6          add(b);
+ 7          b.addActionListener(this);
+ 8          setSize(200, 100);
+ 9          setVisible(true);
+10      }
+11      public void actionPerformed(ActionEvent e) {
+12          count++;
+13          b.setText("Clicked " + count);
+14      }
+15      public static void main(String[] args) { new Counter(); }
+16  }</pre><table><tr><th>Step</th><th>What happens</th></tr><tr><td>1</td><td>Start: main() makes the window.</td></tr><tr><td>2</td><td>Step 1 IMPLEMENT: we promise to write actionPerformed().</td></tr><tr><td>3</td><td>Step 2 REGISTER: button will tell THIS object about clicks.</td></tr><tr><td>4</td><td>Window appears.</td></tr><tr><td>5</td><td><b>👆 You click the button</b> → Step 3 OVERRIDE: you click → Java calls this by itself.</td></tr><tr><td>6</td><td>count becomes 1.</td></tr><tr><td>7</td><td>Button text changes.</td></tr></table>
+  <div class="ck">✅ <b>Quick check:</b> What is step 2 of event handling? <i>(Register the listener with addXxxListener())</i></div></div><div class="pg"><div class="hd"><span>GUI Programming</span><span>Event Classes</span></div><div class="link">⬅️ <b>Last:</b> Event Handling Basics. We know Source → Event → Listener. Now one event class: KeyEvent.<br>➡️ <b>Next:</b> Event Listeners. Now we see all the listener interfaces.</div>
+  <h2>KeyEvent <span class="tag">[5]</span></h2><p>🎬 Animation: <code>lessons/u1-keyevent.html</code></p>
+  <h3>Definition</h3><p><b>KeyEvent</b> is a class in <code>java.awt.event</code> that represents a keyboard action when the user presses, types, or releases a key.</p>
+<h3>Key Points</h3><ul><li>Belongs to <code>java.awt.event</code> and works with <b>KeyListener</b> or <b>KeyAdapter</b>.</li><li><code>getKeyChar()</code> gives the typed character; <code>getKeyCode()</code> gives the key code (such as <code>KeyEvent.VK_ENTER</code>).</li><li><b>keyPressed</b> – any key pushed down. <b>keyTyped</b> – a character key produces a character. <b>keyReleased</b> – key let go.</li></ul>
+<p class="note">Example: the full program is traced above (copy it into the exam).</p><div class="film"><div class="fr"><span>☝️</span>You use the keyboard</div><div class="fr"><span>⌨️</span>1 Key goes DOWN  keyPressed()</div><div class="fr"><span>📩</span>2 Character appears  keyTyped()</div><div class="fr"><span>🧑‍💻</span>3 Key comes UP  keyReleased()</div></div>
+  <div class="mn"><span style="font-size:10pt">3 methods in order:</span><big><b>P</b>izza <b>T</b>ime <b>R</b>ocks = <b>P</b>ressed → <b>T</b>yped → <b>R</b>eleased</big></div><div class="mn"><span style="font-size:10pt">Two getters:</span><big><b>Char</b> = the letter, <b>Code</b> = the number (VK_…)</big></div>
+  <h3>Code (Program: KeyEventExample)</h3><pre> 1  public class KeyEventExample extends JFrame implements KeyListener {
+ 2      JTextField tf = new JTextField(15);
+ 3      JLabel lbl = new JLabel("Press any key...");
+ 4  
+ 5      KeyEventExample() {
+ 6          setLayout(new FlowLayout());
+ 7          tf.addKeyListener(this);
+ 8          add(tf);
+ 9          add(lbl);
+10          setSize(300, 120);
+11          setVisible(true);
+12      }
+13  
+14      public void keyPressed(KeyEvent e) {
+15          lbl.setText("Pressed Key: " + e.getKeyChar() + " | Code: " + e.getKeyCode());
+16      }
+17      public void keyReleased(KeyEvent e) {}
+18      public void keyTyped(KeyEvent e) {}
+19  
+20      public static void main(String[] args) {
+21          new KeyEventExample();
+22      }
+23  }</pre><table><tr><th>Step</th><th>What happens</th></tr><tr><td>1</td><td>Program starts at main() and makes our window object.</td></tr><tr><td>2</td><td>A text box (15 characters wide) is created.</td></tr><tr><td>3</td><td>A label with the starting text is created.</td></tr><tr><td>4</td><td>FlowLayout = put components left to right, like words in a sentence.</td></tr><tr><td>5</td><td>REGISTER: "text box, send your key events to ME (this window)". We promised the 3 key methods with "implements KeyListener".</td></tr><tr><td>6</td><td>Both are placed inside the window (not shown yet).</td></tr><tr><td>7</td><td>Window appears. Now Java waits for the user.</td></tr><tr><td>8</td><td><b>⌨️ You press the key "a"</b> → Java creates a KeyEvent (e) and AUTOMATICALLY calls keyPressed(e).</td></tr><tr><td>9</td><td>Label text changes using the two getters.</td></tr><tr><td>10</td><td>Next Java calls keyTyped(). Body is empty { } → nothing happens.</td></tr><tr><td>11</td><td><b>⌨️ You let go of "a"</b> → Last, keyReleased(). Also empty → nothing. Order was: Pressed → Typed → Released.</td></tr></table>
+  <div class="ck">✅ <b>Quick check:</b> Which method runs first when you push a key? <i>(keyPressed())</i></div></div><div class="pg"><div class="hd"><span>GUI Programming</span><span>Event Listeners</span></div><div class="link">⬅️ <b>Last:</b> Event Classes (KeyEvent). We know events; now the listeners that receive them.<br>➡️ <b>Next:</b> Mouse Min/Max program, then Adapter classes.</div>
+  <h2>Event Listener <span class="tag">[3+2]</span></h2><p>🎬 Animation: <code>lessons/u1-event-listener.html</code></p>
+  <h3>Definition</h3><p>An <b>Event Listener</b> is a Java interface (in <code>java.awt.event</code> or <code>javax.swing.event</code>) that listens for an event on a GUI component and runs code to respond to it.</p>
+<h3>Role of Event Listener</h3><ul><li>Connects the Event Source (like a button) to the response code.</li><li>Provides methods that run automatically when a specific event occurs.</li><li>Keeps UI design separate from event logic so code stays neat and easy to update.</li></ul>
+<h3>Figure – Delegation Event Model</h3><pre>[Event Source (Button)] ---> [Event Object] ---> [Event Listener (Handler Code)]</pre>
+<h3>Different Event Listeners in Java</h3><table><tr><th>Listener</th><th>Used for</th></tr><tr><td>ActionListener</td><td>button click, menu click, pressing Enter in a text box</td></tr><tr><td>MouseListener</td><td>mouse press, release, click, enter, exit</td></tr><tr><td>MouseMotionListener</td><td>moving or dragging the mouse</td></tr><tr><td>KeyListener</td><td>pressing, releasing, or typing a key</td></tr><tr><td>ItemListener</td><td>checkbox, radio button, dropdown item</td></tr><tr><td>WindowListener</td><td>opening, closing, minimizing, restoring a window</td></tr></table><div class="film"><div class="fr"><span>🧑</span>A button is just sitting there</div><div class="fr"><span>🧑‍🍳</span>Someone must WATCH the button</div><div class="fr"><span>🔔</span>Student clicks the button</div><div class="fr"><span>📩</span>Button makes an Event object</div></div>
+  <div class="mn"><span style="font-size:10pt">Flow:</span><big><b>S</b>ome <b>E</b>lephants <b>L</b>isten = <b>S</b>ource → <b>E</b>vent → <b>L</b>istener</big></div><div class="mn"><span style="font-size:10pt">List of 6 listeners:</span><big><b>A M</b>ad <b>M</b>ouse <b>K</b>icks <b>I</b>ce <b>W</b>indows<br>= <b>A</b>ction, <b>M</b>ouse, <b>M</b>ouseMotion, <b>K</b>ey, <b>I</b>tem, <b>W</b>indow</big></div>
+  <h3>Code (Program: button + ActionListener)</h3><pre> 1  public class Demo extends JFrame implements ActionListener {
+ 2      JButton b = new JButton("Click me");
+ 3  
+ 4      Demo() {
+ 5          b.addActionListener(this);
+ 6          add(b);
+ 7          setSize(200, 100);
+ 8          setVisible(true);
+ 9      }
+10  
+11      public void actionPerformed(ActionEvent e) {
+12          System.out.println("Clicked!");
+13      }
+14  
+15      public static void main(String[] args) {
+16          new Demo();
+17      }
+18  }</pre><table><tr><th>Step</th><th>What happens</th></tr><tr><td>1</td><td>Program starts at main() and creates our Demo window.</td></tr><tr><td>2</td><td>The button (Event SOURCE) is created.</td></tr><tr><td>3</td><td>"implements ActionListener" = a PROMISE: this class will have an actionPerformed() method.</td></tr><tr><td>4</td><td>REGISTER: tell the button "when you are clicked, call ME (this)". This is the link Source → Listener!</td></tr><tr><td>5</td><td>Button is added and the window is shown.</td></tr><tr><td>6</td><td><b>👆 You click the button</b> → Java makes an ActionEvent (e) and AUTOMATICALLY calls actionPerformed(e). You never call it yourself.</td></tr><tr><td>7</td><td>Your code runs → prints Clicked!</td></tr></table>
+  <div class="ck">✅ <b>Quick check:</b> Which listener handles a button click? <i>(ActionListener)</i></div></div><div class="pg"><div class="hd"><span>GUI Programming</span><span>Event Listeners</span></div><div class="link">⬅️ <b>Last:</b> KeyEvent had 3 methods and we left 2 empty. Mouse has even more methods…<br>➡️ <b>Next:</b> Adapter classes – a trick so you do NOT have to write the empty methods.</div>
+  <h2>Mouse Min/Max <span class="tag">[Group C – 10]</span></h2><p>🎬 Animation: <code>lessons/u1-mouse-minmax-program.html</code></p>
+  <h3>Frame creation + program</h3><p>See Lesson 1 for how a frame is created (inheritance / composition). The program above is the full answer: <b>implements MouseListener</b>, register with <code>addMouseListener(this)</code>, use <code>mousePressed</code> for smaller and <code>mouseReleased</code> for greater, leave the other 3 methods empty.</p><div class="film"><div class="fr"><span>7️⃣</span>Two numbers + one button</div><div class="fr"><span>🔘</span>Mouse PRESSES the button</div><div class="fr"><span>🏷️</span>Label shows: Smaller = 7</div><div class="fr"><span>👇</span>Mouse RELEASES the button</div></div>
+  <div class="mn"><span style="font-size:10pt">Mouse listener methods:</span><big><b>P</b>eople <b>R</b>arely <b>C</b>lap <b>E</b>very <b>E</b>vening = <b>P</b>ressed, <b>R</b>eleased, <b>C</b>licked, <b>E</b>ntered, <b>E</b>xited</big></div><div class="mn"><span style="font-size:10pt">This program:</span><big><b>Press = S</b>maller, <b>Release = G</b>reater → "<b>S</b>ad <b>G</b>uy" (Press-Small, Release-Great)</big></div>
+  <h3>Code (Program: MinMaxMouseApp (exam answer))</h3><pre> 1  public class MinMaxMouseApp extends JFrame implements MouseListener {
+ 2      JTextField t1 = new JTextField(10);
+ 3      JTextField t2 = new JTextField(10);
+ 4      JButton btn = new JButton("Press / Release Mouse");
+ 5      JLabel lbl = new JLabel("Result will show here");
+ 6  
+ 7      MinMaxMouseApp() {
+ 8          setLayout(new FlowLayout());
+ 9          add(t1); add(t2); add(btn); add(lbl);
+10          btn.addMouseListener(this);
+11          setSize(320, 160);
+12          setVisible(true);
+13      }
+14  
+15      public void mousePressed(MouseEvent e) {
+16          int a = Integer.parseInt(t1.getText());
+17          int b = Integer.parseInt(t2.getText());
+18          int smaller = (a &lt; b) ? a : b;
+19          lbl.setText("Smaller Number: " + smaller);
+20      }
+21  
+22      public void mouseReleased(MouseEvent e) {
+23          int a = Integer.parseInt(t1.getText());
+24          int b = Integer.parseInt(t2.getText());
+25          int greater = (a &gt; b) ? a : b;
+26          lbl.setText("Greater Number: " + greater);
+27      }
+28  
+29      public void mouseClicked(MouseEvent e) {}
+30      public void mouseEntered(MouseEvent e) {}
+31      public void mouseExited(MouseEvent e) {}
+32  
+33      public static void main(String[] args) {
+34          new MinMaxMouseApp();
+35      }
+36  }</pre><table><tr><th>Step</th><th>What happens</th></tr><tr><td>1</td><td>Start at main(): create the window.</td></tr><tr><td>2</td><td>Two text fields, one button and one label are created.</td></tr><tr><td>3</td><td>All four are added in a row (FlowLayout).</td></tr><tr><td>4</td><td>REGISTER: "button, tell ME about mouse events". Remember: Source → Event → Listener.</td></tr><tr><td>5</td><td><b>⌨️ You type 7 and 12</b> → Window appears. User types 7 and 12.</td></tr><tr><td>6</td><td><b>👇 You PRESS the mouse on the button</b> → Java calls mousePressed(e) automatically.</td></tr><tr><td>7</td><td>Read the text boxes, turn text into numbers. (The first copy of these lines.)</td></tr><tr><td>8</td><td>(a &lt; b) ? a : b → "if a is less than b take a, else take b" → 7.</td></tr><tr><td>9</td><td>Label shows Smaller Number: 7</td></tr><tr><td>10</td><td><b>👆 You RELEASE the mouse</b> → Java calls mouseReleased(e) automatically.</td></tr><tr><td>11</td><td>(a &gt; b) ? a : b → 12.</td></tr><tr><td>12</td><td>Label shows Greater Number: 12</td></tr><tr><td>13</td><td>These 3 are empty. Required by the interface, so we write { }. Adapter classes avoid this.</td></tr></table>
+  <div class="ck">✅ <b>Quick check:</b> In this program, which method shows the GREATER number? <i>(mouseReleased())</i></div></div><div class="pg"><div class="hd"><span>GUI Programming</span><span>Adapter Classes</span></div><div class="link">⬅️ <b>Last:</b> Event Listeners. MouseListener forced us to write 5 methods, 3 of them empty.<br>➡️ <b>Next:</b> Swing and the MVC Design Pattern. Now we organise Swing code with MVC.</div>
+  <h2>Adapter Classes <span class="tag">[2.5]</span></h2><p>🎬 Animation: <code>lessons/u1-adapter-classes.html</code></p>
+  <h3>Definition</h3><p>An <b>Adapter class</b> gives blank default bodies for all methods of a listener interface that has multiple methods.</p><h3>Key points</h3><ul><li>Examples: <b>MouseAdapter</b>, <b>KeyAdapter</b>, <b>WindowAdapter</b>, FocusAdapter, MouseMotionAdapter.</li><li>Avoids writing empty methods you do not need when implementing a listener interface directly.</li><li>You override only the method you care about.</li></ul><table><tr><th>Listener interface</th><th>Adapter class</th></tr><tr><td>MouseListener (5 methods)</td><td>MouseAdapter</td></tr><tr><td>KeyListener (3)</td><td>KeyAdapter</td></tr><tr><td>WindowListener (7)</td><td>WindowAdapter</td></tr><tr><td>FocusListener (2)</td><td>FocusAdapter</td></tr><tr><td>MouseMotionListener (2)</td><td>MouseMotionAdapter</td></tr></table><h3>Note</h3>ActionListener has only 1 method, so it has no adapter.<div class="film"><div class="fr"><span>😩</span>Problem</div><div class="fr"><span>🧩</span>Adapter class</div><div class="fr"><span>✂️</span>Extend it, override one</div><div class="fr"><span>🧹</span>Code is short</div></div>
+  <div class="mn"><span style="font-size:10pt">Topic trick</span><big><b>A</b>dapters <b>A</b>re <b>L</b>azy <b>H</b>elpers = They give empty bodies so you write only what you need</big></div><div class="mn"><span style="font-size:10pt">Points trick (3 points)</span><big><b>B</b>ig <b>O</b>ld <b>N</b>ose = Blank bodies · Override only one · No empty methods to write</big></div><div class="mn"><span style="font-size:10pt">List trick</span><big><b>M</b>any <b>K</b>ids <b>W</b>alk <b>F</b>ast = MouseAdapter · KeyAdapter · WindowAdapter · FocusAdapter (+ MouseMotionAdapter)</big></div>
+  <h3>Code (Program: close window with WindowAdapter)</h3><pre> 1  public class CloseDemo extends Frame {
+ 2      CloseDemo() {
+ 3          addWindowListener(new WindowAdapter() {
+ 4              public void windowClosing(WindowEvent e) {
+ 5                  System.exit(0);
+ 6              }
+ 7          });
+ 8          setSize(250, 150);
+ 9          setVisible(true);
+10      }
+11      public static void main(String[] args) { new CloseDemo(); }
+12  }</pre><table><tr><th>Step</th><th>What happens</th></tr><tr><td>1</td><td>main() makes an AWT Frame (AWT frames do NOT close on X by themselves).</td></tr><tr><td>2</td><td>Make an object of an anonymous class that extends WindowAdapter. The other 6 methods are already empty.</td></tr><tr><td>3</td><td>Register it with the frame.</td></tr><tr><td>4</td><td>Window appears.</td></tr><tr><td>5</td><td><b>❎ You click the X button</b> → You click X → Java calls windowClosing by itself.</td></tr><tr><td>6</td><td>Program ends.</td></tr></table>
+  <div class="ck">✅ <b>Quick check:</b> Why use an adapter class? <i>(To avoid writing empty listener methods)</i></div></div><div class="pg"><div class="hd"><span>GUI Programming</span><span>Swing and the MVC Design Pattern</span></div><div class="link">⬅️ <b>Last:</b> Adapter Classes. We know components and events. Now: how Swing organises them inside.<br>➡️ <b>Next:</b> Layout Management. Next: how components are placed (layouts).</div>
+  <h2>Swing and the MVC Design Pattern <span class="tag">[5]</span></h2><p>🎬 Animation: <code>lessons/u1-swing-mvc.html</code></p>
+  <h3>Definition</h3><p><b>MVC (Model–View–Controller)</b> is a design pattern that splits a component into three parts: the <b>Model</b> (data), the <b>View</b> (display) and the <b>Controller</b> (user input).</p><h3>Key points</h3><ul><li><b>Model</b>: stores data/state (e.g. ButtonModel, ListModel, TableModel).</li><li><b>View</b>: shows the model on screen.</li><li><b>Controller</b>: handles user input and updates the model.</li><li>Swing joins View and Controller into a <b>UI delegate</b> (Model–Delegate design).</li><li>Advantages: change the look without changing data; same data in many views; easier to maintain.</li></ul><h3>Figure</h3><pre>User --input--&gt; [Controller] --updates--&gt; [Model] --notifies--&gt; [View] --shows--&gt; User</pre><div class="film"><div class="fr"><span>🧑‍🍳</span>A restaurant = MVC</div><div class="fr"><span>🧑‍🍳</span>Model = kitchen</div><div class="fr"><span>🍽️</span>View = plate</div><div class="fr"><span>🧑‍💼</span>Controller = waiter</div></div>
+  <div class="mn"><span style="font-size:10pt">Topic trick</span><big><b>M</b>y <b>V</b>illage <b>C</b>afe = Model · View · Controller</big></div><div class="mn"><span style="font-size:10pt">Points trick (jobs)</span><big><b>D</b>ata <b>D</b>isplay <b>D</b>irect = Model = data · View = display · Controller = directs input</big></div><div class="mn"><span style="font-size:10pt">Swing twist</span><big><b>T</b>wo <b>B</b>ecome <b>O</b>ne = View + Controller = UI delegate</big></div>
+  <h3>Code (Program: list model updates the view)</h3><pre> 1  DefaultListModel&lt;String&gt; model = new DefaultListModel&lt;&gt;();
+ 2  model.addElement("Java");
+ 3  JList&lt;String&gt; list = new JList&lt;&gt;(model);
+ 4  JFrame f = new JFrame("MVC");
+ 5  f.add(list);
+ 6  f.setSize(200, 150);
+ 7  f.setVisible(true);
+ 8  model.addElement("Swing");</pre><table><tr><th>Step</th><th>What happens</th></tr><tr><td>1</td><td>MODEL: holds the data (a list of strings).</td></tr><tr><td>2</td><td>Add data to the model.</td></tr><tr><td>3</td><td>VIEW: JList shows whatever the model holds.</td></tr><tr><td>4</td><td>Window shows the list.</td></tr><tr><td>5</td><td>Change only the MODEL… the VIEW updates by itself!</td></tr></table>
+  <div class="ck">✅ <b>Quick check:</b> In MVC, which part holds the data? <i>(Model)</i></div></div><div class="pg"><div class="hd"><span>GUI Programming</span><span>Layout Management</span></div><div class="link">⬅️ <b>Last:</b> Swing and the MVC Design Pattern. We have many components. Where do they sit in the window?<br>➡️ <b>Next:</b> Basic Swing Components. Now the actual components to place.</div>
+  <h2>Layout Management <span class="tag">[5]</span></h2><p>🎬 Animation: <code>lessons/u1-layout-management.html</code></p>
+  <h3>Definition</h3><p>A <b>Layout Manager</b> decides the size and position of components inside a container. It is set with <code>setLayout()</code>.</p><h3>Points</h3><ul><li>Components resize/move automatically when the window size changes.</li><li><code>setLayout(null)</code> = absolute positioning with setBounds().</li></ul><table><tr><th>Layout</th><th>How it arranges</th></tr><tr><td><b>FlowLayout</b></td><td>Left to right in a row, wraps (default for JPanel)</td></tr><tr><td><b>BorderLayout</b></td><td>North, South, East, West, Center (default for JFrame)</td></tr><tr><td><b>GridLayout</b></td><td>Rows × columns of equal cells</td></tr><tr><td><b>CardLayout</b></td><td>Stack of cards, one visible at a time</td></tr><tr><td><b>GridBagLayout</b></td><td>Flexible grid, cells can span rows/cols</td></tr><tr><td><b>BoxLayout</b></td><td>Single row or column</td></tr></table><div class="film"><div class="fr"><span>➡️</span>FlowLayout</div><div class="fr"><span>🧭</span>BorderLayout</div><div class="fr"><span>🔢</span>GridLayout(rows, cols)</div><div class="fr"><span>🃏</span>CardLayout</div></div>
+  <div class="mn"><span style="font-size:10pt">Topic trick (layouts)</span><big><b>F</b>unny <b>B</b>ears <b>G</b>et <b>C</b>ake = FlowLayout · BorderLayout · GridLayout · CardLayout (+ GridBag, Box)</big></div><div class="mn"><span style="font-size:10pt">BorderLayout areas</span><big><b>N</b>ever <b>E</b>at <b>S</b>oggy <b>W</b>affles = North · East · South · West (+ Center)</big></div><div class="mn"><span style="font-size:10pt">Defaults</span><big><b>P</b>anel <b>F</b>lows, <b>F</b>rame <b>B</b>orders = JPanel = FlowLayout, JFrame = BorderLayout</big></div>
+  <h3>Code (Program: BorderLayout with 5 buttons)</h3><pre> 1  JFrame f = new JFrame("Border");
+ 2  f.setLayout(new BorderLayout());
+ 3  f.add(new JButton("North"), BorderLayout.NORTH);
+ 4  f.add(new JButton("South"), BorderLayout.SOUTH);
+ 5  f.add(new JButton("East"), BorderLayout.EAST);
+ 6  f.add(new JButton("West"), BorderLayout.WEST);
+ 7  f.add(new JButton("Center"), BorderLayout.CENTER);
+ 8  f.setSize(300, 200);
+ 9  f.setVisible(true);</pre><table><tr><th>Step</th><th>What happens</th></tr><tr><td>1</td><td>Make a window.</td></tr><tr><td>2</td><td>Choose BorderLayout: 5 areas.</td></tr><tr><td>3</td><td>Button goes to the top.</td></tr><tr><td>4</td><td>Button goes to the bottom.</td></tr><tr><td>5</td><td>Right and left sides.</td></tr><tr><td>6</td><td>Center takes all the space left.</td></tr><tr><td>7</td><td>Window shows: N top, S bottom, E right, W left, C middle.</td></tr></table>
+  <div class="ck">✅ <b>Quick check:</b> Default layout of JFrame? <i>(BorderLayout)</i></div></div><div class="pg"><div class="hd"><span>GUI Programming</span><span>Basic Swing Components</span></div><div class="link">⬅️ <b>Last:</b> Layout Management. We know layouts. Now the common components we place.<br>➡️ <b>Next:</b> The Design of JDBC. Unit 2: saving data in a database with JDBC.</div>
+  <h2>Basic Swing Components <span class="tag">[5]</span></h2><p>🎬 Animation: <code>lessons/u1-basic-swing-components.html</code></p>
+  <h3>Definition</h3><p><b>Swing components</b> are ready-made GUI parts in <code>javax.swing</code> (names start with J) used to build user interfaces.</p><table><tr><th>Component</th><th>Use</th><th>Main methods / listener</th></tr><tr><td>JLabel</td><td>Show text/image</td><td>setText()</td></tr><tr><td>JButton</td><td>Clickable button</td><td>addActionListener()</td></tr><tr><td>JTextField</td><td>One-line input</td><td>getText(), setText()</td></tr><tr><td>JTextArea</td><td>Multi-line input</td><td>append()</td></tr><tr><td>JCheckBox</td><td>Select many options</td><td>isSelected(), ItemListener</td></tr><tr><td>JRadioButton</td><td>Select one (with ButtonGroup)</td><td>isSelected()</td></tr><tr><td>JComboBox</td><td>Dropdown list</td><td>getSelectedItem()</td></tr><tr><td>JList</td><td>List of items</td><td>getSelectedValue()</td></tr><tr><td>JPasswordField</td><td>Hidden text</td><td>getPassword()</td></tr></table><div class="film"><div class="fr"><span>🏷️</span>JLabel</div><div class="fr"><span>🔘</span>JButton</div><div class="fr"><span>⌨️</span>JTextField / JTextArea</div><div class="fr"><span>☑️</span>JCheckBox</div></div>
+  <div class="mn"><span style="font-size:10pt">Topic trick (7 components)</span><big><b>L</b>azy <b>B</b>ears <b>T</b>each <b>T</b>iny <b>C</b>ats <b>R</b>unning <b>C</b>ircles = JLabel · JButton · JTextField · JTextArea · JCheckBox · JRadioButton · JComboBox</big></div><div class="mn"><span style="font-size:10pt">Points trick (radio)</span><big><b>O</b>ne <b>G</b>roup <b>O</b>ne <b>P</b>ick = Put radio buttons in a ButtonGroup so only one is selected</big></div>
+  <h3>Code (Program: small form)</h3><pre> 1  JFrame f = new JFrame("Form");
+ 2  f.setLayout(new FlowLayout());
+ 3  JLabel l = new JLabel("Name:");
+ 4  JTextField t = new JTextField(10);
+ 5  JCheckBox c = new JCheckBox("BCA");
+ 6  JButton b = new JButton("Submit");
+ 7  f.add(l); f.add(t); f.add(c); f.add(b);
+ 8  f.setSize(300, 120);
+ 9  f.setVisible(true);</pre><table><tr><th>Step</th><th>What happens</th></tr><tr><td>1</td><td>Window with FlowLayout (left to right).</td></tr><tr><td>2</td><td>Label: shows text.</td></tr><tr><td>3</td><td>Text box 10 columns wide.</td></tr><tr><td>4</td><td>A check box.</td></tr><tr><td>5</td><td>A button.</td></tr><tr><td>6</td><td>All four are added in order.</td></tr><tr><td>7</td><td>The form appears.</td></tr></table>
+  <div class="ck">✅ <b>Quick check:</b> Which component lets you choose only ONE option from a group? <i>(JRadioButton in a ButtonGroup)</i></div></div><div class="pg"><div class="hd"><span>Unit 1</span><span>Memory sheet</span></div><h2>Memorize in 5 minutes</h2><table><tr><th>Topic</th><th>Trick</th></tr><tr><td>Introducing Swing: Topic trick</td><td>AWT Heavy, Swing Light = AWT uses OS parts, Swing is pure Java</td></tr><tr><td>Introducing Swing: Points trick (4 features)</td><td>Little Pigs Make Jam = Lightweight · Pluggable look · MVC based · J-prefix names</td></tr><tr><td>Frame: 4 steps to show a frame:</td><td>Cats Sit Closely Very = Create → Size → Close-operation → Visible</td></tr><tr><td>Frame: 2 ways:</td><td>Inherit (extends) or Create object (new) = "I am a house" or "I own a house"</td></tr><tr><td>Displaying Information in a Component: Topic trick</td><td>Paint Pen Position = paintComponent · Graphics pen · x,y position</td></tr><tr><td>Displaying Information in a Component: Points trick (3 rules)</td><td>Sad Dogs Run = Super first · Draw with g · Repaint to update</td></tr><tr><td>Working with 2D Shapes: Topic trick (shapes)</td><td>Lazy Rabbits Eat = Line2D · Rectangle2D · Ellipse2D (java.awt.geom)</td></tr><tr><td>Working with 2D Shapes: Points trick (3 steps)</td><td>Cats Catch Dogs = Cast g to Graphics2D · Create shape object · Draw or fill it</td></tr><tr><td>Using Color: Topic trick</td><td>Really Good Bananas = Red · Green · Blue, each 0–255</td></tr><tr><td>Using Color: Points trick (order)</td><td>Pick Then Paint = setPaint/setColor first, then draw/fill</td></tr><tr><td>Using Special Fonts for Text: Topic trick (constructor)</td><td>Nice Soft Sofa = new Font(Name, Style, Size)</td></tr><tr><td>Using Special Fonts for Text: Points trick (styles)</td><td>Please Be Interesting = PLAIN · BOLD · ITALIC</td></tr><tr><td>Displaying Images: Topic trick</td><td>Load Then Draw = ImageIO.read() → g.drawImage()</td></tr><tr><td>Displaying Images: Points trick (formats)</td><td>Just Pretty Graphics = JPG · PNG · GIF</td></tr><tr><td>Event Handling Basics: Topic trick (model)</td><td>Some Elephants Listen = Source → Event → Listener (Delegation Event Model)</td></tr><tr><td>Event Handling Basics: Points trick (3 coding steps)</td><td>Ice Reaches Ocean = Implement interface · Register (addXxxListener) · Override method</td></tr><tr><td>KeyEvent: 3 methods in order:</td><td>Pizza Time Rocks = Pressed → Typed → Released</td></tr><tr><td>KeyEvent: Two getters:</td><td>Char = the letter, Code = the number (VK_…)</td></tr><tr><td>Event Listener: Flow:</td><td>Some Elephants Listen = Source → Event → Listener</td></tr><tr><td>Event Listener: List of 6 listeners:</td><td>A Mad Mouse Kicks Ice Windows= Action, Mouse, MouseMotion, Key, Item, Window</td></tr><tr><td>Mouse Min/Max: Mouse listener methods:</td><td>People Rarely Clap Every Evening = Pressed, Released, Clicked, Entered, Exited</td></tr><tr><td>Mouse Min/Max: This program:</td><td>Press = Smaller, Release = Greater → "Sad Guy" (Press-Small, Release-Great)</td></tr><tr><td>Adapter Classes: Topic trick</td><td>Adapters Are Lazy Helpers = They give empty bodies so you write only what you need</td></tr><tr><td>Adapter Classes: Points trick (3 points)</td><td>Big Old Nose = Blank bodies · Override only one · No empty methods to write</td></tr><tr><td>Adapter Classes: List trick</td><td>Many Kids Walk Fast = MouseAdapter · KeyAdapter · WindowAdapter · FocusAdapter (+ MouseMotionAdapter)</td></tr><tr><td>Swing and the MVC Design Pattern: Topic trick</td><td>My Village Cafe = Model · View · Controller</td></tr><tr><td>Swing and the MVC Design Pattern: Points trick (jobs)</td><td>Data Display Direct = Model = data · View = display · Controller = directs input</td></tr><tr><td>Swing and the MVC Design Pattern: Swing twist</td><td>Two Become One = View + Controller = UI delegate</td></tr><tr><td>Layout Management: Topic trick (layouts)</td><td>Funny Bears Get Cake = FlowLayout · BorderLayout · GridLayout · CardLayout (+ GridBag, Box)</td></tr><tr><td>Layout Management: BorderLayout areas</td><td>Never Eat Soggy Waffles = North · East · South · West (+ Center)</td></tr><tr><td>Layout Management: Defaults</td><td>Panel Flows, Frame Borders = JPanel = FlowLayout, JFrame = BorderLayout</td></tr><tr><td>Basic Swing Components: Topic trick (7 components)</td><td>Lazy Bears Teach Tiny Cats Running Circles = JLabel · JButton · JTextField · JTextArea · JCheckBox · JRadioButton · JComboBox</td></tr><tr><td>Basic Swing Components: Points trick (radio)</td><td>One Group One Pick = Put radio buttons in a ButtonGroup so only one is selected</td></tr></table></div><div class="pg"><div class="hd"><span>Unit 1</span><span>Mnemonic story</span></div><pre style="white-space:pre-wrap;font:11pt/1.5 sans-serif;background:#fff;border:0"># Unit 1 story: GUI Programming (hero: Mo the Mad Mouse)
+
+1. Mo sits on a light **swing** watching **Little Pigs Make Jam**. Then **Four Cats Sit Closely Very** build Mo a house. *(Swing: Lightweight, Pluggable look, MVC, J-names · Frame: Create, Size, Close-op, Visible)*
+2. Mo paints the walls with **Sad Dogs Run**, and **Lazy Rabbits Eat** the lines, boxes and circles in **Really Good Banana** colours. *(Super, Draw, Repaint · Line2D, Rectangle2D, Ellipse2D · RGB)*
+3. The doorbell rings: **Some Elephants Listen**, and the **Ice Reaches Ocean**. Mo gets mad and **Kicks Ice Windows**, so **Pink Giraffes** bring **Pizza Time Rocks**. *(Source→Event→Listener · Implement, Register, Override · Action, Mouse, MouseMotion, Key, Item, Window · Pressed, Typed, Released)*
+4. A lazy helper with a **Big Old Nose** fixes only one window. *(Adapter: Blank bodies, Override one, No empty methods)*
+5. Mo opens **My Village Cafe**. **Funny Bears Get Cake** at tables **North, East, South, West**, and **Lazy Bears Teach Tiny Cats Running Circles**. *(Model, View, Controller · Flow, Border, Grid, Card · NESW + Center · JLabel, JButton, JTextField, JTextArea, JCheckBox, JRadioButton, JComboBox)*
+
+## Video prompt (paste into any AI video tool)
+Funny colorful 3D cartoon, 50 seconds, no talking, upbeat music, big captions. Hero: Mo, a small angry-cute mouse, in every scene. 1) Mo on a light swing watches little pigs making jam; four cats build him a house and open the curtains. Captions "Little Pigs Make Jam", "Cats Sit Closely Very". 2) Mo paints walls; rabbits eat painted lines, boxes and circles; red, green and blue bananas. Captions "Lazy Rabbits Eat", "Really Good Bananas". 3) A doorbell rings, an elephant with a huge ear listens, ice slides into the ocean, Mo kicks ice into six windows, pink giraffes arrive with pizza. Captions "Some Elephants Listen", "Ice Reaches Ocean", "A Mad Mouse Kicks Ice Windows", "Pizza Time Rocks". 4) A lazy helper with a big nose fixes only one window. Caption "Big Old Nose". 5) Mo opens a village cafe; bears eat cake at tables marked N, E, S, W; bears teach tiny cats running in circles. Captions "My Village Cafe", "Funny Bears Get Cake", "Never Eat Soggy Waffles". End with all captions for 5 seconds.
+</pre></div><a class="back" href="../index.html">← All topics</a></body></html>
