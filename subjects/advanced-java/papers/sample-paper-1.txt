@@ -1,0 +1,12 @@
+Source: pasted by owner 2026-11-23 (questions only; year/exam unknown). Status: pending-review
+Group B
+1. What is the role of Event Listener in event handling? List different event listeners provided by Java. [3+2]
+2. What is KeyEvent? Explain with a proper example. [5]
+3. What is the use of RowSet interface? Explain connected and disconnected rowsets. What are bounded and constrained properties in JavaBeans? Explain the advantages of JavaBeans. [2+3]
+4. What are the key methods provided in HttpSession interface for handling sessions? Explain. [5]
+5. Explain RMI architecture in Java in detail.
+6. Write short notes on (any two): a) Adapter classes b) CORBA c) Life cycle of a servlet [2.5+2.5]
+Group C (attempt any TWO) [2x10=20]
+1. How can a frame be created in Java? Explain. Write a program to create a GUI application that identifies the smaller and greater number between two input numbers taken through two text fields and displays the result in a label. Mouse press -> smaller, mouse release -> greater.
+2. Explain JDBC architecture. Write a program to insert three records into table Item in database Shop (ItemID, Name, UnitPrice, Units, Expiry Date). [1+4+6]
+3. Differentiate between servlet and JSP. Create a servlet that computes and displays the factorial of an input number entered from a page when the button is pressed. [3+7]

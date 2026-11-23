@@ -1,0 +1,437 @@
+{
+ "id": "u1.t10.mouse-minmax-program",
+ "topic": "u1.t10",
+ "kind": "program",
+ "title": "Mouse Min/Max",
+ "subtitle": "Group C program: press = smaller, release = greater",
+ "marks": "[Group C – 10]",
+ "confidence": "draft – check against textbook",
+ "source": "Owner-provided exam answers (2026-11-23) + Core Java Vol II / Java docs",
+ "last": "KeyEvent had 3 methods and we left 2 empty. Mouse has even more methods…",
+ "next": "Adapter classes – a trick so you do NOT have to write the empty methods.",
+ "actors": {
+  "fin": {
+   "e": "👇",
+   "l": "Mouse",
+   "x": 14,
+   "y": 30
+  },
+  "btn": {
+   "e": "🔘",
+   "l": "Button",
+   "x": 35,
+   "y": 60
+  },
+  "n1": {
+   "e": "7️⃣",
+   "l": "t1",
+   "x": 10,
+   "y": 75,
+   "h": 1
+  },
+  "n2": {
+   "e": "1️⃣2️⃣",
+   "l": "t2",
+   "x": 22,
+   "y": 75,
+   "h": 1
+  },
+  "lis": {
+   "e": "🧑‍💻",
+   "l": "MouseListener",
+   "x": 72,
+   "y": 60
+  },
+  "res": {
+   "e": "🏷️",
+   "l": "Label",
+   "x": 90,
+   "y": 60,
+   "h": 1
+  }
+ },
+ "scenes": [
+  {
+   "cap": "Two numbers + one button",
+   "sub": "User types 7 in text field 1 and 12 in text field 2.",
+   "show": [
+    "btn",
+    "n1",
+    "n2"
+   ],
+   "glow": "n1",
+   "snd": "pop"
+  },
+  {
+   "cap": "Mouse PRESSES the button ⬇️",
+   "sub": "MouseListener calls mousePressed(). Rule from question: show the SMALLER number.",
+   "show": [
+    "fin",
+    "btn",
+    "n1",
+    "n2",
+    "lis"
+   ],
+   "mv": {
+    "fin": [
+     35,
+     45
+    ]
+   },
+   "glow": "btn",
+   "say": {
+    "lis": "mousePressed()"
+   },
+   "snd": "click"
+  },
+  {
+   "cap": "Label shows: Smaller = 7",
+   "sub": "(a < b) ? a : b  → picks 7.",
+   "show": [
+    "fin",
+    "btn",
+    "n1",
+    "n2",
+    "lis",
+    "res"
+   ],
+   "say": {
+    "res": "Smaller: 7"
+   },
+   "glow": "res",
+   "snd": "ding"
+  },
+  {
+   "cap": "Mouse RELEASES the button ⬆️",
+   "sub": "MouseListener calls mouseReleased(). Rule: show the GREATER number.",
+   "show": [
+    "fin",
+    "btn",
+    "n1",
+    "n2",
+    "lis",
+    "res"
+   ],
+   "mv": {
+    "fin": [
+     14,
+     30
+    ]
+   },
+   "say": {
+    "lis": "mouseReleased()"
+   },
+   "snd": "click"
+  },
+  {
+   "cap": "Label shows: Greater = 12",
+   "sub": "(a > b) ? a : b  → picks 12.",
+   "show": [
+    "fin",
+    "btn",
+    "n1",
+    "n2",
+    "lis",
+    "res"
+   ],
+   "say": {
+    "res": "Greater: 12"
+   },
+   "glow": "res",
+   "snd": "ding"
+  },
+  {
+   "cap": "But MouseListener has 5 methods! 😮",
+   "sub": "pressed, released, clicked, entered, exited. We must write all 5 even if we need 2. Empty bodies { }. → Adapter classes fix this (next topic).",
+   "show": [
+    "btn",
+    "lis"
+   ],
+   "glow": "lis",
+   "snd": "tick"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Mouse listener methods:",
+   "html": "<b>P</b>eople <b>R</b>arely <b>C</b>lap <b>E</b>very <b>E</b>vening = <b>P</b>ressed, <b>R</b>eleased, <b>C</b>licked, <b>E</b>ntered, <b>E</b>xited"
+  },
+  {
+   "label": "This program:",
+   "html": "<b>Press = S</b>maller, <b>Release = G</b>reater → \"<b>S</b>ad <b>G</b>uy\" (Press-Small, Release-Great)"
+  }
+ ],
+ "code": {
+  "title": "Program: MinMaxMouseApp (exam answer)",
+  "lines": [
+   "public class MinMaxMouseApp extends JFrame implements MouseListener {",
+   "    JTextField t1 = new JTextField(10);",
+   "    JTextField t2 = new JTextField(10);",
+   "    JButton btn = new JButton(\"Press / Release Mouse\");",
+   "    JLabel lbl = new JLabel(\"Result will show here\");",
+   "",
+   "    MinMaxMouseApp() {",
+   "        setLayout(new FlowLayout());",
+   "        add(t1); add(t2); add(btn); add(lbl);",
+   "        btn.addMouseListener(this);",
+   "        setSize(320, 160);",
+   "        setVisible(true);",
+   "    }",
+   "",
+   "    public void mousePressed(MouseEvent e) {",
+   "        int a = Integer.parseInt(t1.getText());",
+   "        int b = Integer.parseInt(t2.getText());",
+   "        int smaller = (a < b) ? a : b;",
+   "        lbl.setText(\"Smaller Number: \" + smaller);",
+   "    }",
+   "",
+   "    public void mouseReleased(MouseEvent e) {",
+   "        int a = Integer.parseInt(t1.getText());",
+   "        int b = Integer.parseInt(t2.getText());",
+   "        int greater = (a > b) ? a : b;",
+   "        lbl.setText(\"Greater Number: \" + greater);",
+   "    }",
+   "",
+   "    public void mouseClicked(MouseEvent e) {}",
+   "    public void mouseEntered(MouseEvent e) {}",
+   "    public void mouseExited(MouseEvent e) {}",
+   "",
+   "    public static void main(String[] args) {",
+   "        new MinMaxMouseApp();",
+   "    }",
+   "}"
+  ],
+  "note": "(imports and EXIT_ON_CLOSE skipped)",
+  "steps": [
+   {
+    "l": [
+     "new MinMaxMouseApp();"
+    ],
+    "say": "Start at main(): create the window.",
+    "win": {
+     "title": "",
+     "vis": 0,
+     "items": []
+    },
+    "mem": [],
+    "snd": "tick"
+   },
+   {
+    "l": [
+     "JTextField t1",
+     "JTextField t2",
+     "JButton btn",
+     "JLabel lbl"
+    ],
+    "say": "Two text fields, one button and one label are created.",
+    "mem": [
+     "t1, t2 = text fields",
+     "btn = button",
+     "lbl = label"
+    ],
+    "snd": "pop"
+   },
+   {
+    "l": [
+     "add(t1)"
+    ],
+    "say": "All four are added in a row (FlowLayout).",
+    "win": {
+     "title": "Min/Max",
+     "vis": 0,
+     "items": [
+      {
+       "t": "in",
+       "v": ""
+      },
+      {
+       "t": "in",
+       "v": ""
+      },
+      {
+       "t": "btn",
+       "v": "Press / Release Mouse"
+      },
+      {
+       "t": "lb",
+       "v": "Result will show here"
+      }
+     ]
+    },
+    "snd": "tick"
+   },
+   {
+    "l": [
+     "btn.addMouseListener(this)"
+    ],
+    "say": "REGISTER: \"button, tell ME about mouse events\". Remember: Source → Event → Listener.",
+    "mem": [
+     "btn ➜ sends mouse events to: this"
+    ],
+    "snd": "click"
+   },
+   {
+    "l": [
+     "setSize",
+     "setVisible"
+    ],
+    "say": "Window appears. User types 7 and 12.",
+    "win": {
+     "title": "Min/Max",
+     "vis": 1,
+     "items": [
+      {
+       "t": "in",
+       "v": "7"
+      },
+      {
+       "t": "in",
+       "v": "12"
+      },
+      {
+       "t": "btn",
+       "v": "Press / Release Mouse"
+      },
+      {
+       "t": "lb",
+       "v": "Result will show here"
+      }
+     ]
+    },
+    "user": "⌨️ You type 7 and 12",
+    "snd": "ding"
+   },
+   {
+    "l": [
+     "public void mousePressed"
+    ],
+    "user": "👇 You PRESS the mouse on the button",
+    "say": "Java calls mousePressed(e) automatically.",
+    "snd": "click"
+   },
+   {
+    "l": [
+     "int a = Integer.parseInt(t1",
+     "int b = Integer.parseInt(t2"
+    ],
+    "say": "Read the text boxes, turn text into numbers. (The first copy of these lines.)",
+    "mem": [
+     "a = 7",
+     "b = 12"
+    ],
+    "snd": "tick",
+    "occ": 0
+   },
+   {
+    "l": [
+     "int smaller"
+    ],
+    "say": "(a < b) ? a : b → \"if a is less than b take a, else take b\" → 7.",
+    "mem": [
+     "a = 7",
+     "b = 12",
+     "smaller = 7"
+    ],
+    "snd": "tick"
+   },
+   {
+    "l": [
+     "\"Smaller Number: \""
+    ],
+    "say": "Label shows Smaller Number: 7",
+    "win": {
+     "title": "Min/Max",
+     "vis": 1,
+     "items": [
+      {
+       "t": "in",
+       "v": "7"
+      },
+      {
+       "t": "in",
+       "v": "12"
+      },
+      {
+       "t": "btn",
+       "v": "Press / Release Mouse"
+      },
+      {
+       "t": "lb",
+       "v": "Smaller Number: 7"
+      }
+     ]
+    },
+    "snd": "ding"
+   },
+   {
+    "l": [
+     "public void mouseReleased"
+    ],
+    "user": "👆 You RELEASE the mouse",
+    "say": "Java calls mouseReleased(e) automatically.",
+    "snd": "click"
+   },
+   {
+    "l": [
+     "int greater"
+    ],
+    "say": "(a > b) ? a : b → 12.",
+    "mem": [
+     "a = 7",
+     "b = 12",
+     "greater = 12"
+    ],
+    "snd": "tick"
+   },
+   {
+    "l": [
+     "\"Greater Number: \""
+    ],
+    "say": "Label shows Greater Number: 12",
+    "win": {
+     "title": "Min/Max",
+     "vis": 1,
+     "items": [
+      {
+       "t": "in",
+       "v": "7"
+      },
+      {
+       "t": "in",
+       "v": "12"
+      },
+      {
+       "t": "btn",
+       "v": "Press / Release Mouse"
+      },
+      {
+       "t": "lb",
+       "v": "Greater Number: 12"
+      }
+     ]
+    },
+    "snd": "ding"
+   },
+   {
+    "l": [
+     "mouseClicked",
+     "mouseEntered",
+     "mouseExited"
+    ],
+    "say": "These 3 are empty. Required by the interface, so we write { }. Adapter classes avoid this.",
+    "snd": "tick"
+   }
+  ]
+ },
+ "answer_html": "<h3>Frame creation + program</h3><p>See Lesson 1 for how a frame is created (inheritance / composition). The program above is the full answer: <b>implements MouseListener</b>, register with <code>addMouseListener(this)</code>, use <code>mousePressed</code> for smaller and <code>mouseReleased</code> for greater, leave the other 3 methods empty.</p>",
+ "quiz": {
+  "q": "In this program, which method shows the GREATER number?",
+  "options": [
+   "mousePressed()",
+   "mouseReleased()",
+   "mouseClicked()"
+  ],
+  "answer": 1,
+  "why": "Release = Great."
+ }
+}

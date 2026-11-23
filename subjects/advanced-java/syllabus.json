@@ -1,0 +1,269 @@
+{
+ "subject": "advanced-java",
+ "source": "CACS354 syllabus (TU BCA Sem VI) – structure copied from owner-supplied PDF",
+ "units": [
+  {
+   "id": "u1",
+   "title": "GUI Programming",
+   "hours": 12,
+   "topics": [
+    {
+     "id": "u1.t01",
+     "title": "Introducing Swing"
+    },
+    {
+     "id": "u1.t02",
+     "title": "Creating a Frame"
+    },
+    {
+     "id": "u1.t03",
+     "title": "Displaying Information in a Component"
+    },
+    {
+     "id": "u1.t04",
+     "title": "Working with 2D Shapes"
+    },
+    {
+     "id": "u1.t05",
+     "title": "Using Color"
+    },
+    {
+     "id": "u1.t06",
+     "title": "Using Special Fonts for Text"
+    },
+    {
+     "id": "u1.t07",
+     "title": "Displaying Images"
+    },
+    {
+     "id": "u1.t08",
+     "title": "Event Handling Basics"
+    },
+    {
+     "id": "u1.t09",
+     "title": "Event Classes"
+    },
+    {
+     "id": "u1.t10",
+     "title": "Event Listeners"
+    },
+    {
+     "id": "u1.t11",
+     "title": "Adapter Classes"
+    },
+    {
+     "id": "u1.t12",
+     "title": "Swing and the MVC Design Pattern"
+    },
+    {
+     "id": "u1.t13",
+     "title": "Layout Management"
+    },
+    {
+     "id": "u1.t14",
+     "title": "Basic Swing Components"
+    }
+   ]
+  },
+  {
+   "id": "u2",
+   "title": "Database Programming (JDBC)",
+   "hours": 7,
+   "topics": [
+    {
+     "id": "u2.t01",
+     "title": "The Design of JDBC"
+    },
+    {
+     "id": "u2.t02",
+     "title": "JDBC Driver Types and Typical Uses of JDBC"
+    },
+    {
+     "id": "u2.t03",
+     "title": "The Structured Query Language"
+    },
+    {
+     "id": "u2.t04",
+     "title": "JDBC Configuration"
+    },
+    {
+     "id": "u2.t05",
+     "title": "Working with JDBC Statements"
+    },
+    {
+     "id": "u2.t06",
+     "title": "Query Execution"
+    },
+    {
+     "id": "u2.t07",
+     "title": "Scrollable and Updatable Result Sets"
+    },
+    {
+     "id": "u2.t08",
+     "title": "Row Sets"
+    }
+   ]
+  },
+  {
+   "id": "u3",
+   "title": "JavaBeans",
+   "hours": 7,
+   "topics": [
+    {
+     "id": "u3.t01",
+     "title": "What Is a Java Bean?"
+    },
+    {
+     "id": "u3.t02",
+     "title": "Advantages of Java Beans"
+    },
+    {
+     "id": "u3.t03",
+     "title": "Introspection"
+    },
+    {
+     "id": "u3.t04",
+     "title": "Properties, Events, and Methods Design Patterns"
+    },
+    {
+     "id": "u3.t05",
+     "title": "Using BeanInfo Interface"
+    },
+    {
+     "id": "u3.t06",
+     "title": "Bound and Constrained Properties"
+    },
+    {
+     "id": "u3.t07",
+     "title": "Persistence"
+    },
+    {
+     "id": "u3.t08",
+     "title": "Customizers"
+    },
+    {
+     "id": "u3.t09",
+     "title": "The Java Beans API"
+    },
+    {
+     "id": "u3.t10",
+     "title": "Writing JavaBeans"
+    }
+   ]
+  },
+  {
+   "id": "u4",
+   "title": "Servlets and JSP",
+   "hours": 14,
+   "topics": [
+    {
+     "id": "u4.t01",
+     "title": "Background"
+    },
+    {
+     "id": "u4.t02",
+     "title": "The Life Cycle of a Servlet"
+    },
+    {
+     "id": "u4.t03",
+     "title": "A Simple Servlet"
+    },
+    {
+     "id": "u4.t04",
+     "title": "The Servlet API"
+    },
+    {
+     "id": "u4.t05",
+     "title": "The javax.servlet Package"
+    },
+    {
+     "id": "u4.t06",
+     "title": "Reading Servlet Parameters"
+    },
+    {
+     "id": "u4.t07",
+     "title": "The javax.servlet.http Package"
+    },
+    {
+     "id": "u4.t08",
+     "title": "Handling HTTP Requests and Responses"
+    },
+    {
+     "id": "u4.t09",
+     "title": "Using Cookies"
+    },
+    {
+     "id": "u4.t10",
+     "title": "Session Tracking"
+    },
+    {
+     "id": "u4.t11",
+     "title": "Introduction to JSP"
+    },
+    {
+     "id": "u4.t12",
+     "title": "Using JSP"
+    },
+    {
+     "id": "u4.t13",
+     "title": "Comparing JSP with Servlet"
+    },
+    {
+     "id": "u4.t14",
+     "title": "Java Web Frameworks"
+    }
+   ]
+  },
+  {
+   "id": "u5",
+   "title": "RMI",
+   "hours": 5,
+   "topics": [
+    {
+     "id": "u5.t01",
+     "title": "What is RMI?"
+    },
+    {
+     "id": "u5.t02",
+     "title": "The Roles of Client and Server"
+    },
+    {
+     "id": "u5.t03",
+     "title": "Remote Method Calls"
+    },
+    {
+     "id": "u5.t04",
+     "title": "Stubs and Parameter Marshalling"
+    },
+    {
+     "id": "u5.t05",
+     "title": "The RMI Programming Model"
+    },
+    {
+     "id": "u5.t06",
+     "title": "Interfaces and Implementations"
+    },
+    {
+     "id": "u5.t07",
+     "title": "The RMI Registry"
+    },
+    {
+     "id": "u5.t08",
+     "title": "Parameters and Return Values in Remote Methods"
+    },
+    {
+     "id": "u5.t09",
+     "title": "Remote Object Activation"
+    },
+    {
+     "id": "u5.t10",
+     "title": "Simple Client/Server Application using RMI"
+    },
+    {
+     "id": "u5.t11",
+     "title": "Comparing RMI with CORBA"
+    }
+   ]
+  }
+ ]
+}

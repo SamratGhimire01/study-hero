@@ -1,0 +1,346 @@
+{
+ "id": "u1.t09.keyevent",
+ "topic": "u1.t09",
+ "kind": "lesson",
+ "title": "KeyEvent",
+ "subtitle": "KeyEvent",
+ "marks": "[5]",
+ "confidence": "draft – check against textbook",
+ "source": "Owner-provided exam answers (2026-11-23) + Core Java Vol II / Java docs",
+ "last": "We know Source → Event → Listener. The event we used was a button click.",
+ "next": "Mouse program – same idea with mouse events (press / release), and it shows why Adapter classes exist.",
+ "actors": {
+  "fin": {
+   "e": "☝️",
+   "l": "You",
+   "x": 12,
+   "y": 35
+  },
+  "key": {
+   "e": "⌨️",
+   "l": "Key \"A\"",
+   "x": 30,
+   "y": 60
+  },
+  "ev": {
+   "e": "📩",
+   "l": "KeyEvent",
+   "x": 30,
+   "y": 60,
+   "h": 1
+  },
+  "lis": {
+   "e": "🧑‍💻",
+   "l": "KeyListener",
+   "x": 72,
+   "y": 60
+  },
+  "lbl": {
+   "e": "🏷️",
+   "l": "Label",
+   "x": 90,
+   "y": 60,
+   "h": 1
+  }
+ },
+ "scenes": [
+  {
+   "cap": "You use the keyboard ⌨️",
+   "sub": "Every key action makes a KeyEvent (class in java.awt.event).",
+   "show": [
+    "fin",
+    "key"
+   ],
+   "say": {
+    "key": "I am a key"
+   },
+   "snd": "pop"
+  },
+  {
+   "cap": "1️⃣ Key goes DOWN → keyPressed()",
+   "sub": "Runs when ANY key is pushed down.",
+   "show": [
+    "fin",
+    "key",
+    "lis"
+   ],
+   "mv": {
+    "fin": [
+     30,
+     38
+    ]
+   },
+   "glow": "key",
+   "say": {
+    "lis": "keyPressed()"
+   },
+   "snd": "key"
+  },
+  {
+   "cap": "2️⃣ Character appears → keyTyped()",
+   "sub": "Runs only when a character key produces a character.",
+   "show": [
+    "fin",
+    "key",
+    "lis",
+    "ev"
+   ],
+   "glow": "ev",
+   "say": {
+    "lis": "keyTyped()"
+   },
+   "snd": "pop"
+  },
+  {
+   "cap": "3️⃣ Key comes UP → keyReleased()",
+   "sub": "Runs when you let go.",
+   "show": [
+    "fin",
+    "key",
+    "lis"
+   ],
+   "mv": {
+    "fin": [
+     12,
+     35
+    ]
+   },
+   "say": {
+    "lis": "keyReleased()"
+   },
+   "glow": "lis",
+   "snd": "key"
+  },
+  {
+   "cap": "Which key was it? 🔍",
+   "sub": "getKeyChar() = the letter \"A\". getKeyCode() = a number, e.g. VK_ENTER.",
+   "show": [
+    "fin",
+    "key",
+    "lis",
+    "ev"
+   ],
+   "mv": {
+    "ev": [
+     62,
+     60
+    ]
+   },
+   "glow": "ev",
+   "snd": "whoosh"
+  },
+  {
+   "cap": "Your code shows it 🏷️",
+   "sub": "Label text: \"Pressed Key: A\". It needs addKeyListener(this).",
+   "show": [
+    "fin",
+    "key",
+    "lis",
+    "lbl"
+   ],
+   "glow": "lbl",
+   "say": {
+    "lbl": "Pressed Key: A"
+   },
+   "snd": "ding"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "3 methods in order:",
+   "html": "<b>P</b>izza <b>T</b>ime <b>R</b>ocks = <b>P</b>ressed → <b>T</b>yped → <b>R</b>eleased"
+  },
+  {
+   "label": "Two getters:",
+   "html": "<b>Char</b> = the letter, <b>Code</b> = the number (VK_…)"
+  }
+ ],
+ "code": {
+  "title": "Program: KeyEventExample",
+  "lines": [
+   "public class KeyEventExample extends JFrame implements KeyListener {",
+   "    JTextField tf = new JTextField(15);",
+   "    JLabel lbl = new JLabel(\"Press any key...\");",
+   "",
+   "    KeyEventExample() {",
+   "        setLayout(new FlowLayout());",
+   "        tf.addKeyListener(this);",
+   "        add(tf);",
+   "        add(lbl);",
+   "        setSize(300, 120);",
+   "        setVisible(true);",
+   "    }",
+   "",
+   "    public void keyPressed(KeyEvent e) {",
+   "        lbl.setText(\"Pressed Key: \" + e.getKeyChar() + \" | Code: \" + e.getKeyCode());",
+   "    }",
+   "    public void keyReleased(KeyEvent e) {}",
+   "    public void keyTyped(KeyEvent e) {}",
+   "",
+   "    public static void main(String[] args) {",
+   "        new KeyEventExample();",
+   "    }",
+   "}"
+  ],
+  "note": "(imports and EXIT_ON_CLOSE line skipped to keep it short)",
+  "steps": [
+   {
+    "l": [
+     "new KeyEventExample();"
+    ],
+    "say": "Program starts at main() and makes our window object.",
+    "win": {
+     "title": "",
+     "vis": 0,
+     "items": []
+    },
+    "mem": [],
+    "snd": "tick"
+   },
+   {
+    "l": [
+     "JTextField tf"
+    ],
+    "say": "A text box (15 characters wide) is created.",
+    "mem": [
+     "tf = JTextField"
+    ],
+    "snd": "pop"
+   },
+   {
+    "l": [
+     "JLabel lbl"
+    ],
+    "say": "A label with the starting text is created.",
+    "mem": [
+     "tf = JTextField",
+     "lbl = \"Press any key...\""
+    ],
+    "snd": "pop"
+   },
+   {
+    "l": [
+     "setLayout"
+    ],
+    "say": "FlowLayout = put components left to right, like words in a sentence.",
+    "snd": "tick"
+   },
+   {
+    "l": [
+     "tf.addKeyListener(this)"
+    ],
+    "say": "REGISTER: \"text box, send your key events to ME (this window)\". We promised the 3 key methods with \"implements KeyListener\".",
+    "mem": [
+     "tf = JTextField",
+     "lbl = \"Press any key...\"",
+     "tf ➜ sends key events to: this"
+    ],
+    "snd": "click"
+   },
+   {
+    "l": [
+     "add(tf)",
+     "add(lbl)"
+    ],
+    "say": "Both are placed inside the window (not shown yet).",
+    "win": {
+     "title": "KeyEvent",
+     "vis": 0,
+     "items": [
+      {
+       "t": "in",
+       "v": ""
+      },
+      {
+       "t": "lb",
+       "v": "Press any key..."
+      }
+     ]
+    },
+    "snd": "tick"
+   },
+   {
+    "l": [
+     "setSize",
+     "setVisible"
+    ],
+    "say": "Window appears. Now Java waits for the user.",
+    "win": {
+     "title": "KeyEvent",
+     "vis": 1,
+     "items": [
+      {
+       "t": "in",
+       "v": ""
+      },
+      {
+       "t": "lb",
+       "v": "Press any key..."
+      }
+     ]
+    },
+    "snd": "ding"
+   },
+   {
+    "l": [
+     "public void keyPressed"
+    ],
+    "user": "⌨️ You press the key \"a\"",
+    "say": "Java creates a KeyEvent (e) and AUTOMATICALLY calls keyPressed(e).",
+    "mem": [
+     "e = KeyEvent",
+     "e.getKeyChar() = a",
+     "e.getKeyCode() = 65"
+    ],
+    "snd": "key"
+   },
+   {
+    "l": [
+     "lbl.setText"
+    ],
+    "say": "Label text changes using the two getters.",
+    "win": {
+     "title": "KeyEvent",
+     "vis": 1,
+     "items": [
+      {
+       "t": "in",
+       "v": "a"
+      },
+      {
+       "t": "lb",
+       "v": "Pressed Key: a | Code: 65"
+      }
+     ]
+    },
+    "snd": "ding"
+   },
+   {
+    "l": [
+     "keyTyped"
+    ],
+    "say": "Next Java calls keyTyped(). Body is empty { } → nothing happens.",
+    "snd": "tick"
+   },
+   {
+    "l": [
+     "keyReleased"
+    ],
+    "user": "⌨️ You let go of \"a\"",
+    "say": "Last, keyReleased(). Also empty → nothing. Order was: Pressed → Typed → Released.",
+    "snd": "tick"
+   }
+  ]
+ },
+ "answer_html": "<h3>Definition</h3><p><b>KeyEvent</b> is a class in <code>java.awt.event</code> that represents a keyboard action when the user presses, types, or releases a key.</p>\n<h3>Key Points</h3><ul><li>Belongs to <code>java.awt.event</code> and works with <b>KeyListener</b> or <b>KeyAdapter</b>.</li><li><code>getKeyChar()</code> gives the typed character; <code>getKeyCode()</code> gives the key code (such as <code>KeyEvent.VK_ENTER</code>).</li><li><b>keyPressed</b> – any key pushed down. <b>keyTyped</b> – a character key produces a character. <b>keyReleased</b> – key let go.</li></ul>\n<p class=\"note\">Example: the full program is traced above (copy it into the exam).</p>",
+ "quiz": {
+  "q": "Which method runs first when you push a key?",
+  "options": [
+   "keyReleased()",
+   "keyPressed()",
+   "getKeyChar()"
+  ],
+  "answer": 1,
+  "why": "Pizza Time Rocks: Pressed first!"
+ }
+}

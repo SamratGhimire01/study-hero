@@ -1,0 +1,302 @@
+{
+ "papers": [
+  {
+   "id": "sample-paper-1",
+   "year": null,
+   "status": "pending-review",
+   "note": "Only 1 paper: priority is a weak guess. Add more papers."
+  }
+ ],
+ "nPapers": 1,
+ "rows": [
+  {
+   "topic": "u1.t10",
+   "asked": 2,
+   "marks": 10,
+   "qs": [
+    "B1",
+    "C1"
+   ],
+   "score": 12.67,
+   "title": "Event Listeners"
+  },
+  {
+   "topic": "u4.t10",
+   "asked": 1,
+   "marks": 5,
+   "qs": [
+    "B4"
+   ],
+   "score": 6.56,
+   "title": "Session Tracking"
+  },
+  {
+   "topic": "u4.t13",
+   "asked": 1,
+   "marks": 5,
+   "qs": [
+    "C3"
+   ],
+   "score": 6.56,
+   "title": "Comparing JSP with Servlet"
+  },
+  {
+   "topic": "u4.t03",
+   "asked": 1,
+   "marks": 5,
+   "qs": [
+    "C3"
+   ],
+   "score": 6.56,
+   "title": "A Simple Servlet"
+  },
+  {
+   "topic": "u2.t01",
+   "asked": 1,
+   "marks": 5.5,
+   "qs": [
+    "C2"
+   ],
+   "score": 6.36,
+   "title": "The Design of JDBC"
+  },
+  {
+   "topic": "u2.t05",
+   "asked": 1,
+   "marks": 5.5,
+   "qs": [
+    "C2"
+   ],
+   "score": 6.36,
+   "title": "Working with JDBC Statements"
+  },
+  {
+   "topic": "u1.t09",
+   "asked": 1,
+   "marks": 5,
+   "qs": [
+    "B2"
+   ],
+   "score": 6.33,
+   "title": "Event Classes"
+  },
+  {
+   "topic": "u1.t02",
+   "asked": 1,
+   "marks": 5,
+   "qs": [
+    "C1"
+   ],
+   "score": 6.33,
+   "title": "Creating a Frame"
+  },
+  {
+   "topic": "u4.t02",
+   "asked": 1,
+   "marks": 2.5,
+   "qs": [
+    "B6c"
+   ],
+   "score": 3.28,
+   "title": "The Life Cycle of a Servlet"
+  },
+  {
+   "topic": "u1.t11",
+   "asked": 1,
+   "marks": 2.5,
+   "qs": [
+    "B6a"
+   ],
+   "score": 3.17,
+   "title": "Adapter Classes"
+  },
+  {
+   "topic": "u5.t04",
+   "asked": 1,
+   "marks": 2.5,
+   "qs": [
+    "B5"
+   ],
+   "score": 2.78,
+   "title": "Stubs and Parameter Marshalling"
+  },
+  {
+   "topic": "u5.t05",
+   "asked": 1,
+   "marks": 2.5,
+   "qs": [
+    "B5"
+   ],
+   "score": 2.78,
+   "title": "The RMI Programming Model"
+  },
+  {
+   "topic": "u5.t11",
+   "asked": 1,
+   "marks": 2.5,
+   "qs": [
+    "B6b"
+   ],
+   "score": 2.78,
+   "title": "Comparing RMI with CORBA"
+  },
+  {
+   "topic": "u2.t08",
+   "asked": 1,
+   "marks": 2,
+   "qs": [
+    "B3a"
+   ],
+   "score": 2.31,
+   "title": "Row Sets"
+  },
+  {
+   "topic": "u3.t06",
+   "asked": 1,
+   "marks": 1.5,
+   "qs": [
+    "B3b"
+   ],
+   "score": 1.73,
+   "title": "Bound and Constrained Properties"
+  },
+  {
+   "topic": "u3.t02",
+   "asked": 1,
+   "marks": 1.5,
+   "qs": [
+    "B3b"
+   ],
+   "score": 1.73,
+   "title": "Advantages of Java Beans"
+  }
+ ],
+ "questions": [
+  {
+   "paper": "sample-paper-1",
+   "q": "C2",
+   "text": "JDBC architecture + insert 3 records",
+   "marks": 11,
+   "type": "long",
+   "topics": [
+    "u2.t01",
+    "u2.t05"
+   ]
+  },
+  {
+   "paper": "sample-paper-1",
+   "q": "C1",
+   "text": "Create a frame + mouse min/max program",
+   "marks": 10,
+   "type": "long",
+   "topics": [
+    "u1.t02",
+    "u1.t10"
+   ]
+  },
+  {
+   "paper": "sample-paper-1",
+   "q": "C3",
+   "text": "Servlet vs JSP + factorial servlet",
+   "marks": 10,
+   "type": "long",
+   "topics": [
+    "u4.t13",
+    "u4.t03"
+   ]
+  },
+  {
+   "paper": "sample-paper-1",
+   "q": "B1",
+   "text": "Role of Event Listener + list listeners",
+   "marks": 5,
+   "type": "short",
+   "topics": [
+    "u1.t10"
+   ]
+  },
+  {
+   "paper": "sample-paper-1",
+   "q": "B2",
+   "text": "KeyEvent with example",
+   "marks": 5,
+   "type": "short",
+   "topics": [
+    "u1.t09"
+   ]
+  },
+  {
+   "paper": "sample-paper-1",
+   "q": "B4",
+   "text": "HttpSession key methods",
+   "marks": 5,
+   "type": "short",
+   "topics": [
+    "u4.t10"
+   ]
+  },
+  {
+   "paper": "sample-paper-1",
+   "q": "B5",
+   "text": "RMI architecture in detail",
+   "marks": 5,
+   "marks_assumed": true,
+   "type": "short",
+   "topics": [
+    "u5.t04",
+    "u5.t05"
+   ]
+  },
+  {
+   "paper": "sample-paper-1",
+   "q": "B3b",
+   "text": "Bounded/constrained properties; advantages of JavaBeans",
+   "marks": 3,
+   "type": "short",
+   "topics": [
+    "u3.t06",
+    "u3.t02"
+   ]
+  },
+  {
+   "paper": "sample-paper-1",
+   "q": "B6a",
+   "text": "Adapter classes",
+   "marks": 2.5,
+   "type": "short",
+   "topics": [
+    "u1.t11"
+   ]
+  },
+  {
+   "paper": "sample-paper-1",
+   "q": "B6b",
+   "text": "CORBA",
+   "marks": 2.5,
+   "type": "short",
+   "topics": [
+    "u5.t11"
+   ]
+  },
+  {
+   "paper": "sample-paper-1",
+   "q": "B6c",
+   "text": "Life cycle of a servlet",
+   "marks": 2.5,
+   "type": "short",
+   "topics": [
+    "u4.t02"
+   ]
+  },
+  {
+   "paper": "sample-paper-1",
+   "q": "B3a",
+   "text": "RowSet use; connected vs disconnected",
+   "marks": 2,
+   "type": "short",
+   "topics": [
+    "u2.t08"
+   ]
+  }
+ ]
+}

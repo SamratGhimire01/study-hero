@@ -1,0 +1,35 @@
+{
+ "slug": "advanced-java",
+ "title": "Advanced Java Programming",
+ "code": "CACS354",
+ "program": "TU BCA, Semester VI",
+ "language": "en-simple",
+ "exam": {
+  "total": 60,
+  "hours": 3,
+  "groups": [
+   {
+    "name": "A",
+    "type": "MCQ",
+    "count": 10,
+    "marksEach": 1,
+    "attempt": "all"
+   },
+   {
+    "name": "B",
+    "type": "short",
+    "count": 7,
+    "marksEach": 5,
+    "attempt": 6
+   },
+   {
+    "name": "C",
+    "type": "long",
+    "count": 3,
+    "marksEach": 10,
+    "attempt": 2
+   }
+  ],
+  "note": "Format assumed from syllabus + sample paper; confirm with owner."
+ }
+}

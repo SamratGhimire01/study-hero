@@ -1,0 +1,14 @@
+{"papers":[{"id":"sample-paper-1","year":null,"status":"pending-review","note":"Only 1 paper: priority is a weak guess. Add more papers."}],
+"questions":[
+{"paper":"sample-paper-1","q":"B1","text":"Role of Event Listener + list listeners","marks":5,"type":"short","topics":["u1.t10"]},
+{"paper":"sample-paper-1","q":"B2","text":"KeyEvent with example","marks":5,"type":"short","topics":["u1.t09"]},
+{"paper":"sample-paper-1","q":"B3a","text":"RowSet use; connected vs disconnected","marks":2,"type":"short","topics":["u2.t08"]},
+{"paper":"sample-paper-1","q":"B3b","text":"Bounded/constrained properties; advantages of JavaBeans","marks":3,"type":"short","topics":["u3.t06","u3.t02"]},
+{"paper":"sample-paper-1","q":"B4","text":"HttpSession key methods","marks":5,"type":"short","topics":["u4.t10"]},
+{"paper":"sample-paper-1","q":"B5","text":"RMI architecture in detail","marks":5,"marks_assumed":true,"type":"short","topics":["u5.t04","u5.t05"]},
+{"paper":"sample-paper-1","q":"B6a","text":"Adapter classes","marks":2.5,"type":"short","topics":["u1.t11"]},
+{"paper":"sample-paper-1","q":"B6b","text":"CORBA","marks":2.5,"type":"short","topics":["u5.t11"]},
+{"paper":"sample-paper-1","q":"B6c","text":"Life cycle of a servlet","marks":2.5,"type":"short","topics":["u4.t02"]},
+{"paper":"sample-paper-1","q":"C1","text":"Create a frame + mouse min/max program","marks":10,"type":"long","topics":["u1.t02","u1.t10"]},
+{"paper":"sample-paper-1","q":"C2","text":"JDBC architecture + insert 3 records","marks":11,"type":"long","topics":["u2.t01","u2.t05"]},
+{"paper":"sample-paper-1","q":"C3","text":"Servlet vs JSP + factorial servlet","marks":10,"type":"long","topics":["u4.t13","u4.t03"]}]}
