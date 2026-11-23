@@ -14,7 +14,7 @@ for(const slug of subs){
   const unitOf={};S.syllabus.units.forEach(u=>u.topics.forEach(t=>unitOf[t.id]=u));
   S.cards.forEach((c,i)=>{
     const prev=S.cards[i-1],next=S.cards[i+1],u=unitOf[c.topic];
-    const C={tab:c.title,sub:c.subtitle,marks:c.marks,unit:`Unit ${u.id.slice(1)} · ${u.title}`,last:c.last,next:c.next,actors:c.actors,scenes:c.scenes,mn:c.mnemonics.map(m=>[m.label,m.html]),code:c.code,ans:c.answer_html,q:[c.quiz.q,c.quiz.options,c.quiz.answer,c.quiz.why]};
+    const C={tab:c.title,sub:c.subtitle,marks:c.marks,unit:`Unit ${u.id.slice(1)} · ${u.title}`,uid:u.id,last:c.last,next:c.next,actors:c.actors,scenes:c.scenes,mn:c.mnemonics.map(m=>[m.label,m.html]),code:c.code,ans:c.answer_html,q:[c.quiz.q,c.quiz.options,c.quiz.answer,c.quiz.why]};
     C.src=`${c.confidence} · Source: ${c.source}`;
     const NAV={home:'../index.html',next:next?{href:lessonFile(next),title:next.title}:null,prev:prev?{href:lessonFile(prev),title:prev.title}:null};
     const body=`<header class="top"><div class="wrap"><a class="icon" href="../index.html" aria-label="All topics">✕</a><div class="t">${esc(c.title)}</div><span class="count" id="count"></span><button class="icon" id="snd"></button></div><div class="prog"><i id="bar"></i></div><div class="wrap"><nav class="secs" id="secs" aria-label="Parts of this topic"></nav></div></header>

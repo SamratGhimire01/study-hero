@@ -69,18 +69,27 @@ if(left.length)add('Remember',`<div class="eyebrow">Remember</div><h2>Say these 
 add('Check',`<div class="eyebrow">Quick check</div><h2>${C.q[0]}</h2><div class="step" style="gap:10px">${C.q[1].map((o,k)=>`<button class="opt" data-k="${k}">${o}</button>`).join('')}</div><p class="fb" id="fb" aria-live="polite"></p>`,el=>{
  el.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const ok=+b.dataset.k===C.q[2];b.classList.add(ok?'ok':'no');snd(ok?'ding':'err');
   $('fb').innerHTML=ok?'Correct. '+C.q[3]:'Not this one. Try another.'})});
-add('Done',`<div class="eyebrow">Topic done</div><h1>Nice. ${C.tab} is finished.</h1><p class="lead">${NAV.next?`Next topic: <b>${esc(NAV.next.title)}</b>`:'This was the last topic. Open EXAM-RESCUE from the home page.'}</p><p class="mut">Want it again later? It is in the PDF for this unit too.</p><p class="mut" style="font-size:13px">${esc(C.src||'')}</p>`,()=>{snd('ding');try{localStorage.setItem('sh:done:'+location.pathname.split('/').pop(),'1')}catch(e){}});
+add('Done',`<div class="eyebrow">Topic done · full summary</div><h1>${C.tab}</h1>
+ <p class="mut">Everything from this topic on one page. Read it top to bottom before the exam.</p>
+ ${trickHTML(tricks[0])}
+ <div class="ans">${C.ans.replace(/<h3>/g,'<h2 style="font-size:22px;margin:18px 0 8px">').replace(/<\/h3>/g,'</h2>').replace(/<table/g,'<div class="scroll"><table').replace(/<\/table>/g,'</table></div>')}</div>
+ ${tricks.slice(1).map(trickHTML).join('')}
+ ${C.code?`<h2 style="font-size:22px">Code: ${esc(C.code.title)}</h2><div class="code">${C.code.lines.map((x,k)=>`<div><i>${k+1}</i>${esc(x)}</div>`).join('')}</div>`:''}
+ <div class="box"><b>Quick check:</b> ${C.q[0]}<br><span class="mut">Answer:</span> ${C.q[1][C.q[2]]}</div>
+ <div class="chain"><div class="now">${NAV.next?`Next topic: ${esc(NAV.next.title)}`:'This was the last topic.'}</div><div><a href="../${C.uid}.pdf">Open the Unit ${C.uid.slice(1)} PDF</a> · <a href="#s2">Watch the story again</a></div></div>
+ <p class="mut" style="font-size:13px">${esc(C.src||'')}</p>`,()=>{snd('ding');try{localStorage.setItem('sh:done:'+location.pathname.split('/').pop(),'1')}catch(e){}});
 
 // ---- section chips
 const secs=[...new Set(steps.map(s=>s.sec))];
-$('secs').innerHTML=secs.map(s=>`<span data-s="${s}">${s}</span>`).join('');
+$('secs').innerHTML=secs.map(s=>`<button type="button" data-s="${s}">${s==='Done'?'Summary':s}</button>`).join('');
+$('secs').querySelectorAll('button').forEach(b=>b.onclick=()=>show(steps.findIndex(x=>x.sec===b.dataset.s)));
 
 // ---- player
 let i=0;
 function show(n){i=Math.max(0,Math.min(steps.length-1,n));const s=steps[i],el=$('step');
  if(s.html!==null)el.innerHTML=s.html;if(s.enter)s.enter(el);
  $('count').textContent=`${i+1} / ${steps.length}`;$('bar').style.width=((i+1)/steps.length*100)+'%';
- const si=secs.indexOf(s.sec);$('secs').querySelectorAll('span').forEach((x,k)=>{x.className=k==si?'on':k<si?'done':'';if(k==si)x.scrollIntoView({block:'nearest',inline:'center'})});
+ const si=secs.indexOf(s.sec);$('secs').querySelectorAll('button').forEach((x,k)=>{x.className=k==si?'on':k<si?'done':'';if(k==si)x.scrollIntoView({block:'nearest',inline:'center'})});
  $('back').disabled=i==0;
  const nx=$('next');
  if(i==steps.length-1){nx.textContent=NAV.next?'Next topic →':'Back to all topics';nx.onclick=()=>location.href=NAV.next?NAV.next.href:NAV.home}

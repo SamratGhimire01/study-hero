@@ -7,7 +7,7 @@ import {createRequire} from 'module';
 let chromium;
 try{({chromium}=await import('playwright'))}
 catch{try{chromium=createRequire('/opt/node-tools/')('playwright').chromium}catch{console.log('Install first: npm i && npx playwright install chromium');process.exit(1)}}
-const doc=b=>`<!doctype html><html><head><meta charset="utf-8"><style>${css}</style></head><body>${b}</body></html>`;
+const doc=b=>`<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,600&display=swap"><style>${css}</style></head><body>${b}</body></html>`;
 const strip=h=>h.replace(/<[^>]+>/g,'');
 function cardPage(S,c,unit,topicTitle){
   const film=c.scenes.slice(0,4).map(s=>{const g=s.glow&&c.actors[s.glow]||c.actors[s.show[0]];return `<div class="fr"><span>${g.e}</span>${esc(s.cap.replace(/[^\x00-\x7F]+/g,'').trim()||s.cap)}</div>`}).join('');
@@ -30,7 +30,7 @@ for(const slug of listSubjects()){
   const S=loadSubject(slug);fs.mkdirSync(S.out,{recursive:true});const b=await chromium.launch();const p=await b.newPage();
   const make=async(name,html)=>{await p.setContent(doc(html));await p.pdf({path:path.join(S.out,name),format:'A4',printBackground:true,margin:{top:'14mm',bottom:'14mm',left:'14mm',right:'14mm'}});console.log('wrote',name)};
   for(const u of S.syllabus.units)if(S.cards.some(c=>c.topic.startsWith(u.id+'.')))await make(`${u.id}.pdf`,unitHTML(S,u));
-  const cover=`<div class="pg"><div class="cover"><p>DRAFT</p><h1>${esc(S.subject.title)}</h1><p>${esc(S.subject.code)} · ${esc(S.subject.program)}</p><p style="margin-top:30mm">Memorize Book · every topic in simple English</p></div></div>`;
+  const cover=`<div class="pg"><div class="cover"><p>Study Hero · draft</p><h1>${esc(S.subject.title)}</h1><p>${esc(S.subject.code)} · ${esc(S.subject.program)}</p><p style="margin-top:30mm">Memorize Book · every topic in simple English</p></div></div>`;
   await make('WHOLE-BOOK.pdf',cover+S.syllabus.units.map(u=>unitHTML(S,u)).join(''));
   const P=priority(S);
   if(P){const byId={};S.cards.forEach(c=>byId[c.id]=c);

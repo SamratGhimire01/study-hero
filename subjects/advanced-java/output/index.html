@@ -31,8 +31,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .prog{height:3px;background:var(--line)}.prog i{display:block;height:100%;width:0;background:var(--ink);transition:width .3s}
 .secs{display:flex;gap:16px;overflow-x:auto;padding:10px 0 0;font-size:13px;scrollbar-width:none}
 .secs::-webkit-scrollbar{display:none}
-.secs span{white-space:nowrap;color:var(--mut);padding-bottom:6px;border-bottom:2px solid transparent}
-.secs span.done{color:var(--ink)}.secs span.on{color:var(--ink);font-weight:700;border-color:var(--ink)}
+.secs button{white-space:nowrap;color:var(--mut);padding:0 0 6px;border:0;border-bottom:2px solid transparent;background:none;cursor:pointer;font-size:13px}
+.secs button.done{color:var(--ink)}.secs button.on{color:var(--ink);font-weight:700;border-color:var(--ink)}
 
 /* ---------- lesson: one step ---------- */
 main{padding-top:22px;padding-bottom:calc(110px + env(safe-area-inset-bottom,0px))}
