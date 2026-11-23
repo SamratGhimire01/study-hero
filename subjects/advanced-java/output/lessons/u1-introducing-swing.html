@@ -1,124 +1,212 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Introducing Swing – CACS354</title><style>
-:root{--bg:#f4f6fb;--card:#fff;--ink:#16202c;--mut:#5b6877;--acc:#4f46e5;--g:#16a34a;--o:#ea580c;--line:#dde2ea;--hl:#fff3b0;--code:#0f172a;--codeink:#e2e8f0}
-@media(prefers-color-scheme:dark){:root{--bg:#0f141b;--card:#18202a;--ink:#eaf0f6;--mut:#9aa7b5;--acc:#8b87ff;--line:#2a3441;--hl:#5a4b00}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 system-ui,sans-serif}
-.w{max-width:900px;margin:0 auto;padding:14px}h1{font-size:21px;margin:6px 0}
-.top{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.top button{margin-left:auto}
-.road{display:flex;gap:4px;flex-wrap:wrap;margin:10px 0}
-.road button{flex:1 1 90px;border:2px solid var(--line);background:var(--card);color:var(--ink);padding:8px 6px;border-radius:10px;font:inherit;font-size:14px;cursor:pointer;position:relative}
-.road button.on{border-color:var(--acc);background:var(--acc);color:#fff}.road button.done{border-color:var(--g)}
-.road button small{display:block;font-size:11px;opacity:.8}
-.pg{display:none}.pg.on{display:block}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:12px 0}
-h2{margin:0 0 4px;font-size:20px}h3{margin:14px 0 4px;font-size:14px;color:var(--acc);text-transform:uppercase;letter-spacing:.05em}
-.step{display:inline-block;background:var(--acc);color:#fff;border-radius:50%;width:24px;height:24px;text-align:center;font-size:14px;line-height:24px;margin-right:6px}
-.link{background:var(--bg);border:1px dashed var(--acc);border-radius:10px;padding:8px 12px;margin:8px 0;font-size:15px}
-.stage{position:relative;height:clamp(200px,52vw,270px);border-radius:12px;background:linear-gradient(#e9f0ff,#f9fbff);border:1px solid var(--line);overflow:hidden;color:#16202c}
-@media(prefers-color-scheme:dark){.stage{background:linear-gradient(#1b2740,#141c2b);color:#eaf0f6}}
-.a{position:absolute;transform:translate(-50%,-50%);text-align:center;transition:left 1s ease,top 1s ease,opacity .5s,transform .4s;font-size:clamp(26px,7vw,52px);line-height:1}
-.a small{display:block;font-size:clamp(9px,2.4vw,13px);font-weight:700;margin-top:4px}
-.a.glow{transform:translate(-50%,-50%) scale(1.25);filter:drop-shadow(0 0 10px #facc15)}
-.b{z-index:5;position:absolute;transform:translate(-50%,-100%);background:#fff;color:#111;border:2px solid #333;border-radius:12px;padding:4px 10px;font-size:14px;font-weight:700;max-width:170px;text-align:center;opacity:0;transition:opacity .3s}.b.on{opacity:1}
-.cap{margin:10px 0 2px;font-size:22px;font-weight:800}.sub{color:var(--mut);margin:0 0 8px;min-height:26px}
-.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--acc);transition:width .4s}
-.ctl{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;align-items:center}
-button.p,.ctl button,.top button{border:0;background:var(--acc);color:#fff;padding:9px 16px;border-radius:10px;font:inherit;cursor:pointer}
-.ctl button.s,.top button.s{background:var(--line);color:var(--ink)}
-.dots{display:flex;gap:5px;margin-left:auto}.dots b{width:10px;height:10px;border-radius:50%;background:var(--line)}.dots b.on{background:var(--acc)}
-.mn{background:var(--hl);color:#111;border-radius:12px;padding:12px 14px;margin:10px 0;border-left:6px solid #eab308}
-@media(prefers-color-scheme:dark){.mn{color:#fff}}
-.mn big{font-size:21px;font-weight:800;display:block}.mn b{color:var(--o)}
-table{border-collapse:collapse;width:100%;font-size:15px}td,th{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}th{background:var(--bg)}
-pre{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px;overflow:auto;font:13.5px/1.45 ui-monospace,Menlo,monospace;margin:6px 0}
-ul{padding-left:22px;margin:4px 0}.note{color:var(--mut);font-size:14px}
-.q button{display:block;width:100%;text-align:left;margin:6px 0;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:inherit;cursor:pointer}
-.q button.ok{background:#bbf7d0;color:#064e1f}.q button.no{background:#fecaca;color:#7f1d1d}
-code{background:var(--bg);padding:1px 5px;border-radius:4px;font-size:.9em}
-/* code trace */
-.tr{display:grid;grid-template-columns:1.25fr 1fr;gap:10px}@media(max-width:700px){.tr{grid-template-columns:1fr}}
-.code{background:var(--code);color:var(--codeink);border-radius:10px;padding:8px 0;font:13px/1.7 ui-monospace,Menlo,monospace;max-height:340px;overflow:auto}
-.code div{padding:0 10px;white-space:pre;border-left:4px solid transparent}.code div.on{background:#4338ca;border-left-color:#facc15;color:#fff}
-.code div i{color:#64748b;font-style:normal;display:inline-block;width:26px}
-.side{display:flex;flex-direction:column;gap:8px}
-.user{background:#ffedd5;color:#7c2d12;border:2px solid #fb923c;border-radius:10px;padding:6px 10px;font-weight:700;font-size:15px;display:none}.user.on{display:block}
-.say{background:var(--bg);border:2px solid var(--acc);border-radius:10px;padding:8px 10px;font-weight:600;min-height:64px}
-.win{border:2px solid #475569;border-radius:8px;background:#fff;color:#111;overflow:hidden;font-size:14px}
-.win .tb{background:#475569;color:#fff;padding:3px 8px;display:flex;justify-content:space-between}
-.win .bd{padding:8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;min-height:64px}
-.win.off{border-style:dashed;background:transparent;color:var(--mut);text-align:center;padding:18px}
-.win input{width:90px;border:1px solid #888;padding:2px 4px;font-size:14px;background:#fff;color:#111}.win .bt{border:1px solid #888;background:#e5e7eb;border-radius:4px;padding:2px 8px}
-.mem{font:13px ui-monospace,Menlo,monospace;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 8px;min-height:44px}
-.con{font:13px ui-monospace,monospace;background:#000;color:#4ade80;border-radius:6px;padding:4px 8px;min-height:28px}
-.hint{font-size:13px;color:var(--mut)}
-/* mobile: never scroll sideways */
-.card{min-width:0;overflow-wrap:anywhere}.tr>*{min-width:0}td,th,code,.mn big,.link{overflow-wrap:anywhere;word-break:break-word}
-pre{max-width:100%}table{table-layout:auto}
-.b{white-space:nowrap;font-size:clamp(11px,3.2vw,14px)}
-.nav{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:6px 0}.nav a{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:7px 12px;color:var(--ink);text-decoration:none;font-size:15px}.road{display:none}a{color:var(--acc)}
-.list li{margin:3px 0}.todo{color:var(--mut)}.ok{color:#16a34a;font-weight:700}</style></head><body><div class="w"><div class="nav"><a href="../index.html">☰ Advanced Java Programming</a><a href="u1-frame.html">Frame ▶</a><button class="s" id="snd" onclick="togSnd()">🔊 Sound ON</button></div><div id="road" class="road"></div><div id="pages"></div><p class="note">draft – check against textbook · Source: Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs</p><div class="nav"><a href="../index.html">☰ Advanced Java Programming</a><a href="u1-frame.html">Frame ▶</a><button class="s" id="snd" onclick="togSnd()">🔊 Sound ON</button></div></div><script>const L=[{"tab":"Introducing Swing","sub":"Introducing Swing","marks":"[5]","last":"Start of the subject.","next":"Creating a Frame. Every Swing app needs a window first.","actors":{"a0":{"e":"🏚️","l":"AWT","x":10,"y":52},"a1":{"e":"🪶","l":"Swing","x":30,"y":62},"a2":{"e":"🎨","l":"Look & Feel","x":50,"y":52},"a3":{"e":"🧱","l":"J-components","x":70,"y":62},"a4":{"e":"🧠","l":"MVC","x":90,"y":52}},"scenes":[{"cap":"Old way: AWT","sub":"AWT asks the operating system to draw buttons. It is heavy and looks different on each OS.","show":["a0"],"snd":"pop","glow":"a0"},{"cap":"New way: Swing","sub":"Swing draws its own buttons in pure Java. It is light and looks the same everywhere.","show":["a0","a1"],"snd":"whoosh","glow":"a1","say":{"a1":"I am light!"}},{"cap":"Pluggable look and feel","sub":"You can change the whole style (Metal, Nimbus, Windows) with one line.","show":["a0","a1","a2"],"snd":"ding","glow":"a2"},{"cap":"Names start with J","sub":"JButton, JLabel, JTextField, JFrame… all in javax.swing.","show":["a0","a1","a2","a3"],"snd":"pop","glow":"a3"},{"cap":"Built on MVC idea","sub":"Data (model) is kept apart from the view, so components are flexible.","show":["a0","a1","a2","a3","a4"],"snd":"tick","glow":"a4"},{"cap":"Swing = light, pretty, flexible","sub":"AWT is heavy (uses OS), Swing is light (pure Java).","show":["a0","a1","a2","a3","a4"],"snd":"ding"}],"mn":[["Topic trick","<b>A</b>WT <b>H</b>eavy, <b>S</b>wing <b>L</b>ight = AWT uses OS parts, Swing is pure Java"],["Points trick (4 features)","<b>L</b>ittle <b>P</b>igs <b>M</b>ake <b>J</b>am = Lightweight · Pluggable look · MVC based · J-prefix names"]],"code":{"title":"Program: first Swing window","lines":["import javax.swing.*;","public class SwingDemo {","    public static void main(String[] args) {","        JFrame f = new JFrame(\"Swing Demo\");","        JButton b = new JButton(\"Hello Swing\");","        f.add(b);","        f.setSize(250, 120);","        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);","        f.setVisible(true);","    }","}"],"note":"(complete program)","steps":[{"l":["import javax.swing"],"say":"All Swing classes live in the package javax.swing.","snd":"tick","win":{"title":"","vis":0,"items":[]},"mem":[]},{"l":["main("],"say":"Program starts at main().","snd":"tick"},{"l":["new JFrame"],"say":"A JFrame (the window) is made in memory.","snd":"pop","mem":["f = JFrame \"Swing Demo\""]},{"l":["new JButton"],"say":"A JButton is made. Note the J at the start: it is a Swing component.","snd":"pop","mem":["f = JFrame \"Swing Demo\"","b = JButton \"Hello Swing\""]},{"l":["f.add(b)"],"say":"The button is put inside the window.","snd":"tick","win":{"title":"Swing Demo","vis":0,"items":[{"t":"btn","v":"Hello Swing"}]}},{"l":["setVisible"],"say":"Size is set and the window appears.","snd":"ding","win":{"title":"Swing Demo","vis":1,"items":[{"t":"btn","v":"Hello Swing"}]}}]},"ans":"<h3>Definition</h3><p><b>Swing</b> is a Java GUI toolkit (package <code>javax.swing</code>) used to build windows, buttons, text boxes and other graphical parts. It is built on top of AWT and is written fully in Java.</p><h3>Features of Swing</h3><ul><li><b>Lightweight</b>: components are drawn by Java, not by the operating system.</li><li><b>Pluggable look and feel</b>: the style can be changed at run time.</li><li><b>MVC based</b>: data (model) is separate from display (view).</li><li><b>Platform independent</b>: looks the same on all OS.</li><li><b>Rich components</b>: JTable, JTree, JTabbedPane, etc. (names start with J).</li></ul><h3>Figure (class hierarchy)</h3><pre>Object → Component → Container → JComponent → JButton, JLabel, JPanel …</pre><table><tr><th>AWT</th><th>Swing</th></tr><tr><td>Heavyweight (uses OS peers)</td><td>Lightweight (pure Java)</td></tr><tr><td>Look depends on OS</td><td>Same look on every OS, can change</td></tr><tr><td>Package java.awt</td><td>Package javax.swing</td></tr><tr><td>Fewer components</td><td>Many rich components</td></tr><tr><td>Button, Label</td><td>JButton, JLabel</td></tr></table>","q":["Why is Swing called lightweight?",["It uses less RAM","Its components are drawn by Java, not the OS","It has fewer classes"],1,"AWT Heavy, Swing Light."]}];
-// ===== sound (made in the browser, no files) =====
-let SOUND=true,AC=null;
-function tone(f,d,type,g,at,f2){const t=AC.currentTime+(at||0),o=AC.createOscillator(),n=AC.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);n.gain.setValueAtTime(g||.12,t);n.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(n);n.connect(AC.destination);o.start(t);o.stop(t+d)}
-function S(k){if(!SOUND||!k)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();AC.resume();
- ({tick:()=>tone(660,.07,'triangle',.07),click:()=>{tone(200,.06,'square',.1);tone(90,.08,'sine',.12,.02)},whoosh:()=>tone(250,.4,'sawtooth',.04,0,1400),ding:()=>{tone(880,.25,'sine',.14);tone(1320,.4,'sine',.1,.12)},pop:()=>tone(450,.12,'sine',.14,0,900),key:()=>tone(420,.05,'square',.07),err:()=>tone(150,.3,'sawtooth',.08)})[k]()}catch(e){}}
-function togSnd(){SOUND=!SOUND;document.getElementById('snd').textContent=SOUND?'🔊 Sound ON':'🔇 Sound OFF';S('ding')}
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Introducing Swing – CACS354</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600&display=swap"><style>/* Study Hero – calm, one-step-at-a-time look (after the StudyForge wireframes):
+   white page, near-black ink, serif titles, hairline rows, one black primary button.
+   Teaching colours (blue/amber/green) only inside figures, code and tricks. */
+:root{--bg:#fff;--ink:#141414;--mut:#5c5c5c;--line:#e4e4e0;--soft:#f6f6f3;--btn:#141414;--btnink:#fff;
+ --hl:#fff1b8;--hlink:#7a4b00;--blue:#1d4ed8;--green:#15803d;--red:#b91c1c;--okbg:#dcfce7;--nobg:#fee2e2;
+ --code:#14161a;--codeink:#e6e6e6;--codeon:#2b3a67;
+ --serif:"Source Serif 4",Georgia,"Times New Roman",serif;--sans:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;--mono:ui-monospace,Menlo,Consolas,monospace}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#121212;--ink:#f4f4f2;--mut:#b4b4ae;--line:#2e2e2b;--soft:#1c1c1a;--btn:#f4f4f2;--btnink:#121212;--hl:#3d3200;--hlink:#ffd666;--blue:#8fb2ff;--green:#5fd38a;--red:#ff8a8a;--okbg:#123d22;--nobg:#4a1616;--code:#0b0c0e;--codeon:#33437a;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#121212;--ink:#f4f4f2;--mut:#b4b4ae;--line:#2e2e2b;--soft:#1c1c1a;--btn:#f4f4f2;--btnink:#121212;--hl:#3d3200;--hlink:#ffd666;--blue:#8fb2ff;--green:#5fd38a;--red:#ff8a8a;--okbg:#123d22;--nobg:#4a1616;--code:#0b0c0e;--codeon:#33437a;color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 var(--sans)}
+a{color:var(--ink)}
+.wrap{max-width:680px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2{font-family:var(--serif);font-weight:600;letter-spacing:-.01em;text-wrap:balance;margin:0}
+h1{font-size:clamp(30px,8vw,40px);line-height:1.12}
+h2{font-size:clamp(24px,6.4vw,30px);line-height:1.2}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.mut{color:var(--mut)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 
-// ===== engine =====
-const road=document.getElementById('road'),pages=document.getElementById('pages');
-const PL=[];function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&lt;'.replace('lt','gt'))}
-function winHTML(w){if(!w||!w.vis)return `<div class="win off">🪟 window not on screen yet${w&&w.title?` ("${w.title}" exists in memory)`:''}</div>`;
- return `<div class="win"><div class="tb"><span>${w.title}</span><span>– □ ✕</span></div><div class="bd">${w.items.map(x=>x.t=='in'?`<input value="${x.v}" readonly>`:x.t=='btn'?`<span class="bt">${x.v}</span>`:`<span>${x.v}</span>`).join('')}</div></div>`}
-L.forEach((t,i)=>{
- const b=document.createElement('button');b.innerHTML=`${i+1}. ${t.tab}<small>${t.marks}</small>`;b.onclick=()=>show(i);road.appendChild(b);
- const p=document.createElement('section');p.className='pg';p.id='p'+i;
- p.innerHTML=`<div class="link">⬅️ <b>Last:</b> ${t.last}<br>📍 <b>Now:</b> ${t.sub}</div>
- <div class="card"><h2><span class="step">1</span>60-second story <span class="note">${t.marks}</span></h2><div class="stage" id="st${i}"></div><div class="cap" id="cap${i}"></div><p class="sub" id="sub${i}"></p><div class="bar"><i id="bar${i}"></i></div>
- <div class="ctl"><button onclick="PL[${i}].play()" id="pl${i}">▶ Play</button><button class="s" onclick="PL[${i}].go(-1)">◀ Back</button><button class="s" onclick="PL[${i}].go(1)">Next ▶</button><div class="dots" id="dots${i}"></div></div></div>
- ${t.code?` <div class="card"><h2><span class="step">2</span>How the code really runs <span class="note">${t.code.title}</span></h2><p class="hint">Yellow line = the line running now. Right side = what you would see.</p>
- <div class="tr"><div class="code" id="code${i}">${t.code.lines.map((x,k)=>`<div id="c${i}_${k}"><i>${k+1}</i>${esc(x)}</div>`).join('')}</div>
- <div class="side"><div class="user" id="usr${i}"></div><div class="say" id="say${i}"></div><div id="win${i}"></div><div class="mem" id="mem${i}"></div><div class="con" id="con${i}"></div></div></div>
- <p class="hint">${t.code.note}</p>
- <div class="bar" style="margin-top:8px"><i id="cbar${i}"></i></div>
- <div class="ctl"><button onclick="CT[${i}].play()" id="cpl${i}">▶ Play</button><button class="s" onclick="CT[${i}].go(-1)">◀ Back</button><button class="s" onclick="CT[${i}].go(1)">Next ▶</button><span class="note" id="cnt${i}"></span></div></div>`:''}
- <div class="card"><h2><span class="step">${t.code?3:2}</span>Memory tricks</h2>${t.mn.map(m=>`<div class="mn"><span class="note" style="color:inherit">${m[0]}</span><big>${m[1]}</big></div>`).join('')}</div>
- <div class="card"><h2><span class="step">${t.code?4:3}</span>Write this in the exam <span class="note">${t.marks}</span></h2>${t.ans}</div>
- <div class="card q"><h2><span class="step">${t.code?5:4}</span>Quick check</h2><p><b>${t.q[0]}</b></p>${t.q[1].map((o,k)=>`<button onclick="chk(this,${k==t.q[2]},'${t.q[3].replace(/'/g,"\\'")}')">${o}</button>`).join('')}<p class="note"></p></div>
- <div class="link">➡️ <b>Next:</b> ${t.next} ${i<L.length-1?`<br><button class="p" style="margin-top:6px" onclick="show(${i+1})">Go to lesson ${i+2} ▶</button>`:''}</div>`;
- pages.appendChild(p);
-});
-// story players
-L.forEach((t,i)=>{
- const st=document.getElementById('st'+i),A={};
- for(const[k,a]of Object.entries(t.actors)){const d=document.createElement('div');d.className='a';d.innerHTML=a.e+(a.l?`<small>${a.l}</small>`:'');d.style.left=a.x+'%';d.style.top=a.y+'%';d.style.opacity=0;st.appendChild(d);const bb=document.createElement('div');bb.className='b';st.appendChild(bb);A[k]={d,b:bb,a}}
- const dots=document.getElementById('dots'+i);t.scenes.forEach(()=>dots.appendChild(document.createElement('b')));
- let n=0,timer=null,playing=false;
- function render(snd){const s=t.scenes[n];
-  for(const k in A){const{d,b,a}=A[k];const on=s.show.includes(k);d.style.opacity=on?1:0;d.classList.toggle('glow',s.glow===k);const pos=(s.mv&&s.mv[k])||[a.x,a.y];d.style.left=pos[0]+'%';d.style.top=pos[1]+'%';const sy=s.say&&s.say[k];b.classList.toggle('on',!!sy&&on);if(sy){b.textContent=sy;b.style.left=pos[0]+'%';b.style.transform='translate('+(pos[0]>75?-92:pos[0]<25?-8:-50)+'%,-100%)';b.style.top=(pos[1]-14)+'%'}}
-  document.getElementById('cap'+i).textContent=s.cap;document.getElementById('sub'+i).textContent=s.sub;[...dots.children].forEach((x,j)=>x.classList.toggle('on',j<=n));document.getElementById('bar'+i).style.width=((n+1)/t.scenes.length*100)+'%';if(snd)S(s.snd)}
- function stop(){clearTimeout(timer);playing=false;document.getElementById('pl'+i).textContent='▶ Play'}
- function tick(){render(1);if(n>=t.scenes.length-1){stop();document.getElementById('pl'+i).textContent='↻ Replay';return}timer=setTimeout(()=>{n++;tick()},5200)}
- PL[i]={go(d){stop();n=Math.max(0,Math.min(t.scenes.length-1,n+d));render(1)},play(){if(playing){stop();return}if(n>=t.scenes.length-1)n=0;playing=true;document.getElementById('pl'+i).textContent='⏸ Pause';tick()},reset(){stop();n=0;render(0)}};PL[i].reset();
-});
-// code tracers
-const CT=[];
-L.forEach((t,i)=>{const c=t.code;if(!c){CT[i]={reset(){},go(){},play(){}};return}let n=0,timer=null,playing=false;
- const idx=(s,occ)=>{let k=-1,seen=0;for(let j=0;j<c.lines.length;j++){if(c.lines[j].includes(s)){if(seen==(occ||0)){k=j;break}seen++}}return k};
- c.steps.forEach(s=>{s.idx=s.l.map(x=>idx(x,s.occ));});
- function render(snd){const s=c.steps[n];let win=null,mem=[],con='';
+/* ---------- lesson: top bar ---------- */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bg);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:10px;height:52px}
+.icon{display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:44px;border:0;background:none;cursor:pointer;text-decoration:none;font-size:20px;border-radius:10px}
+.icon:hover{background:var(--soft)}
+.top .t{flex:1;min-width:0;font-weight:600;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.count{font-size:14px;color:var(--mut);font-variant-numeric:tabular-nums}
+.prog{height:3px;background:var(--line)}.prog i{display:block;height:100%;width:0;background:var(--ink);transition:width .3s}
+.secs{display:flex;gap:16px;overflow-x:auto;padding:10px 0 0;font-size:13px;scrollbar-width:none}
+.secs::-webkit-scrollbar{display:none}
+.secs span{white-space:nowrap;color:var(--mut);padding-bottom:6px;border-bottom:2px solid transparent}
+.secs span.done{color:var(--ink)}.secs span.on{color:var(--ink);font-weight:700;border-color:var(--ink)}
+
+/* ---------- lesson: one step ---------- */
+main{padding-top:22px;padding-bottom:calc(110px + env(safe-area-inset-bottom,0px))}
+.step{display:flex;flex-direction:column;gap:16px;min-width:0;overflow-wrap:anywhere}
+.step p{margin:0}
+.lead{font-size:19px;line-height:1.55}
+.say{font-size:20px;line-height:1.5;font-weight:500}
+.box{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.row{display:flex;gap:12px;align-items:flex-start}
+.row b.k{flex:0 0 70px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);padding-top:3px}
+.chain{display:flex;flex-direction:column;gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.chain>div{padding:12px 16px}.chain>div+div{border-top:1px solid var(--line)}.chain .now{background:var(--soft);font-weight:600}
+.trick{background:var(--hl);border-radius:12px;padding:14px 16px}
+.trick .eyebrow{color:var(--hlink)}
+.trick big{display:block;font-family:var(--serif);font-size:23px;line-height:1.35;font-weight:600;margin-top:4px}
+.trick big b{color:var(--hlink);text-decoration:underline;text-underline-offset:3px}
+.ans ul,.ans ol{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:8px}
+.ans p{margin:0 0 8px}
+.ans table,.scroll table{border-collapse:collapse;width:100%;font-size:15px}
+.scroll{overflow-x:auto;max-width:100%}
+td,th{border-bottom:1px solid var(--line);padding:9px 8px;text-align:left;vertical-align:top}th{font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--mut);border-bottom:2px solid var(--ink)}
+pre{margin:0;background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:12px;overflow:auto;font:13.5px/1.5 var(--mono);max-width:100%;white-space:pre}
+code{font-family:var(--mono);font-size:.9em;background:var(--soft);padding:1px 5px;border-radius:4px}
+
+/* story stage */
+.stage{position:relative;height:clamp(220px,60vw,300px);border-radius:14px;background:var(--soft);border:1px solid var(--line);overflow:hidden}
+.a{position:absolute;transform:translate(-50%,-50%);text-align:center;transition:left .9s ease,top .9s ease,opacity .4s,transform .35s;font-size:clamp(30px,8vw,52px);line-height:1}
+.a small{display:block;font:700 clamp(10px,2.6vw,13px)/1.2 var(--sans);margin-top:4px;color:var(--ink)}
+.a.glow{transform:translate(-50%,-50%) scale(1.25);filter:drop-shadow(0 0 8px #f5b301)}
+.b{z-index:5;position:absolute;background:var(--bg);color:var(--ink);border:1.5px solid var(--ink);border-radius:12px;padding:4px 10px;font:700 clamp(11px,3.2vw,14px)/1.3 var(--sans);white-space:nowrap;opacity:0;transition:opacity .3s}.b.on{opacity:1}
+.dots{display:flex;gap:6px}.dots b{width:8px;height:8px;border-radius:50%;background:var(--line)}.dots b.on{background:var(--ink)}
+
+/* code trace */
+.code{background:var(--code);color:var(--codeink);border-radius:12px;padding:8px 0;font:12.5px/1.75 var(--mono);max-height:36vh;overflow:auto}
+.code div{padding:0 12px;white-space:pre;border-left:4px solid transparent;width:max-content;min-width:100%}
+.code div.on{background:var(--codeon);border-left-color:#f5b301;color:#fff}
+.code div i{color:#7b8190;font-style:normal;display:inline-block;width:26px}
+.user{border:1.5px solid var(--ink);border-radius:10px;padding:6px 12px;font-weight:700;align-self:flex-start}
+.win{border:2px solid #4b5563;border-radius:8px;background:#fff;color:#111;overflow:hidden;font-size:14px}
+.win .tb{background:#4b5563;color:#fff;padding:3px 8px;display:flex;justify-content:space-between}
+.win .bd{padding:8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;min-height:56px}
+.win.off{border-style:dashed;background:transparent;color:var(--mut);text-align:center;padding:14px}
+.win input{width:90px;border:1px solid #888;padding:2px 4px;font-size:14px;background:#fff;color:#111}.win .bt{border:1px solid #888;background:#e5e7eb;border-radius:4px;padding:2px 8px}
+.mem{font:13px/1.5 var(--mono)}
+.con{font:13px var(--mono);background:#000;color:#4ade80;border-radius:8px;padding:6px 10px}
+
+/* quiz */
+.opt{display:block;width:100%;text-align:left;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--bg);cursor:pointer;min-height:48px}
+.opt:hover{border-color:var(--ink)}
+.opt.ok{background:var(--okbg);border-color:var(--green)}.opt.no{background:var(--nobg);border-color:var(--red)}
+.fb{font-weight:600}
+
+/* bottom bar */
+.bot{position:fixed;left:0;right:0;bottom:0;z-index:9;background:var(--bg);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.bot .wrap{display:flex;gap:10px;padding-block:12px}
+.btn{flex:1;min-height:52px;border-radius:12px;border:1.5px solid var(--btn);background:var(--btn);color:var(--btnink);font-weight:700;font-size:17px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;padding:0 16px;text-align:center}
+.btn.ghost{flex:0 0 auto;background:var(--bg);color:var(--ink);border-color:var(--line)}
+.btn[disabled]{opacity:.35;cursor:default}
+
+/* ---------- home ---------- */
+.home{padding-block:28px 48px;display:flex;flex-direction:column;gap:28px}
+.brand{font-weight:700;font-size:17px}
+.cont{border:1px solid var(--line);background:var(--soft);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.cont .btn{flex:none}
+.unit{border-top:1px solid var(--line)}
+.unit summary{list-style:none;cursor:pointer;padding:18px 0;display:flex;gap:12px;align-items:baseline}
+.unit summary::-webkit-details-marker{display:none}
+.unit summary h2{font-size:22px;flex:1}
+.unit summary .mut{font-size:14px;white-space:nowrap}
+.unit summary::after{content:"+";font-size:22px;color:var(--mut)}.unit[open] summary::after{content:"–"}
+.topics{list-style:none;margin:0 0 16px;padding:0}
+.topics a{display:flex;gap:14px;align-items:baseline;padding:13px 0;text-decoration:none;border-top:1px solid var(--line);min-height:48px}
+.topics .n{flex:0 0 26px;font-variant-numeric:tabular-nums;color:var(--mut);font-size:14px}
+.topics .tt{flex:1;min-width:0}
+.topics .tag{font-size:12px;color:var(--mut);white-space:nowrap}
+.topics a.done .n::before{content:"✓ ";color:var(--green)}
+.topics a.sub{padding-left:40px}
+.files a{display:flex;justify-content:space-between;gap:12px;padding:13px 0;border-top:1px solid var(--line);text-decoration:none}
+.files a span:last-child{color:var(--mut);font-size:14px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body><header class="top"><div class="wrap"><a class="icon" href="../index.html" aria-label="All topics">✕</a><div class="t">Introducing Swing</div><span class="count" id="count"></span><button class="icon" id="snd"></button></div><div class="prog"><i id="bar"></i></div><div class="wrap"><nav class="secs" id="secs" aria-label="Parts of this topic"></nav></div></header>
+<main class="wrap"><section class="step" id="step" aria-live="polite"></section></main>
+<footer class="bot"><div class="wrap"><button class="btn ghost" id="back" aria-label="Back">←</button><button class="btn" id="next">Next →</button></div></footer><script>const C={"tab":"Introducing Swing","sub":"Introducing Swing","marks":"[5]","unit":"Unit 1 · GUI Programming","last":"Start of the subject.","next":"Creating a Frame. Every Swing app needs a window first.","actors":{"a0":{"e":"🏚️","l":"AWT","x":10,"y":52},"a1":{"e":"🪶","l":"Swing","x":30,"y":62},"a2":{"e":"🎨","l":"Look & Feel","x":50,"y":52},"a3":{"e":"🧱","l":"J-components","x":70,"y":62},"a4":{"e":"🧠","l":"MVC","x":90,"y":52}},"scenes":[{"cap":"Old way: AWT","sub":"AWT asks the operating system to draw buttons. It is heavy and looks different on each OS.","show":["a0"],"snd":"pop","glow":"a0"},{"cap":"New way: Swing","sub":"Swing draws its own buttons in pure Java. It is light and looks the same everywhere.","show":["a0","a1"],"snd":"whoosh","glow":"a1","say":{"a1":"I am light!"}},{"cap":"Pluggable look and feel","sub":"You can change the whole style (Metal, Nimbus, Windows) with one line.","show":["a0","a1","a2"],"snd":"ding","glow":"a2"},{"cap":"Names start with J","sub":"JButton, JLabel, JTextField, JFrame… all in javax.swing.","show":["a0","a1","a2","a3"],"snd":"pop","glow":"a3"},{"cap":"Built on MVC idea","sub":"Data (model) is kept apart from the view, so components are flexible.","show":["a0","a1","a2","a3","a4"],"snd":"tick","glow":"a4"},{"cap":"Swing = light, pretty, flexible","sub":"AWT is heavy (uses OS), Swing is light (pure Java).","show":["a0","a1","a2","a3","a4"],"snd":"ding"}],"mn":[["Topic trick","<b>A</b>WT <b>H</b>eavy, <b>S</b>wing <b>L</b>ight = AWT uses OS parts, Swing is pure Java"],["Points trick (4 features)","<b>L</b>ittle <b>P</b>igs <b>M</b>ake <b>J</b>am = Lightweight · Pluggable look · MVC based · J-prefix names"]],"code":{"title":"Program: first Swing window","lines":["import javax.swing.*;","public class SwingDemo {","    public static void main(String[] args) {","        JFrame f = new JFrame(\"Swing Demo\");","        JButton b = new JButton(\"Hello Swing\");","        f.add(b);","        f.setSize(250, 120);","        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);","        f.setVisible(true);","    }","}"],"note":"(complete program)","steps":[{"l":["import javax.swing"],"say":"All Swing classes live in the package javax.swing.","snd":"tick","win":{"title":"","vis":0,"items":[]},"mem":[]},{"l":["main("],"say":"Program starts at main().","snd":"tick"},{"l":["new JFrame"],"say":"A JFrame (the window) is made in memory.","snd":"pop","mem":["f = JFrame \"Swing Demo\""]},{"l":["new JButton"],"say":"A JButton is made. Note the J at the start: it is a Swing component.","snd":"pop","mem":["f = JFrame \"Swing Demo\"","b = JButton \"Hello Swing\""]},{"l":["f.add(b)"],"say":"The button is put inside the window.","snd":"tick","win":{"title":"Swing Demo","vis":0,"items":[{"t":"btn","v":"Hello Swing"}]}},{"l":["setVisible"],"say":"Size is set and the window appears.","snd":"ding","win":{"title":"Swing Demo","vis":1,"items":[{"t":"btn","v":"Hello Swing"}]}}]},"ans":"<h3>Definition</h3><p><b>Swing</b> is a Java GUI toolkit (package <code>javax.swing</code>) used to build windows, buttons, text boxes and other graphical parts. It is built on top of AWT and is written fully in Java.</p><h3>Features of Swing</h3><ul><li><b>Lightweight</b>: components are drawn by Java, not by the operating system.</li><li><b>Pluggable look and feel</b>: the style can be changed at run time.</li><li><b>MVC based</b>: data (model) is separate from display (view).</li><li><b>Platform independent</b>: looks the same on all OS.</li><li><b>Rich components</b>: JTable, JTree, JTabbedPane, etc. (names start with J).</li></ul><h3>Figure (class hierarchy)</h3><pre>Object → Component → Container → JComponent → JButton, JLabel, JPanel …</pre><table><tr><th>AWT</th><th>Swing</th></tr><tr><td>Heavyweight (uses OS peers)</td><td>Lightweight (pure Java)</td></tr><tr><td>Look depends on OS</td><td>Same look on every OS, can change</td></tr><tr><td>Package java.awt</td><td>Package javax.swing</td></tr><tr><td>Fewer components</td><td>Many rich components</td></tr><tr><td>Button, Label</td><td>JButton, JLabel</td></tr></table>","q":["Why is Swing called lightweight?",["It uses less RAM","Its components are drawn by Java, not the OS","It has fewer classes"],1,"AWT Heavy, Swing Light."],"src":"draft – check against textbook · Source: Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs"};const NAV={"home":"../index.html","next":{"href":"u1-frame.html","title":"Frame"},"prev":null};
+// Study Hero lesson player: ONE step on screen, a big Next button, nothing else to hunt for.
+// Needs: const C (card) and const NAV ({home, next:{href,title}|null, prev:{href,title}|null}) defined before this file.
+let SOUND=true,AC=null;
+try{SOUND=localStorage.getItem('sh:sound')!=='0'}catch(e){}
+function tone(f,d,type,g,at,f2){const t=AC.currentTime+(at||0),o=AC.createOscillator(),n=AC.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);n.gain.setValueAtTime(g||.12,t);n.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(n);n.connect(AC.destination);o.start(t);o.stop(t+d)}
+function snd(k){if(!SOUND||!k)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();AC.resume();
+ ({tick:()=>tone(660,.07,'triangle',.07),click:()=>{tone(200,.06,'square',.1);tone(90,.08,'sine',.12,.02)},whoosh:()=>tone(250,.4,'sawtooth',.04,0,1400),ding:()=>{tone(880,.25,'sine',.14);tone(1320,.4,'sine',.1,.12)},pop:()=>tone(450,.12,'sine',.14,0,900),key:()=>tone(420,.05,'square',.07),err:()=>tone(150,.3,'sawtooth',.08)})[k]()}catch(e){}}
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+function setSnd(){$('snd').textContent=SOUND?'🔊':'🔇';$('snd').setAttribute('aria-label',SOUND?'Sound on':'Sound off')}
+$('snd').onclick=()=>{SOUND=!SOUND;try{localStorage.setItem('sh:sound',SOUND?'1':'0')}catch(e){}setSnd();snd('ding')};setSnd();
+
+// ---- tricks: topic trick first, the "points" trick goes with the points, a "list/table" trick with the table
+const tricks=C.mn.map(([label,html])=>({label,html,used:false}));
+const takeTrick=re=>{const t=tricks.find(x=>!x.used&&re.test(x.label));if(t)t.used=true;return t};
+const trickHTML=t=>t?`<div class="trick"><div class="eyebrow">${t.label}</div><big>${t.html}</big></div>`:'';
+
+// ---- build the step list
+const steps=[];const add=(sec,html,enter)=>steps.push({sec,html,enter});
+const topicTrick=takeTrick(/topic/i)||tricks.find(x=>!x.used&&(x.used=true));
+add('Start',`<div class="eyebrow">${esc(C.unit)} · ${esc(C.marks)}</div><h1>${C.tab}</h1>${C.sub&&C.sub.trim().toLowerCase()!==C.tab.trim().toLowerCase()?`<p class="lead mut">${C.sub}</p>`:''}
+ <div class="chain"><div><span class="mut">You just learned</span><br>${C.last}</div><div class="now">Now: ${C.tab}</div><div><span class="mut">Coming next</span><br>${C.next}</div></div>
+ ${trickHTML(topicTrick)}<p class="mut">Tap <b>Next</b> to go one small step at a time. About ${Math.max(2,Math.round(stepsEstimate()/4))} minutes.</p>`);
+function stepsEstimate(){return C.scenes.length+(C.code?C.code.steps.length:0)+6}
+
+// story: one scene per step
+const actors={};
+C.scenes.forEach((s,k)=>add('Story',null,el=>story(el,k)));
+function story(el,k){const s=C.scenes[k];
+ el.innerHTML=`<div class="eyebrow">Story · ${k+1} of ${C.scenes.length}</div><div class="stage" id="stage"></div><h2>${s.cap}</h2><p class="say">${s.sub}</p>`;
+ const st=$('stage');const prev=k>0?C.scenes[k-1]:null;
+ for(const[id,a]of Object.entries(C.actors)){const d=document.createElement('div');d.className='a';d.innerHTML=a.e+(a.l?`<small>${a.l}</small>`:'');
+  const from=prev?((prev.mv&&prev.mv[id])||[a.x,a.y]):[a.x,a.y];d.style.left=from[0]+'%';d.style.top=from[1]+'%';d.style.opacity=prev&&prev.show.includes(id)?1:0;st.appendChild(d);
+  const b=document.createElement('div');b.className='b';st.appendChild(b);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{const on=s.show.includes(id),pos=(s.mv&&s.mv[id])||[a.x,a.y];d.style.opacity=on?1:0;d.style.left=pos[0]+'%';d.style.top=pos[1]+'%';d.classList.toggle('glow',s.glow===id);
+   const sy=s.say&&s.say[id];if(sy&&on){b.textContent=sy;b.style.left=pos[0]+'%';b.style.top=(pos[1]-14)+'%';b.style.transform=`translate(${pos[0]>75?-92:pos[0]<25?-8:-50}%,-100%)`;setTimeout(()=>b.classList.add('on'),500)}}))}
+ snd(s.snd)}
+
+// code trace: one line-step per step
+if(C.code){const c=C.code;
+ const idx=(s,occ)=>{let seen=0;for(let j=0;j<c.lines.length;j++)if(c.lines[j].includes(s)){if(seen==(occ||0))return j;seen++}return -1};
+ c.steps.forEach(s=>s.idx=s.l.map(x=>idx(x,s.occ)));
+ c.steps.forEach((s,n)=>add('Code',null,el=>codeStep(el,n)));
+ function codeStep(el,n){const s=c.steps[n];let win=null,mem=[],con='';
   for(let j=0;j<=n;j++){const q=c.steps[j];if(q.win)win=q.win;if(q.mem)mem=q.mem;if(q.con!==undefined)con=q.con}
-  c.lines.forEach((_,k)=>document.getElementById(`c${i}_${k}`).classList.toggle('on',s.idx.includes(k)));
-  const first=document.getElementById(`c${i}_${s.idx[0]}`);if(first){const box=document.getElementById('code'+i);box.scrollTop=first.offsetTop-box.offsetTop-80}
-  const u=document.getElementById('usr'+i);u.textContent=s.user||'';u.classList.toggle('on',!!s.user);
-  document.getElementById('say'+i).textContent=s.say;document.getElementById('win'+i).innerHTML=winHTML(win);
-  document.getElementById('mem'+i).innerHTML='<b>In memory:</b><br>'+(mem.length?mem.map(esc).join('<br>'):'<span class="hint">(nothing yet)</span>');
-  const cn=document.getElementById('con'+i);cn.style.display=con?'block':'none';cn.textContent=con?'> '+con:'';
-  document.getElementById('cbar'+i).style.width=((n+1)/c.steps.length*100)+'%';document.getElementById('cnt'+i).textContent=`Step ${n+1} of ${c.steps.length}`;if(snd)S(s.snd)}
- function stop(){clearTimeout(timer);playing=false;document.getElementById('cpl'+i).textContent='▶ Play'}
- function tick(){render(1);if(n>=c.steps.length-1){stop();document.getElementById('cpl'+i).textContent='↻ Replay';return}timer=setTimeout(()=>{n++;tick()},4800)}
- CT[i]={go(d){stop();n=Math.max(0,Math.min(c.steps.length-1,n+d));render(1)},play(){if(playing){stop();return}if(n>=c.steps.length-1)n=0;playing=true;document.getElementById('cpl'+i).textContent='⏸ Pause';tick()},reset(){stop();n=0;render(0)},steps:c.steps.length};CT[i].reset();
-});
-let seen=new Set();
-function show(i){document.querySelectorAll('.pg').forEach((p,j)=>p.classList.toggle('on',i==j));[...road.children].forEach((b,j)=>{b.classList.toggle('on',i==j)});seen.add(i);[...road.children].forEach((b,j)=>b.classList.toggle('done',seen.has(j)&&j!=i&&j<L.length));PL.forEach((p,j)=>j!=i&&p.reset());CT.forEach((p,j)=>j!=i&&p.reset());window.scrollTo(0,0)}
-function chk(b,ok,msg){b.classList.add(ok?'ok':'no');S(ok?'ding':'err');b.parentElement.querySelector('.note').textContent=ok?'✅ Correct! '+msg:'❌ Try again.'}
-show(0);
+  el.innerHTML=`<div class="eyebrow">How the code runs · ${n+1} of ${c.steps.length}</div>${n==0?`<p class="mut">${esc(c.title)}. The yellow line is the line running now.</p>`:''}
+  <div class="code" id="code">${c.lines.map((x,k)=>`<div class="${s.idx.includes(k)?'on':''}"><i>${k+1}</i>${esc(x)}</div>`).join('')}</div>
+  ${s.user?`<div class="user">👆 ${esc(s.user)}</div>`:''}<p class="say">${s.say}</p>
+  ${win&&win.vis?`<div class="win"><div class="tb"><span>${win.title}</span><span>– □ ✕</span></div><div class="bd">${win.items.map(x=>x.t=='in'?`<input value="${x.v}" readonly tabindex="-1">`:x.t=='btn'?`<span class="bt">${x.v}</span>`:`<span>${x.v}</span>`).join('')}</div></div>`:''}
+  ${mem.length?`<div class="box mem"><b>In memory</b><br>${mem.map(esc).join('<br>')}</div>`:''}${con?`<div class="con">&gt; ${esc(con)}</div>`:''}
+  ${n==c.steps.length-1&&c.note?`<p class="mut">${c.note}</p>`:''}`;
+  const box=$('code'),on=box.querySelector('.on');if(on)box.scrollTop=on.offsetTop-box.clientHeight/3;snd(s.snd)}}
+
+// exam answer: split by heading, one part per step; big tables get their own step
+(function(){const tmp=document.createElement('div');tmp.innerHTML=C.ans;const parts=[];let cur=null;
+ for(const n of [...tmp.childNodes]){
+  if(n.nodeName==='H3'){cur={title:n.textContent,html:''};parts.push(cur);continue}
+  if(n.nodeName==='TABLE'&&cur&&cur.html.trim()){cur={title:'Table',html:''};parts.push(cur)}
+  if(!cur){cur={title:'Answer',html:''};parts.push(cur)}
+  cur.html+=n.nodeName==='TABLE'?`<div class="scroll">${n.outerHTML}</div>`:(n.outerHTML||esc(n.textContent))}
+ parts.forEach((p,k)=>{let t='';
+  if(/point|role|feature|advantage|step|type/i.test(p.title))t=trickHTML(takeTrick(/point|answer/i));
+  if(/table|list|type/i.test(p.title))t+=trickHTML(takeTrick(/list|table|type/i));
+  add('Exam answer',`<div class="eyebrow">Write this in the exam · ${k+1} of ${parts.length}</div><h2>${p.title}</h2><div class="ans">${p.html}</div>${t}`)})})();
+
+// leftover tricks + quick check + finish
+const left=tricks.filter(x=>!x.used);
+if(left.length)add('Remember',`<div class="eyebrow">Remember</div><h2>Say these out loud once</h2>${left.map(trickHTML).join('')}`);
+add('Check',`<div class="eyebrow">Quick check</div><h2>${C.q[0]}</h2><div class="step" style="gap:10px">${C.q[1].map((o,k)=>`<button class="opt" data-k="${k}">${o}</button>`).join('')}</div><p class="fb" id="fb" aria-live="polite"></p>`,el=>{
+ el.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const ok=+b.dataset.k===C.q[2];b.classList.add(ok?'ok':'no');snd(ok?'ding':'err');
+  $('fb').innerHTML=ok?'Correct. '+C.q[3]:'Not this one. Try another.'})});
+add('Done',`<div class="eyebrow">Topic done</div><h1>Nice. ${C.tab} is finished.</h1><p class="lead">${NAV.next?`Next topic: <b>${esc(NAV.next.title)}</b>`:'This was the last topic. Open EXAM-RESCUE from the home page.'}</p><p class="mut">Want it again later? It is in the PDF for this unit too.</p><p class="mut" style="font-size:13px">${esc(C.src||'')}</p>`,()=>{snd('ding');try{localStorage.setItem('sh:done:'+location.pathname.split('/').pop(),'1')}catch(e){}});
+
+// ---- section chips
+const secs=[...new Set(steps.map(s=>s.sec))];
+$('secs').innerHTML=secs.map(s=>`<span data-s="${s}">${s}</span>`).join('');
+
+// ---- player
+let i=0;
+function show(n){i=Math.max(0,Math.min(steps.length-1,n));const s=steps[i],el=$('step');
+ if(s.html!==null)el.innerHTML=s.html;if(s.enter)s.enter(el);
+ $('count').textContent=`${i+1} / ${steps.length}`;$('bar').style.width=((i+1)/steps.length*100)+'%';
+ const si=secs.indexOf(s.sec);$('secs').querySelectorAll('span').forEach((x,k)=>{x.className=k==si?'on':k<si?'done':'';if(k==si)x.scrollIntoView({block:'nearest',inline:'center'})});
+ $('back').disabled=i==0;
+ const nx=$('next');
+ if(i==steps.length-1){nx.textContent=NAV.next?'Next topic →':'Back to all topics';nx.onclick=()=>location.href=NAV.next?NAV.next.href:NAV.home}
+ else{nx.textContent=i==0?'Start →':'Next →';nx.onclick=()=>{if(s.sec!=='Story'&&s.sec!=='Code')snd('tick');show(i+1)}}
+ try{history.replaceState(null,'','#s'+(i+1))}catch(e){}window.scrollTo(0,0);
+ try{localStorage.setItem('sh:last',JSON.stringify({href:location.pathname.split('/').pop(),title:C.tab,step:i}))}catch(e){}}
+$('back').onclick=()=>show(i-1);
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')$('next').click();if(e.key==='ArrowLeft'&&i>0)show(i-1)});
+window.addEventListener('hashchange',()=>{const m=+(location.hash.match(/^#s(\d+)$/)||[])[1];if(m&&m-1!==i)show(m-1)});
+const h=+(location.hash.match(/^#s(\d+)$/)||[])[1];show(h?h-1:0);
 </script></body></html>
