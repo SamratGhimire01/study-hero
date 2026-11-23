@@ -1,0 +1,182 @@
+{
+ "id": "u3.t10.writing-javabeans",
+ "topic": "u3.t10",
+ "kind": "lesson",
+ "title": "Writing JavaBeans",
+ "subtitle": "Writing JavaBeans",
+ "marks": "[5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "The Java Beans API. We know all the parts. Now write and use a complete bean.",
+ "next": "Background. Unit 4: Servlets and JSP (server-side Java).",
+ "actors": {
+  "a0": {
+   "e": "📄",
+   "l": "Class",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "🚪",
+   "l": "Constructor",
+   "x": 30,
+   "y": 62
+  },
+  "a2": {
+   "e": "🔒",
+   "l": "Fields",
+   "x": 50,
+   "y": 52
+  },
+  "a3": {
+   "e": "🔑",
+   "l": "Get/Set",
+   "x": 70,
+   "y": 62
+  },
+  "a4": {
+   "e": "🫙",
+   "l": "JAR",
+   "x": 90,
+   "y": 52
+  }
+ },
+ "scenes": [
+  {
+   "cap": "1. public class … implements Serializable",
+   "sub": "",
+   "show": [
+    "a0"
+   ],
+   "snd": "pop",
+   "glow": "a0"
+  },
+  {
+   "cap": "2. public no-arg constructor",
+   "sub": "",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "tick",
+   "glow": "a1"
+  },
+  {
+   "cap": "3. private fields",
+   "sub": "",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "tick",
+   "glow": "a2"
+  },
+  {
+   "cap": "4. getters and setters",
+   "sub": "(+ events / bound properties if needed)",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "click",
+   "glow": "a3"
+  },
+  {
+   "cap": "5. Compile and package in a JAR",
+   "sub": "Manifest: Java-Bean: True. Load into a builder tool or use in code.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "ding",
+   "glow": "a4"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick (5 steps)",
+   "html": "<b>C</b>ool <b>C</b>ats <b>F</b>ind <b>G</b>ood <b>J</b>am = Class · Constructor · Fields · Get/Set · JAR"
+  }
+ ],
+ "code": {
+  "title": "Program: write and use a bean",
+  "lines": [
+   "public class BeanTest {",
+   "    public static void main(String[] args) {",
+   "        Student s = new Student();",
+   "        s.setName(\"Samrat\");",
+   "        s.setAge(21);",
+   "        System.out.println(s.getName() + \" is \" + s.getAge());",
+   "    }",
+   "}",
+   "",
+   "class Student implements java.io.Serializable {",
+   "    private String name;",
+   "    private int age;",
+   "    public Student() { }",
+   "    public String getName() { return name; }",
+   "    public void setName(String name) { this.name = name; }",
+   "    public int getAge() { return age; }",
+   "    public void setAge(int age) { this.age = age; }",
+   "}"
+  ],
+  "note": "(imports skipped)",
+  "steps": [
+   {
+    "l": [
+     "class Student"
+    ],
+    "say": "The bean: Serializable, no-arg constructor, private fields, get/set.",
+    "snd": "pop",
+    "mem": []
+   },
+   {
+    "l": [
+     "new Student()"
+    ],
+    "say": "Create the bean with the no-arg constructor.",
+    "snd": "pop",
+    "mem": [
+     "s = Student (name=null, age=0)"
+    ]
+   },
+   {
+    "l": [
+     "s.setName",
+     "s.setAge"
+    ],
+    "say": "Set properties only through setters.",
+    "snd": "tick",
+    "mem": [
+     "s.name = Samrat",
+     "s.age = 21"
+    ]
+   },
+   {
+    "l": [
+     "println"
+    ],
+    "say": "Read with getters.",
+    "snd": "ding",
+    "con": "Samrat is 21"
+   }
+  ]
+ },
+ "answer_html": "<h3>Definition</h3><p><b>Writing a JavaBean</b> means creating a reusable class that follows bean rules so tools and programs can use it.</p><h3>Steps</h3><ul><li>Create a <b>public class</b> that implements <b>Serializable</b>.</li><li>Add a <b>public no-arg constructor</b>.</li><li>Make fields <b>private</b>.</li><li>Add <b>getters/setters</b> (and events/bound properties if needed).</li><li>Compile and package into a <b>JAR</b> with manifest entry <code>Java-Bean: True</code>.</li></ul><h3>Example</h3><pre>public class Student implements java.io.Serializable {\n    private String name;\n    private int age;\n    public Student() { }\n    public String getName() { return name; }\n    public void setName(String name) { this.name = name; }\n    public int getAge() { return age; }\n    public void setAge(int age) { this.age = age; }\n}</pre>",
+ "quiz": {
+  "q": "What is step 5 of writing a bean?",
+  "options": [
+   "Add private fields",
+   "Package into a JAR",
+   "Add a constructor"
+  ],
+  "answer": 1,
+  "why": "Cool Cats Find Good Jam."
+ }
+}

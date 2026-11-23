@@ -1,0 +1,143 @@
+{
+ "id": "u5.t03.remote-method-calls",
+ "topic": "u5.t03",
+ "kind": "lesson",
+ "title": "Remote Method Calls",
+ "subtitle": "Remote Method Calls",
+ "marks": "[5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "The Roles of Client and Server. Client calls, server runs. What happens in between?",
+ "next": "Stubs and Parameter Marshalling. Stubs do the packing: marshalling.",
+ "actors": {
+  "a0": {
+   "e": "📞",
+   "l": "Call stub",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "🧳",
+   "l": "Pack",
+   "x": 26,
+   "y": 62
+  },
+  "a2": {
+   "e": "🌐",
+   "l": "Send",
+   "x": 42,
+   "y": 52
+  },
+  "a3": {
+   "e": "📭",
+   "l": "Unpack",
+   "x": 58,
+   "y": 62
+  },
+  "a4": {
+   "e": "⚙️",
+   "l": "Run",
+   "x": 74,
+   "y": 52
+  },
+  "a5": {
+   "e": "↩️",
+   "l": "Return",
+   "x": 90,
+   "y": 62
+  }
+ },
+ "scenes": [
+  {
+   "cap": "Client calls the stub",
+   "sub": "a.add(5, 7) — looks local.",
+   "show": [
+    "a0"
+   ],
+   "snd": "click",
+   "glow": "a0"
+  },
+  {
+   "cap": "Stub packs the arguments",
+   "sub": "Marshalling: method name + 5, 7 → bytes.",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "pop",
+   "glow": "a1"
+  },
+  {
+   "cap": "Sent over the network",
+   "sub": "TCP/IP to the server.",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "whoosh",
+   "glow": "a2"
+  },
+  {
+   "cap": "Server side unpacks",
+   "sub": "Unmarshalling: bytes → 5, 7.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "tick",
+   "glow": "a3"
+  },
+  {
+   "cap": "Real method runs",
+   "sub": "AdderImpl.add(5,7) = 12",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "ding",
+   "glow": "a4"
+  },
+  {
+   "cap": "Result packed and sent back",
+   "sub": "Stub unpacks 12 and returns it (or throws RemoteException).",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4",
+    "a5"
+   ],
+   "snd": "ding",
+   "glow": "a5"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick (6 steps)",
+   "html": "<b>C</b>an <b>P</b>eople <b>S</b>end <b>U</b>nusual <b>R</b>are <b>R</b>ubies = Call stub · Pack · Send · Unpack · Run · Return"
+  },
+  {
+   "label": "Error trick",
+   "html": "<b>E</b>very <b>r</b>emote <b>m</b>ethod <b>t</b>hrows <b>R</b>emoteException"
+  }
+ ],
+ "code": null,
+ "answer_html": "<h3>Definition</h3><p>A <b>remote method call</b> is a call from a client to a method of an object in another JVM. The stub and the server side do all the network work.</p><h3>Steps</h3><ul><li>Client calls a method on the <b>stub</b>.</li><li>Stub <b>marshals</b> (packs) the method ID and parameters.</li><li>Data is sent over the network (TCP/IP).</li><li>Server side (skeleton) <b>unmarshals</b> the parameters.</li><li>The real method runs on the remote object.</li><li>Return value is marshalled back; the stub unmarshals and returns it to the client.</li></ul><h3>Figure</h3><pre>Client → Stub (marshal) → Network → Skeleton (unmarshal) → Remote Object\nClient ← Stub (unmarshal) ← Network ← Skeleton (marshal result) ←</pre>",
+ "quiz": {
+  "q": "What is \"marshalling\"?",
+  "options": [
+   "Finding the object",
+   "Packing parameters into bytes to send",
+   "Starting the registry"
+  ],
+  "answer": 1,
+  "why": "Pack the suitcase."
+ }
+}

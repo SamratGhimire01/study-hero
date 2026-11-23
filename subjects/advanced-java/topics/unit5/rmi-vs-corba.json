@@ -1,0 +1,123 @@
+{
+ "id": "u5.t11.rmi-vs-corba",
+ "topic": "u5.t11",
+ "kind": "lesson",
+ "title": "Comparing RMI with CORBA",
+ "subtitle": "Comparing RMI with CORBA",
+ "marks": "[2.5 / 5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Simple Client/Server Application using RMI. RMI is Java-only. What if programs use different languages?",
+ "next": "End of the syllabus. Go to EXAM-RESCUE and the memory sheets.",
+ "actors": {
+  "j": {
+   "e": "☕",
+   "l": "Java",
+   "x": 15,
+   "y": 30
+  },
+  "c": {
+   "e": "🅲",
+   "l": "C++",
+   "x": 15,
+   "y": 80
+  },
+  "orb": {
+   "e": "🚌",
+   "l": "ORB (bus)",
+   "x": 50,
+   "y": 55
+  },
+  "idl": {
+   "e": "📜",
+   "l": "IDL contract",
+   "x": 50,
+   "y": 20,
+   "h": 1
+  },
+  "py": {
+   "e": "🐍",
+   "l": "Python",
+   "x": 85,
+   "y": 55
+  }
+ },
+ "scenes": [
+  {
+   "cap": "RMI: Java ↔ Java only",
+   "sub": "Both sides must be Java.",
+   "show": [
+    "j"
+   ],
+   "snd": "tick",
+   "glow": "j"
+  },
+  {
+   "cap": "CORBA: many languages",
+   "sub": "Java, C++, Python… can talk to each other.",
+   "show": [
+    "j",
+    "c",
+    "py"
+   ],
+   "snd": "pop"
+  },
+  {
+   "cap": "IDL = common contract 📜",
+   "sub": "Interface Definition Language: every language understands it.",
+   "show": [
+    "j",
+    "c",
+    "py",
+    "idl"
+   ],
+   "snd": "tick",
+   "glow": "idl"
+  },
+  {
+   "cap": "ORB = the bus 🚌",
+   "sub": "Object Request Broker carries requests and replies (protocol IIOP).",
+   "show": [
+    "j",
+    "c",
+    "py",
+    "orb"
+   ],
+   "snd": "whoosh",
+   "glow": "orb"
+  },
+  {
+   "cap": "RMI simpler, CORBA bigger",
+   "sub": "RMI: easy, Java only. CORBA: language-independent, more complex.",
+   "show": [
+    "j",
+    "c",
+    "py",
+    "orb"
+   ],
+   "snd": "ding"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick (CORBA parts)",
+   "html": "<b>I</b> <b>O</b>rder <b>I</b>ce-cream = IDL · ORB · IIOP"
+  },
+  {
+   "label": "Points trick (difference)",
+   "html": "<b>R</b>MI = <b>R</b>eally <b>M</b>y <b>I</b>sland (Java <b>o</b>nly), <b>C</b>ORBA = <b>C</b>an <b>O</b>pen <b>t</b>o <b>R</b>est <b>o</b>f <b>A</b>ll"
+  }
+ ],
+ "code": null,
+ "answer_html": "<h3>Definition</h3><p><b>CORBA (Common Object Request Broker Architecture)</b> is a standard that lets programs written in different languages on different machines talk to each other over a network.</p><h3>CORBA key points</h3><ul><li>Uses <b>IDL</b> (Interface Definition Language) so any language can understand the interface.</li><li>Uses an <b>ORB</b> (Object Request Broker) to pass requests and replies between client and object.</li><li>Works across different languages and operating systems (protocol IIOP).</li></ul><table><tr><th>Point</th><th>RMI</th><th>CORBA</th></tr><tr><td>Language</td><td>Java only</td><td>Any language (C++, Java, Python…)</td></tr><tr><td>Interface</td><td>Java interface</td><td>IDL</td></tr><tr><td>Protocol</td><td>JRMP (or IIOP)</td><td>IIOP</td></tr><tr><td>Complexity</td><td>Simple</td><td>More complex</td></tr><tr><td>Objects passed</td><td>By value (serialization) or reference</td><td>Mostly by reference</td></tr><tr><td>Garbage collection</td><td>Distributed GC</td><td>No distributed GC</td></tr></table>",
+ "quiz": {
+  "q": "What does CORBA use so different languages understand an interface?",
+  "options": [
+   "JSP",
+   "IDL",
+   "JDBC"
+  ],
+  "answer": 1,
+  "why": "I Order Ice-cream: IDL first."
+ }
+}

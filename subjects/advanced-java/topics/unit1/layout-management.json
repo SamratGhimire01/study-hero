@@ -1,0 +1,248 @@
+{
+ "id": "u1.t13.layout-management",
+ "topic": "u1.t13",
+ "kind": "lesson",
+ "title": "Layout Management",
+ "subtitle": "Layout Management",
+ "marks": "[5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Swing and the MVC Design Pattern. We have many components. Where do they sit in the window?",
+ "next": "Basic Swing Components. Now the actual components to place.",
+ "actors": {
+  "a0": {
+   "e": "➡️",
+   "l": "FlowLayout",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "🧭",
+   "l": "BorderLayout",
+   "x": 26,
+   "y": 62
+  },
+  "a2": {
+   "e": "🔢",
+   "l": "GridLayout",
+   "x": 42,
+   "y": 52
+  },
+  "a3": {
+   "e": "🃏",
+   "l": "CardLayout",
+   "x": 58,
+   "y": 62
+  },
+  "a4": {
+   "e": "🧱",
+   "l": "GridBag/Box",
+   "x": 74,
+   "y": 52
+  },
+  "a5": {
+   "e": "🛠️",
+   "l": "setLayout",
+   "x": 90,
+   "y": 62
+  }
+ },
+ "scenes": [
+  {
+   "cap": "FlowLayout",
+   "sub": "Left to right like words in a line; wraps to next line. Default for JPanel.",
+   "show": [
+    "a0"
+   ],
+   "snd": "tick",
+   "glow": "a0"
+  },
+  {
+   "cap": "BorderLayout",
+   "sub": "5 areas: NORTH, SOUTH, EAST, WEST, CENTER. Default for JFrame.",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "pop",
+   "glow": "a1"
+  },
+  {
+   "cap": "GridLayout(rows, cols)",
+   "sub": "Equal-size boxes in a grid, like a calculator.",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "tick",
+   "glow": "a2"
+  },
+  {
+   "cap": "CardLayout",
+   "sub": "Cards on top of each other; one shows at a time.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "tick",
+   "glow": "a3"
+  },
+  {
+   "cap": "GridBagLayout · BoxLayout",
+   "sub": "GridBag = flexible grid; Box = one row or one column.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "tick",
+   "glow": "a4"
+  },
+  {
+   "cap": "setLayout(new …Layout())",
+   "sub": "Pick the layout manager for a container.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4",
+    "a5"
+   ],
+   "snd": "ding",
+   "glow": "a5"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick (layouts)",
+   "html": "<b>F</b>unny <b>B</b>ears <b>G</b>et <b>C</b>ake = FlowLayout · BorderLayout · GridLayout · CardLayout (+ GridBag, Box)"
+  },
+  {
+   "label": "BorderLayout areas",
+   "html": "<b>N</b>ever <b>E</b>at <b>S</b>oggy <b>W</b>affles = North · East · South · West (+ Center)"
+  },
+  {
+   "label": "Defaults",
+   "html": "<b>P</b>anel <b>F</b>lows, <b>F</b>rame <b>B</b>orders = JPanel = FlowLayout, JFrame = BorderLayout"
+  }
+ ],
+ "code": {
+  "title": "Program: BorderLayout with 5 buttons",
+  "lines": [
+   "JFrame f = new JFrame(\"Border\");",
+   "f.setLayout(new BorderLayout());",
+   "f.add(new JButton(\"North\"), BorderLayout.NORTH);",
+   "f.add(new JButton(\"South\"), BorderLayout.SOUTH);",
+   "f.add(new JButton(\"East\"), BorderLayout.EAST);",
+   "f.add(new JButton(\"West\"), BorderLayout.WEST);",
+   "f.add(new JButton(\"Center\"), BorderLayout.CENTER);",
+   "f.setSize(300, 200);",
+   "f.setVisible(true);"
+  ],
+  "note": "(inside main; imports java.awt.*, javax.swing.* skipped)",
+  "steps": [
+   {
+    "l": [
+     "new JFrame"
+    ],
+    "say": "Make a window.",
+    "snd": "tick",
+    "win": {
+     "title": "",
+     "vis": 0,
+     "items": []
+    },
+    "mem": []
+   },
+   {
+    "l": [
+     "setLayout"
+    ],
+    "say": "Choose BorderLayout: 5 areas.",
+    "snd": "pop",
+    "mem": [
+     "layout = BorderLayout"
+    ]
+   },
+   {
+    "l": [
+     "NORTH"
+    ],
+    "say": "Button goes to the top.",
+    "snd": "tick"
+   },
+   {
+    "l": [
+     "SOUTH"
+    ],
+    "say": "Button goes to the bottom.",
+    "snd": "tick"
+   },
+   {
+    "l": [
+     "EAST",
+     "WEST"
+    ],
+    "say": "Right and left sides.",
+    "snd": "tick"
+   },
+   {
+    "l": [
+     "CENTER"
+    ],
+    "say": "Center takes all the space left.",
+    "snd": "tick"
+   },
+   {
+    "l": [
+     "setVisible"
+    ],
+    "say": "Window shows: N top, S bottom, E right, W left, C middle.",
+    "snd": "ding",
+    "win": {
+     "title": "Border",
+     "vis": 1,
+     "items": [
+      {
+       "t": "btn",
+       "v": "North"
+      },
+      {
+       "t": "btn",
+       "v": "West"
+      },
+      {
+       "t": "btn",
+       "v": "Center"
+      },
+      {
+       "t": "btn",
+       "v": "East"
+      },
+      {
+       "t": "btn",
+       "v": "South"
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "answer_html": "<h3>Definition</h3><p>A <b>Layout Manager</b> decides the size and position of components inside a container. It is set with <code>setLayout()</code>.</p><h3>Points</h3><ul><li>Components resize/move automatically when the window size changes.</li><li><code>setLayout(null)</code> = absolute positioning with setBounds().</li></ul><table><tr><th>Layout</th><th>How it arranges</th></tr><tr><td><b>FlowLayout</b></td><td>Left to right in a row, wraps (default for JPanel)</td></tr><tr><td><b>BorderLayout</b></td><td>North, South, East, West, Center (default for JFrame)</td></tr><tr><td><b>GridLayout</b></td><td>Rows × columns of equal cells</td></tr><tr><td><b>CardLayout</b></td><td>Stack of cards, one visible at a time</td></tr><tr><td><b>GridBagLayout</b></td><td>Flexible grid, cells can span rows/cols</td></tr><tr><td><b>BoxLayout</b></td><td>Single row or column</td></tr></table>",
+ "quiz": {
+  "q": "Default layout of JFrame?",
+  "options": [
+   "FlowLayout",
+   "BorderLayout",
+   "GridLayout"
+  ],
+  "answer": 1,
+  "why": "Panel Flows, Frame Borders."
+ }
+}

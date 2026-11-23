@@ -1,3 +1,19 @@
-{"name":"study-hero","version":"0.1.0","private":true,"type":"module","description":"Exam study pipeline: syllabus + topic cards + question papers -> lessons, PDFs, priority answers",
-"scripts":{"validate":"node tools/validate.mjs","build":"node tools/validate.mjs && node tools/build.mjs","pdf":"node tools/pdf.mjs","papers":"node tools/papers.mjs","all":"npm run build && npm run papers && npm run pdf"},
-"devDependencies":{"playwright":"*"}}
+{
+ "name": "study-hero",
+ "version": "0.1.0",
+ "private": true,
+ "type": "module",
+ "description": "Exam study pipeline: syllabus + topic cards + question papers -> lessons, PDFs, priority answers",
+ "scripts": {
+  "validate": "node tools/validate.mjs",
+  "build": "node tools/validate.mjs && node tools/build.mjs",
+  "pdf": "node tools/pdf.mjs",
+  "papers": "node tools/papers.mjs",
+  "all": "npm run build && npm run papers && npm run pdf && node tools/build.mjs",
+  "check:java": "node tools/check-java.mjs",
+  "cards": "for f in subjects/*/src/*.mjs; do node $f; done"
+ },
+ "devDependencies": {
+  "playwright": "*"
+ }
+}

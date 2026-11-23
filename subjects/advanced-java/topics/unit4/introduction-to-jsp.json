@@ -1,0 +1,240 @@
+{
+ "id": "u4.t11.introduction-to-jsp",
+ "topic": "u4.t11",
+ "kind": "lesson",
+ "title": "Introduction to JSP",
+ "subtitle": "Introduction to JSP",
+ "marks": "[5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Session Tracking. Servlets print HTML with println, which is messy.",
+ "next": "Using JSP. Now the JSP tags and objects we use.",
+ "actors": {
+  "a0": {
+   "e": "📄",
+   "l": "JSP",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "🔄",
+   "l": "Translate",
+   "x": 26,
+   "y": 62
+  },
+  "a2": {
+   "e": "⚙️",
+   "l": "Compile",
+   "x": 42,
+   "y": 52
+  },
+  "a3": {
+   "e": "🔧",
+   "l": "jspInit",
+   "x": 58,
+   "y": 62
+  },
+  "a4": {
+   "e": "🔁",
+   "l": "_jspService",
+   "x": 74,
+   "y": 52
+  },
+  "a5": {
+   "e": "🧹",
+   "l": "jspDestroy",
+   "x": 90,
+   "y": 62
+  }
+ },
+ "scenes": [
+  {
+   "cap": "JSP = HTML + small Java",
+   "sub": "hello.jsp: mostly HTML with Java tags inside.",
+   "show": [
+    "a0"
+   ],
+   "snd": "pop",
+   "glow": "a0"
+  },
+  {
+   "cap": "1. Translation",
+   "sub": "Container turns the JSP into a servlet .java file (first request).",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "whoosh",
+   "glow": "a1"
+  },
+  {
+   "cap": "2. Compilation",
+   "sub": ".java → .class",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "tick",
+   "glow": "a2"
+  },
+  {
+   "cap": "3. jspInit()",
+   "sub": "Once.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "tick",
+   "glow": "a3"
+  },
+  {
+   "cap": "4. _jspService()",
+   "sub": "Every request.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "whoosh",
+   "glow": "a4"
+  },
+  {
+   "cap": "5. jspDestroy()",
+   "sub": "Once at the end.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4",
+    "a5"
+   ],
+   "snd": "ding",
+   "glow": "a5"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick",
+   "html": "<b>J</b>SP = <b>H</b>TML <b>w</b>earing <b>a</b> <b>J</b>ava <b>h</b>at"
+  },
+  {
+   "label": "Points trick (life cycle)",
+   "html": "<b>T</b>he <b>C</b>at <b>I</b>s <b>S</b>leeping <b>D</b>eeply = Translate · Compile · jspInit · _jspService · jspDestroy"
+  }
+ ],
+ "code": {
+  "title": "Page: hello.jsp",
+  "lines": [
+   "<html>",
+   "<body>",
+   "  <h2>Hello from JSP</h2>",
+   "  <% int a = 5, b = 7; %>",
+   "  Sum = <%= a + b %><br>",
+   "  Time: <%= new java.util.Date() %>",
+   "</body>",
+   "</html>"
+  ],
+  "note": "(JSP is turned into a servlet automatically)",
+  "steps": [
+   {
+    "l": [
+     "<html>"
+    ],
+    "say": "A normal HTML page saved as hello.jsp.",
+    "snd": "tick",
+    "mem": []
+   },
+   {
+    "l": [
+     "<h2>"
+    ],
+    "say": "Plain HTML goes straight to the browser.",
+    "snd": "tick",
+    "win": {
+     "title": "hello.jsp",
+     "vis": 1,
+     "items": [
+      {
+       "t": "lb",
+       "v": "Hello from JSP"
+      }
+     ]
+    }
+   },
+   {
+    "l": [
+     "<% int a"
+    ],
+    "say": "Scriptlet: Java code runs on the server.",
+    "snd": "pop",
+    "mem": [
+     "a = 5",
+     "b = 7"
+    ]
+   },
+   {
+    "l": [
+     "<%= a + b %>"
+    ],
+    "say": "Expression: value is printed into the page.",
+    "snd": "ding",
+    "win": {
+     "title": "hello.jsp",
+     "vis": 1,
+     "items": [
+      {
+       "t": "lb",
+       "v": "Hello from JSP"
+      },
+      {
+       "t": "lb",
+       "v": "Sum = 12"
+      }
+     ]
+    }
+   },
+   {
+    "l": [
+     "new java.util.Date"
+    ],
+    "say": "Server time is printed.",
+    "snd": "ding",
+    "win": {
+     "title": "hello.jsp",
+     "vis": 1,
+     "items": [
+      {
+       "t": "lb",
+       "v": "Hello from JSP"
+      },
+      {
+       "t": "lb",
+       "v": "Sum = 12"
+      },
+      {
+       "t": "lb",
+       "v": "Time: …"
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "answer_html": "<h3>Definition</h3><p><b>JSP (JavaServer Pages)</b> is a server-side technology to create dynamic web pages by writing Java code inside HTML. Every JSP is converted into a servlet by the container.</p><h3>Features</h3><ul><li>Easy to write the view (HTML) part.</li><li>Automatic compilation; changes do not need manual redeploy.</li><li>Implicit objects (request, response, session, out…).</li><li>Supports tags, JSTL and JavaBeans (&lt;jsp:useBean&gt;).</li></ul><h3>JSP life cycle</h3><pre>hello.jsp → (translate) → hello_jsp.java → (compile) → .class → jspInit() → _jspService() per request → jspDestroy()</pre>",
+ "quiz": {
+  "q": "What does the container turn a JSP into?",
+  "options": [
+   "An applet",
+   "A servlet",
+   "A JavaBean"
+  ],
+  "answer": 1,
+  "why": "The Cat Is Sleeping: Translate first."
+ }
+}

@@ -1,0 +1,119 @@
+{
+ "id": "u4.t07.javax-servlet-http",
+ "topic": "u4.t07",
+ "kind": "lesson",
+ "title": "The javax.servlet.http Package",
+ "subtitle": "The javax.servlet.http Package",
+ "marks": "[5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Reading Servlet Parameters. javax.servlet is general. This package is for HTTP (the web).",
+ "next": "Handling HTTP Requests and Responses. Use these classes to handle GET and POST.",
+ "actors": {
+  "a0": {
+   "e": "🧬",
+   "l": "HttpServlet",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "📨",
+   "l": "Request",
+   "x": 30,
+   "y": 62
+  },
+  "a2": {
+   "e": "📤",
+   "l": "Response",
+   "x": 50,
+   "y": 52
+  },
+  "a3": {
+   "e": "🗂️",
+   "l": "Session",
+   "x": 70,
+   "y": 62
+  },
+  "a4": {
+   "e": "🍪",
+   "l": "Cookie",
+   "x": 90,
+   "y": 52
+  }
+ },
+ "scenes": [
+  {
+   "cap": "HttpServlet",
+   "sub": "Abstract class: doGet, doPost, doPut, doDelete…",
+   "show": [
+    "a0"
+   ],
+   "snd": "pop",
+   "glow": "a0"
+  },
+  {
+   "cap": "HttpServletRequest",
+   "sub": "Headers, cookies, session, method.",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "tick",
+   "glow": "a1"
+  },
+  {
+   "cap": "HttpServletResponse",
+   "sub": "Status, headers, addCookie, sendRedirect.",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "tick",
+   "glow": "a2"
+  },
+  {
+   "cap": "HttpSession",
+   "sub": "Remember a user across requests.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "whoosh",
+   "glow": "a3"
+  },
+  {
+   "cap": "Cookie",
+   "sub": "Small data stored in the browser.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "ding",
+   "glow": "a4"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick (5 types)",
+   "html": "<b>H</b>appy <b>R</b>abbits <b>R</b>un <b>S</b>wiftly <b>C</b>arrying = HttpServlet · Request · Response · Session · Cookie"
+  }
+ ],
+ "code": null,
+ "answer_html": "<h3>Definition</h3><p>The <b>javax.servlet.http</b> package contains classes and interfaces for writing servlets that work with the <b>HTTP</b> protocol.</p><table><tr><th>Type</th><th>Use / key methods</th></tr><tr><td>HttpServlet (class)</td><td>doGet(), doPost(), doPut(), doDelete()</td></tr><tr><td>HttpServletRequest</td><td>getParameter(), getHeader(), getCookies(), getSession(), getMethod()</td></tr><tr><td>HttpServletResponse</td><td>setContentType(), addCookie(), sendRedirect(), setStatus()</td></tr><tr><td>HttpSession</td><td>setAttribute(), getAttribute(), invalidate()</td></tr><tr><td>Cookie (class)</td><td>getName(), getValue(), setMaxAge()</td></tr><tr><td>HttpSessionListener</td><td>Session created/destroyed events</td></tr></table>",
+ "quiz": {
+  "q": "Which method sends the browser to another URL?",
+  "options": [
+   "forward()",
+   "sendRedirect()",
+   "addCookie()"
+  ],
+  "answer": 1,
+  "why": "Response does the redirect."
+ }
+}

@@ -1,0 +1,191 @@
+{
+ "id": "u3.t07.persistence",
+ "topic": "u3.t07",
+ "kind": "lesson",
+ "title": "Persistence",
+ "subtitle": "Persistence",
+ "marks": "[2.5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Bound and Constrained Properties. Beans hold state. Can we save it and load it later?",
+ "next": "Customizers. Builder tools can also edit beans with a customizer.",
+ "actors": {
+  "a0": {
+   "e": "🫘",
+   "l": "Bean",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "📦",
+   "l": "Serializable",
+   "x": 30,
+   "y": 62
+  },
+  "a2": {
+   "e": "📄",
+   "l": "XMLEncoder",
+   "x": 50,
+   "y": 52
+  },
+  "a3": {
+   "e": "🙈",
+   "l": "transient",
+   "x": 70,
+   "y": 62
+  },
+  "a4": {
+   "e": "📥",
+   "l": "Load",
+   "x": 90,
+   "y": 52
+  }
+ },
+ "scenes": [
+  {
+   "cap": "A bean with data",
+   "sub": "name = \"Samrat\", age = 21",
+   "show": [
+    "a0"
+   ],
+   "snd": "pop",
+   "glow": "a0"
+  },
+  {
+   "cap": "Way 1: Serialization",
+   "sub": "ObjectOutputStream writes bytes to a file.",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "whoosh",
+   "glow": "a1"
+  },
+  {
+   "cap": "Way 2: XMLEncoder",
+   "sub": "Writes a readable XML file. Best for long-term storage of beans.",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "whoosh",
+   "glow": "a2"
+  },
+  {
+   "cap": "transient fields are skipped",
+   "sub": "e.g. a password or open connection.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "tick",
+   "glow": "a3"
+  },
+  {
+   "cap": "Load it back",
+   "sub": "ObjectInputStream.readObject() / XMLDecoder.readObject().",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "ding",
+   "glow": "a4"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick",
+   "html": "<b>P</b>ersistence = <b>P</b>ause <b>a</b>nd <b>R</b>esume = save state, load later"
+  },
+  {
+   "label": "Points trick (3 points)",
+   "html": "<b>S</b>weet <b>X</b>mas <b>T</b>reats = Serializable · XMLEncoder/XMLDecoder · transient fields not saved"
+  }
+ ],
+ "code": {
+  "title": "Program: save a bean as XML",
+  "lines": [
+   "public class SaveBean {",
+   "    public static void main(String[] args) throws Exception {",
+   "        Student s = new Student();",
+   "        s.setName(\"Samrat\");",
+   "        XMLEncoder enc = new XMLEncoder(new FileOutputStream(\"student.xml\"));",
+   "        enc.writeObject(s);",
+   "        enc.close();",
+   "    }",
+   "}",
+   "",
+   "class Student implements java.io.Serializable {",
+   "    private String name;",
+   "    private int age;",
+   "    public Student() { }",
+   "    public String getName() { return name; }",
+   "    public void setName(String name) { this.name = name; }",
+   "    public int getAge() { return age; }",
+   "    public void setAge(int age) { this.age = age; }",
+   "}"
+  ],
+  "note": "(imports java.beans.*, java.io.*)",
+  "steps": [
+   {
+    "l": [
+     "new Student()"
+    ],
+    "say": "Make a bean with the no-arg constructor.",
+    "snd": "pop",
+    "mem": [
+     "s = Student"
+    ]
+   },
+   {
+    "l": [
+     "s.setName"
+    ],
+    "say": "Set its property.",
+    "snd": "tick",
+    "mem": [
+     "s.name = Samrat"
+    ]
+   },
+   {
+    "l": [
+     "new XMLEncoder"
+    ],
+    "say": "Open an XML encoder to a file.",
+    "snd": "tick"
+   },
+   {
+    "l": [
+     "enc.writeObject"
+    ],
+    "say": "Writes the bean’s properties as XML.",
+    "snd": "whoosh",
+    "con": "student.xml: <string>Samrat</string> …"
+   },
+   {
+    "l": [
+     "enc.close"
+    ],
+    "say": "Save and close.",
+    "snd": "ding"
+   }
+  ]
+ },
+ "answer_html": "<h3>Definition</h3><p><b>Persistence</b> is the ability of a bean to save its state (property values) and restore it later.</p><h3>Key points</h3><ul><li>By <b>Serialization</b>: bean implements Serializable; save with ObjectOutputStream, load with ObjectInputStream.</li><li>By <b>XMLEncoder / XMLDecoder</b>: saves bean properties as XML (long-term persistence).</li><li><b>transient</b> fields are not saved.</li><li>Builder tools use persistence to store a designed GUI.</li></ul>",
+ "quiz": {
+  "q": "Which keyword stops a field from being saved?",
+  "options": [
+   "static",
+   "transient",
+   "private"
+  ],
+  "answer": 1,
+  "why": "Sweet Xmas Treats: T = transient."
+ }
+}

@@ -1,0 +1,93 @@
+{
+ "id": "u4.t13.jsp-vs-servlet",
+ "topic": "u4.t13",
+ "kind": "lesson",
+ "title": "Comparing JSP with Servlet",
+ "subtitle": "Comparing JSP with Servlet",
+ "marks": "[3]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Using JSP. We know both servlets and JSP.",
+ "next": "Java Web Frameworks. Big apps use frameworks built on these.",
+ "actors": {
+  "sv": {
+   "e": "🧑‍🍳",
+   "l": "Servlet (cook: logic)",
+   "x": 25,
+   "y": 55
+  },
+  "jsp": {
+   "e": "🧑‍🎨",
+   "l": "JSP (waiter: view)",
+   "x": 75,
+   "y": 55
+  }
+ },
+ "scenes": [
+  {
+   "cap": "Two workers in one web app",
+   "sub": "Both run on the server and become servlets in the end.",
+   "show": [
+    "sv",
+    "jsp"
+   ],
+   "snd": "pop"
+  },
+  {
+   "cap": "Servlet = Java with HTML inside",
+   "sub": "out.println(\"<h1>…\") – good for logic, bad for big pages.",
+   "show": [
+    "sv",
+    "jsp"
+   ],
+   "snd": "tick",
+   "glow": "sv",
+   "say": {
+    "sv": "logic"
+   }
+  },
+  {
+   "cap": "JSP = HTML with Java inside",
+   "sub": "Easy to design pages; has implicit objects.",
+   "show": [
+    "sv",
+    "jsp"
+   ],
+   "snd": "tick",
+   "glow": "jsp",
+   "say": {
+    "jsp": "view"
+   }
+  },
+  {
+   "cap": "Best: use both (MVC)",
+   "sub": "Servlet = controller, JSP = view.",
+   "show": [
+    "sv",
+    "jsp"
+   ],
+   "snd": "ding"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick",
+   "html": "<b>S</b>ervlet <b>C</b>ooks, <b>J</b>SP <b>S</b>erves = servlet = logic/controller, JSP = view"
+  },
+  {
+   "label": "Points trick (5 differences)",
+   "html": "<b>S</b>mart <b>R</b>abbits <b>C</b>an <b>D</b>ance <b>I</b>nside = Style · Role · Compilation · Design · Implicit objects"
+  }
+ ],
+ "code": null,
+ "answer_html": "<h3>Definition</h3><p>A <b>Servlet</b> is a server-side Java class that handles requests and builds responses in Java code, while <b>JSP</b> is an HTML page with embedded Java tags that turns into a servlet behind the scenes.</p><table><tr><th>Point</th><th>Servlet</th><th>JSP</th></tr><tr><td>1. Writing style</td><td>Prints HTML inside Java (out.println)</td><td>Puts Java tags inside HTML</td></tr><tr><td>2. Role</td><td>Request routing and business logic</td><td>Designs and displays the UI (view)</td></tr><tr><td>3. Compilation</td><td>Compiled directly to .class</td><td>Translated to a servlet, then compiled by container</td></tr><tr><td>4. Page design</td><td>Hard; UI changes need Java edits</td><td>Easy; front-end work is cleaner</td></tr><tr><td>5. Implicit objects</td><td>Get request, response, session via parameters/calls</td><td>Built-in implicit objects (request, response, session, out)</td></tr></table>",
+ "quiz": {
+  "q": "Which is better for designing a big HTML page?",
+  "options": [
+   "Servlet",
+   "JSP"
+  ],
+  "answer": 1,
+  "why": "Servlet Cooks, JSP Serves."
+ }
+}

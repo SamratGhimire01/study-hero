@@ -1,0 +1,192 @@
+{
+ "id": "u1.t07.displaying-images",
+ "topic": "u1.t07",
+ "kind": "lesson",
+ "title": "Displaying Images",
+ "subtitle": "Displaying Images",
+ "marks": "[2.5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Using Special Fonts for Text. We can draw text and shapes. Now we show pictures.",
+ "next": "Event Handling Basics. Our window looks good. Next: make it react to the user.",
+ "actors": {
+  "a0": {
+   "e": "📁",
+   "l": "File",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "📥",
+   "l": "ImageIO.read",
+   "x": 30,
+   "y": 62
+  },
+  "a2": {
+   "e": "🖌️",
+   "l": "paintComponent",
+   "x": 50,
+   "y": 52
+  },
+  "a3": {
+   "e": "🖼️",
+   "l": "drawImage",
+   "x": 70,
+   "y": 62
+  },
+  "a4": {
+   "e": "🏷️",
+   "l": "JLabel",
+   "x": 90,
+   "y": 52
+  }
+ },
+ "scenes": [
+  {
+   "cap": "Picture file",
+   "sub": "JPG, PNG or GIF on disk or from a URL.",
+   "show": [
+    "a0"
+   ],
+   "snd": "pop",
+   "glow": "a0"
+  },
+  {
+   "cap": "Load it",
+   "sub": "Image img = ImageIO.read(new File(\"cat.jpg\")); (or new ImageIcon(\"cat.jpg\"))",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "whoosh",
+   "glow": "a1"
+  },
+  {
+   "cap": "Java calls paintComponent",
+   "sub": "Inside it we draw the image.",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "tick",
+   "glow": "a2"
+  },
+  {
+   "cap": "g.drawImage(img, x, y, null)",
+   "sub": "The picture appears at x, y.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "ding",
+   "glow": "a3"
+  },
+  {
+   "cap": "Easy way",
+   "sub": "new JLabel(new ImageIcon(\"cat.jpg\")) shows a picture with no drawing code.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "pop",
+   "glow": "a4"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick",
+   "html": "<b>L</b>oad <b>T</b>hen <b>D</b>raw = ImageIO.read() → g.drawImage()"
+  },
+  {
+   "label": "Points trick (formats)",
+   "html": "<b>J</b>ust <b>P</b>retty <b>G</b>raphics = JPG · PNG · GIF"
+  }
+ ],
+ "code": {
+  "title": "Program: show an image",
+  "lines": [
+   "class ImagePanel extends JPanel {",
+   "    private Image img;",
+   "    ImagePanel() throws IOException {",
+   "        img = ImageIO.read(new File(\"cat.jpg\"));",
+   "    }",
+   "    protected void paintComponent(Graphics g) {",
+   "        super.paintComponent(g);",
+   "        g.drawImage(img, 20, 20, null);",
+   "    }",
+   "}"
+  ],
+  "note": "(imports java.awt.*, java.io.*, javax.imageio.*, javax.swing.* skipped)",
+  "steps": [
+   {
+    "l": [
+     "ImagePanel()"
+    ],
+    "say": "Constructor runs when the panel is made.",
+    "snd": "tick",
+    "win": {
+     "title": "Image",
+     "vis": 0,
+     "items": []
+    },
+    "mem": []
+   },
+   {
+    "l": [
+     "ImageIO.read"
+    ],
+    "say": "Load cat.jpg from disk into memory. (May throw IOException.)",
+    "snd": "whoosh",
+    "mem": [
+     "img = cat.jpg (loaded)"
+    ]
+   },
+   {
+    "l": [
+     "protected void paintComponent"
+    ],
+    "say": "Window opens → Java calls paintComponent.",
+    "snd": "whoosh",
+    "win": {
+     "title": "Image",
+     "vis": 1,
+     "items": []
+    }
+   },
+   {
+    "l": [
+     "g.drawImage"
+    ],
+    "say": "Draw the picture at x=20, y=20.",
+    "snd": "ding",
+    "win": {
+     "title": "Image",
+     "vis": 1,
+     "items": [
+      {
+       "t": "lb",
+       "v": "🐱 (cat.jpg)"
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "answer_html": "<h3>Definition</h3><p>Java can display images (JPG, PNG, GIF) by loading them with <b>ImageIO.read()</b> or <b>ImageIcon</b> and drawing them with <b>drawImage()</b>.</p><h3>Key points</h3><ul><li>Load: <code>Image img = ImageIO.read(new File(\"cat.jpg\"));</code></li><li>Draw in paintComponent: <code>g.drawImage(img, x, y, null);</code></li><li>Easy way: <code>new JLabel(new ImageIcon(\"cat.jpg\"))</code>.</li><li>Can scale: <code>g.drawImage(img, x, y, width, height, null)</code>.</li></ul>",
+ "quiz": {
+  "q": "Which method draws a picture?",
+  "options": [
+   "drawString()",
+   "drawImage()",
+   "setIcon()"
+  ],
+  "answer": 1,
+  "why": "Load Then Draw."
+ }
+}

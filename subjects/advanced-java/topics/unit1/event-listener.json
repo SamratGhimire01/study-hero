@@ -5,38 +5,38 @@
  "title": "Event Listener",
  "subtitle": "Event handling & listeners",
  "marks": "[3+2]",
- "confidence": "draft – check against textbook",
+ "confidence": "draft \u2013 check against textbook",
  "source": "Owner-provided exam answers (2026-11-23) + Core Java Vol II / Java docs",
- "last": "We can make a window (Frame) and put a button in it. But clicking does nothing yet.",
- "next": "KeyEvent – one kind of event (keyboard). Same idea: Source → Event → Listener.",
+ "last": "Event Classes (KeyEvent). We know events; now the listeners that receive them.",
+ "next": "Mouse Min/Max program, then Adapter classes.",
  "actors": {
   "kid": {
-   "e": "🧑",
+   "e": "\ud83e\uddd1",
    "l": "Student",
    "x": 12,
    "y": 55
   },
   "btn": {
-   "e": "🔔",
+   "e": "\ud83d\udd14",
    "l": "Button",
    "x": 30,
    "y": 55
   },
   "slip": {
-   "e": "📩",
+   "e": "\ud83d\udce9",
    "l": "Event object",
    "x": 30,
    "y": 55,
    "h": 1
   },
   "wait": {
-   "e": "🧑‍🍳",
+   "e": "\ud83e\uddd1\u200d\ud83c\udf73",
    "l": "Listener",
    "x": 75,
    "y": 55
   },
   "work": {
-   "e": "🍲",
+   "e": "\ud83c\udf72",
    "l": "Your code runs",
    "x": 90,
    "y": 55,
@@ -45,7 +45,7 @@
  },
  "scenes": [
   {
-   "cap": "A button is just sitting there 🔔",
+   "cap": "A button is just sitting there \ud83d\udd14",
    "sub": "In a Java window, a button waits. Nothing happens by itself.",
    "show": [
     "kid",
@@ -57,7 +57,7 @@
    "snd": "pop"
   },
   {
-   "cap": "Someone must WATCH the button 👀",
+   "cap": "Someone must WATCH the button \ud83d\udc40",
    "sub": "This watcher is the Event Listener. It registers: \"tell me if it is clicked\".",
    "show": [
     "kid",
@@ -71,7 +71,7 @@
    "snd": "tick"
   },
   {
-   "cap": "Student clicks the button 👆",
+   "cap": "Student clicks the button \ud83d\udc46",
    "sub": "The click is the EVENT.",
    "show": [
     "kid",
@@ -91,7 +91,7 @@
    "snd": "click"
   },
   {
-   "cap": "Button makes an Event object 📩",
+   "cap": "Button makes an Event object \ud83d\udce9",
    "sub": "It holds details: who clicked, what happened.",
    "show": [
     "kid",
@@ -103,8 +103,8 @@
    "snd": "pop"
   },
   {
-   "cap": "Event object goes to the Listener ➡️",
-   "sub": "This is the Delegation Event Model: Source → Event → Listener.",
+   "cap": "Event object goes to the Listener \u27a1\ufe0f",
+   "sub": "This is the Delegation Event Model: Source \u2192 Event \u2192 Listener.",
    "show": [
     "kid",
     "btn",
@@ -121,7 +121,7 @@
    "snd": "whoosh"
   },
   {
-   "cap": "Listener runs your code 🍲",
+   "cap": "Listener runs your code \ud83c\udf72",
    "sub": "The method runs automatically: actionPerformed().",
    "show": [
     "kid",
@@ -139,7 +139,7 @@
  "mnemonics": [
   {
    "label": "Flow:",
-   "html": "<b>S</b>ome <b>E</b>lephants <b>L</b>isten = <b>S</b>ource → <b>E</b>vent → <b>L</b>istener"
+   "html": "<b>S</b>ome <b>E</b>lephants <b>L</b>isten = <b>S</b>ource \u2192 <b>E</b>vent \u2192 <b>L</b>istener"
   },
   {
    "label": "List of 6 listeners:",
@@ -208,10 +208,10 @@
     "l": [
      "b.addActionListener(this)"
     ],
-    "say": "REGISTER: tell the button \"when you are clicked, call ME (this)\". This is the link Source → Listener!",
+    "say": "REGISTER: tell the button \"when you are clicked, call ME (this)\". This is the link Source \u2192 Listener!",
     "mem": [
      "b = JButton \"Click me\"",
-     "b ➜ will notify: this (Demo)"
+     "b \u279c will notify: this (Demo)"
     ],
     "snd": "click"
    },
@@ -237,7 +237,7 @@
     "l": [
      "actionPerformed"
     ],
-    "user": "👆 You click the button",
+    "user": "\ud83d\udc46 You click the button",
     "say": "Java makes an ActionEvent (e) and AUTOMATICALLY calls actionPerformed(e). You never call it yourself.",
     "mem": [
      "e = ActionEvent (source: b)"
@@ -248,13 +248,13 @@
     "l": [
      "System.out.println"
     ],
-    "say": "Your code runs → prints Clicked!",
+    "say": "Your code runs \u2192 prints Clicked!",
     "con": "Clicked!",
     "snd": "ding"
    }
   ]
  },
- "answer_html": "<h3>Definition</h3><p>An <b>Event Listener</b> is a Java interface (in <code>java.awt.event</code> or <code>javax.swing.event</code>) that listens for an event on a GUI component and runs code to respond to it.</p>\n<h3>Role of Event Listener</h3><ul><li>Connects the Event Source (like a button) to the response code.</li><li>Provides methods that run automatically when a specific event occurs.</li><li>Keeps UI design separate from event logic so code stays neat and easy to update.</li></ul>\n<h3>Figure – Delegation Event Model</h3><pre>[Event Source (Button)] ---> [Event Object] ---> [Event Listener (Handler Code)]</pre>\n<h3>Different Event Listeners in Java</h3><table><tr><th>Listener</th><th>Used for</th></tr><tr><td>ActionListener</td><td>button click, menu click, pressing Enter in a text box</td></tr><tr><td>MouseListener</td><td>mouse press, release, click, enter, exit</td></tr><tr><td>MouseMotionListener</td><td>moving or dragging the mouse</td></tr><tr><td>KeyListener</td><td>pressing, releasing, or typing a key</td></tr><tr><td>ItemListener</td><td>checkbox, radio button, dropdown item</td></tr><tr><td>WindowListener</td><td>opening, closing, minimizing, restoring a window</td></tr></table>",
+ "answer_html": "<h3>Definition</h3><p>An <b>Event Listener</b> is a Java interface (in <code>java.awt.event</code> or <code>javax.swing.event</code>) that listens for an event on a GUI component and runs code to respond to it.</p>\n<h3>Role of Event Listener</h3><ul><li>Connects the Event Source (like a button) to the response code.</li><li>Provides methods that run automatically when a specific event occurs.</li><li>Keeps UI design separate from event logic so code stays neat and easy to update.</li></ul>\n<h3>Figure \u2013 Delegation Event Model</h3><pre>[Event Source (Button)] ---> [Event Object] ---> [Event Listener (Handler Code)]</pre>\n<h3>Different Event Listeners in Java</h3><table><tr><th>Listener</th><th>Used for</th></tr><tr><td>ActionListener</td><td>button click, menu click, pressing Enter in a text box</td></tr><tr><td>MouseListener</td><td>mouse press, release, click, enter, exit</td></tr><tr><td>MouseMotionListener</td><td>moving or dragging the mouse</td></tr><tr><td>KeyListener</td><td>pressing, releasing, or typing a key</td></tr><tr><td>ItemListener</td><td>checkbox, radio button, dropdown item</td></tr><tr><td>WindowListener</td><td>opening, closing, minimizing, restoring a window</td></tr></table>",
  "quiz": {
   "q": "Which listener handles a button click?",
   "options": [
@@ -263,6 +263,6 @@
    "WindowListener"
   ],
   "answer": 1,
-  "why": "A = Action = Button (A Mad Mouse…)."
+  "why": "A = Action = Button (A Mad Mouse\u2026)."
  }
 }

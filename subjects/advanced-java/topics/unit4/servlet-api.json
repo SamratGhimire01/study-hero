@@ -1,0 +1,86 @@
+{
+ "id": "u4.t04.servlet-api",
+ "topic": "u4.t04",
+ "kind": "lesson",
+ "title": "The Servlet API",
+ "subtitle": "The Servlet API",
+ "marks": "[2.5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "A Simple Servlet. We used HttpServlet, request and response. Where do they come from?",
+ "next": "The javax.servlet Package. Look inside package 1: javax.servlet.",
+ "actors": {
+  "a0": {
+   "e": "📦",
+   "l": "javax.servlet",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "🌐",
+   "l": "javax.servlet.http",
+   "x": 50,
+   "y": 62
+  },
+  "a2": {
+   "e": "🧬",
+   "l": "Hierarchy",
+   "x": 90,
+   "y": 52
+  }
+ },
+ "scenes": [
+  {
+   "cap": "Package 1: javax.servlet",
+   "sub": "General classes for ANY protocol: Servlet, GenericServlet, ServletRequest…",
+   "show": [
+    "a0"
+   ],
+   "snd": "pop",
+   "glow": "a0"
+  },
+  {
+   "cap": "Package 2: javax.servlet.http",
+   "sub": "HTTP-only: HttpServlet, HttpServletRequest, HttpSession, Cookie…",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "whoosh",
+   "glow": "a1"
+  },
+  {
+   "cap": "Servlet ← GenericServlet ← HttpServlet ← YourServlet",
+   "sub": "We always extend HttpServlet.",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "ding",
+   "glow": "a2"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick",
+   "html": "<b>T</b>wo <b>B</b>oxes: <b>G</b>eneral <b>a</b>nd <b>H</b>TTP = javax.servlet + javax.servlet.http"
+  },
+  {
+   "label": "Hierarchy trick",
+   "html": "<b>S</b>ome <b>G</b>ood <b>H</b>ens <b>Y</b>awn = Servlet → GenericServlet → HttpServlet → Your servlet"
+  }
+ ],
+ "code": null,
+ "answer_html": "<h3>Definition</h3><p>The <b>Servlet API</b> is the set of interfaces and classes used to write servlets. It has two main packages: <b>javax.servlet</b> and <b>javax.servlet.http</b> (jakarta.servlet in new versions).</p><h3>Hierarchy</h3><pre>Servlet (interface)\n   ↑ implements\nGenericServlet (abstract class)\n   ↑ extends\nHttpServlet (abstract class)\n   ↑ extends\nMyServlet</pre><table><tr><th>Package</th><th>Main types</th></tr><tr><td>javax.servlet</td><td>Servlet, GenericServlet, ServletRequest, ServletResponse, ServletConfig, ServletContext, RequestDispatcher, ServletException</td></tr><tr><td>javax.servlet.http</td><td>HttpServlet, HttpServletRequest, HttpServletResponse, HttpSession, Cookie</td></tr></table>",
+ "quiz": {
+  "q": "Which class do we usually extend?",
+  "options": [
+   "Servlet",
+   "GenericServlet",
+   "HttpServlet"
+  ],
+  "answer": 2,
+  "why": "Some Good Hens Yawn."
+ }
+}

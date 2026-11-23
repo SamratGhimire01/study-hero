@@ -1,0 +1,10 @@
+# Unit 3 story: JavaBeans (hero: Mo the Mad Mouse)
+
+1. Mo finds a magic **bean** at a gate: **No Private Gate Shuts**, and **Real Easy Pets Eat Tasty Pies** behind it. *(No-arg constructor, Private fields, Getters/setters, Serializable · Reusable, Encapsulation, Persistence, Events, Tool support, Portable)*
+2. A doctor X-rays the bean and says **Please Meet Everyone**, then reads its **Get Set Is** name tag. *(Introspection finds Properties, Methods, Events · getX, setX, isX)*
+3. The bean shows its ID card: **Please Meet Every Bean In** town. *(BeanInfo: Property, Method, EventSet, Bean descriptors, Icon)*
+4. The bean's price changes. A loudspeaker shouts it **after** (Bound = Behind), and a guard with a red sign **can stop** it (Constrained = Can stop). *(PropertyChangeListener · VetoableChangeListener → PropertyVetoException)*
+5. Mo saves the bean with **Sweet Xmas Treats**, **Penguins Sell Bananas** to dress it, and **Cool Cats Find Good Jam** to pack it in a jar. *(Serializable, XMLEncoder, transient · Panel, setObject, BeanDescriptor · Class, Constructor, Fields, Get/Set, JAR)*
+
+## Video prompt (paste into any AI video tool)
+Funny colorful 3D cartoon, 50 seconds, no talking, upbeat music, big captions. Hero: Mo, a small angry-cute mouse, in every scene. 1) Mo finds a glowing magic bean at a gate that never shuts; pets eat tasty pies behind it. Captions "No Private Gate Shuts", "Real Easy Pets Eat Tasty Pies". 2) A doctor X-rays the bean; the bean wears a name tag "Get Set Is". Caption "Please Meet Everyone". 3) The bean shows an ID card to the whole town. Caption "Please Meet Every Bean In". 4) A price tag changes; a loudspeaker shouts afterwards, while a guard holds a big red STOP sign before the change. Captions "Bound = Behind", "Constrained = Can stop". 5) Mo wraps the bean in Christmas paper, penguins sell bananas, cats put jam and the bean in a jar. Captions "Sweet Xmas Treats", "Penguins Sell Bananas", "Cool Cats Find Good Jam". End with all captions for 5 seconds.

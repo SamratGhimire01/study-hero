@@ -1,0 +1,210 @@
+{
+ "id": "u2.t07.scrollable-updatable-resultset",
+ "topic": "u2.t07",
+ "kind": "lesson",
+ "title": "Scrollable and Updatable Result Sets",
+ "subtitle": "Scrollable and Updatable Result Sets",
+ "marks": "[5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Query Execution. Normal ResultSet only moves forward and is read-only.",
+ "next": "Row Sets. RowSet: a ResultSet that is easier and can work offline.",
+ "actors": {
+  "a0": {
+   "e": "➡️",
+   "l": "FORWARD_ONLY",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "🔃",
+   "l": "SCROLL",
+   "x": 30,
+   "y": 62
+  },
+  "a2": {
+   "e": "🧭",
+   "l": "Move",
+   "x": 50,
+   "y": 52
+  },
+  "a3": {
+   "e": "✏️",
+   "l": "UPDATABLE",
+   "x": 70,
+   "y": 62
+  },
+  "a4": {
+   "e": "💾",
+   "l": "updateRow",
+   "x": 90,
+   "y": 52
+  }
+ },
+ "scenes": [
+  {
+   "cap": "Default: forward only",
+   "sub": "Can only call next(). Read-only.",
+   "show": [
+    "a0"
+   ],
+   "snd": "tick",
+   "glow": "a0"
+  },
+  {
+   "cap": "TYPE_SCROLL_INSENSITIVE / SENSITIVE",
+   "sub": "Move anywhere. Sensitive also sees others’ changes.",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "whoosh",
+   "glow": "a1"
+  },
+  {
+   "cap": "Move anywhere",
+   "sub": "previous(), first(), last(), absolute(3), relative(-1).",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "click",
+   "glow": "a2"
+  },
+  {
+   "cap": "CONCUR_UPDATABLE",
+   "sub": "Change rows from Java.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "pop",
+   "glow": "a3"
+  },
+  {
+   "cap": "rs.updateDouble(…) then rs.updateRow()",
+   "sub": "Change value in memory, then save to DB.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "ding",
+   "glow": "a4"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick (types)",
+   "html": "<b>F</b>ish <b>I</b>n <b>S</b>ea = FORWARD_ONLY · SCROLL_INSENSITIVE · SCROLL_SENSITIVE"
+  },
+  {
+   "label": "Points trick (move methods)",
+   "html": "<b>N</b>ice <b>P</b>eople <b>F</b>ind <b>L</b>ost <b>A</b>nimals <b>R</b>arely = next · previous · first · last · absolute · relative"
+  },
+  {
+   "label": "Update trick",
+   "html": "<b>C</b>hange <b>T</b>hen <b>S</b>ave = updateXxx() then updateRow() (insertRow / deleteRow too)"
+  }
+ ],
+ "code": {
+  "title": "Program: scroll and update",
+  "lines": [
+   "Statement st = con.createStatement(",
+   "    ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);",
+   "ResultSet rs = st.executeQuery(\"SELECT ItemID, Name, UnitPrice FROM Item\");",
+   "rs.last();",
+   "System.out.println(\"Last item: \" + rs.getString(\"Name\"));",
+   "rs.absolute(1);",
+   "rs.updateDouble(\"UnitPrice\", 20.0);",
+   "rs.updateRow();"
+  ],
+  "note": "(con already connected)",
+  "steps": [
+   {
+    "l": [
+     "createStatement"
+    ],
+    "say": "Ask for a SCROLLABLE and UPDATABLE ResultSet.",
+    "snd": "pop",
+    "mem": [
+     "type = SCROLL_INSENSITIVE",
+     "concurrency = UPDATABLE"
+    ]
+   },
+   {
+    "l": [
+     "executeQuery"
+    ],
+    "say": "Run the SELECT.",
+    "snd": "whoosh",
+    "mem": [
+     "rs = 3 rows",
+     "cursor: before 1"
+    ]
+   },
+   {
+    "l": [
+     "rs.last()"
+    ],
+    "say": "Jump straight to the last row (not possible with forward-only).",
+    "snd": "click",
+    "mem": [
+     "cursor: row 3"
+    ]
+   },
+   {
+    "l": [
+     "println"
+    ],
+    "say": "Print it.",
+    "snd": "ding",
+    "con": "Last item: Eraser"
+   },
+   {
+    "l": [
+     "rs.absolute(1)"
+    ],
+    "say": "Jump to row 1.",
+    "snd": "click",
+    "mem": [
+     "cursor: row 1 (Pen, 15.0)"
+    ]
+   },
+   {
+    "l": [
+     "updateDouble"
+    ],
+    "say": "Change price in the ResultSet (memory only).",
+    "snd": "tick",
+    "mem": [
+     "cursor: row 1 (Pen, 20.0*)"
+    ]
+   },
+   {
+    "l": [
+     "rs.updateRow()"
+    ],
+    "say": "Save the change to the database.",
+    "snd": "ding",
+    "con": "DB: Pen price = 20.0"
+   }
+  ]
+ },
+ "answer_html": "<h3>Definition</h3><p>A <b>scrollable ResultSet</b> lets the cursor move forward, backward or jump to any row. An <b>updatable ResultSet</b> lets us change database rows through the ResultSet.</p><h3>ResultSet types</h3><ul><li><b>TYPE_FORWARD_ONLY</b> (default): only next().</li><li><b>TYPE_SCROLL_INSENSITIVE</b>: scroll; does not see changes by others.</li><li><b>TYPE_SCROLL_SENSITIVE</b>: scroll; sees changes by others.</li></ul><table><tr><th>Concurrency</th><th>Meaning</th></tr><tr><td>CONCUR_READ_ONLY</td><td>Cannot change (default)</td></tr><tr><td>CONCUR_UPDATABLE</td><td>Can update, insert, delete rows</td></tr></table><h3>Methods</h3><ul><li>Move: next(), previous(), first(), last(), absolute(n), relative(n), beforeFirst(), afterLast()</li><li>Update: updateXxx(col, value) → updateRow(); moveToInsertRow() → insertRow(); deleteRow()</li></ul><h3>Create</h3><pre>Statement st = con.createStatement(\n  ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);</pre>",
+ "quiz": {
+  "q": "Which method saves an updated row to the database?",
+  "options": [
+   "updateDouble()",
+   "updateRow()",
+   "absolute()"
+  ],
+  "answer": 1,
+  "why": "Change Then Save."
+ }
+}

@@ -50,3 +50,7 @@ code{background:var(--bg);padding:1px 5px;border-radius:4px;font-size:.9em}
 .mem{font:13px ui-monospace,Menlo,monospace;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 8px;min-height:44px}
 .con{font:13px ui-monospace,monospace;background:#000;color:#4ade80;border-radius:6px;padding:4px 8px;min-height:28px}
 .hint{font-size:13px;color:var(--mut)}
+/* mobile: never scroll sideways */
+.card{min-width:0;overflow-wrap:anywhere}.tr>*{min-width:0}td,th,code,.mn big,.link{overflow-wrap:anywhere;word-break:break-word}
+pre{max-width:100%}table{table-layout:auto}
+.b{white-space:nowrap;font-size:clamp(11px,3.2vw,14px)}

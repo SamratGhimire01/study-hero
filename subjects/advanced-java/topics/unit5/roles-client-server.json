@@ -1,0 +1,122 @@
+{
+ "id": "u5.t02.roles-client-server",
+ "topic": "u5.t02",
+ "kind": "lesson",
+ "title": "The Roles of Client and Server",
+ "subtitle": "The Roles of Client and Server",
+ "marks": "[2.5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "What is RMI?. RMI has two sides.",
+ "next": "Remote Method Calls. How does one remote call actually travel?",
+ "actors": {
+  "a0": {
+   "e": "🏗️",
+   "l": "Create",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "📤",
+   "l": "Export",
+   "x": 30,
+   "y": 62
+  },
+  "a2": {
+   "e": "📒",
+   "l": "Register",
+   "x": 50,
+   "y": 52
+  },
+  "a3": {
+   "e": "🔎",
+   "l": "Lookup",
+   "x": 70,
+   "y": 62
+  },
+  "a4": {
+   "e": "📞",
+   "l": "Call",
+   "x": 90,
+   "y": 52
+  }
+ },
+ "scenes": [
+  {
+   "cap": "Server: create remote object",
+   "sub": "new AdderImpl()",
+   "show": [
+    "a0"
+   ],
+   "snd": "pop",
+   "glow": "a0"
+  },
+  {
+   "cap": "Server: export it",
+   "sub": "extends UnicastRemoteObject (ready to receive calls).",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "tick",
+   "glow": "a1"
+  },
+  {
+   "cap": "Server: register a name",
+   "sub": "registry.rebind(\"adder\", obj)",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "click",
+   "glow": "a2"
+  },
+  {
+   "cap": "Client: look it up",
+   "sub": "registry.lookup(\"adder\") → gets a stub",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "whoosh",
+   "glow": "a3"
+  },
+  {
+   "cap": "Client: call methods",
+   "sub": "stub.add(5,7) → result 12",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "ding",
+   "glow": "a4"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Server trick",
+   "html": "<b>C</b>ows <b>E</b>at <b>R</b>oses = Create · Export · Register"
+  },
+  {
+   "label": "Client trick",
+   "html": "<b>L</b>ook <b>t</b>hen <b>C</b>all = lookup() then call the method"
+  }
+ ],
+ "code": null,
+ "answer_html": "<h3>Definition</h3><p>In RMI, the <b>server</b> creates and offers a remote object, and the <b>client</b> finds that object and calls its methods.</p><table><tr><th>Server role</th><th>Client role</th></tr><tr><td>Creates the remote object</td><td>Looks up the object in the RMI registry</td></tr><tr><td>Exports it (UnicastRemoteObject)</td><td>Gets a stub (proxy) for it</td></tr><tr><td>Registers it with a name (bind/rebind)</td><td>Calls remote methods on the stub</td></tr><tr><td>Waits for calls and runs methods</td><td>Receives results or RemoteException</td></tr></table>",
+ "quiz": {
+  "q": "Who registers the object in the registry?",
+  "options": [
+   "Client",
+   "Server"
+  ],
+  "answer": 1,
+  "why": "Cows Eat Roses: Register = server."
+ }
+}

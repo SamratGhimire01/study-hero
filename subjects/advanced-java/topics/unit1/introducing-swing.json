@@ -1,0 +1,231 @@
+{
+ "id": "u1.t01.introducing-swing",
+ "topic": "u1.t01",
+ "kind": "lesson",
+ "title": "Introducing Swing",
+ "subtitle": "Introducing Swing",
+ "marks": "[5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Start of the subject.",
+ "next": "Creating a Frame. Every Swing app needs a window first.",
+ "actors": {
+  "a0": {
+   "e": "🏚️",
+   "l": "AWT",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "🪶",
+   "l": "Swing",
+   "x": 30,
+   "y": 62
+  },
+  "a2": {
+   "e": "🎨",
+   "l": "Look & Feel",
+   "x": 50,
+   "y": 52
+  },
+  "a3": {
+   "e": "🧱",
+   "l": "J-components",
+   "x": 70,
+   "y": 62
+  },
+  "a4": {
+   "e": "🧠",
+   "l": "MVC",
+   "x": 90,
+   "y": 52
+  }
+ },
+ "scenes": [
+  {
+   "cap": "Old way: AWT",
+   "sub": "AWT asks the operating system to draw buttons. It is heavy and looks different on each OS.",
+   "show": [
+    "a0"
+   ],
+   "snd": "pop",
+   "glow": "a0"
+  },
+  {
+   "cap": "New way: Swing",
+   "sub": "Swing draws its own buttons in pure Java. It is light and looks the same everywhere.",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "whoosh",
+   "glow": "a1",
+   "say": {
+    "a1": "I am light!"
+   }
+  },
+  {
+   "cap": "Pluggable look and feel",
+   "sub": "You can change the whole style (Metal, Nimbus, Windows) with one line.",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "ding",
+   "glow": "a2"
+  },
+  {
+   "cap": "Names start with J",
+   "sub": "JButton, JLabel, JTextField, JFrame… all in javax.swing.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "pop",
+   "glow": "a3"
+  },
+  {
+   "cap": "Built on MVC idea",
+   "sub": "Data (model) is kept apart from the view, so components are flexible.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "tick",
+   "glow": "a4"
+  },
+  {
+   "cap": "Swing = light, pretty, flexible",
+   "sub": "AWT is heavy (uses OS), Swing is light (pure Java).",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "ding"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick",
+   "html": "<b>A</b>WT <b>H</b>eavy, <b>S</b>wing <b>L</b>ight = AWT uses OS parts, Swing is pure Java"
+  },
+  {
+   "label": "Points trick (4 features)",
+   "html": "<b>L</b>ittle <b>P</b>igs <b>M</b>ake <b>J</b>am = Lightweight · Pluggable look · MVC based · J-prefix names"
+  }
+ ],
+ "code": {
+  "title": "Program: first Swing window",
+  "lines": [
+   "import javax.swing.*;",
+   "public class SwingDemo {",
+   "    public static void main(String[] args) {",
+   "        JFrame f = new JFrame(\"Swing Demo\");",
+   "        JButton b = new JButton(\"Hello Swing\");",
+   "        f.add(b);",
+   "        f.setSize(250, 120);",
+   "        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);",
+   "        f.setVisible(true);",
+   "    }",
+   "}"
+  ],
+  "note": "(complete program)",
+  "steps": [
+   {
+    "l": [
+     "import javax.swing"
+    ],
+    "say": "All Swing classes live in the package javax.swing.",
+    "snd": "tick",
+    "win": {
+     "title": "",
+     "vis": 0,
+     "items": []
+    },
+    "mem": []
+   },
+   {
+    "l": [
+     "main("
+    ],
+    "say": "Program starts at main().",
+    "snd": "tick"
+   },
+   {
+    "l": [
+     "new JFrame"
+    ],
+    "say": "A JFrame (the window) is made in memory.",
+    "snd": "pop",
+    "mem": [
+     "f = JFrame \"Swing Demo\""
+    ]
+   },
+   {
+    "l": [
+     "new JButton"
+    ],
+    "say": "A JButton is made. Note the J at the start: it is a Swing component.",
+    "snd": "pop",
+    "mem": [
+     "f = JFrame \"Swing Demo\"",
+     "b = JButton \"Hello Swing\""
+    ]
+   },
+   {
+    "l": [
+     "f.add(b)"
+    ],
+    "say": "The button is put inside the window.",
+    "snd": "tick",
+    "win": {
+     "title": "Swing Demo",
+     "vis": 0,
+     "items": [
+      {
+       "t": "btn",
+       "v": "Hello Swing"
+      }
+     ]
+    }
+   },
+   {
+    "l": [
+     "setVisible"
+    ],
+    "say": "Size is set and the window appears.",
+    "snd": "ding",
+    "win": {
+     "title": "Swing Demo",
+     "vis": 1,
+     "items": [
+      {
+       "t": "btn",
+       "v": "Hello Swing"
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "answer_html": "<h3>Definition</h3><p><b>Swing</b> is a Java GUI toolkit (package <code>javax.swing</code>) used to build windows, buttons, text boxes and other graphical parts. It is built on top of AWT and is written fully in Java.</p><h3>Features of Swing</h3><ul><li><b>Lightweight</b>: components are drawn by Java, not by the operating system.</li><li><b>Pluggable look and feel</b>: the style can be changed at run time.</li><li><b>MVC based</b>: data (model) is separate from display (view).</li><li><b>Platform independent</b>: looks the same on all OS.</li><li><b>Rich components</b>: JTable, JTree, JTabbedPane, etc. (names start with J).</li></ul><h3>Figure (class hierarchy)</h3><pre>Object → Component → Container → JComponent → JButton, JLabel, JPanel …</pre><table><tr><th>AWT</th><th>Swing</th></tr><tr><td>Heavyweight (uses OS peers)</td><td>Lightweight (pure Java)</td></tr><tr><td>Look depends on OS</td><td>Same look on every OS, can change</td></tr><tr><td>Package java.awt</td><td>Package javax.swing</td></tr><tr><td>Fewer components</td><td>Many rich components</td></tr><tr><td>Button, Label</td><td>JButton, JLabel</td></tr></table>",
+ "quiz": {
+  "q": "Why is Swing called lightweight?",
+  "options": [
+   "It uses less RAM",
+   "Its components are drawn by Java, not the OS",
+   "It has fewer classes"
+  ],
+  "answer": 1,
+  "why": "AWT Heavy, Swing Light."
+ }
+}

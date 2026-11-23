@@ -1,0 +1,187 @@
+{
+ "id": "u1.t06.special-fonts",
+ "topic": "u1.t06",
+ "kind": "lesson",
+ "title": "Using Special Fonts for Text",
+ "subtitle": "Using Special Fonts for Text",
+ "marks": "[2.5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Using Color. We can color text. Now we change its font.",
+ "next": "Displaying Images. After text and shapes, we show pictures.",
+ "actors": {
+  "a0": {
+   "e": "🔤",
+   "l": "Font",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "🏷️",
+   "l": "Name",
+   "x": 30,
+   "y": 62
+  },
+  "a2": {
+   "e": "🅱️",
+   "l": "Style",
+   "x": 50,
+   "y": 52
+  },
+  "a3": {
+   "e": "📐",
+   "l": "Size",
+   "x": 70,
+   "y": 62
+  },
+  "a4": {
+   "e": "✍️",
+   "l": "setFont",
+   "x": 90,
+   "y": 52
+  }
+ },
+ "scenes": [
+  {
+   "cap": "The Font class",
+   "sub": "In java.awt. Controls how text looks.",
+   "show": [
+    "a0"
+   ],
+   "snd": "pop",
+   "glow": "a0"
+  },
+  {
+   "cap": "1. Font name",
+   "sub": "\"Serif\", \"SansSerif\", \"Monospaced\", \"Dialog\", \"DialogInput\" (logical fonts) or a real one like \"Arial\".",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "tick",
+   "glow": "a1"
+  },
+  {
+   "cap": "2. Style",
+   "sub": "Font.PLAIN, Font.BOLD, Font.ITALIC (or BOLD + ITALIC).",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "tick",
+   "glow": "a2"
+  },
+  {
+   "cap": "3. Size in points",
+   "sub": "e.g. 24.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "tick",
+   "glow": "a3"
+  },
+  {
+   "cap": "g2.setFont(f) then drawString",
+   "sub": "The next text uses this font.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "ding",
+   "glow": "a4",
+   "say": {
+    "a4": "Big Bold!"
+   }
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick (constructor)",
+   "html": "<b>N</b>ice <b>S</b>oft <b>S</b>ofa = new Font(Name, Style, Size)"
+  },
+  {
+   "label": "Points trick (styles)",
+   "html": "<b>P</b>lease <b>B</b>e <b>I</b>nteresting = PLAIN · BOLD · ITALIC"
+  }
+ ],
+ "code": {
+  "title": "Program: bold serif text",
+  "lines": [
+   "protected void paintComponent(Graphics g) {",
+   "    super.paintComponent(g);",
+   "    Graphics2D g2 = (Graphics2D) g;",
+   "    Font f = new Font(\"Serif\", Font.BOLD, 24);",
+   "    g2.setFont(f);",
+   "    g2.drawString(\"Exam Hero\", 40, 80);",
+   "}"
+  ],
+  "note": "(inside a JPanel subclass)",
+  "steps": [
+   {
+    "l": [
+     "protected void"
+    ],
+    "say": "Java calls paintComponent.",
+    "snd": "whoosh",
+    "win": {
+     "title": "Font",
+     "vis": 1,
+     "items": []
+    },
+    "mem": []
+   },
+   {
+    "l": [
+     "new Font"
+    ],
+    "say": "Create a font: name Serif, style BOLD, size 24.",
+    "snd": "pop",
+    "mem": [
+     "f = Serif, BOLD, 24"
+    ]
+   },
+   {
+    "l": [
+     "setFont"
+    ],
+    "say": "Tell the pen to use this font.",
+    "snd": "click"
+   },
+   {
+    "l": [
+     "drawString"
+    ],
+    "say": "Text drawn big and bold.",
+    "snd": "ding",
+    "win": {
+     "title": "Font",
+     "vis": 1,
+     "items": [
+      {
+       "t": "lb",
+       "v": "𝐄𝐱𝐚𝐦 𝐇𝐞𝐫𝐨"
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "answer_html": "<h3>Definition</h3><p>The <b>Font</b> class (in <code>java.awt</code>) is used to draw text in a special typeface, style and size.</p><h3>Key points</h3><ul><li>Create: <code>new Font(name, style, size)</code>.</li><li>Styles: <b>Font.PLAIN</b>, <b>Font.BOLD</b>, <b>Font.ITALIC</b>.</li><li>Logical font names: Serif, SansSerif, Monospaced, Dialog, DialogInput.</li><li>Apply: <code>g2.setFont(f)</code> (drawing) or <code>component.setFont(f)</code>.</li><li>List installed fonts: <code>GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames()</code>.</li></ul><h3>Example</h3><pre>Font f = new Font(\"Serif\", Font.BOLD, 24);\ng2.setFont(f);\ng2.drawString(\"Exam Hero\", 40, 80);</pre>",
+ "quiz": {
+  "q": "What are the 3 parts of new Font(...)?",
+  "options": [
+   "Name, Style, Size",
+   "Color, Size, Width",
+   "Name, Color, Style"
+  ],
+  "answer": 0,
+  "why": "Nice Soft Sofa."
+ }
+}

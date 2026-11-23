@@ -1,0 +1,229 @@
+{
+ "id": "u1.t12.swing-mvc",
+ "topic": "u1.t12",
+ "kind": "lesson",
+ "title": "Swing and the MVC Design Pattern",
+ "subtitle": "Swing and the MVC Design Pattern",
+ "marks": "[5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Adapter Classes. We know components and events. Now: how Swing organises them inside.",
+ "next": "Layout Management. Next: how components are placed (layouts).",
+ "actors": {
+  "k": {
+   "e": "🧑‍🍳",
+   "l": "Model (kitchen = data)",
+   "x": 15,
+   "y": 58
+  },
+  "v": {
+   "e": "🍽️",
+   "l": "View (plate = display)",
+   "x": 50,
+   "y": 58
+  },
+  "c": {
+   "e": "🧑‍💼",
+   "l": "Controller (waiter = input)",
+   "x": 85,
+   "y": 58
+  },
+  "u": {
+   "e": "🧑",
+   "l": "Customer",
+   "x": 85,
+   "y": 20,
+   "h": 1
+  }
+ },
+ "scenes": [
+  {
+   "cap": "A restaurant = MVC",
+   "sub": "Swing components are built like a restaurant with 3 jobs.",
+   "show": [
+    "k",
+    "v",
+    "c"
+   ],
+   "snd": "pop"
+  },
+  {
+   "cap": "Model = kitchen 🧑‍🍳",
+   "sub": "Holds the DATA and state. e.g. is the button pressed? the text in a field.",
+   "show": [
+    "k",
+    "v",
+    "c"
+   ],
+   "snd": "tick",
+   "glow": "k"
+  },
+  {
+   "cap": "View = plate 🍽️",
+   "sub": "Shows the data on screen. How it LOOKS.",
+   "show": [
+    "k",
+    "v",
+    "c"
+   ],
+   "snd": "tick",
+   "glow": "v"
+  },
+  {
+   "cap": "Controller = waiter 🧑‍💼",
+   "sub": "Takes the user INPUT (mouse/keys) and tells the model.",
+   "show": [
+    "k",
+    "v",
+    "c",
+    "u"
+   ],
+   "snd": "click",
+   "glow": "c",
+   "say": {
+    "u": "One more item!"
+   }
+  },
+  {
+   "cap": "Model changes → View updates",
+   "sub": "Data changes in the kitchen, the plate is updated automatically.",
+   "show": [
+    "k",
+    "v",
+    "c",
+    "u"
+   ],
+   "snd": "whoosh",
+   "glow": "v"
+  },
+  {
+   "cap": "In Swing: View + Controller joined",
+   "sub": "Swing uses Model–UI Delegate: view and controller are one \"UI delegate\". Model stays separate.",
+   "show": [
+    "k",
+    "v",
+    "c"
+   ],
+   "snd": "ding",
+   "glow": "k"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick",
+   "html": "<b>M</b>y <b>V</b>illage <b>C</b>afe = Model · View · Controller"
+  },
+  {
+   "label": "Points trick (jobs)",
+   "html": "<b>D</b>ata <b>D</b>isplay <b>D</b>irect = Model = data · View = display · Controller = directs input"
+  },
+  {
+   "label": "Swing twist",
+   "html": "<b>T</b>wo <b>B</b>ecome <b>O</b>ne = View + Controller = UI delegate"
+  }
+ ],
+ "code": {
+  "title": "Program: list model updates the view",
+  "lines": [
+   "DefaultListModel<String> model = new DefaultListModel<>();",
+   "model.addElement(\"Java\");",
+   "JList<String> list = new JList<>(model);",
+   "JFrame f = new JFrame(\"MVC\");",
+   "f.add(list);",
+   "f.setSize(200, 150);",
+   "f.setVisible(true);",
+   "model.addElement(\"Swing\");"
+  ],
+  "note": "(inside main; imports javax.swing.* skipped)",
+  "steps": [
+   {
+    "l": [
+     "DefaultListModel"
+    ],
+    "say": "MODEL: holds the data (a list of strings).",
+    "snd": "pop",
+    "win": {
+     "title": "",
+     "vis": 0,
+     "items": []
+    },
+    "mem": [
+     "model = []"
+    ]
+   },
+   {
+    "l": [
+     "model.addElement(\"Java\")"
+    ],
+    "say": "Add data to the model.",
+    "snd": "tick",
+    "mem": [
+     "model = [Java]"
+    ]
+   },
+   {
+    "l": [
+     "new JList"
+    ],
+    "say": "VIEW: JList shows whatever the model holds.",
+    "snd": "pop",
+    "mem": [
+     "model = [Java]",
+     "list → views model"
+    ]
+   },
+   {
+    "l": [
+     "setVisible"
+    ],
+    "say": "Window shows the list.",
+    "snd": "ding",
+    "win": {
+     "title": "MVC",
+     "vis": 1,
+     "items": [
+      {
+       "t": "lb",
+       "v": "• Java"
+      }
+     ]
+    }
+   },
+   {
+    "l": [
+     "model.addElement(\"Swing\")"
+    ],
+    "say": "Change only the MODEL… the VIEW updates by itself!",
+    "snd": "ding",
+    "win": {
+     "title": "MVC",
+     "vis": 1,
+     "items": [
+      {
+       "t": "lb",
+       "v": "• Java"
+      },
+      {
+       "t": "lb",
+       "v": "• Swing"
+      }
+     ]
+    },
+    "mem": [
+     "model = [Java, Swing]"
+    ]
+   }
+  ]
+ },
+ "answer_html": "<h3>Definition</h3><p><b>MVC (Model–View–Controller)</b> is a design pattern that splits a component into three parts: the <b>Model</b> (data), the <b>View</b> (display) and the <b>Controller</b> (user input).</p><h3>Key points</h3><ul><li><b>Model</b>: stores data/state (e.g. ButtonModel, ListModel, TableModel).</li><li><b>View</b>: shows the model on screen.</li><li><b>Controller</b>: handles user input and updates the model.</li><li>Swing joins View and Controller into a <b>UI delegate</b> (Model–Delegate design).</li><li>Advantages: change the look without changing data; same data in many views; easier to maintain.</li></ul><h3>Figure</h3><pre>User --input--&gt; [Controller] --updates--&gt; [Model] --notifies--&gt; [View] --shows--&gt; User</pre>",
+ "quiz": {
+  "q": "In MVC, which part holds the data?",
+  "options": [
+   "View",
+   "Controller",
+   "Model"
+  ],
+  "answer": 2,
+  "why": "Data Display Direct: Model = data."
+ }
+}

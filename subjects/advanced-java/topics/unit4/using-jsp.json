@@ -1,0 +1,204 @@
+{
+ "id": "u4.t12.using-jsp",
+ "topic": "u4.t12",
+ "kind": "lesson",
+ "title": "Using JSP (Tags and Implicit Objects)",
+ "subtitle": "Using JSP",
+ "marks": "[5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Introduction to JSP. We know what JSP is. Now its building blocks.",
+ "next": "Comparing JSP with Servlet. Servlet or JSP: when to use which?",
+ "actors": {
+  "a0": {
+   "e": "📌",
+   "l": "Directive",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "📝",
+   "l": "Declaration",
+   "x": 30,
+   "y": 62
+  },
+  "a2": {
+   "e": "⚙️",
+   "l": "Scriptlet",
+   "x": 50,
+   "y": 52
+  },
+  "a3": {
+   "e": "💬",
+   "l": "Expression",
+   "x": 70,
+   "y": 62
+  },
+  "a4": {
+   "e": "🙈",
+   "l": "Comment",
+   "x": 90,
+   "y": 52
+  }
+ },
+ "scenes": [
+  {
+   "cap": "<%@ page import=\"java.util.*\" %>",
+   "sub": "Settings for the page (page, include, taglib).",
+   "show": [
+    "a0"
+   ],
+   "snd": "pop",
+   "glow": "a0"
+  },
+  {
+   "cap": "<%! int count = 0; %>",
+   "sub": "Declares variables/methods (class level).",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "tick",
+   "glow": "a1"
+  },
+  {
+   "cap": "<% count++; %>",
+   "sub": "Java statements run per request.",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "tick",
+   "glow": "a2"
+  },
+  {
+   "cap": "<%= count %>",
+   "sub": "Prints a value.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "ding",
+   "glow": "a3"
+  },
+  {
+   "cap": "<%-- hidden --%>",
+   "sub": "Not sent to the browser.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "tick",
+   "glow": "a4"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick (4 tags)",
+   "html": "<b>D</b>ogs <b>D</b>on’t <b>S</b>teal <b>E</b>ggs = Directive <%@ · Declaration <%! · Scriptlet <% · Expression <%="
+  },
+  {
+   "label": "Points trick (9 implicit objects)",
+   "html": "<b>R</b>ich <b>R</b>ats <b>O</b>rder <b>S</b>weet <b>A</b>pples, <b>C</b>ats <b>P</b>refer <b>P</b>urple <b>E</b>ggs = request · response · out · session · application · config · pageContext · page · exception"
+  }
+ ],
+ "code": {
+  "title": "Page: counter.jsp",
+  "lines": [
+   "<%@ page import=\"java.util.Date\" %>",
+   "<%! int hits = 0; %>",
+   "<html><body>",
+   "<% hits++; %>",
+   "<p>Page hits: <%= hits %></p>",
+   "<p>Your session: <%= session.getId() %></p>",
+   "</body></html>"
+  ],
+  "note": "(JSP page)",
+  "steps": [
+   {
+    "l": [
+     "<%@ page"
+    ],
+    "say": "Directive: import Date.",
+    "snd": "pop",
+    "mem": []
+   },
+   {
+    "l": [
+     "<%! int hits"
+    ],
+    "say": "Declaration: hits is a field of the generated servlet (shared).",
+    "snd": "tick",
+    "mem": [
+     "hits = 0"
+    ]
+   },
+   {
+    "l": [
+     "<% hits++"
+    ],
+    "say": "Scriptlet runs each request.",
+    "snd": "click",
+    "user": "🌐 Visit",
+    "mem": [
+     "hits = 1"
+    ]
+   },
+   {
+    "l": [
+     "<%= hits %>"
+    ],
+    "say": "Expression prints 1.",
+    "snd": "ding",
+    "win": {
+     "title": "counter.jsp",
+     "vis": 1,
+     "items": [
+      {
+       "t": "lb",
+       "v": "Page hits: 1"
+      }
+     ]
+    }
+   },
+   {
+    "l": [
+     "session.getId"
+    ],
+    "say": "\"session\" is an implicit object: ready to use, no need to create.",
+    "snd": "ding",
+    "win": {
+     "title": "counter.jsp",
+     "vis": 1,
+     "items": [
+      {
+       "t": "lb",
+       "v": "Page hits: 1"
+      },
+      {
+       "t": "lb",
+       "v": "Your session: A1B2"
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "answer_html": "<h3>Definition</h3><p>Using JSP means writing pages with <b>JSP elements</b> (directives, declarations, scriptlets, expressions) and <b>implicit objects</b>.</p><table><tr><th>Element</th><th>Syntax</th><th>Use</th></tr><tr><td>Directive</td><td>&lt;%@ page / include / taglib %&gt;</td><td>Page settings</td></tr><tr><td>Declaration</td><td>&lt;%! … %&gt;</td><td>Declare variables/methods</td></tr><tr><td>Scriptlet</td><td>&lt;% … %&gt;</td><td>Java statements</td></tr><tr><td>Expression</td><td>&lt;%= … %&gt;</td><td>Print a value</td></tr><tr><td>Comment</td><td>&lt;%-- … --%&gt;</td><td>Hidden comment</td></tr><tr><td>Action</td><td>&lt;jsp:include&gt;, &lt;jsp:forward&gt;, &lt;jsp:useBean&gt;</td><td>Built-in actions</td></tr></table><h3>Implicit objects (9)</h3>request, response, out, session, application, config, pageContext, page, exception",
+ "quiz": {
+  "q": "Which tag prints a value into the page?",
+  "options": [
+   "<%! %>",
+   "<% %>",
+   "<%= %>"
+  ],
+  "answer": 2,
+  "why": "Dogs Don’t Steal Eggs: E = Expression."
+ }
+}

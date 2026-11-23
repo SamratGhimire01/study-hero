@@ -1,0 +1,108 @@
+{
+ "id": "u4.t01.servlet-background",
+ "topic": "u4.t01",
+ "kind": "lesson",
+ "title": "Background (Why Servlets?)",
+ "subtitle": "Background",
+ "marks": "[2.5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Writing JavaBeans. Units 1–3 ran on your own computer. Now Java runs on a web server.",
+ "next": "The Life Cycle of a Servlet. A servlet lives through a life cycle.",
+ "actors": {
+  "br": {
+   "e": "🌐",
+   "l": "Browser",
+   "x": 10,
+   "y": 55
+  },
+  "cgi": {
+   "e": "🐌",
+   "l": "CGI (new process each time)",
+   "x": 50,
+   "y": 28
+  },
+  "sv": {
+   "e": "⚡",
+   "l": "Servlet (one object, many threads)",
+   "x": 50,
+   "y": 78
+  },
+  "srv": {
+   "e": "🖥️",
+   "l": "Web server",
+   "x": 88,
+   "y": 55
+  }
+ },
+ "scenes": [
+  {
+   "cap": "Browser sends a request",
+   "sub": "e.g. a form on a web page.",
+   "show": [
+    "br",
+    "srv"
+   ],
+   "snd": "pop"
+  },
+  {
+   "cap": "Old way: CGI 🐌",
+   "sub": "Server starts a NEW process for every request. Slow and heavy.",
+   "show": [
+    "br",
+    "srv",
+    "cgi"
+   ],
+   "snd": "err",
+   "glow": "cgi"
+  },
+  {
+   "cap": "New way: Servlet ⚡",
+   "sub": "Loaded once. Each request gets a light thread, not a new process.",
+   "show": [
+    "br",
+    "srv",
+    "cgi",
+    "sv"
+   ],
+   "snd": "whoosh",
+   "glow": "sv"
+  },
+  {
+   "cap": "Servlet = Java on the server",
+   "sub": "Runs inside a servlet container (Tomcat). Builds the reply page.",
+   "show": [
+    "br",
+    "srv",
+    "sv"
+   ],
+   "snd": "ding",
+   "glow": "sv",
+   "say": {
+    "sv": "HTML reply"
+   }
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick",
+   "html": "<b>C</b>GI <b>C</b>rawls, <b>S</b>ervlet <b>S</b>prints"
+  },
+  {
+   "label": "Points trick (advantages)",
+   "html": "<b>F</b>unny <b>P</b>enguins <b>S</b>kate <b>R</b>eally <b>E</b>asily = Fast (threads) · Portable (Java) · Secure · Robust (memory managed) · Easy (Servlet API)"
+  }
+ ],
+ "code": null,
+ "answer_html": "<h3>Definition</h3><p>A <b>Servlet</b> is a Java class that runs on a web server (inside a servlet container like Tomcat), receives HTTP requests and builds dynamic responses. Servlets replaced <b>CGI</b> programs.</p><h3>Advantages of Servlets</h3><ul><li>Fast (thread based)</li><li>Portable</li><li>Secure</li><li>Robust (garbage collection, exceptions)</li><li>Rich API (sessions, cookies)</li></ul><table><tr><th>CGI</th><th>Servlet</th></tr><tr><td>New process for every request</td><td>One object; a new thread per request</td></tr><tr><td>Slow, uses more memory</td><td>Fast, uses less memory</td></tr><tr><td>Platform dependent (C, Perl)</td><td>Platform independent (Java)</td></tr><tr><td>Less secure</td><td>Secure (Java security)</td></tr><tr><td>Hard to share data between requests</td><td>Easy: sessions, context</td></tr></table>",
+ "quiz": {
+  "q": "Why are servlets faster than CGI?",
+  "options": [
+   "They use C",
+   "They use threads, not a new process per request",
+   "They skip HTTP"
+  ],
+  "answer": 1,
+  "why": "CGI Crawls, Servlet Sprints."
+ }
+}

@@ -1,0 +1,184 @@
+{
+ "id": "u5.t06.interfaces-implementations",
+ "topic": "u5.t06",
+ "kind": "lesson",
+ "title": "Interfaces and Implementations",
+ "subtitle": "Interfaces and Implementations",
+ "marks": "[5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "The RMI Programming Model. Step 1 and 2 of the RMI model.",
+ "next": "The RMI Registry. Then register the object in the RMI registry.",
+ "actors": {
+  "a0": {
+   "e": "📜",
+   "l": "Interface",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "⚠️",
+   "l": "Exception",
+   "x": 30,
+   "y": 62
+  },
+  "a2": {
+   "e": "🏗️",
+   "l": "Impl",
+   "x": 50,
+   "y": 52
+  },
+  "a3": {
+   "e": "🚪",
+   "l": "Constructor",
+   "x": 70,
+   "y": 62
+  },
+  "a4": {
+   "e": "🤝",
+   "l": "Shared",
+   "x": 90,
+   "y": 52
+  }
+ },
+ "scenes": [
+  {
+   "cap": "Remote interface",
+   "sub": "interface Adder extends Remote",
+   "show": [
+    "a0"
+   ],
+   "snd": "pop",
+   "glow": "a0"
+  },
+  {
+   "cap": "Every method throws RemoteException",
+   "sub": "Network can fail.",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "err",
+   "glow": "a1"
+  },
+  {
+   "cap": "Implementation class",
+   "sub": "class AdderImpl extends UnicastRemoteObject implements Adder",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "tick",
+   "glow": "a2"
+  },
+  {
+   "cap": "Constructor throws RemoteException",
+   "sub": "super() exports the object.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "tick",
+   "glow": "a3"
+  },
+  {
+   "cap": "Client knows only the interface",
+   "sub": "Server has the implementation.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "ding",
+   "glow": "a4"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick (interface rules)",
+   "html": "<b>E</b>ver <b>R</b>eady <b>P</b>rogrammers = Extends Remote · RemoteException on every method · Public"
+  },
+  {
+   "label": "Impl trick",
+   "html": "<b>U</b>gly <b>R</b>obots <b>I</b>mplement = extends UnicastRemoteObject · implements interface · constructor throws RemoteException"
+  }
+ ],
+ "code": {
+  "title": "Program: remote interface and implementation",
+  "lines": [
+   "import java.rmi.*;",
+   "import java.rmi.server.*;",
+   "",
+   "interface Adder extends Remote {",
+   "    int add(int a, int b) throws RemoteException;",
+   "}",
+   "",
+   "class AdderImpl extends UnicastRemoteObject implements Adder {",
+   "    AdderImpl() throws RemoteException {",
+   "        super();",
+   "    }",
+   "    public int add(int a, int b) throws RemoteException {",
+   "        return a + b;",
+   "    }",
+   "}"
+  ],
+  "note": "(the client only needs the Adder interface)",
+  "steps": [
+   {
+    "l": [
+     "interface Adder extends Remote"
+    ],
+    "say": "Remote interface: marks methods that can be called from another JVM.",
+    "snd": "pop",
+    "mem": []
+   },
+   {
+    "l": [
+     "int add(int a, int b) throws"
+    ],
+    "say": "Each method must throw RemoteException.",
+    "snd": "err"
+   },
+   {
+    "l": [
+     "class AdderImpl extends UnicastRemoteObject"
+    ],
+    "say": "Implementation; UnicastRemoteObject makes it able to receive calls.",
+    "snd": "tick",
+    "mem": [
+     "AdderImpl (exported)"
+    ]
+   },
+   {
+    "l": [
+     "super();"
+    ],
+    "say": "Constructor exports the object (it may fail → RemoteException).",
+    "snd": "tick"
+   },
+   {
+    "l": [
+     "return a + b"
+    ],
+    "say": "The real work.",
+    "snd": "ding"
+   }
+  ]
+ },
+ "answer_html": "<h3>Definition</h3><p>In RMI, the <b>remote interface</b> declares the methods a client may call remotely, and the <b>implementation class</b> on the server provides the real code.</p><h3>Key points</h3><ul><li>Remote interface <b>extends java.rmi.Remote</b>.</li><li>Every remote method <b>throws RemoteException</b>.</li><li>Implementation <b>extends UnicastRemoteObject</b> (or uses UnicastRemoteObject.exportObject()).</li><li>Implementation constructor throws RemoteException.</li><li>Client works only with the interface type (via the stub).</li></ul>",
+ "quiz": {
+  "q": "A remote interface must extend…",
+  "options": [
+   "Serializable",
+   "Remote",
+   "Runnable"
+  ],
+  "answer": 1,
+  "why": "Ever Ready Programmers: Extends Remote."
+ }
+}

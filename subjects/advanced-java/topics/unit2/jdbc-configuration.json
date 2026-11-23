@@ -1,0 +1,173 @@
+{
+ "id": "u2.t04.jdbc-configuration",
+ "topic": "u2.t04",
+ "kind": "lesson",
+ "title": "JDBC Configuration",
+ "subtitle": "JDBC Configuration",
+ "marks": "[2.5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "The Structured Query Language. We know SQL. Now set up JDBC so Java can send it.",
+ "next": "Working with JDBC Statements. Connected! Now we send SQL with statements.",
+ "actors": {
+  "a0": {
+   "e": "🗄️",
+   "l": "Database",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "📦",
+   "l": "JAR",
+   "x": 30,
+   "y": 62
+  },
+  "a2": {
+   "e": "🔗",
+   "l": "URL",
+   "x": 50,
+   "y": 52
+  },
+  "a3": {
+   "e": "🚚",
+   "l": "forName",
+   "x": 70,
+   "y": 62
+  },
+  "a4": {
+   "e": "🤝",
+   "l": "Connect",
+   "x": 90,
+   "y": 52
+  }
+ },
+ "scenes": [
+  {
+   "cap": "Have a database",
+   "sub": "Install MySQL, create database Shop.",
+   "show": [
+    "a0"
+   ],
+   "snd": "pop",
+   "glow": "a0"
+  },
+  {
+   "cap": "Add driver JAR",
+   "sub": "Put mysql-connector-j.jar on the classpath.",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "tick",
+   "glow": "a1"
+  },
+  {
+   "cap": "Write the URL",
+   "sub": "jdbc:mysql://localhost:3306/Shop  (jdbc:subprotocol://host:port/db)",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "tick",
+   "glow": "a2"
+  },
+  {
+   "cap": "Load driver",
+   "sub": "Class.forName(\"com.mysql.cj.jdbc.Driver\")  (auto in JDBC 4+)",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "click",
+   "glow": "a3"
+  },
+  {
+   "cap": "getConnection(url, user, pass)",
+   "sub": "Returns a Connection object.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "ding",
+   "glow": "a4"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick (steps)",
+   "html": "<b>J</b>olly <b>U</b>ncles <b>C</b>atch <b>G</b>rapes = JAR on classpath · URL · Class.forName · getConnection"
+  },
+  {
+   "label": "URL trick",
+   "html": "<b>J</b>ava <b>M</b>y <b>L</b>ocal <b>S</b>hop = jdbc : mysql : //localhost:3306 / Shop"
+  }
+ ],
+ "code": {
+  "title": "Program: connection with try-with-resources",
+  "lines": [
+   "String url = \"jdbc:mysql://localhost:3306/Shop\";",
+   "try (Connection con = DriverManager.getConnection(url, \"root\", \"\")) {",
+   "    System.out.println(\"Connected to \" + con.getCatalog());",
+   "}"
+  ],
+  "note": "(inside main throws Exception)",
+  "steps": [
+   {
+    "l": [
+     "String url"
+    ],
+    "say": "URL format: jdbc:<db type>://<host>:<port>/<database>.",
+    "snd": "tick",
+    "mem": [
+     "url = jdbc:mysql://localhost:3306/Shop"
+    ]
+   },
+   {
+    "l": [
+     "getConnection"
+    ],
+    "say": "Open the connection with user and password.",
+    "snd": "whoosh",
+    "mem": [
+     "url",
+     "con = Connection"
+    ]
+   },
+   {
+    "l": [
+     "println"
+    ],
+    "say": "Print the database name.",
+    "snd": "ding",
+    "con": "Connected to Shop"
+   },
+   {
+    "l": [
+     "}"
+    ],
+    "say": "try-with-resources closes the connection automatically.",
+    "snd": "tick",
+    "mem": [
+     "con = closed"
+    ]
+   }
+  ]
+ },
+ "answer_html": "<h3>Definition</h3><p><b>JDBC configuration</b> means setting up everything a Java program needs to connect to a database.</p><h3>Steps</h3><ul><li>Install the database and create the database/table.</li><li>Add the <b>driver JAR</b> (e.g. mysql-connector-j.jar) to the classpath.</li><li>Write the <b>database URL</b>: <code>jdbc:mysql://localhost:3306/Shop</code>.</li><li>Load the driver: <code>Class.forName(\"com.mysql.cj.jdbc.Driver\")</code> (automatic since JDBC 4).</li><li>Connect: <code>DriverManager.getConnection(url, user, password)</code>.</li></ul><table><tr><th>Database</th><th>Driver class</th><th>URL</th></tr><tr><td>MySQL</td><td>com.mysql.cj.jdbc.Driver</td><td>jdbc:mysql://host:3306/db</td></tr><tr><td>Oracle</td><td>oracle.jdbc.OracleDriver</td><td>jdbc:oracle:thin:@host:1521:xe</td></tr><tr><td>PostgreSQL</td><td>org.postgresql.Driver</td><td>jdbc:postgresql://host:5432/db</td></tr></table>",
+ "quiz": {
+  "q": "Which part of the URL is the database name in jdbc:mysql://localhost:3306/Shop?",
+  "options": [
+   "mysql",
+   "3306",
+   "Shop"
+  ],
+  "answer": 2,
+  "why": "Java My Local Shop."
+ }
+}

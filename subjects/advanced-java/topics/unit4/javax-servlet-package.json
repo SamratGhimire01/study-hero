@@ -1,0 +1,143 @@
+{
+ "id": "u4.t05.javax-servlet-package",
+ "topic": "u4.t05",
+ "kind": "lesson",
+ "title": "The javax.servlet Package",
+ "subtitle": "The javax.servlet Package",
+ "marks": "[5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "The Servlet API. The API has 2 packages. First the general one.",
+ "next": "Reading Servlet Parameters. Use ServletRequest to read form parameters.",
+ "actors": {
+  "a0": {
+   "e": "📜",
+   "l": "Servlet",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "📨",
+   "l": "Request",
+   "x": 26,
+   "y": 62
+  },
+  "a2": {
+   "e": "📤",
+   "l": "Response",
+   "x": 42,
+   "y": 52
+  },
+  "a3": {
+   "e": "⚙️",
+   "l": "Config",
+   "x": 58,
+   "y": 62
+  },
+  "a4": {
+   "e": "🏢",
+   "l": "Context",
+   "x": 74,
+   "y": 52
+  },
+  "a5": {
+   "e": "🧱",
+   "l": "Generic",
+   "x": 90,
+   "y": 62
+  }
+ },
+ "scenes": [
+  {
+   "cap": "Servlet (interface)",
+   "sub": "init, service, destroy, getServletConfig, getServletInfo.",
+   "show": [
+    "a0"
+   ],
+   "snd": "pop",
+   "glow": "a0"
+  },
+  {
+   "cap": "ServletRequest",
+   "sub": "Read data from client: getParameter().",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "tick",
+   "glow": "a1"
+  },
+  {
+   "cap": "ServletResponse",
+   "sub": "Send data: getWriter(), setContentType().",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "tick",
+   "glow": "a2"
+  },
+  {
+   "cap": "ServletConfig",
+   "sub": "Settings for ONE servlet (init parameters).",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "tick",
+   "glow": "a3"
+  },
+  {
+   "cap": "ServletContext",
+   "sub": "Shared by ALL servlets of the web app.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "whoosh",
+   "glow": "a4"
+  },
+  {
+   "cap": "GenericServlet (class)",
+   "sub": "Protocol-independent; you write service().",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4",
+    "a5"
+   ],
+   "snd": "ding",
+   "glow": "a5"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick (interfaces)",
+   "html": "<b>S</b>ome <b>R</b>ich <b>R</b>ats <b>C</b>an <b>C</b>ook = Servlet · Request · Response · Config · Context"
+  },
+  {
+   "label": "Points trick (Config vs Context)",
+   "html": "<b>C</b>onfig = <b>O</b>ne, <b>C</b>ontext = <b>C</b>ommon = ServletConfig per servlet; ServletContext shared by the whole app"
+  }
+ ],
+ "code": null,
+ "answer_html": "<h3>Definition</h3><p>The <b>javax.servlet</b> package contains the general (protocol-independent) interfaces and classes of the Servlet API.</p><table><tr><th>Interface / Class</th><th>Use</th></tr><tr><td>Servlet</td><td>Main interface: init(), service(), destroy()</td></tr><tr><td>ServletRequest</td><td>Read client data (getParameter)</td></tr><tr><td>ServletResponse</td><td>Send response (getWriter, setContentType)</td></tr><tr><td>ServletConfig</td><td>Config of one servlet (getInitParameter)</td></tr><tr><td>ServletContext</td><td>Shared info for the whole web app</td></tr><tr><td>RequestDispatcher</td><td>forward() / include() to other resources</td></tr><tr><td>GenericServlet</td><td>Abstract class implementing Servlet</td></tr><tr><td>ServletException</td><td>Error from a servlet</td></tr><tr><td>ServletInputStream / OutputStream</td><td>Binary data</td></tr></table>",
+ "quiz": {
+  "q": "Which object is shared by all servlets of an app?",
+  "options": [
+   "ServletConfig",
+   "ServletContext",
+   "ServletRequest"
+  ],
+  "answer": 1,
+  "why": "Config = One, Context = Common."
+ }
+}

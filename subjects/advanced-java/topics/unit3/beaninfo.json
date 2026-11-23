@@ -1,0 +1,187 @@
+{
+ "id": "u3.t05.beaninfo",
+ "topic": "u3.t05",
+ "kind": "lesson",
+ "title": "Using BeanInfo Interface",
+ "subtitle": "Using BeanInfo Interface",
+ "marks": "[5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Properties, Events, and Methods Design Patterns. Naming patterns are automatic. BeanInfo lets you control what tools see.",
+ "next": "Bound and Constrained Properties. Some properties notify others: bound and constrained.",
+ "actors": {
+  "a0": {
+   "e": "📝",
+   "l": "BeanInfo",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "🧩",
+   "l": "Simple",
+   "x": 30,
+   "y": 62
+  },
+  "a2": {
+   "e": "🏷️",
+   "l": "Properties",
+   "x": 50,
+   "y": 52
+  },
+  "a3": {
+   "e": "⚙️",
+   "l": "Methods/Events",
+   "x": 70,
+   "y": 62
+  },
+  "a4": {
+   "e": "🖼️",
+   "l": "Icon",
+   "x": 90,
+   "y": 52
+  }
+ },
+ "scenes": [
+  {
+   "cap": "Write StudentBeanInfo",
+   "sub": "Class name = bean name + \"BeanInfo\". Same package.",
+   "show": [
+    "a0"
+   ],
+   "snd": "pop",
+   "glow": "a0"
+  },
+  {
+   "cap": "extends SimpleBeanInfo",
+   "sub": "A ready class with default (null) answers; override only what you need.",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "tick",
+   "glow": "a1"
+  },
+  {
+   "cap": "getPropertyDescriptors()",
+   "sub": "Show only the properties you choose (hide others).",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "click",
+   "glow": "a2"
+  },
+  {
+   "cap": "getMethodDescriptors(), getEventSetDescriptors()",
+   "sub": "Control methods and events too.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "tick",
+   "glow": "a3"
+  },
+  {
+   "cap": "getIcon(), getBeanDescriptor()",
+   "sub": "Icon for the tool palette; customizer link.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "ding",
+   "glow": "a4"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick",
+   "html": "<b>B</b>eanInfo = <b>B</b>ean’s <b>I</b>D <b>c</b>ard"
+  },
+  {
+   "label": "Points trick (methods)",
+   "html": "<b>P</b>lease <b>M</b>eet <b>E</b>very <b>B</b>ean <b>I</b>n = getPropertyDescriptors · getMethodDescriptors · getEventSetDescriptors · getBeanDescriptor · getIcon"
+  }
+ ],
+ "code": {
+  "title": "Program: BeanInfo shows only \"name\"",
+  "lines": [
+   "public class StudentBeanInfo extends SimpleBeanInfo {",
+   "    public PropertyDescriptor[] getPropertyDescriptors() {",
+   "        try {",
+   "            PropertyDescriptor name = new PropertyDescriptor(\"name\", Student.class);",
+   "            return new PropertyDescriptor[] { name };",
+   "        } catch (IntrospectionException e) {",
+   "            return null;",
+   "        }",
+   "    }",
+   "}",
+   "class Student {",
+   "    private String name; private int age;",
+   "    public String getName() { return name; }",
+   "    public void setName(String n) { name = n; }",
+   "    public int getAge() { return age; }",
+   "    public void setAge(int a) { age = a; }",
+   "}"
+  ],
+  "note": "(imports java.beans.*)",
+  "steps": [
+   {
+    "l": [
+     "public class StudentBeanInfo"
+    ],
+    "say": "Name = Student + BeanInfo, so Introspector finds it automatically.",
+    "snd": "pop",
+    "mem": []
+   },
+   {
+    "l": [
+     "extends SimpleBeanInfo"
+    ],
+    "say": "Start from SimpleBeanInfo (defaults).",
+    "snd": "tick"
+   },
+   {
+    "l": [
+     "getPropertyDescriptors"
+    ],
+    "say": "Override: we decide the property list.",
+    "snd": "click"
+   },
+   {
+    "l": [
+     "new PropertyDescriptor(\"name\""
+    ],
+    "say": "Describe only \"name\".",
+    "snd": "tick",
+    "mem": [
+     "visible: name",
+     "hidden: age"
+    ]
+   },
+   {
+    "l": [
+     "return new PropertyDescriptor"
+    ],
+    "say": "Tools now show ONLY \"name\", even though age has get/set.",
+    "snd": "ding"
+   }
+  ]
+ },
+ "answer_html": "<h3>Definition</h3><p>The <b>BeanInfo</b> interface (java.beans) lets a developer <b>explicitly</b> describe a bean’s properties, methods, events, icon and customizer, instead of relying only on naming patterns.</p><h3>Key points</h3><ul><li>BeanInfo class name = <b>BeanName + \"BeanInfo\"</b> (e.g. StudentBeanInfo).</li><li>Usually <b>extends SimpleBeanInfo</b> and overrides only needed methods.</li><li>Methods: <code>getPropertyDescriptors()</code>, <code>getMethodDescriptors()</code>, <code>getEventSetDescriptors()</code>, <code>getBeanDescriptor()</code>, <code>getIcon()</code>.</li><li>Used to hide properties, give display names, set icons and customizers.</li></ul>",
+ "quiz": {
+  "q": "What should the BeanInfo class for bean \"Car\" be named?",
+  "options": [
+   "CarInfo",
+   "CarBeanInfo",
+   "BeanInfoCar"
+  ],
+  "answer": 1,
+  "why": "Name + BeanInfo."
+ }
+}

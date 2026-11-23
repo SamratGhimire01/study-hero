@@ -1,0 +1,195 @@
+{
+ "id": "u3.t03.introspection",
+ "topic": "u3.t03",
+ "kind": "lesson",
+ "title": "Introspection",
+ "subtitle": "Introspection",
+ "marks": "[5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Advantages of Java Beans. Beans are great for tools. But how does a tool know what is inside?",
+ "next": "Properties, Events, and Methods Design Patterns. Introspection works by naming patterns. Next: those patterns.",
+ "actors": {
+  "tool": {
+   "e": "🧑‍🔬",
+   "l": "Builder tool",
+   "x": 12,
+   "y": 55
+  },
+  "xr": {
+   "e": "🩻",
+   "l": "Introspector",
+   "x": 45,
+   "y": 55
+  },
+  "bean": {
+   "e": "🫘",
+   "l": "Student bean",
+   "x": 80,
+   "y": 55
+  },
+  "p": {
+   "e": "🏷️",
+   "l": "name, age",
+   "x": 80,
+   "y": 25,
+   "h": 1
+  },
+  "m": {
+   "e": "⚙️",
+   "l": "methods",
+   "x": 62,
+   "y": 82,
+   "h": 1
+  },
+  "e": {
+   "e": "📣",
+   "l": "events",
+   "x": 92,
+   "y": 82,
+   "h": 1
+  }
+ },
+ "scenes": [
+  {
+   "cap": "A tool gets an unknown bean",
+   "sub": "It wants to show its properties in a panel.",
+   "show": [
+    "tool",
+    "bean"
+   ],
+   "snd": "pop"
+  },
+  {
+   "cap": "It uses the Introspector 🩻",
+   "sub": "Like an X-ray for classes. Class: java.beans.Introspector.",
+   "show": [
+    "tool",
+    "xr",
+    "bean"
+   ],
+   "snd": "whoosh",
+   "glow": "xr"
+  },
+  {
+   "cap": "Finds properties 🏷️",
+   "sub": "Sees getName/setName → property \"name\".",
+   "show": [
+    "tool",
+    "xr",
+    "bean",
+    "p"
+   ],
+   "snd": "ding",
+   "glow": "p"
+  },
+  {
+   "cap": "Finds methods and events ⚙️📣",
+   "sub": "Public methods; addXListener/removeXListener → events.",
+   "show": [
+    "tool",
+    "xr",
+    "bean",
+    "p",
+    "m",
+    "e"
+   ],
+   "snd": "ding",
+   "glow": "e"
+  },
+  {
+   "cap": "Two ways to know",
+   "sub": "1) Naming patterns (reflection). 2) A BeanInfo class written by the developer.",
+   "show": [
+    "tool",
+    "xr",
+    "bean"
+   ],
+   "snd": "tick",
+   "glow": "xr"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick",
+   "html": "<b>I</b>ntrospection = <b>X</b>-ray = Look inside a bean at run time"
+  },
+  {
+   "label": "Points trick (what it finds)",
+   "html": "<b>P</b>lease <b>M</b>eet <b>E</b>veryone = Properties · Methods · Events"
+  },
+  {
+   "label": "How it finds",
+   "html": "<b>N</b>ames <b>o</b>r <b>B</b>eanInfo = Design patterns (reflection) or explicit BeanInfo"
+  }
+ ],
+ "code": {
+  "title": "Program: list properties of a bean",
+  "lines": [
+   "public class IntroDemo {",
+   "    public static void main(String[] args) throws Exception {",
+   "        BeanInfo info = Introspector.getBeanInfo(Student.class, Object.class);",
+   "        for (PropertyDescriptor pd : info.getPropertyDescriptors()) {",
+   "            System.out.println(pd.getName());",
+   "        }",
+   "    }",
+   "}",
+   "class Student {",
+   "    private String name; private int age;",
+   "    public String getName() { return name; }",
+   "    public void setName(String n) { name = n; }",
+   "    public int getAge() { return age; }",
+   "    public void setAge(int a) { age = a; }",
+   "}"
+  ],
+  "note": "(imports java.beans.*)",
+  "steps": [
+   {
+    "l": [
+     "Introspector.getBeanInfo"
+    ],
+    "say": "Ask the Introspector to X-ray Student (stop at Object).",
+    "snd": "whoosh",
+    "mem": [
+     "info = BeanInfo(Student)"
+    ]
+   },
+   {
+    "l": [
+     "getPropertyDescriptors"
+    ],
+    "say": "Get one PropertyDescriptor per property it found.",
+    "snd": "pop",
+    "mem": [
+     "found: age, name"
+    ]
+   },
+   {
+    "l": [
+     "println"
+    ],
+    "say": "Print each property name.",
+    "snd": "ding",
+    "con": "age  name"
+   },
+   {
+    "l": [
+     "public String getName"
+    ],
+    "say": "It found \"name\" because of getName/setName (naming pattern).",
+    "snd": "tick"
+   }
+  ]
+ },
+ "answer_html": "<h3>Definition</h3><p><b>Introspection</b> is the process by which a builder tool finds out a bean’s <b>properties, methods and events</b> at run time.</p><h3>Key points</h3><ul><li>Done by the class <b>java.beans.Introspector</b>.</li><li>Uses <b>naming patterns</b> (getX/setX, addXListener) via reflection.</li><li>Or uses an explicit <b>BeanInfo</b> class if the developer provides one.</li><li>Result is a BeanInfo object with PropertyDescriptor, MethodDescriptor, EventSetDescriptor.</li></ul><h3>Figure</h3><pre>Builder tool → Introspector.getBeanInfo(Bean.class) → BeanInfo → properties / methods / events</pre>",
+ "quiz": {
+  "q": "Which class performs introspection?",
+  "options": [
+   "Reflector",
+   "Introspector",
+   "BeanMaker"
+  ],
+  "answer": 1,
+  "why": "Introspection = X-ray."
+ }
+}

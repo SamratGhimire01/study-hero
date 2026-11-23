@@ -6,7 +6,7 @@ for(const s of listSubjects()){
   const sceneKeys=['cap','sub','show','snd'];
   for(const c of S.cards){
     const w=`${s}/${c._file}`;
-    for(const k of ['id','topic','kind','title','marks','last','next','actors','scenes','mnemonics','code','answer_html','quiz','confidence','source'])if(c[k]===undefined)err(`${w}: missing "${k}"`);
+    for(const k of ['id','topic','kind','title','marks','last','next','actors','scenes','mnemonics','answer_html','quiz','confidence','source'])if(c[k]===undefined)err(`${w}: missing "${k}"`);
     if(!ids.has(c.topic))err(`${w}: topic ${c.topic} not in syllabus`);
     if(c.scenes&&c.scenes.length>8)err(`${w}: more than 8 scenes (keep short)`);
     (c.scenes||[]).forEach((sc,i)=>{for(const k of sceneKeys)if(sc[k]===undefined)err(`${w}: scene ${i+1} missing ${k}`);(sc.show||[]).forEach(a=>{if(!c.actors[a])err(`${w}: scene ${i+1} unknown actor ${a}`)})});

@@ -1,0 +1,246 @@
+{
+ "id": "u2.t06.query-execution",
+ "topic": "u2.t06",
+ "kind": "lesson",
+ "title": "Query Execution",
+ "subtitle": "Query Execution",
+ "marks": "[5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Working with JDBC Statements. We can insert. Now we read data back with SELECT.",
+ "next": "Scrollable and Updatable Result Sets. ResultSet can also scroll and update.",
+ "actors": {
+  "app": {
+   "e": "☕",
+   "l": "Java",
+   "x": 10,
+   "y": 55
+  },
+  "db": {
+   "e": "🗄️",
+   "l": "Database",
+   "x": 88,
+   "y": 55
+  },
+  "rs": {
+   "e": "📑",
+   "l": "ResultSet",
+   "x": 50,
+   "y": 55,
+   "h": 1
+  },
+  "cur": {
+   "e": "👉",
+   "l": "cursor",
+   "x": 50,
+   "y": 30,
+   "h": 1
+  }
+ },
+ "scenes": [
+  {
+   "cap": "Ask: executeQuery(\"SELECT …\")",
+   "sub": "Java sends a SELECT to the database.",
+   "show": [
+    "app",
+    "db"
+   ],
+   "snd": "whoosh",
+   "glow": "app",
+   "say": {
+    "app": "SELECT * FROM Item"
+   }
+  },
+  {
+   "cap": "Answer: a ResultSet 📑",
+   "sub": "The rows come back as a ResultSet, like a small table.",
+   "show": [
+    "app",
+    "db",
+    "rs"
+   ],
+   "snd": "pop",
+   "glow": "rs"
+  },
+  {
+   "cap": "Cursor starts BEFORE row 1",
+   "sub": "Think of a finger 👉 above the first row.",
+   "show": [
+    "app",
+    "db",
+    "rs",
+    "cur"
+   ],
+   "snd": "tick",
+   "glow": "cur"
+  },
+  {
+   "cap": "rs.next() moves down",
+   "sub": "Returns true if there is a row, false at the end.",
+   "show": [
+    "app",
+    "db",
+    "rs",
+    "cur"
+   ],
+   "snd": "click",
+   "glow": "cur",
+   "say": {
+    "cur": "row 1"
+   },
+   "mv": {
+    "cur": [
+     50,
+     45
+    ]
+   }
+  },
+  {
+   "cap": "rs.getString(\"Name\")",
+   "sub": "Read columns by name or number (1-based).",
+   "show": [
+    "app",
+    "db",
+    "rs",
+    "cur"
+   ],
+   "snd": "ding",
+   "glow": "rs",
+   "say": {
+    "rs": "Pen, 15.0"
+   }
+  },
+  {
+   "cap": "Loop: while (rs.next())",
+   "sub": "Repeat for every row, then close.",
+   "show": [
+    "app",
+    "db",
+    "rs"
+   ],
+   "snd": "ding",
+   "glow": "rs"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick (3 steps)",
+   "html": "<b>A</b>ll <b>L</b>ions <b>G</b>rowl = executeQuery · Loop with rs.next() · getXxx(\"column\")"
+  },
+  {
+   "label": "Points trick",
+   "html": "<b>B</b>efore <b>F</b>irst, <b>N</b>ext <b>i</b>s <b>T</b>rue = Cursor starts before first row; next() returns true while rows remain"
+  }
+ ],
+ "code": {
+  "title": "Program: read all items",
+  "lines": [
+   "Connection con = DriverManager.getConnection(\"jdbc:mysql://localhost:3306/Shop\", \"root\", \"\");",
+   "Statement st = con.createStatement();",
+   "ResultSet rs = st.executeQuery(\"SELECT ItemID, Name, UnitPrice FROM Item\");",
+   "while (rs.next()) {",
+   "    int id = rs.getInt(\"ItemID\");",
+   "    String name = rs.getString(\"Name\");",
+   "    double price = rs.getDouble(3);",
+   "    System.out.println(id + \" \" + name + \" \" + price);",
+   "}",
+   "con.close();"
+  ],
+  "note": "(inside main throws Exception)",
+  "steps": [
+   {
+    "l": [
+     "getConnection"
+    ],
+    "say": "Connect.",
+    "snd": "whoosh",
+    "mem": [
+     "con"
+    ]
+   },
+   {
+    "l": [
+     "createStatement"
+    ],
+    "say": "Create a Statement.",
+    "snd": "pop",
+    "mem": [
+     "con",
+     "st"
+    ]
+   },
+   {
+    "l": [
+     "executeQuery"
+    ],
+    "say": "Run SELECT → get ResultSet. Cursor is before row 1.",
+    "snd": "whoosh",
+    "mem": [
+     "rs = 3 rows",
+     "cursor: before row 1"
+    ]
+   },
+   {
+    "l": [
+     "while (rs.next())"
+    ],
+    "say": "next() → row 1 exists → true.",
+    "snd": "click",
+    "mem": [
+     "rs = 3 rows",
+     "cursor: row 1"
+    ]
+   },
+   {
+    "l": [
+     "rs.getInt",
+     "rs.getString",
+     "rs.getDouble"
+    ],
+    "say": "Read the 3 columns (by name or index 3).",
+    "snd": "tick",
+    "mem": [
+     "cursor: row 1",
+     "id=1, name=Pen, price=15.0"
+    ]
+   },
+   {
+    "l": [
+     "println"
+    ],
+    "say": "Print row 1.",
+    "snd": "ding",
+    "con": "1 Pen 15.0"
+   },
+   {
+    "l": [
+     "while (rs.next())"
+    ],
+    "say": "Loop again for row 2, 3… then next() gives false and the loop stops.",
+    "snd": "click",
+    "con": "1 Pen 15.0 | 2 Notebook 80.0 | 3 Eraser 10.0",
+    "mem": [
+     "cursor: after last"
+    ]
+   },
+   {
+    "l": [
+     "con.close"
+    ],
+    "say": "Close.",
+    "snd": "tick"
+   }
+  ]
+ },
+ "answer_html": "<h3>Definition</h3><p><b>Query execution</b> means sending a SELECT statement with <b>executeQuery()</b> and reading the returned <b>ResultSet</b> row by row.</p><h3>Key points</h3><ul><li><code>ResultSet rs = st.executeQuery(sql);</code></li><li>The cursor starts <b>before the first row</b>.</li><li><code>rs.next()</code> moves to the next row; returns false at the end.</li><li>Read values with <code>getInt()</code>, <code>getString()</code>, <code>getDouble()</code>, <code>getDate()</code> by column name or number (starts at 1).</li><li>Close ResultSet, Statement and Connection after use.</li></ul><h3>Figure</h3><pre>executeQuery() → ResultSet → while(rs.next()) → rs.getXxx(\"col\") → print</pre>",
+ "quiz": {
+  "q": "Where is the ResultSet cursor at the start?",
+  "options": [
+   "On the first row",
+   "Before the first row",
+   "On the last row"
+  ],
+  "answer": 1,
+  "why": "Before First, Next is True."
+ }
+}

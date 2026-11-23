@@ -41,14 +41,14 @@
    "title": "Comparing JSP with Servlet"
   },
   {
-   "topic": "u4.t03",
+   "topic": "u4.t06",
    "asked": 1,
    "marks": 5,
    "qs": [
     "C3"
    ],
    "score": 6.56,
-   "title": "A Simple Servlet"
+   "title": "Reading Servlet Parameters"
   },
   {
    "topic": "u2.t01",
@@ -111,16 +111,6 @@
    "title": "Adapter Classes"
   },
   {
-   "topic": "u5.t04",
-   "asked": 1,
-   "marks": 2.5,
-   "qs": [
-    "B5"
-   ],
-   "score": 2.78,
-   "title": "Stubs and Parameter Marshalling"
-  },
-  {
    "topic": "u5.t05",
    "asked": 1,
    "marks": 2.5,
@@ -129,6 +119,16 @@
    ],
    "score": 2.78,
    "title": "The RMI Programming Model"
+  },
+  {
+   "topic": "u5.t04",
+   "asked": 1,
+   "marks": 2.5,
+   "qs": [
+    "B5"
+   ],
+   "score": 2.78,
+   "title": "Stubs and Parameter Marshalling"
   },
   {
    "topic": "u5.t11",
@@ -181,6 +181,10 @@
    "topics": [
     "u2.t01",
     "u2.t05"
+   ],
+   "cards": [
+    "u2.t01.jdbc-design",
+    "u2.t05.jdbc-statements"
    ]
   },
   {
@@ -192,6 +196,10 @@
    "topics": [
     "u1.t02",
     "u1.t10"
+   ],
+   "cards": [
+    "u1.t02.frame",
+    "u1.t10.mouse-minmax-program"
    ]
   },
   {
@@ -202,7 +210,11 @@
    "type": "long",
    "topics": [
     "u4.t13",
-    "u4.t03"
+    "u4.t06"
+   ],
+   "cards": [
+    "u4.t13.jsp-vs-servlet",
+    "u4.t06.reading-servlet-parameters"
    ]
   },
   {
@@ -243,8 +255,8 @@
    "marks_assumed": true,
    "type": "short",
    "topics": [
-    "u5.t04",
-    "u5.t05"
+    "u5.t05",
+    "u5.t04"
    ]
   },
   {
@@ -256,6 +268,10 @@
    "topics": [
     "u3.t06",
     "u3.t02"
+   ],
+   "cards": [
+    "u3.t06.bound-constrained",
+    "u3.t02.advantages-javabeans"
    ]
   },
   {
@@ -296,6 +312,9 @@
    "type": "short",
    "topics": [
     "u2.t08"
+   ],
+   "cards": [
+    "u2.t08.rowsets"
    ]
   }
  ]

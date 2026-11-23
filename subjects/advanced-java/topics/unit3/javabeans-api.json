@@ -1,0 +1,143 @@
+{
+ "id": "u3.t09.javabeans-api",
+ "topic": "u3.t09",
+ "kind": "lesson",
+ "title": "The Java Beans API",
+ "subtitle": "The Java Beans API",
+ "marks": "[5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Customizers. We used many bean classes. They all live in java.beans.",
+ "next": "Writing JavaBeans. Now put it all together and write a bean.",
+ "actors": {
+  "a0": {
+   "e": "🩻",
+   "l": "Introspector",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "🏷️",
+   "l": "Descriptors",
+   "x": 26,
+   "y": 62
+  },
+  "a2": {
+   "e": "📢",
+   "l": "Change",
+   "x": 42,
+   "y": 52
+  },
+  "a3": {
+   "e": "🛑",
+   "l": "Veto",
+   "x": 58,
+   "y": 62
+  },
+  "a4": {
+   "e": "🎛️",
+   "l": "Editors",
+   "x": 74,
+   "y": 52
+  },
+  "a5": {
+   "e": "💾",
+   "l": "XML",
+   "x": 90,
+   "y": 62
+  }
+ },
+ "scenes": [
+  {
+   "cap": "Introspector, BeanInfo, SimpleBeanInfo",
+   "sub": "Find what is inside a bean.",
+   "show": [
+    "a0"
+   ],
+   "snd": "pop",
+   "glow": "a0"
+  },
+  {
+   "cap": "PropertyDescriptor, MethodDescriptor, EventSetDescriptor, BeanDescriptor",
+   "sub": "Describe each feature.",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "tick",
+   "glow": "a1"
+  },
+  {
+   "cap": "PropertyChangeListener / Event / Support",
+   "sub": "Bound properties.",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "whoosh",
+   "glow": "a2"
+  },
+  {
+   "cap": "VetoableChangeListener, PropertyVetoException",
+   "sub": "Constrained properties.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "err",
+   "glow": "a3"
+  },
+  {
+   "cap": "PropertyEditor, Customizer",
+   "sub": "Edit beans in tools.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "tick",
+   "glow": "a4"
+  },
+  {
+   "cap": "XMLEncoder, XMLDecoder, Beans",
+   "sub": "Persistence and creating beans.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4",
+    "a5"
+   ],
+   "snd": "ding",
+   "glow": "a5"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick",
+   "html": "<b>j</b>ava.beans = <b>B</b>ean <b>t</b>oolbox"
+  },
+  {
+   "label": "Points trick (groups)",
+   "html": "<b>I</b>n <b>D</b>ark <b>P</b>laces <b>V</b>ery <b>E</b>asy <b>X</b>ylophones = Introspection · Descriptors · PropertyChange · Veto · Editors/Customizer · XML"
+  }
+ ],
+ "code": null,
+ "answer_html": "<h3>Definition</h3><p>The <b>JavaBeans API</b> is the set of classes and interfaces in the <b>java.beans</b> package used to create, inspect and manage beans.</p><table><tr><th>Class / Interface</th><th>Use</th></tr><tr><td>Introspector</td><td>Analyses a bean</td></tr><tr><td>BeanInfo / SimpleBeanInfo</td><td>Explicit bean information</td></tr><tr><td>PropertyDescriptor</td><td>Describes a property</td></tr><tr><td>EventSetDescriptor, MethodDescriptor</td><td>Describe events, methods</td></tr><tr><td>PropertyChangeListener / Event / Support</td><td>Bound properties</td></tr><tr><td>VetoableChangeListener, PropertyVetoException</td><td>Constrained properties</td></tr><tr><td>PropertyEditor, Customizer</td><td>Editing in builder tools</td></tr><tr><td>XMLEncoder, XMLDecoder</td><td>Persistence as XML</td></tr><tr><td>Beans</td><td>Utility, e.g. Beans.instantiate()</td></tr></table>",
+ "quiz": {
+  "q": "Which package holds the JavaBeans API?",
+  "options": [
+   "java.bean",
+   "java.beans",
+   "javax.beans"
+  ],
+  "answer": 1,
+  "why": "java.beans = Bean toolbox."
+ }
+}

@@ -1,0 +1,251 @@
+{
+ "id": "u1.t14.basic-swing-components",
+ "topic": "u1.t14",
+ "kind": "lesson",
+ "title": "Basic Swing Components",
+ "subtitle": "Basic Swing Components",
+ "marks": "[5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Layout Management. We know layouts. Now the common components we place.",
+ "next": "The Design of JDBC. Unit 2: saving data in a database with JDBC.",
+ "actors": {
+  "a0": {
+   "e": "🏷️",
+   "l": "JLabel",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "🔘",
+   "l": "JButton",
+   "x": 26,
+   "y": 62
+  },
+  "a2": {
+   "e": "⌨️",
+   "l": "JTextField",
+   "x": 42,
+   "y": 52
+  },
+  "a3": {
+   "e": "☑️",
+   "l": "JCheckBox",
+   "x": 58,
+   "y": 62
+  },
+  "a4": {
+   "e": "🔘",
+   "l": "JRadioButton",
+   "x": 74,
+   "y": 52
+  },
+  "a5": {
+   "e": "🔽",
+   "l": "JComboBox",
+   "x": 90,
+   "y": 62
+  }
+ },
+ "scenes": [
+  {
+   "cap": "JLabel",
+   "sub": "Shows text or an image. User cannot type.",
+   "show": [
+    "a0"
+   ],
+   "snd": "pop",
+   "glow": "a0"
+  },
+  {
+   "cap": "JButton",
+   "sub": "Click to do an action (ActionListener).",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "click",
+   "glow": "a1"
+  },
+  {
+   "cap": "JTextField / JTextArea",
+   "sub": "One-line / many-line text input. getText(), setText().",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "key",
+   "glow": "a2"
+  },
+  {
+   "cap": "JCheckBox",
+   "sub": "Tick many options (ItemListener).",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "tick",
+   "glow": "a3"
+  },
+  {
+   "cap": "JRadioButton + ButtonGroup",
+   "sub": "Choose only ONE from a group.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "tick",
+   "glow": "a4"
+  },
+  {
+   "cap": "JComboBox / JList",
+   "sub": "Dropdown / list to pick items.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4",
+    "a5"
+   ],
+   "snd": "ding",
+   "glow": "a5"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick (7 components)",
+   "html": "<b>L</b>azy <b>B</b>ears <b>T</b>each <b>T</b>iny <b>C</b>ats <b>R</b>unning <b>C</b>ircles = JLabel · JButton · JTextField · JTextArea · JCheckBox · JRadioButton · JComboBox"
+  },
+  {
+   "label": "Points trick (radio)",
+   "html": "<b>O</b>ne <b>G</b>roup <b>O</b>ne <b>P</b>ick = Put radio buttons in a ButtonGroup so only one is selected"
+  }
+ ],
+ "code": {
+  "title": "Program: small form",
+  "lines": [
+   "JFrame f = new JFrame(\"Form\");",
+   "f.setLayout(new FlowLayout());",
+   "JLabel l = new JLabel(\"Name:\");",
+   "JTextField t = new JTextField(10);",
+   "JCheckBox c = new JCheckBox(\"BCA\");",
+   "JButton b = new JButton(\"Submit\");",
+   "f.add(l); f.add(t); f.add(c); f.add(b);",
+   "f.setSize(300, 120);",
+   "f.setVisible(true);"
+  ],
+  "note": "(inside main; imports skipped)",
+  "steps": [
+   {
+    "l": [
+     "new JFrame"
+    ],
+    "say": "Window with FlowLayout (left to right).",
+    "snd": "tick",
+    "win": {
+     "title": "",
+     "vis": 0,
+     "items": []
+    },
+    "mem": []
+   },
+   {
+    "l": [
+     "JLabel l"
+    ],
+    "say": "Label: shows text.",
+    "snd": "pop",
+    "mem": [
+     "l = JLabel"
+    ]
+   },
+   {
+    "l": [
+     "JTextField t"
+    ],
+    "say": "Text box 10 columns wide.",
+    "snd": "pop",
+    "mem": [
+     "l = JLabel",
+     "t = JTextField"
+    ]
+   },
+   {
+    "l": [
+     "JCheckBox c"
+    ],
+    "say": "A check box.",
+    "snd": "pop",
+    "mem": [
+     "l, t",
+     "c = JCheckBox"
+    ]
+   },
+   {
+    "l": [
+     "JButton b"
+    ],
+    "say": "A button.",
+    "snd": "pop",
+    "mem": [
+     "l, t, c",
+     "b = JButton"
+    ]
+   },
+   {
+    "l": [
+     "f.add(l)"
+    ],
+    "say": "All four are added in order.",
+    "snd": "tick"
+   },
+   {
+    "l": [
+     "setVisible"
+    ],
+    "say": "The form appears.",
+    "snd": "ding",
+    "win": {
+     "title": "Form",
+     "vis": 1,
+     "items": [
+      {
+       "t": "lb",
+       "v": "Name:"
+      },
+      {
+       "t": "in",
+       "v": ""
+      },
+      {
+       "t": "lb",
+       "v": "☐ BCA"
+      },
+      {
+       "t": "btn",
+       "v": "Submit"
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "answer_html": "<h3>Definition</h3><p><b>Swing components</b> are ready-made GUI parts in <code>javax.swing</code> (names start with J) used to build user interfaces.</p><table><tr><th>Component</th><th>Use</th><th>Main methods / listener</th></tr><tr><td>JLabel</td><td>Show text/image</td><td>setText()</td></tr><tr><td>JButton</td><td>Clickable button</td><td>addActionListener()</td></tr><tr><td>JTextField</td><td>One-line input</td><td>getText(), setText()</td></tr><tr><td>JTextArea</td><td>Multi-line input</td><td>append()</td></tr><tr><td>JCheckBox</td><td>Select many options</td><td>isSelected(), ItemListener</td></tr><tr><td>JRadioButton</td><td>Select one (with ButtonGroup)</td><td>isSelected()</td></tr><tr><td>JComboBox</td><td>Dropdown list</td><td>getSelectedItem()</td></tr><tr><td>JList</td><td>List of items</td><td>getSelectedValue()</td></tr><tr><td>JPasswordField</td><td>Hidden text</td><td>getPassword()</td></tr></table>",
+ "quiz": {
+  "q": "Which component lets you choose only ONE option from a group?",
+  "options": [
+   "JCheckBox",
+   "JRadioButton in a ButtonGroup",
+   "JTextArea"
+  ],
+  "answer": 1,
+  "why": "One Group One Pick."
+ }
+}

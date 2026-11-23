@@ -1,0 +1,104 @@
+{
+ "id": "u4.t14.java-web-frameworks",
+ "topic": "u4.t14",
+ "kind": "lesson",
+ "title": "Java Web Frameworks",
+ "subtitle": "Java Web Frameworks",
+ "marks": "[2.5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Comparing JSP with Servlet. Servlets + JSP get big and repetitive.",
+ "next": "What is RMI?. Unit 5: RMI, calling methods on another computer.",
+ "actors": {
+  "a0": {
+   "e": "🌱",
+   "l": "Spring",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "🏛️",
+   "l": "Struts",
+   "x": 37,
+   "y": 62
+  },
+  "a2": {
+   "e": "🧩",
+   "l": "JSF",
+   "x": 63,
+   "y": 52
+  },
+  "a3": {
+   "e": "🗃️",
+   "l": "Hibernate",
+   "x": 90,
+   "y": 62
+  }
+ },
+ "scenes": [
+  {
+   "cap": "Spring / Spring Boot",
+   "sub": "Most popular. MVC, dependency injection, easy setup.",
+   "show": [
+    "a0"
+   ],
+   "snd": "ding",
+   "glow": "a0"
+  },
+  {
+   "cap": "Apache Struts",
+   "sub": "MVC framework using actions.",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "tick",
+   "glow": "a1"
+  },
+  {
+   "cap": "JSF (JavaServer Faces)",
+   "sub": "Component-based UI from Oracle.",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "tick",
+   "glow": "a2"
+  },
+  {
+   "cap": "Hibernate",
+   "sub": "ORM: maps Java objects to DB tables (used with web apps).",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "pop",
+   "glow": "a3"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick (4 names)",
+   "html": "<b>S</b>illy <b>S</b>tudents <b>J</b>ump <b>H</b>igh = Spring · Struts · JSF · Hibernate"
+  },
+  {
+   "label": "Points trick (why)",
+   "html": "<b>M</b>ore <b>S</b>peed, <b>L</b>ess <b>R</b>epeat = MVC structure · faster development · less boilerplate · reuse"
+  }
+ ],
+ "code": null,
+ "answer_html": "<h3>Definition</h3><p>A <b>Java web framework</b> is a ready-made structure of libraries that makes building web applications faster and cleaner than writing raw servlets and JSP.</p><h3>Advantages</h3><ul><li>Follow MVC, so code is organised.</li><li>Less repeated (boilerplate) code.</li><li>Built-in security, validation, database support.</li></ul><table><tr><th>Framework</th><th>Key idea</th></tr><tr><td>Spring MVC / Spring Boot</td><td>MVC, dependency injection, auto configuration</td></tr><tr><td>Struts</td><td>Action-based MVC</td></tr><tr><td>JSF</td><td>Component-based UI, event driven</td></tr><tr><td>Hibernate</td><td>ORM: Java objects ↔ database tables</td></tr><tr><td>Others</td><td>Play, Grails, Vaadin</td></tr></table>",
+ "quiz": {
+  "q": "Which framework is mainly ORM (objects ↔ tables)?",
+  "options": [
+   "Spring MVC",
+   "Hibernate",
+   "JSF"
+  ],
+  "answer": 1,
+  "why": "Silly Students Jump High: H = Hibernate = database."
+ }
+}

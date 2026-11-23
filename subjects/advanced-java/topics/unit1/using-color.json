@@ -1,0 +1,229 @@
+{
+ "id": "u1.t05.using-color",
+ "topic": "u1.t05",
+ "kind": "lesson",
+ "title": "Using Color",
+ "subtitle": "Using Color",
+ "marks": "[2.5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Working with 2D Shapes. We can draw shapes. Now we color them.",
+ "next": "Using Special Fonts for Text. Text can also get special fonts.",
+ "actors": {
+  "a0": {
+   "e": "🎨",
+   "l": "Color",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "🔴",
+   "l": "RGB",
+   "x": 26,
+   "y": 62
+  },
+  "a2": {
+   "e": "🏷️",
+   "l": "Constants",
+   "x": 42,
+   "y": 52
+  },
+  "a3": {
+   "e": "🖌️",
+   "l": "setPaint",
+   "x": 58,
+   "y": 62
+  },
+  "a4": {
+   "e": "🟥",
+   "l": "fill",
+   "x": 74,
+   "y": 52
+  },
+  "a5": {
+   "e": "🪟",
+   "l": "background",
+   "x": 90,
+   "y": 62
+  }
+ },
+ "scenes": [
+  {
+   "cap": "The Color class",
+   "sub": "In java.awt. Every color is a mix of Red, Green, Blue.",
+   "show": [
+    "a0"
+   ],
+   "snd": "pop",
+   "glow": "a0"
+  },
+  {
+   "cap": "new Color(r, g, b)",
+   "sub": "Each value 0 to 255. new Color(255,0,0) = red.",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "tick",
+   "glow": "a1"
+  },
+  {
+   "cap": "Ready colors",
+   "sub": "Color.RED, Color.BLUE, Color.GREEN, Color.BLACK …",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "tick",
+   "glow": "a2"
+  },
+  {
+   "cap": "g2.setPaint(Color.RED)",
+   "sub": "Pick the paint first…",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "click",
+   "glow": "a3"
+  },
+  {
+   "cap": "g2.fill(rect)",
+   "sub": "…then draw or fill. The shape is red.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "ding",
+   "glow": "a4"
+  },
+  {
+   "cap": "setBackground / setForeground",
+   "sub": "Change color of a whole component.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4",
+    "a5"
+   ],
+   "snd": "tick",
+   "glow": "a5"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick",
+   "html": "<b>R</b>eally <b>G</b>ood <b>B</b>ananas = Red · Green · Blue, each 0–255"
+  },
+  {
+   "label": "Points trick (order)",
+   "html": "<b>P</b>ick <b>T</b>hen <b>P</b>aint = setPaint/setColor first, then draw/fill"
+  }
+ ],
+ "code": {
+  "title": "Program: red filled rectangle",
+  "lines": [
+   "protected void paintComponent(Graphics g) {",
+   "    super.paintComponent(g);",
+   "    Graphics2D g2 = (Graphics2D) g;",
+   "    g2.setPaint(Color.RED);",
+   "    g2.fill(new Rectangle2D.Double(40, 40, 120, 60));",
+   "    g2.setPaint(new Color(0, 128, 255));",
+   "    g2.drawString(\"Blue text\", 40, 140);",
+   "}"
+  ],
+  "note": "(inside a JPanel subclass)",
+  "steps": [
+   {
+    "l": [
+     "protected void"
+    ],
+    "say": "Java calls paintComponent when drawing.",
+    "snd": "whoosh",
+    "win": {
+     "title": "Color",
+     "vis": 1,
+     "items": []
+    },
+    "mem": []
+   },
+   {
+    "l": [
+     "Color.RED"
+    ],
+    "say": "Pick red paint (a ready constant).",
+    "snd": "click",
+    "mem": [
+     "paint = RED (255,0,0)"
+    ]
+   },
+   {
+    "l": [
+     "g2.fill"
+    ],
+    "say": "Fill a rectangle: it comes out red.",
+    "snd": "ding",
+    "win": {
+     "title": "Color",
+     "vis": 1,
+     "items": [
+      {
+       "t": "lb",
+       "v": "🟥 red box"
+      }
+     ]
+    }
+   },
+   {
+    "l": [
+     "new Color(0, 128, 255)"
+    ],
+    "say": "Make our own color: R=0, G=128, B=255 → sky blue.",
+    "snd": "click",
+    "mem": [
+     "paint = (0,128,255) blue"
+    ]
+   },
+   {
+    "l": [
+     "drawString"
+    ],
+    "say": "Text is drawn in blue.",
+    "snd": "ding",
+    "win": {
+     "title": "Color",
+     "vis": 1,
+     "items": [
+      {
+       "t": "lb",
+       "v": "🟥 red box"
+      },
+      {
+       "t": "lb",
+       "v": "Blue text"
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "answer_html": "<h3>Definition</h3><p>The <b>Color</b> class (in <code>java.awt</code>) represents colors using <b>RGB</b> values (Red, Green, Blue), each from 0 to 255.</p><h3>Key points</h3><ul><li>Make a color: <code>new Color(r, g, b)</code>.</li><li>Use constants: <code>Color.RED</code>, <code>Color.BLUE</code>, etc.</li><li>Set drawing color: <code>g2.setPaint(c)</code> or <code>g.setColor(c)</code>, then draw/fill.</li><li>Component colors: <code>setBackground(c)</code>, <code>setForeground(c)</code>.</li><li><code>brighter()</code> and <code>darker()</code> give lighter/darker shades.</li></ul>",
+ "quiz": {
+  "q": "new Color(0, 0, 255) gives which color?",
+  "options": [
+   "Red",
+   "Green",
+   "Blue"
+  ],
+  "answer": 2,
+  "why": "R, G, B: third value is Blue."
+ }
+}

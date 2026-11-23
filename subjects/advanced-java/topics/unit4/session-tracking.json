@@ -1,0 +1,232 @@
+{
+ "id": "u4.t10.session-tracking",
+ "topic": "u4.t10",
+ "kind": "lesson",
+ "title": "Session Tracking (HttpSession)",
+ "subtitle": "Session Tracking",
+ "marks": "[5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Using Cookies. Cookies store data in the browser. Sessions store it on the server.",
+ "next": "Introduction to JSP. Writing HTML in println is hard. JSP makes it easy.",
+ "actors": {
+  "u": {
+   "e": "🧑",
+   "l": "User",
+   "x": 10,
+   "y": 55
+  },
+  "srv": {
+   "e": "🖥️",
+   "l": "Server",
+   "x": 50,
+   "y": 55
+  },
+  "box": {
+   "e": "🗄️",
+   "l": "HttpSession (locker)",
+   "x": 85,
+   "y": 55,
+   "h": 1
+  },
+  "id": {
+   "e": "🎫",
+   "l": "JSESSIONID",
+   "x": 30,
+   "y": 25,
+   "h": 1
+  }
+ },
+ "scenes": [
+  {
+   "cap": "HTTP is stateless",
+   "sub": "The server forgets you after each request.",
+   "show": [
+    "u",
+    "srv"
+   ],
+   "snd": "err"
+  },
+  {
+   "cap": "getSession() opens a locker 🗄️",
+   "sub": "Server makes an HttpSession with a unique ID.",
+   "show": [
+    "u",
+    "srv",
+    "box"
+   ],
+   "snd": "pop",
+   "glow": "box",
+   "say": {
+    "box": "id=A1B2"
+   }
+  },
+  {
+   "cap": "You get a ticket 🎫",
+   "sub": "The ID goes to the browser (cookie JSESSIONID or URL rewriting).",
+   "show": [
+    "u",
+    "srv",
+    "box",
+    "id"
+   ],
+   "snd": "whoosh",
+   "glow": "id",
+   "mv": {
+    "id": [
+     15,
+     25
+    ]
+   }
+  },
+  {
+   "cap": "setAttribute(\"cart\", …)",
+   "sub": "Store data in your locker on the server.",
+   "show": [
+    "u",
+    "srv",
+    "box"
+   ],
+   "snd": "click",
+   "glow": "box",
+   "say": {
+    "box": "cart: 2 items"
+   }
+  },
+  {
+   "cap": "Next request: show ticket",
+   "sub": "Server finds your locker: getAttribute(\"cart\").",
+   "show": [
+    "u",
+    "srv",
+    "box",
+    "id"
+   ],
+   "snd": "ding",
+   "glow": "box"
+  },
+  {
+   "cap": "Logout: invalidate()",
+   "sub": "Locker is emptied and closed.",
+   "show": [
+    "u",
+    "srv"
+   ],
+   "snd": "tick",
+   "glow": "srv"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick (4 techniques)",
+   "html": "<b>C</b>ute <b>U</b>nicorns <b>H</b>ide <b>S</b>ecrets = Cookies · URL rewriting · Hidden form fields · HttpSession"
+  },
+  {
+   "label": "Points trick (7 methods)",
+   "html": "<b>S</b>am <b>G</b>ets <b>R</b>ice <b>I</b>n <b>I</b>ndia <b>S</b>o <b>I</b>nexpensively = setAttribute · getAttribute · removeAttribute · getId · invalidate · setMaxInactiveInterval · isNew"
+  }
+ ],
+ "code": {
+  "title": "Program: count visits with a session",
+  "lines": [
+   "import java.io.*;",
+   "import javax.servlet.*;",
+   "import javax.servlet.http.*;",
+   "",
+   "public class VisitServlet extends HttpServlet {",
+   "    protected void doGet(HttpServletRequest req, HttpServletResponse res)",
+   "            throws ServletException, IOException {",
+   "        HttpSession session = req.getSession();",
+   "        Integer count = (Integer) session.getAttribute(\"count\");",
+   "        if (count == null) count = 0;",
+   "        count++;",
+   "        session.setAttribute(\"count\", count);",
+   "        res.getWriter().println(\"Visit \" + count + \", session id \" + session.getId());",
+   "    }",
+   "}"
+  ],
+  "note": "(complete servlet)",
+  "steps": [
+   {
+    "l": [
+     "req.getSession()"
+    ],
+    "say": "Get this user’s session (make one if new).",
+    "snd": "pop",
+    "user": "🌐 First visit",
+    "mem": [
+     "session id = A1B2 (new)"
+    ]
+   },
+   {
+    "l": [
+     "getAttribute(\"count\")"
+    ],
+    "say": "Nothing saved yet → null → 0.",
+    "snd": "tick",
+    "mem": [
+     "session A1B2",
+     "count = null → 0"
+    ]
+   },
+   {
+    "l": [
+     "count++"
+    ],
+    "say": "count = 1.",
+    "snd": "tick",
+    "mem": [
+     "count = 1"
+    ]
+   },
+   {
+    "l": [
+     "setAttribute"
+    ],
+    "say": "Save it in the session (on the server).",
+    "snd": "click",
+    "mem": [
+     "session A1B2: count = 1"
+    ]
+   },
+   {
+    "l": [
+     "println"
+    ],
+    "say": "Reply.",
+    "snd": "ding",
+    "con": "Visit 1, session id A1B2"
+   },
+   {
+    "l": [
+     "req.getSession()"
+    ],
+    "say": "Same user comes back → SAME session found by its ID.",
+    "snd": "whoosh",
+    "user": "🌐 Second visit",
+    "mem": [
+     "session A1B2: count = 1"
+    ]
+   },
+   {
+    "l": [
+     "println"
+    ],
+    "say": "Now count is 2.",
+    "snd": "ding",
+    "con": "Visit 2, session id A1B2"
+   }
+  ]
+ },
+ "answer_html": "<h3>Definition</h3><p><b>HttpSession</b> (<code>javax.servlet.http.HttpSession</code>) is an interface used to remember user data across multiple web requests, because HTTP by itself does not remember past requests.</p><h3>Key methods</h3><ul><li><b>setAttribute(String name, Object value)</b> – saves data in the session under a name.</li><li><b>getAttribute(String name)</b> – gets saved data by name (null if not there).</li><li><b>removeAttribute(String name)</b> – deletes saved data by name.</li><li><b>getId()</b> – returns the unique ID of the user’s session.</li><li><b>invalidate()</b> – ends the session and clears all saved data (logout).</li><li><b>setMaxInactiveInterval(int seconds)</b> – how long the session can stay idle before expiring.</li><li><b>isNew()</b> – true if the session was just created.</li></ul><h3>Session tracking techniques</h3>Cookies · URL rewriting · Hidden form fields · HttpSession",
+ "quiz": {
+  "q": "Which method ends a session on logout?",
+  "options": [
+   "removeAttribute()",
+   "invalidate()",
+   "getId()"
+  ],
+  "answer": 1,
+  "why": "Sam Gets Rice In India: I = invalidate."
+ }
+}

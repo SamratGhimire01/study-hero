@@ -1,0 +1,104 @@
+{
+ "id": "u5.t09.remote-object-activation",
+ "topic": "u5.t09",
+ "kind": "lesson",
+ "title": "Remote Object Activation",
+ "subtitle": "Remote Object Activation",
+ "marks": "[2.5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Parameters and Return Values in Remote Methods. Normal remote objects run all the time and use memory.",
+ "next": "Simple Client/Server Application using RMI. Now build a full client/server RMI app.",
+ "actors": {
+  "a0": {
+   "e": "😴",
+   "l": "Sleep",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "📞",
+   "l": "Call",
+   "x": 37,
+   "y": 62
+  },
+  "a2": {
+   "e": "⏰",
+   "l": "rmid",
+   "x": 63,
+   "y": 52
+  },
+  "a3": {
+   "e": "⚙️",
+   "l": "Run",
+   "x": 90,
+   "y": 62
+  }
+ },
+ "scenes": [
+  {
+   "cap": "Object sleeps",
+   "sub": "Not running, not using memory.",
+   "show": [
+    "a0"
+   ],
+   "snd": "tick",
+   "glow": "a0"
+  },
+  {
+   "cap": "A client calls it",
+   "sub": "",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "click",
+   "glow": "a1"
+  },
+  {
+   "cap": "Activation daemon (rmid) wakes it",
+   "sub": "Creates/loads the object on demand.",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "whoosh",
+   "glow": "a2"
+  },
+  {
+   "cap": "Method runs",
+   "sub": "Then it may become inactive again.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "ding",
+   "glow": "a3"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick",
+   "html": "<b>A</b>ctivation = <b>A</b>larm <b>c</b>lock = object wakes up only when called"
+  },
+  {
+   "label": "Points trick (parts)",
+   "html": "<b>A</b>lways <b>R</b>ead <b>D</b>aily = Activatable class · rmid daemon · Descriptor (ActivationDesc)"
+  }
+ ],
+ "code": null,
+ "answer_html": "<h3>Definition</h3><p><b>Remote object activation</b> lets a remote object be started <b>on demand</b> (only when a client calls it) instead of running all the time.</p><h3>Key points</h3><ul><li>Uses package <b>java.rmi.activation</b>.</li><li>Object extends <b>Activatable</b>.</li><li>The activation daemon <b>rmid</b> starts the object when needed.</li><li>Registered with an <b>ActivationDesc</b> (descriptor).</li><li>Saves memory and server resources; objects survive server restarts.</li><li>Note: deprecated in Java 15 and removed in Java 17, but it is in the syllabus.</li></ul>",
+ "quiz": {
+  "q": "Which daemon starts activatable objects?",
+  "options": [
+   "rmiregistry",
+   "rmid",
+   "javac"
+  ],
+  "answer": 1,
+  "why": "Alarm clock = rmid."
+ }
+}

@@ -1,0 +1,225 @@
+{
+ "id": "u2.t08.rowsets",
+ "topic": "u2.t08",
+ "kind": "lesson",
+ "title": "Row Sets",
+ "subtitle": "Row Sets",
+ "marks": "[2+3]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Scrollable and Updatable Result Sets. ResultSet needs an open connection and is not a JavaBean.",
+ "next": "What Is a Java Bean?. Unit 3: JavaBeans (RowSet is a bean!).",
+ "actors": {
+  "db": {
+   "e": "🗄️",
+   "l": "Database",
+   "x": 12,
+   "y": 55
+  },
+  "j": {
+   "e": "🔌",
+   "l": "JdbcRowSet (connected)",
+   "x": 45,
+   "y": 30
+  },
+  "c": {
+   "e": "🎒",
+   "l": "CachedRowSet (disconnected)",
+   "x": 45,
+   "y": 75
+  },
+  "off": {
+   "e": "✈️",
+   "l": "Offline",
+   "x": 85,
+   "y": 75,
+   "h": 1
+  },
+  "sync": {
+   "e": "🔄",
+   "l": "acceptChanges()",
+   "x": 20,
+   "y": 80,
+   "h": 1
+  }
+ },
+ "scenes": [
+  {
+   "cap": "RowSet = ResultSet + JavaBean",
+   "sub": "javax.sql.RowSet extends ResultSet. Easier, and sends events.",
+   "show": [
+    "db",
+    "j",
+    "c"
+   ],
+   "snd": "pop"
+  },
+  {
+   "cap": "Connected: JdbcRowSet 🔌",
+   "sub": "Keeps the connection open all the time. Changes go to DB right away.",
+   "show": [
+    "db",
+    "j"
+   ],
+   "snd": "tick",
+   "glow": "j",
+   "say": {
+    "j": "always online"
+   }
+  },
+  {
+   "cap": "Disconnected: CachedRowSet 🎒",
+   "sub": "Fetches rows, CLOSES the connection, keeps rows in memory.",
+   "show": [
+    "db",
+    "c"
+   ],
+   "snd": "whoosh",
+   "glow": "c"
+  },
+  {
+   "cap": "Works offline ✈️",
+   "sub": "Read and edit rows with no connection. It is Serializable: can be sent over a network.",
+   "show": [
+    "db",
+    "c",
+    "off"
+   ],
+   "snd": "pop",
+   "glow": "c",
+   "mv": {
+    "c": [
+     75,
+     60
+    ]
+   }
+  },
+  {
+   "cap": "Reconnect and save 🔄",
+   "sub": "acceptChanges() writes the edits back to the database.",
+   "show": [
+    "db",
+    "c",
+    "sync"
+   ],
+   "snd": "ding",
+   "glow": "sync",
+   "say": {
+    "sync": "saved!"
+   },
+   "mv": {
+    "c": [
+     30,
+     60
+    ]
+   }
+  },
+  {
+   "cap": "Other disconnected types",
+   "sub": "WebRowSet (XML), FilteredRowSet (filter), JoinRowSet (join).",
+   "show": [
+    "db",
+    "j",
+    "c"
+   ],
+   "snd": "tick"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick (types)",
+   "html": "<b>J</b>ust <b>C</b>ats <b>W</b>ill <b>F</b>ind <b>J</b>oy = JdbcRowSet · CachedRowSet · WebRowSet · FilteredRowSet · JoinRowSet"
+  },
+  {
+   "label": "Points trick (difference)",
+   "html": "<b>C</b>onnected = <b>C</b>onstantly <b>o</b>nline, <b>D</b>isconnected = <b>D</b>oes <b>w</b>ork <b>o</b>ffline"
+  },
+  {
+   "label": "Use trick (2 uses)",
+   "html": "<b>S</b>imple <b>S</b>ignals = Simpler than ResultSet · Sends events (it is a JavaBean)"
+  }
+ ],
+ "code": {
+  "title": "Program: CachedRowSet (disconnected)",
+  "lines": [
+   "CachedRowSet crs = RowSetProvider.newFactory().createCachedRowSet();",
+   "crs.setUrl(\"jdbc:mysql://localhost:3306/Shop\");",
+   "crs.setUsername(\"root\");",
+   "crs.setPassword(\"\");",
+   "crs.setCommand(\"SELECT * FROM Item\");",
+   "crs.execute();",
+   "while (crs.next()) {",
+   "    System.out.println(crs.getString(\"Name\"));",
+   "}"
+  ],
+  "note": "(imports javax.sql.rowset.* ; inside main throws Exception)",
+  "steps": [
+   {
+    "l": [
+     "RowSetProvider"
+    ],
+    "say": "Make a CachedRowSet using the factory.",
+    "snd": "pop",
+    "mem": [
+     "crs = CachedRowSet"
+    ]
+   },
+   {
+    "l": [
+     "setUrl",
+     "setUsername",
+     "setPassword"
+    ],
+    "say": "Set connection details like JavaBean properties (setters!).",
+    "snd": "tick",
+    "mem": [
+     "crs: url, user, pass set"
+    ]
+   },
+   {
+    "l": [
+     "setCommand"
+    ],
+    "say": "Set the SQL.",
+    "snd": "tick"
+   },
+   {
+    "l": [
+     "crs.execute()"
+    ],
+    "say": "Connects, fetches all rows, then DISCONNECTS.",
+    "snd": "whoosh",
+    "mem": [
+     "crs = 3 rows in memory",
+     "connection: closed"
+    ]
+   },
+   {
+    "l": [
+     "while (crs.next())"
+    ],
+    "say": "Loop over rows offline.",
+    "snd": "click"
+   },
+   {
+    "l": [
+     "println"
+    ],
+    "say": "Print names.",
+    "snd": "ding",
+    "con": "Pen · Notebook · Eraser"
+   }
+  ]
+ },
+ "answer_html": "<h3>Definition</h3><p><b>RowSet</b> (<code>javax.sql.RowSet</code>) is an interface that extends ResultSet and treats table data from a database as a <b>JavaBean</b> component.</p><h3>Use of RowSet</h3><ul><li>Makes database reading and updating simpler than plain ResultSet.</li><li>Sends events automatically when data or cursor position changes.</li></ul><table><tr><th>Point</th><th>Connected RowSet (JdbcRowSet)</th><th>Disconnected RowSet (CachedRowSet, WebRowSet, etc.)</th></tr><tr><td>DB connection</td><td>Keeps an active connection at all times</td><td>Fetches data, closes the connection, works offline</td></tr><tr><td>Saving changes</td><td>Saves updates to the DB right away</td><td>Saves later when you reconnect and call acceptChanges()</td></tr><tr><td>Network / memory</td><td>Needs continuous connection; less local memory</td><td>More memory to hold rows; saves DB connections</td></tr><tr><td>Serializable</td><td>Usually not sent over network</td><td>Serializable, can move across tiers</td></tr><tr><td>Best for</td><td>Steady, direct DB access</td><td>Distributed, mobile, low-connection apps</td></tr></table>",
+ "quiz": {
+  "q": "Which RowSet keeps the connection open all the time?",
+  "options": [
+   "CachedRowSet",
+   "JdbcRowSet",
+   "WebRowSet"
+  ],
+  "answer": 1,
+  "why": "Connected = Constantly online."
+ }
+}

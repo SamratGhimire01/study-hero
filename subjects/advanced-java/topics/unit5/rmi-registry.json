@@ -1,0 +1,173 @@
+{
+ "id": "u5.t07.rmi-registry",
+ "topic": "u5.t07",
+ "kind": "lesson",
+ "title": "The RMI Registry",
+ "subtitle": "The RMI Registry",
+ "marks": "[2.5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Interfaces and Implementations. We have a remote object. How does the client find it?",
+ "next": "Parameters and Return Values in Remote Methods. What can we pass to and from remote methods?",
+ "actors": {
+  "a0": {
+   "e": "📒",
+   "l": "Registry",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "▶️",
+   "l": "Start",
+   "x": 30,
+   "y": 62
+  },
+  "a2": {
+   "e": "✍️",
+   "l": "rebind",
+   "x": 50,
+   "y": 52
+  },
+  "a3": {
+   "e": "🔎",
+   "l": "lookup",
+   "x": 70,
+   "y": 62
+  },
+  "a4": {
+   "e": "🗑️",
+   "l": "unbind",
+   "x": 90,
+   "y": 52
+  }
+ },
+ "scenes": [
+  {
+   "cap": "RMI Registry = phonebook",
+   "sub": "A naming service, default port 1099.",
+   "show": [
+    "a0"
+   ],
+   "snd": "pop",
+   "glow": "a0"
+  },
+  {
+   "cap": "Start it",
+   "sub": "Command: rmiregistry, or LocateRegistry.createRegistry(1099)",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "tick",
+   "glow": "a1"
+  },
+  {
+   "cap": "Server: rebind(\"adder\", obj)",
+   "sub": "Write the name in the phonebook.",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "click",
+   "glow": "a2"
+  },
+  {
+   "cap": "Client: lookup(\"adder\")",
+   "sub": "Read the name → get a stub.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "whoosh",
+   "glow": "a3"
+  },
+  {
+   "cap": "unbind / list",
+   "sub": "Remove a name / list all names.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "ding",
+   "glow": "a4"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick",
+   "html": "<b>R</b>egistry = <b>P</b>honebook <b>o</b>n <b>p</b>ort 1099"
+  },
+  {
+   "label": "Points trick (5 methods)",
+   "html": "<b>B</b>ig <b>R</b>abbits <b>U</b>sually <b>L</b>ook <b>L</b>azy = bind · rebind · unbind · lookup · list"
+  }
+ ],
+ "code": {
+  "title": "Program: server registers, client looks up",
+  "lines": [
+   "import java.rmi.registry.*;",
+   "public class RegistryDemo {",
+   "    public static void main(String[] args) throws Exception {",
+   "        Registry reg = LocateRegistry.createRegistry(1099);",
+   "        System.out.println(\"Registry running on 1099\");",
+   "        String[] names = reg.list();",
+   "        System.out.println(\"Names: \" + names.length);",
+   "    }",
+   "}"
+  ],
+  "note": "(Naming.rebind(\"rmi://localhost/adder\", obj) is the older URL style)",
+  "steps": [
+   {
+    "l": [
+     "createRegistry"
+    ],
+    "say": "Start a registry inside this JVM on port 1099.",
+    "snd": "pop",
+    "mem": [
+     "registry @1099",
+     "names: []"
+    ]
+   },
+   {
+    "l": [
+     "println(\"Registry"
+    ],
+    "say": "Running.",
+    "snd": "ding",
+    "con": "Registry running on 1099"
+   },
+   {
+    "l": [
+     "reg.list()"
+    ],
+    "say": "list() returns all registered names (none yet; server would call rebind).",
+    "snd": "tick"
+   },
+   {
+    "l": [
+     "println(\"Names"
+    ],
+    "say": "0 names.",
+    "snd": "ding",
+    "con": "Names: 0"
+   }
+  ]
+ },
+ "answer_html": "<h3>Definition</h3><p>The <b>RMI Registry</b> is a simple naming service (like a phonebook) where a server registers remote objects by name, and clients look them up. Default port is <b>1099</b>.</p><h3>Methods (Registry / Naming)</h3><ul><li><b>bind(name, obj)</b>: add a name (error if it exists).</li><li><b>rebind(name, obj)</b>: add or replace.</li><li><b>unbind(name)</b>: remove.</li><li><b>lookup(name)</b>: get the stub.</li><li><b>list()</b>: all names.</li></ul><h3>Start the registry</h3><code>rmiregistry 1099</code> (command) or <code>LocateRegistry.createRegistry(1099)</code> (code).",
+ "quiz": {
+  "q": "Default port of the RMI registry?",
+  "options": [
+   "8080",
+   "1099",
+   "3306"
+  ],
+  "answer": 1,
+  "why": "Phonebook on port 1099."
+ }
+}

@@ -1,0 +1,123 @@
+{
+ "id": "u2.t03.sql",
+ "topic": "u2.t03",
+ "kind": "lesson",
+ "title": "The Structured Query Language",
+ "subtitle": "The Structured Query Language",
+ "marks": "[2.5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "JDBC Driver Types and Typical Uses of JDBC. The driver carries SQL to the database.",
+ "next": "JDBC Configuration. Now we set up JDBC to send that SQL.",
+ "actors": {
+  "a0": {
+   "e": "🏗️",
+   "l": "DDL",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "✏️",
+   "l": "DML",
+   "x": 30,
+   "y": 62
+  },
+  "a2": {
+   "e": "🔎",
+   "l": "DQL",
+   "x": 50,
+   "y": 52
+  },
+  "a3": {
+   "e": "🔑",
+   "l": "DCL",
+   "x": 70,
+   "y": 62
+  },
+  "a4": {
+   "e": "💾",
+   "l": "TCL",
+   "x": 90,
+   "y": 52
+  }
+ },
+ "scenes": [
+  {
+   "cap": "DDL: build tables",
+   "sub": "CREATE, ALTER, DROP.",
+   "show": [
+    "a0"
+   ],
+   "snd": "pop",
+   "glow": "a0"
+  },
+  {
+   "cap": "DML: change rows",
+   "sub": "INSERT, UPDATE, DELETE.",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "tick",
+   "glow": "a1"
+  },
+  {
+   "cap": "DQL: ask",
+   "sub": "SELECT … FROM … WHERE.",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "whoosh",
+   "glow": "a2"
+  },
+  {
+   "cap": "DCL: permissions",
+   "sub": "GRANT, REVOKE.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "tick",
+   "glow": "a3"
+  },
+  {
+   "cap": "TCL: save/undo",
+   "sub": "COMMIT, ROLLBACK.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "ding",
+   "glow": "a4"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick (5 groups)",
+   "html": "<b>D</b>ogs <b>M</b>ake <b>Q</b>uiet <b>C</b>ats <b>T</b>alk = DDL · DML · DQL · DCL · TCL"
+  },
+  {
+   "label": "DML trick",
+   "html": "<b>I</b> <b>U</b>se <b>D</b>etergent = INSERT · UPDATE · DELETE"
+  }
+ ],
+ "code": null,
+ "answer_html": "<h3>Definition</h3><p><b>SQL (Structured Query Language)</b> is the standard language to create, read, update and delete data in a relational database. JDBC sends SQL strings to the database.</p><table><tr><th>Group</th><th>Commands</th><th>Use</th></tr><tr><td>DDL</td><td>CREATE, ALTER, DROP</td><td>Define tables</td></tr><tr><td>DML</td><td>INSERT, UPDATE, DELETE</td><td>Change data</td></tr><tr><td>DQL</td><td>SELECT</td><td>Read data</td></tr><tr><td>DCL</td><td>GRANT, REVOKE</td><td>Permissions</td></tr><tr><td>TCL</td><td>COMMIT, ROLLBACK</td><td>Transactions</td></tr></table><h3>Example</h3><pre>CREATE TABLE Item (ItemID INT PRIMARY KEY, Name VARCHAR(50),\n  UnitPrice DOUBLE, Units INT, ExpiryDate DATE);\nINSERT INTO Item VALUES (1, 'Pen', 15.0, 50, '2027-06-15');\nSELECT Name, UnitPrice FROM Item WHERE Units &gt; 10;\nUPDATE Item SET UnitPrice = 20 WHERE ItemID = 1;\nDELETE FROM Item WHERE ItemID = 3;</pre>",
+ "quiz": {
+  "q": "SELECT belongs to which group?",
+  "options": [
+   "DDL",
+   "DQL",
+   "TCL"
+  ],
+  "answer": 1,
+  "why": "Q = Query."
+ }
+}

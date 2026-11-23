@@ -1,0 +1,194 @@
+{
+ "id": "u4.t09.cookies",
+ "topic": "u4.t09",
+ "kind": "lesson",
+ "title": "Using Cookies",
+ "subtitle": "Using Cookies",
+ "marks": "[5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Handling HTTP Requests and Responses. HTTP forgets the user after each request. Cookies help remember.",
+ "next": "Session Tracking. A more powerful way to remember: sessions.",
+ "actors": {
+  "a0": {
+   "e": "🍪",
+   "l": "Cookie",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "⏰",
+   "l": "setMaxAge",
+   "x": 30,
+   "y": 62
+  },
+  "a2": {
+   "e": "📤",
+   "l": "addCookie",
+   "x": 50,
+   "y": 52
+  },
+  "a3": {
+   "e": "🌐",
+   "l": "Browser",
+   "x": 70,
+   "y": 62
+  },
+  "a4": {
+   "e": "📨",
+   "l": "getCookies",
+   "x": 90,
+   "y": 52
+  }
+ },
+ "scenes": [
+  {
+   "cap": "new Cookie(\"user\", \"Samrat\")",
+   "sub": "A small name=value text.",
+   "show": [
+    "a0"
+   ],
+   "snd": "pop",
+   "glow": "a0"
+  },
+  {
+   "cap": "c.setMaxAge(3600)",
+   "sub": "Lives 1 hour (seconds). 0 = delete.",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "tick",
+   "glow": "a1"
+  },
+  {
+   "cap": "res.addCookie(c)",
+   "sub": "Sent to the browser, stored there.",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "whoosh",
+   "glow": "a2"
+  },
+  {
+   "cap": "Browser sends it back",
+   "sub": "With every next request to this site.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "tick",
+   "glow": "a3"
+  },
+  {
+   "cap": "req.getCookies()",
+   "sub": "Read all cookies (array).",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "ding",
+   "glow": "a4",
+   "say": {
+    "a4": "Hi Samrat!"
+   }
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick (steps)",
+   "html": "<b>C</b>ows <b>A</b>lways <b>A</b>dd <b>G</b>rass = Create · Age (setMaxAge) · Add (addCookie) · Get (getCookies)"
+  },
+  {
+   "label": "Points trick",
+   "html": "<b>C</b>ookie = <b>C</b>lient = stored on the client/browser, small text only"
+  }
+ ],
+ "code": {
+  "title": "Program: set and read a cookie",
+  "lines": [
+   "import java.io.*;",
+   "import javax.servlet.*;",
+   "import javax.servlet.http.*;",
+   "",
+   "public class CookieServlet extends HttpServlet {",
+   "    protected void doGet(HttpServletRequest req, HttpServletResponse res)",
+   "            throws ServletException, IOException {",
+   "        Cookie c = new Cookie(\"user\", \"Samrat\");",
+   "        c.setMaxAge(3600);",
+   "        res.addCookie(c);",
+   "        PrintWriter out = res.getWriter();",
+   "        Cookie[] all = req.getCookies();",
+   "        if (all != null) {",
+   "            for (Cookie k : all) out.println(k.getName() + \" = \" + k.getValue());",
+   "        }",
+   "    }",
+   "}"
+  ],
+  "note": "(complete servlet)",
+  "steps": [
+   {
+    "l": [
+     "new Cookie"
+    ],
+    "say": "Create a cookie user=Samrat.",
+    "snd": "pop",
+    "mem": [
+     "c = user:Samrat"
+    ]
+   },
+   {
+    "l": [
+     "setMaxAge"
+    ],
+    "say": "Keep it for 3600 seconds.",
+    "snd": "tick",
+    "mem": [
+     "c = user:Samrat, 1 hour"
+    ]
+   },
+   {
+    "l": [
+     "addCookie"
+    ],
+    "say": "Send it to the browser in the response.",
+    "snd": "whoosh",
+    "con": "Browser stores: user=Samrat"
+   },
+   {
+    "l": [
+     "getCookies"
+    ],
+    "say": "On the NEXT visit the browser sends it back; read all cookies.",
+    "snd": "whoosh",
+    "user": "🌐 Next visit"
+   },
+   {
+    "l": [
+     "out.println"
+    ],
+    "say": "Print name = value.",
+    "snd": "ding",
+    "con": "user = Samrat"
+   }
+  ]
+ },
+ "answer_html": "<h3>Definition</h3><p>A <b>cookie</b> is a small piece of text (name=value) stored in the browser by the server and sent back with every request. Used for remembering users.</p><h3>Steps / methods</h3><ul><li>Create: <code>Cookie c = new Cookie(\"user\", \"Samrat\");</code></li><li>Set life: <code>c.setMaxAge(seconds)</code> (0 deletes it).</li><li>Send: <code>res.addCookie(c);</code></li><li>Read: <code>Cookie[] cs = req.getCookies();</code> then <code>getName()</code>, <code>getValue()</code>.</li></ul><h3>Disadvantages</h3><ul><li>User can disable/delete cookies.</li><li>Only text, small size (~4 KB).</li><li>Not safe for secret data.</li></ul>",
+ "quiz": {
+  "q": "How do you delete a cookie?",
+  "options": [
+   "c.delete()",
+   "c.setMaxAge(0)",
+   "res.removeCookie()"
+  ],
+  "answer": 1,
+  "why": "Cows Always Add Grass: Age 0 = gone."
+ }
+}

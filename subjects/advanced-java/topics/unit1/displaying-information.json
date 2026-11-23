@@ -1,0 +1,221 @@
+{
+ "id": "u1.t03.displaying-information",
+ "topic": "u1.t03",
+ "kind": "lesson",
+ "title": "Displaying Information in a Component",
+ "subtitle": "Displaying Information in a Component",
+ "marks": "[5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Creating a Frame. We have a window. Now we write or draw inside it.",
+ "next": "Working with 2D Shapes. After text, we draw shapes.",
+ "actors": {
+  "a0": {
+   "e": "🖼️",
+   "l": "JPanel",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "🖌️",
+   "l": "paintComponent",
+   "x": 30,
+   "y": 62
+  },
+  "a2": {
+   "e": "🧽",
+   "l": "super",
+   "x": 50,
+   "y": 52
+  },
+  "a3": {
+   "e": "✍️",
+   "l": "drawString",
+   "x": 70,
+   "y": 62
+  },
+  "a4": {
+   "e": "🔁",
+   "l": "repaint()",
+   "x": 90,
+   "y": 52
+  }
+ },
+ "scenes": [
+  {
+   "cap": "Take a blank board",
+   "sub": "We draw on a JPanel (or JComponent), not on the frame directly.",
+   "show": [
+    "a0"
+   ],
+   "snd": "pop",
+   "glow": "a0"
+  },
+  {
+   "cap": "Java calls paintComponent(g)",
+   "sub": "Java calls it by itself whenever the window must be drawn (open, resize, un-hide).",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "whoosh",
+   "glow": "a1",
+   "say": {
+    "a1": "paintComponent(g)"
+   }
+  },
+  {
+   "cap": "Clean first: super.paintComponent(g)",
+   "sub": "Clears the old drawing so it does not leave marks.",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "tick",
+   "glow": "a2"
+  },
+  {
+   "cap": "Write: g.drawString(\"Hi\", x, y)",
+   "sub": "The Graphics object g is the pen. x, y = position in pixels.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "ding",
+   "glow": "a3",
+   "say": {
+    "a3": "Hi!"
+   }
+  },
+  {
+   "cap": "Need to change it? call repaint()",
+   "sub": "Never call paintComponent yourself. Ask Java with repaint().",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "click",
+   "glow": "a4"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick",
+   "html": "<b>P</b>aint <b>P</b>en <b>P</b>osition = paintComponent · Graphics pen · x,y position"
+  },
+  {
+   "label": "Points trick (3 rules)",
+   "html": "<b>S</b>ad <b>D</b>ogs <b>R</b>un = Super first · Draw with g · Repaint to update"
+  }
+ ],
+ "code": {
+  "title": "Program: write text in a panel",
+  "lines": [
+   "class MessagePanel extends JPanel {",
+   "    protected void paintComponent(Graphics g) {",
+   "        super.paintComponent(g);",
+   "        g.drawString(\"Hello, Swing!\", 75, 100);",
+   "    }",
+   "}",
+   "public class DrawText {",
+   "    public static void main(String[] args) {",
+   "        JFrame f = new JFrame(\"Text\");",
+   "        f.add(new MessagePanel());",
+   "        f.setSize(300, 200);",
+   "        f.setVisible(true);",
+   "    }",
+   "}"
+  ],
+  "note": "(imports java.awt.*, javax.swing.* skipped)",
+  "steps": [
+   {
+    "l": [
+     "main("
+    ],
+    "say": "Program starts at main() and makes a frame.",
+    "snd": "tick",
+    "win": {
+     "title": "",
+     "vis": 0,
+     "items": []
+    },
+    "mem": []
+   },
+   {
+    "l": [
+     "f.add(new MessagePanel())"
+    ],
+    "say": "Our own panel (a JPanel child) is added into the frame.",
+    "snd": "pop",
+    "mem": [
+     "panel = MessagePanel"
+    ]
+   },
+   {
+    "l": [
+     "setVisible"
+    ],
+    "say": "Window shows. Java now needs to draw the panel…",
+    "snd": "tick",
+    "win": {
+     "title": "Text",
+     "vis": 1,
+     "items": []
+    }
+   },
+   {
+    "l": [
+     "protected void paintComponent"
+    ],
+    "say": "…so Java calls paintComponent(g) BY ITSELF. g = the pen.",
+    "snd": "whoosh",
+    "user": "🪟 The window opens",
+    "mem": [
+     "panel = MessagePanel",
+     "g = Graphics (pen)"
+    ]
+   },
+   {
+    "l": [
+     "super.paintComponent"
+    ],
+    "say": "First clear the background.",
+    "snd": "tick"
+   },
+   {
+    "l": [
+     "g.drawString"
+    ],
+    "say": "Write the text at x=75, y=100.",
+    "snd": "ding",
+    "win": {
+     "title": "Text",
+     "vis": 1,
+     "items": [
+      {
+       "t": "lb",
+       "v": "Hello, Swing!"
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "answer_html": "<h3>Definition</h3><p>To display information in a component, we make a class that extends <b>JPanel</b> (or JComponent) and override <b>paintComponent(Graphics g)</b>. Java calls this method automatically whenever the component needs to be drawn.</p><h3>Key points</h3><ul><li><b>paintComponent(Graphics g)</b> is called by Java, not by us.</li><li>Call <b>super.paintComponent(g)</b> first to clear the background.</li><li>The <b>Graphics</b> object is the pen: <code>drawString()</code>, <code>drawLine()</code>, <code>drawRect()</code>.</li><li>Coordinates are in pixels; (0,0) is the top-left corner.</li><li>To redraw, call <b>repaint()</b>.</li></ul><h3>Figure</h3><pre>Window opens/resizes → Java → paintComponent(g) → g.drawString(\"Hello\", x, y) → text on screen</pre>",
+ "quiz": {
+  "q": "How should you redraw a component when data changes?",
+  "options": [
+   "Call paintComponent() yourself",
+   "Call repaint()",
+   "Create a new frame"
+  ],
+  "answer": 1,
+  "why": "Sad Dogs Run: … Repaint."
+ }
+}

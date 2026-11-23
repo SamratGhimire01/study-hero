@@ -1,0 +1,176 @@
+{
+ "id": "u4.t08.http-requests-responses",
+ "topic": "u4.t08",
+ "kind": "lesson",
+ "title": "Handling HTTP Requests and Responses",
+ "subtitle": "Handling HTTP Requests and Responses",
+ "marks": "[5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "The javax.servlet.http Package. HttpServlet has doGet and doPost. When is each used?",
+ "next": "Using Cookies. Responses can also store small data in the browser: cookies.",
+ "actors": {
+  "br": {
+   "e": "🌐",
+   "l": "Browser",
+   "x": 10,
+   "y": 55
+  },
+  "g": {
+   "e": "✉️",
+   "l": "GET (data in URL)",
+   "x": 50,
+   "y": 28
+  },
+  "p": {
+   "e": "📦",
+   "l": "POST (data in body)",
+   "x": 50,
+   "y": 80
+  },
+  "sv": {
+   "e": "⚡",
+   "l": "Servlet",
+   "x": 88,
+   "y": 55
+  }
+ },
+ "scenes": [
+  {
+   "cap": "Browser talks with HTTP",
+   "sub": "Each request has a method: GET or POST (and PUT, DELETE…).",
+   "show": [
+    "br",
+    "sv"
+   ],
+   "snd": "pop"
+  },
+  {
+   "cap": "GET ✉️ = postcard",
+   "sub": "Data in the URL: ?name=Sam. Visible, small, bookmarkable. → doGet()",
+   "show": [
+    "br",
+    "g",
+    "sv"
+   ],
+   "snd": "whoosh",
+   "glow": "g",
+   "say": {
+    "g": "?name=Sam"
+   }
+  },
+  {
+   "cap": "POST 📦 = sealed parcel",
+   "sub": "Data in the request body. Hidden, large, for forms/passwords. → doPost()",
+   "show": [
+    "br",
+    "p",
+    "sv"
+   ],
+   "snd": "whoosh",
+   "glow": "p"
+  },
+  {
+   "cap": "Servlet answers",
+   "sub": "res.setContentType, getWriter, println. Status 200 OK.",
+   "show": [
+    "br",
+    "g",
+    "p",
+    "sv"
+   ],
+   "snd": "ding",
+   "glow": "sv",
+   "say": {
+    "sv": "200 OK"
+   }
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick",
+   "html": "<b>G</b>ET = <b>P</b>ostcard, <b>P</b>OST = <b>P</b>arcel"
+  },
+  {
+   "label": "Points trick (difference)",
+   "html": "<b>U</b>RL <b>L</b>imited <b>B</b>ookmark <b>v</b>s <b>B</b>ody <b>B</b>ig <b>S</b>ecure = GET: URL, limited size, bookmarkable · POST: body, large, more secure"
+  }
+ ],
+ "code": {
+  "title": "Program: one servlet for GET and POST",
+  "lines": [
+   "import java.io.*;",
+   "import javax.servlet.*;",
+   "import javax.servlet.http.*;",
+   "",
+   "public class GreetServlet extends HttpServlet {",
+   "    protected void doGet(HttpServletRequest req, HttpServletResponse res)",
+   "            throws ServletException, IOException {",
+   "        res.setContentType(\"text/html\");",
+   "        res.getWriter().println(\"Hello \" + req.getParameter(\"name\") + \" (GET)\");",
+   "    }",
+   "    protected void doPost(HttpServletRequest req, HttpServletResponse res)",
+   "            throws ServletException, IOException {",
+   "        doGet(req, res);",
+   "    }",
+   "}"
+  ],
+  "note": "(complete servlet)",
+  "steps": [
+   {
+    "l": [
+     "protected void doGet"
+    ],
+    "say": "Browser opens /greet?name=Sam → GET → doGet.",
+    "snd": "whoosh",
+    "user": "🌐 GET /greet?name=Sam",
+    "mem": [
+     "name = Sam (from URL)"
+    ]
+   },
+   {
+    "l": [
+     "res.getWriter"
+    ],
+    "say": "Reply is written.",
+    "snd": "ding",
+    "win": {
+     "title": "/greet?name=Sam",
+     "vis": 1,
+     "items": [
+      {
+       "t": "lb",
+       "v": "Hello Sam (GET)"
+      }
+     ]
+    }
+   },
+   {
+    "l": [
+     "protected void doPost"
+    ],
+    "say": "A form with method=\"post\" → doPost.",
+    "snd": "whoosh",
+    "user": "📦 POST form name=Sam"
+   },
+   {
+    "l": [
+     "doGet(req, res)"
+    ],
+    "say": "Common trick: reuse doGet code.",
+    "snd": "ding"
+   }
+  ]
+ },
+ "answer_html": "<h3>Definition</h3><p>An HTTP servlet handles a browser <b>request</b> in methods like <b>doGet()</b> and <b>doPost()</b>, and sends back a <b>response</b> (HTML, status, headers).</p><h3>Main methods</h3><ul><li>Request: getParameter(), getHeader(), getMethod().</li><li>Response: setContentType(), getWriter(), sendRedirect(), setStatus().</li></ul><table><tr><th>GET</th><th>POST</th></tr><tr><td>Data in URL (query string)</td><td>Data in request body</td></tr><tr><td>Visible, less secure</td><td>Hidden, more secure</td></tr><tr><td>Limited size</td><td>Large data allowed</td></tr><tr><td>Can be bookmarked/cached</td><td>Not bookmarked</td></tr><tr><td>Handled by doGet()</td><td>Handled by doPost()</td></tr></table>",
+ "quiz": {
+  "q": "Which method is better for a password form?",
+  "options": [
+   "GET",
+   "POST",
+   "HEAD"
+  ],
+  "answer": 1,
+  "why": "POST = Parcel (sealed)."
+ }
+}

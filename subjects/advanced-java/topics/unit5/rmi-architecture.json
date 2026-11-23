@@ -1,0 +1,221 @@
+{
+ "id": "u5.t05.rmi-architecture",
+ "topic": "u5.t05",
+ "kind": "lesson",
+ "title": "The RMI Programming Model (Architecture)",
+ "subtitle": "The RMI Programming Model",
+ "marks": "[5 / 10]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Stubs and Parameter Marshalling. Stubs carry calls. Here is the whole layered architecture.",
+ "next": "Interfaces and Implementations. Step 1 of the model: interface and implementation.",
+ "actors": {
+  "cl": {
+   "e": "🧑",
+   "l": "Client",
+   "x": 8,
+   "y": 55
+  },
+  "st": {
+   "e": "📞",
+   "l": "Stub",
+   "x": 26,
+   "y": 55
+  },
+  "rrl": {
+   "e": "🧭",
+   "l": "RRL",
+   "x": 44,
+   "y": 55
+  },
+  "tr": {
+   "e": "🚚",
+   "l": "Transport",
+   "x": 62,
+   "y": 55
+  },
+  "sk": {
+   "e": "🛎️",
+   "l": "Skeleton",
+   "x": 78,
+   "y": 55
+  },
+  "ob": {
+   "e": "🧠",
+   "l": "Object",
+   "x": 93,
+   "y": 55
+  },
+  "reg": {
+   "e": "📒",
+   "l": "Registry",
+   "x": 78,
+   "y": 18,
+   "h": 1
+  },
+  "msg": {
+   "e": "✉️",
+   "l": "",
+   "x": 8,
+   "y": 38,
+   "h": 1
+  }
+ },
+ "scenes": [
+  {
+   "cap": "The expert is far away 🌍",
+   "sub": "Remote object lives in another JVM.",
+   "show": [
+    "cl",
+    "ob"
+   ],
+   "snd": "pop"
+  },
+  {
+   "cap": "First, the phonebook 📒",
+   "sub": "RMI Registry: server registers a name, client looks it up.",
+   "show": [
+    "cl",
+    "ob",
+    "reg"
+   ],
+   "snd": "tick",
+   "glow": "reg",
+   "say": {
+    "reg": "name → object"
+   }
+  },
+  {
+   "cap": "Client calls the Stub 📞",
+   "sub": "Stub = local stand-in. Packs arguments.",
+   "show": [
+    "cl",
+    "st",
+    "ob",
+    "msg"
+   ],
+   "snd": "click",
+   "glow": "st",
+   "mv": {
+    "msg": [
+     26,
+     40
+    ]
+   }
+  },
+  {
+   "cap": "Remote Reference Layer 🧭",
+   "sub": "Manages the reference to the remote object and the connection.",
+   "show": [
+    "cl",
+    "st",
+    "rrl",
+    "ob",
+    "msg"
+   ],
+   "snd": "tick",
+   "glow": "rrl",
+   "mv": {
+    "msg": [
+     44,
+     40
+    ]
+   }
+  },
+  {
+   "cap": "Transport Layer 🚚 (TCP/IP)",
+   "sub": "Carries the data over the network.",
+   "show": [
+    "cl",
+    "st",
+    "rrl",
+    "tr",
+    "ob",
+    "msg"
+   ],
+   "snd": "whoosh",
+   "glow": "tr",
+   "mv": {
+    "msg": [
+     62,
+     40
+    ]
+   }
+  },
+  {
+   "cap": "Skeleton receives 🛎️",
+   "sub": "Unpacks and calls the REAL method.",
+   "show": [
+    "cl",
+    "st",
+    "rrl",
+    "tr",
+    "sk",
+    "ob",
+    "msg"
+   ],
+   "snd": "pop",
+   "glow": "sk",
+   "mv": {
+    "msg": [
+     78,
+     40
+    ]
+   }
+  },
+  {
+   "cap": "Answer travels back ↩️",
+   "sub": "Object → Skeleton → Transport → RRL → Stub → Client.",
+   "show": [
+    "cl",
+    "st",
+    "rrl",
+    "tr",
+    "sk",
+    "ob",
+    "msg"
+   ],
+   "snd": "ding",
+   "glow": "cl",
+   "say": {
+    "cl": "Got it!"
+   },
+   "mv": {
+    "msg": [
+     8,
+     40
+    ]
+   }
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick (client path)",
+   "html": "<b>C</b>ats <b>S</b>it <b>R</b>ight <b>T</b>here = Client → Stub → RRL → Transport"
+  },
+  {
+   "label": "Server path",
+   "html": "<b>T</b>ransport <b>S</b>erves <b>O</b>bjects = Transport → Skeleton → Object"
+  },
+  {
+   "label": "Program steps",
+   "html": "<b>I</b> <b>I</b>nsist <b>R</b>ats <b>S</b>ing <b>C</b>arols = Interface · Implementation · Registry · Server · Client"
+  },
+  {
+   "label": "Roles",
+   "html": "<b>S</b>tub = <b>p</b>hone, <b>S</b>keleton = <b>r</b>eceptionist, <b>R</b>egistry = <b>p</b>honebook"
+  }
+ ],
+ "code": null,
+ "answer_html": "<h3>Definition</h3><p><b>RMI (Remote Method Invocation)</b> lets a Java program in one JVM call a method on an object running in another JVM over a network. Its architecture has layers on both client and server.</p><h3>Key parts</h3><ul><li><b>Client &amp; Server</b>: client calls remote methods; server holds and runs the remote object.</li><li><b>Stub</b> (client side): local stand-in; packs arguments and unpacks return values or errors.</li><li><b>Skeleton</b> (server side): receives calls, unpacks arguments, runs the method, sends back the result. (Old; removed after Java 1.2 but still asked.)</li><li><b>Remote Reference Layer</b>: handles remote object references and how connections are made.</li><li><b>Transport Layer</b>: sends/receives raw data (TCP/IP).</li><li><b>RMI Registry</b>: phonebook where the server registers the object name and the client finds it.</li></ul><h3>Architecture Diagram</h3><pre>+--------+    +------+    +--------------+    +-----------+\n| Client | -&gt; | Stub | -&gt; | Remote Ref.  | -&gt; | Transport |\n+--------+    +------+    | Layer (RRL)  |    |  Layer    |\n                          +--------------+    +-----------+\n                                                   | network\n+---------------+    +----------+    +--------------+    +-----------+\n| Remote Object | &lt;- | Skeleton | &lt;- | Remote Ref.  | &lt;- | Transport |\n+---------------+    +----------+    | Layer (RRL)  |    |  Layer    |\n                                     +--------------+    +-----------+</pre><h3>Steps to build an RMI app</h3><ol><li>Define remote interface</li><li>Implement it</li><li>Start registry</li><li>Server binds object</li><li>Client looks up and calls</li></ol>",
+ "quiz": {
+  "q": "Which layer carries data over TCP/IP?",
+  "options": [
+   "Stub",
+   "Remote Reference Layer",
+   "Transport Layer"
+  ],
+  "answer": 2,
+  "why": "Cats Sit Right There: T = Transport last."
+ }
+}

@@ -1,0 +1,137 @@
+{
+ "id": "u5.t04.stubs-marshalling",
+ "topic": "u5.t04",
+ "kind": "lesson",
+ "title": "Stubs and Parameter Marshalling",
+ "subtitle": "Stubs and Parameter Marshalling",
+ "marks": "[5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Remote Method Calls. We saw a call travel. The stub is the traveller.",
+ "next": "The RMI Programming Model. Now the full RMI programming model (architecture).",
+ "actors": {
+  "c": {
+   "e": "🧑",
+   "l": "Client",
+   "x": 10,
+   "y": 55
+  },
+  "st": {
+   "e": "📞",
+   "l": "Stub (proxy)",
+   "x": 35,
+   "y": 55
+  },
+  "bag": {
+   "e": "🧳",
+   "l": "marshalled bytes",
+   "x": 35,
+   "y": 25,
+   "h": 1
+  },
+  "sk": {
+   "e": "🛎️",
+   "l": "Skeleton",
+   "x": 70,
+   "y": 55
+  },
+  "o": {
+   "e": "🧠",
+   "l": "Remote object",
+   "x": 92,
+   "y": 55
+  }
+ },
+ "scenes": [
+  {
+   "cap": "Stub = local stand-in 📞",
+   "sub": "It has the same methods as the remote object, so the client thinks it is local.",
+   "show": [
+    "c",
+    "st",
+    "sk",
+    "o"
+   ],
+   "snd": "pop",
+   "glow": "st"
+  },
+  {
+   "cap": "Marshalling = packing the suitcase 🧳",
+   "sub": "Parameters are turned into bytes (serialization).",
+   "show": [
+    "c",
+    "st",
+    "bag",
+    "sk",
+    "o"
+   ],
+   "snd": "pop",
+   "glow": "bag"
+  },
+  {
+   "cap": "Bytes travel to the server",
+   "sub": "",
+   "show": [
+    "c",
+    "st",
+    "bag",
+    "sk",
+    "o"
+   ],
+   "snd": "whoosh",
+   "glow": "bag",
+   "mv": {
+    "bag": [
+     70,
+     25
+    ]
+   }
+  },
+  {
+   "cap": "Unmarshalling = unpacking",
+   "sub": "Skeleton/server unpacks and calls the real object.",
+   "show": [
+    "c",
+    "st",
+    "sk",
+    "o"
+   ],
+   "snd": "tick",
+   "glow": "sk"
+  },
+  {
+   "cap": "Rules: what is copied?",
+   "sub": "Primitives and Serializable objects: COPIED. Remote objects: passed as a STUB (reference).",
+   "show": [
+    "c",
+    "st",
+    "sk",
+    "o"
+   ],
+   "snd": "ding",
+   "glow": "st"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick",
+   "html": "<b>S</b>tub = <b>S</b>tand-in, <b>M</b>arshal = <b>P</b>ack"
+  },
+  {
+   "label": "Points trick (passing rules)",
+   "html": "<b>P</b>rimitives <b>C</b>opy, <b>O</b>bjects <b>C</b>opy, <b>R</b>emotes <b>R</b>eference = int/double by value · Serializable objects by copy · Remote objects by stub reference"
+  }
+ ],
+ "code": null,
+ "answer_html": "<h3>Definition</h3><p>A <b>stub</b> is a client-side proxy for a remote object. <b>Parameter marshalling</b> is packing method parameters into a byte stream to send them over the network (unmarshalling is unpacking them).</p><h3>Key points</h3><ul><li>Stub implements the same remote interface as the real object.</li><li>Stub: starts connection, marshals parameters, sends, waits, unmarshals result.</li><li>Uses Java <b>serialization</b> for objects.</li><li>Primitive types are sent by value.</li><li>Non-remote objects must be <b>Serializable</b> and are sent as copies.</li><li>Remote objects are sent as stubs (by reference).</li><li>Since Java 5 stubs are created automatically (no rmic needed).</li></ul>",
+ "quiz": {
+  "q": "How is a non-remote object parameter passed in RMI?",
+  "options": [
+   "By reference",
+   "By copy (must be Serializable)",
+   "It cannot be passed"
+  ],
+  "answer": 1,
+  "why": "Objects Copy, Remotes Reference."
+ }
+}

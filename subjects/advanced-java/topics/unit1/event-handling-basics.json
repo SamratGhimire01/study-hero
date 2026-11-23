@@ -1,0 +1,251 @@
+{
+ "id": "u1.t08.event-handling-basics",
+ "topic": "u1.t08",
+ "kind": "lesson",
+ "title": "Event Handling Basics",
+ "subtitle": "Event Handling Basics",
+ "marks": "[5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Displaying Images. The window looks good, but clicking does nothing yet.",
+ "next": "Event Classes. Each event has its own class (like KeyEvent).",
+ "actors": {
+  "a0": {
+   "e": "🔔",
+   "l": "Source",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "👆",
+   "l": "Event",
+   "x": 30,
+   "y": 62
+  },
+  "a2": {
+   "e": "📩",
+   "l": "Event object",
+   "x": 50,
+   "y": 52
+  },
+  "a3": {
+   "e": "🧑‍🍳",
+   "l": "Listener",
+   "x": 70,
+   "y": 62
+  },
+  "a4": {
+   "e": "🍲",
+   "l": "Handler",
+   "x": 90,
+   "y": 52
+  }
+ },
+ "scenes": [
+  {
+   "cap": "Event Source",
+   "sub": "The component where something happens (button, text field, window).",
+   "show": [
+    "a0"
+   ],
+   "snd": "pop",
+   "glow": "a0"
+  },
+  {
+   "cap": "User acts",
+   "sub": "Click, key press, mouse move = an event.",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "click",
+   "glow": "a1"
+  },
+  {
+   "cap": "Event object is made",
+   "sub": "ActionEvent, KeyEvent, MouseEvent… holds the details.",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "pop",
+   "glow": "a2"
+  },
+  {
+   "cap": "Sent to the Listener",
+   "sub": "Only listeners that registered get it (Delegation Event Model).",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "whoosh",
+   "glow": "a3",
+   "say": {
+    "a3": "I registered!"
+   }
+  },
+  {
+   "cap": "Method runs",
+   "sub": "e.g. actionPerformed(e). Your code reacts.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "ding",
+   "glow": "a4"
+  },
+  {
+   "cap": "3 steps to code it: Implement → Register → Override",
+   "sub": "implements ActionListener · b.addActionListener(this) · write actionPerformed()",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "ding"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick (model)",
+   "html": "<b>S</b>ome <b>E</b>lephants <b>L</b>isten = Source → Event → Listener (Delegation Event Model)"
+  },
+  {
+   "label": "Points trick (3 coding steps)",
+   "html": "<b>I</b>ce <b>R</b>eaches <b>O</b>cean = Implement interface · Register (addXxxListener) · Override method"
+  }
+ ],
+ "code": {
+  "title": "Program: count clicks",
+  "lines": [
+   "public class Counter extends JFrame implements ActionListener {",
+   "    JButton b = new JButton(\"Click\");",
+   "    int count = 0;",
+   "    Counter() {",
+   "        setLayout(new FlowLayout());",
+   "        add(b);",
+   "        b.addActionListener(this);",
+   "        setSize(200, 100);",
+   "        setVisible(true);",
+   "    }",
+   "    public void actionPerformed(ActionEvent e) {",
+   "        count++;",
+   "        b.setText(\"Clicked \" + count);",
+   "    }",
+   "    public static void main(String[] args) { new Counter(); }",
+   "}"
+  ],
+  "note": "(imports java.awt.*, java.awt.event.*, javax.swing.* skipped)",
+  "steps": [
+   {
+    "l": [
+     "new Counter()"
+    ],
+    "say": "Start: main() makes the window.",
+    "snd": "tick",
+    "win": {
+     "title": "",
+     "vis": 0,
+     "items": []
+    },
+    "mem": []
+   },
+   {
+    "l": [
+     "implements ActionListener"
+    ],
+    "say": "Step 1 IMPLEMENT: we promise to write actionPerformed().",
+    "snd": "tick",
+    "mem": [
+     "Counter is an ActionListener"
+    ]
+   },
+   {
+    "l": [
+     "b.addActionListener(this)"
+    ],
+    "say": "Step 2 REGISTER: button will tell THIS object about clicks.",
+    "snd": "click",
+    "mem": [
+     "b ➜ notifies this",
+     "count = 0"
+    ]
+   },
+   {
+    "l": [
+     "setVisible"
+    ],
+    "say": "Window appears.",
+    "snd": "ding",
+    "win": {
+     "title": "Counter",
+     "vis": 1,
+     "items": [
+      {
+       "t": "btn",
+       "v": "Click"
+      }
+     ]
+    }
+   },
+   {
+    "l": [
+     "public void actionPerformed"
+    ],
+    "say": "Step 3 OVERRIDE: you click → Java calls this by itself.",
+    "snd": "click",
+    "user": "👆 You click the button",
+    "mem": [
+     "e = ActionEvent",
+     "count = 0"
+    ]
+   },
+   {
+    "l": [
+     "count++"
+    ],
+    "say": "count becomes 1.",
+    "snd": "tick",
+    "mem": [
+     "count = 1"
+    ]
+   },
+   {
+    "l": [
+     "b.setText"
+    ],
+    "say": "Button text changes.",
+    "snd": "ding",
+    "win": {
+     "title": "Counter",
+     "vis": 1,
+     "items": [
+      {
+       "t": "btn",
+       "v": "Clicked 1"
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "answer_html": "<h3>Definition</h3><p><b>Event handling</b> is the way a Java program reacts to user actions like clicks and key presses. Java uses the <b>Delegation Event Model</b>: a source sends an event object to registered listeners.</p><h3>Parts of the Delegation Event Model</h3><ul><li><b>Event Source</b>: component that generates the event (JButton).</li><li><b>Event Object</b>: holds information about the event (ActionEvent).</li><li><b>Event Listener</b>: interface whose method runs when the event occurs (ActionListener).</li></ul><h3>Figure</h3><pre>[Event Source] --event object--&gt; [Registered Listener] --&gt; handler method runs</pre><h3>Steps to handle an event</h3><ol><li><b>Implement</b> the listener interface.</li><li><b>Register</b> it: <code>source.addXxxListener(listener)</code>.</li><li><b>Override</b> its method (e.g. <code>actionPerformed</code>).</li></ol>",
+ "quiz": {
+  "q": "What is step 2 of event handling?",
+  "options": [
+   "Override the method",
+   "Register the listener with addXxxListener()",
+   "Create a frame"
+  ],
+  "answer": 1,
+  "why": "Ice Reaches Ocean: Implement, Register, Override."
+ }
+}

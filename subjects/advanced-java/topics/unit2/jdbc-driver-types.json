@@ -1,0 +1,107 @@
+{
+ "id": "u2.t02.jdbc-driver-types",
+ "topic": "u2.t02",
+ "kind": "lesson",
+ "title": "JDBC Driver Types and Typical Uses",
+ "subtitle": "JDBC Driver Types and Typical Uses of JDBC",
+ "marks": "[5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "The Design of JDBC. The driver connects Java to the database. There are 4 kinds.",
+ "next": "The Structured Query Language. Drivers carry SQL. Now SQL itself.",
+ "actors": {
+  "a0": {
+   "e": "🌉",
+   "l": "Type 1",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "🧩",
+   "l": "Type 2",
+   "x": 37,
+   "y": 62
+  },
+  "a2": {
+   "e": "🌐",
+   "l": "Type 3",
+   "x": 63,
+   "y": 52
+  },
+  "a3": {
+   "e": "⚡",
+   "l": "Type 4",
+   "x": 90,
+   "y": 62
+  }
+ },
+ "scenes": [
+  {
+   "cap": "Type 1: JDBC-ODBC Bridge",
+   "sub": "Java → ODBC → DB. Old, slow, removed in Java 8.",
+   "show": [
+    "a0"
+   ],
+   "snd": "err",
+   "glow": "a0"
+  },
+  {
+   "cap": "Type 2: Native-API",
+   "sub": "Uses the DB’s native (C) library. Partly Java. Needs install on client.",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "tick",
+   "glow": "a1"
+  },
+  {
+   "cap": "Type 3: Network Protocol",
+   "sub": "Pure Java to a middleware server, which talks to the DB.",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "whoosh",
+   "glow": "a2"
+  },
+  {
+   "cap": "Type 4: Thin driver",
+   "sub": "Pure Java, talks the DB protocol directly. Fastest. Most used (MySQL Connector/J).",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "ding",
+   "glow": "a3",
+   "say": {
+    "a3": "Best!"
+   }
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick (4 types in order)",
+   "html": "<b>O</b>ld <b>N</b>anny <b>N</b>eeds <b>T</b>ea = ODBC bridge · Native-API · Network protocol · Thin"
+  },
+  {
+   "label": "Points trick (why Type 4)",
+   "html": "<b>P</b>ure <b>F</b>ast <b>F</b>ree = Pure Java · Fastest · No extra install"
+  }
+ ],
+ "code": null,
+ "answer_html": "<h3>Definition</h3><p>A <b>JDBC driver</b> is software that lets a Java program talk to a specific database. There are <b>4 types</b>.</p><table><tr><th>Type</th><th>Name</th><th>How it works</th><th>Pros / Cons</th></tr><tr><td>1</td><td>JDBC-ODBC Bridge</td><td>Java → ODBC → DB</td><td>Easy; slow, needs ODBC, removed in Java 8</td></tr><tr><td>2</td><td>Native-API (partly Java)</td><td>Uses DB client library (C/C++)</td><td>Faster than 1; needs native install</td></tr><tr><td>3</td><td>Network Protocol (pure Java)</td><td>Java → middleware server → DB</td><td>Flexible; needs middle server</td></tr><tr><td>4</td><td>Thin driver (pure Java)</td><td>Java → DB protocol directly</td><td>Fastest, portable, most used</td></tr></table><h3>Typical uses of JDBC</h3><ul><li><b>Two-tier</b>: desktop app talks to DB directly.</li><li><b>Three-tier</b>: web app (servlet/JSP) uses JDBC on the server.</li><li>Reports, banking, shop billing, student records.</li></ul>",
+ "quiz": {
+  "q": "Which driver type is pure Java and talks directly to the database?",
+  "options": [
+   "Type 1",
+   "Type 3",
+   "Type 4"
+  ],
+  "answer": 2,
+  "why": "Old Nanny Needs Tea: Thin = Type 4."
+ }
+}

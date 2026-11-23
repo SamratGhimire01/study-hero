@@ -1,0 +1,206 @@
+{
+ "id": "u2.t01.jdbc-design",
+ "topic": "u2.t01",
+ "kind": "lesson",
+ "title": "The Design of JDBC (Architecture)",
+ "subtitle": "The Design of JDBC",
+ "marks": "[5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Basic Swing Components. Unit 1 made the screen. Now we store data in a database.",
+ "next": "JDBC Driver Types and Typical Uses of JDBC. The Driver is the key part, and there are 4 types.",
+ "actors": {
+  "a0": {
+   "e": "☕",
+   "l": "Java App",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "📜",
+   "l": "JDBC API",
+   "x": 30,
+   "y": 62
+  },
+  "a2": {
+   "e": "🧑‍💼",
+   "l": "DriverManager",
+   "x": 50,
+   "y": 52
+  },
+  "a3": {
+   "e": "🔌",
+   "l": "Driver",
+   "x": 70,
+   "y": 62
+  },
+  "a4": {
+   "e": "🗄️",
+   "l": "Database",
+   "x": 90,
+   "y": 52
+  }
+ },
+ "scenes": [
+  {
+   "cap": "Your Java program",
+   "sub": "Wants to save or read data.",
+   "show": [
+    "a0"
+   ],
+   "snd": "pop",
+   "glow": "a0"
+  },
+  {
+   "cap": "JDBC API (java.sql)",
+   "sub": "Same classes for every database: Connection, Statement, ResultSet.",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "tick",
+   "glow": "a1"
+  },
+  {
+   "cap": "DriverManager",
+   "sub": "Picks the right driver for the database URL.",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "click",
+   "glow": "a2"
+  },
+  {
+   "cap": "JDBC Driver",
+   "sub": "Translates Java calls into the database’s own language.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "whoosh",
+   "glow": "a3"
+  },
+  {
+   "cap": "Database (MySQL, Oracle…)",
+   "sub": "Runs the SQL and sends results back.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "ding",
+   "glow": "a4",
+   "say": {
+    "a4": "rows!"
+   }
+  },
+  {
+   "cap": "Two-tier vs Three-tier",
+   "sub": "2-tier: App ↔ Driver ↔ DB. 3-tier: Client ↔ App/Web server (+JDBC) ↔ DB.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "ding"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick (parts)",
+   "html": "<b>A</b>ll <b>D</b>rivers <b>D</b>rive <b>D</b>aily = JDBC API · DriverManager · Driver · Database"
+  },
+  {
+   "label": "Program steps (every JDBC program)",
+   "html": "<b>L</b>ittle <b>C</b>ats <b>C</b>reate <b>E</b>xtra <b>C</b>haos = Load driver · Connect · Create statement · Execute · Close"
+  },
+  {
+   "label": "Tiers",
+   "html": "<b>T</b>wo <b>T</b>alks <b>D</b>irect, <b>T</b>hree <b>T</b>akes <b>a</b> <b>M</b>iddleman"
+  }
+ ],
+ "code": {
+  "title": "Program: connect to the database",
+  "lines": [
+   "import java.sql.*;",
+   "public class ConnectDemo {",
+   "    public static void main(String[] args) throws Exception {",
+   "        Class.forName(\"com.mysql.cj.jdbc.Driver\");",
+   "        Connection con = DriverManager.getConnection(",
+   "            \"jdbc:mysql://localhost:3306/Shop\", \"root\", \"\");",
+   "        System.out.println(\"Connected!\");",
+   "        con.close();",
+   "    }",
+   "}"
+  ],
+  "note": "(complete program; needs MySQL driver JAR)",
+  "steps": [
+   {
+    "l": [
+     "main("
+    ],
+    "say": "Program starts.",
+    "snd": "tick",
+    "mem": []
+   },
+   {
+    "l": [
+     "Class.forName"
+    ],
+    "say": "L = Load the MySQL driver class (optional since JDBC 4, but write it in exams).",
+    "snd": "pop",
+    "mem": [
+     "driver = MySQL loaded"
+    ]
+   },
+   {
+    "l": [
+     "DriverManager.getConnection"
+    ],
+    "say": "C = Connect: DriverManager finds the driver for this URL and opens a connection.",
+    "snd": "whoosh",
+    "mem": [
+     "driver loaded",
+     "con = Connection to Shop"
+    ]
+   },
+   {
+    "l": [
+     "println"
+    ],
+    "say": "Connected! (Next topics: Create statement, Execute.)",
+    "snd": "ding",
+    "con": "Connected!"
+   },
+   {
+    "l": [
+     "con.close"
+    ],
+    "say": "C = Close: always free the connection.",
+    "snd": "tick",
+    "mem": [
+     "con = closed"
+    ]
+   }
+  ]
+ },
+ "answer_html": "<h3>Definition</h3><p><b>JDBC (Java Database Connectivity)</b> is a Java API used to connect Java programs to relational databases and run SQL queries.</p><h3>Main parts</h3><ul><li><b>JDBC API (java.sql)</b>: interfaces/classes like DriverManager, Connection, Statement, PreparedStatement, ResultSet.</li><li><b>DriverManager</b>: picks and loads the right driver for the database URL.</li><li><b>JDBC Drivers</b>: translate Java database calls into database-specific commands.</li><li><b>Database</b>: stores the tables and runs SQL queries.</li></ul><h3>JDBC Architecture Diagram</h3><pre>Two-Tier:\n[Java App] &lt;---&gt; [JDBC Driver] &lt;---&gt; [Database]\n\nThree-Tier:\n[Client App] &lt;---&gt; [Web / App Server + JDBC] &lt;---&gt; [Database]</pre><h3>Steps in a JDBC program</h3><ol><li>Load driver</li><li>Connect</li><li>Create statement</li><li>Execute query</li><li>Close</li></ol>",
+ "quiz": {
+  "q": "Which class picks the right driver for a URL?",
+  "options": [
+   "ResultSet",
+   "DriverManager",
+   "Statement"
+  ],
+  "answer": 1,
+  "why": "All Drivers Drive Daily."
+ }
+}

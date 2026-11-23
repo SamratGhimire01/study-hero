@@ -1,0 +1,10 @@
+# Unit 5 story: RMI (hero: Mo the Mad Mouse)
+
+1. Mo makes a **phone call to an object** far away. **Just Open Some Rooms**: the server **Cows Eat Roses**, then Mo can **Look then Call**. *(RMI · Java only, Objects passed, Stub/Skeleton, Registry · Create, Export, Register)*
+2. **Can People Send Unusual Rare Rubies**? Mo packs them in a suitcase. **Primitives Copy, Objects Copy, Remotes Reference**. *(Call, Pack, Send, Unpack, Run, Return · marshalling rules)*
+3. The call travels as **Cats Sit Right There**, and **Transport Serves Objects**. **Ever Ready Programmers** and **Ugly Robots Implement** the work. *(Client→Stub→RRL→Transport · Transport→Skeleton→Object · Extends Remote, RemoteException · UnicastRemoteObject)*
+4. The phonebook on page **1099**: **Big Rabbits Usually Look Lazy**. An **alarm clock** wakes the sleeping object, and **Always Read Daily**. *(bind, rebind, unbind, lookup, list · Activation: Activatable, rmid, Descriptor)*
+5. **I Insist Rats Sing Carols** to finish the app. Then Mo boards a CORBA bus and says **I Order Ice-cream**. *(Interface, Implementation, Registry, Server, Client · IDL, ORB, IIOP)*
+
+## Video prompt (paste into any AI video tool)
+Funny colorful 3D cartoon, 50 seconds, no talking, upbeat music, big captions. Hero: Mo, a small angry-cute mouse, in every scene. 1) Mo phones a giant brain on a faraway island; cows eat roses at the server house. Captions "Just Open Some Rooms", "Cows Eat Roses", "Look then Call". 2) Mo packs rubies into a suitcase that flies across the sea. Captions "Can People Send Unusual Rare Rubies", "Primitives Copy, Remotes Reference". 3) Cats sit on a road of boxes labelled Stub, RRL, Transport; robots work in a factory. Captions "Cats Sit Right There", "Ugly Robots Implement". 4) Rabbits lazily read a giant phonebook with page 1099; an alarm clock wakes a sleeping brain. Captions "Big Rabbits Usually Look Lazy", "Activation = Alarm clock". 5) Rats sing carols; Mo rides a colorful bus (ORB) with Java, C++ and Python friends, eating ice cream. Captions "I Insist Rats Sing Carols", "I Order Ice-cream". End with all captions for 5 seconds.

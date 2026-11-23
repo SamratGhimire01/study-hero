@@ -1,0 +1,143 @@
+{
+ "id": "u3.t02.advantages-javabeans",
+ "topic": "u3.t02",
+ "kind": "lesson",
+ "title": "Advantages of Java Beans",
+ "subtitle": "Advantages of Java Beans",
+ "marks": "[3]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "What Is a Java Bean?. We know what a bean is.",
+ "next": "Introspection. How do tools find a bean’s properties? Introspection.",
+ "actors": {
+  "a0": {
+   "e": "♻️",
+   "l": "Reusable",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "🔒",
+   "l": "Encapsulation",
+   "x": 26,
+   "y": 62
+  },
+  "a2": {
+   "e": "💾",
+   "l": "Persistence",
+   "x": 42,
+   "y": 52
+  },
+  "a3": {
+   "e": "📣",
+   "l": "Events",
+   "x": 58,
+   "y": 62
+  },
+  "a4": {
+   "e": "🧰",
+   "l": "Tools",
+   "x": 74,
+   "y": 52
+  },
+  "a5": {
+   "e": "🌍",
+   "l": "Portable",
+   "x": 90,
+   "y": 62
+  }
+ },
+ "scenes": [
+  {
+   "cap": "Reusable",
+   "sub": "Write once, use in many apps and GUI builder tools.",
+   "show": [
+    "a0"
+   ],
+   "snd": "pop",
+   "glow": "a0"
+  },
+  {
+   "cap": "Encapsulation",
+   "sub": "Data hidden behind getters/setters.",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "tick",
+   "glow": "a1"
+  },
+  {
+   "cap": "Persistence",
+   "sub": "Serializable: save state and load later.",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "tick",
+   "glow": "a2"
+  },
+  {
+   "cap": "Events",
+   "sub": "Can send and receive events (listeners).",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "whoosh",
+   "glow": "a3"
+  },
+  {
+   "cap": "Tool support",
+   "sub": "IDEs can see and set properties visually (introspection).",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "ding",
+   "glow": "a4"
+  },
+  {
+   "cap": "Platform independent",
+   "sub": "Pure Java: write once, run anywhere.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4",
+    "a5"
+   ],
+   "snd": "pop",
+   "glow": "a5"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick",
+   "html": "<b>B</b>eans <b>M</b>ake <b>B</b>uilding <b>E</b>asy"
+  },
+  {
+   "label": "Points trick (6 advantages)",
+   "html": "<b>R</b>eal <b>E</b>asy <b>P</b>ets <b>E</b>at <b>T</b>asty <b>P</b>ies = Reusable · Encapsulation · Persistence · Events · Tool support · Portable"
+  }
+ ],
+ "code": null,
+ "answer_html": "<h3>Definition</h3><p><b>JavaBeans</b> are reusable Java classes with a no-argument constructor, private variables, public getter/setter methods and Serializable support.</p><h3>Advantages of JavaBeans</h3><ul><li>Easy to <b>reuse</b> in different apps and GUI tools.</li><li>Hides internal data using getters and setters (<b>encapsulation</b>).</li><li>Supports saving/sending object state via <b>Serializable</b> (persistence).</li><li>Supports <b>event</b> listening out of the box.</li><li><b>Builder tools</b> can inspect and customize them (introspection, customizers).</li><li><b>Platform independent</b> (pure Java).</li></ul>",
+ "quiz": {
+  "q": "Which advantage lets a bean save its state?",
+  "options": [
+   "Events",
+   "Persistence (Serializable)",
+   "Introspection"
+  ],
+  "answer": 1,
+  "why": "Real Easy Pets: P = Persistence."
+ }
+}

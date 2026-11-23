@@ -1,0 +1,188 @@
+{
+ "id": "u3.t01.what-is-java-bean",
+ "topic": "u3.t01",
+ "kind": "lesson",
+ "title": "What Is a Java Bean?",
+ "subtitle": "What Is a Java Bean?",
+ "marks": "[2.5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Row Sets. Unit 2 is done (a RowSet is a bean). Now: what is a bean?",
+ "next": "Advantages of Java Beans. Why should we use beans? Their advantages.",
+ "actors": {
+  "a0": {
+   "e": "🫘",
+   "l": "Bean",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "🚪",
+   "l": "No-arg",
+   "x": 30,
+   "y": 62
+  },
+  "a2": {
+   "e": "🔒",
+   "l": "Private",
+   "x": 50,
+   "y": 52
+  },
+  "a3": {
+   "e": "🔑",
+   "l": "Get/Set",
+   "x": 70,
+   "y": 62
+  },
+  "a4": {
+   "e": "💾",
+   "l": "Serializable",
+   "x": 90,
+   "y": 52
+  }
+ },
+ "scenes": [
+  {
+   "cap": "A reusable Java class",
+   "sub": "Like a LEGO block you can plug into many programs and GUI tools.",
+   "show": [
+    "a0"
+   ],
+   "snd": "pop",
+   "glow": "a0"
+  },
+  {
+   "cap": "Rule 1: public no-arg constructor",
+   "sub": "Tools can create it with new Student().",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "tick",
+   "glow": "a1"
+  },
+  {
+   "cap": "Rule 2: private fields",
+   "sub": "Data is hidden.",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "tick",
+   "glow": "a2"
+  },
+  {
+   "cap": "Rule 3: public getters/setters",
+   "sub": "getName(), setName(), isActive() for boolean.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "click",
+   "glow": "a3"
+  },
+  {
+   "cap": "Rule 4: implements Serializable",
+   "sub": "So its state can be saved and sent.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "ding",
+   "glow": "a4"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick",
+   "html": "<b>B</b>ean = <b>L</b>EGO <b>b</b>lock = reusable component"
+  },
+  {
+   "label": "Points trick (4 rules)",
+   "html": "<b>N</b>o <b>P</b>rivate <b>G</b>ate <b>S</b>huts = No-arg constructor · Private fields · Getters/setters · Serializable"
+  }
+ ],
+ "code": {
+  "title": "Program: Student bean",
+  "lines": [
+   "public class Student implements java.io.Serializable {",
+   "    private String name;",
+   "    private int age;",
+   "    public Student() { }",
+   "    public String getName() { return name; }",
+   "    public void setName(String name) { this.name = name; }",
+   "    public int getAge() { return age; }",
+   "    public void setAge(int age) { this.age = age; }",
+   "}"
+  ],
+  "note": "(complete bean)",
+  "steps": [
+   {
+    "l": [
+     "public class Student"
+    ],
+    "say": "A public class that implements Serializable (rule 4).",
+    "snd": "pop",
+    "mem": []
+   },
+   {
+    "l": [
+     "private String name"
+    ],
+    "say": "Private fields (rule 2): name and age are hidden.",
+    "snd": "tick",
+    "mem": [
+     "name (private)",
+     "age (private)"
+    ]
+   },
+   {
+    "l": [
+     "public Student()"
+    ],
+    "say": "Public no-argument constructor (rule 1).",
+    "snd": "tick"
+   },
+   {
+    "l": [
+     "getName",
+     "setName"
+    ],
+    "say": "Getter and setter for property \"name\" (rule 3).",
+    "snd": "click",
+    "mem": [
+     "property: name (read/write)"
+    ]
+   },
+   {
+    "l": [
+     "getAge",
+     "setAge"
+    ],
+    "say": "Property \"age\". Tools find properties by these names.",
+    "snd": "ding",
+    "mem": [
+     "property: name",
+     "property: age"
+    ]
+   }
+  ]
+ },
+ "answer_html": "<h3>Definition</h3><p>A <b>JavaBean</b> is a reusable Java class (software component) that follows simple rules so tools and programs can use it easily.</p><h3>Rules of a JavaBean</h3><ul><li>Has a <b>public no-argument constructor</b>.</li><li>Fields (properties) are <b>private</b>.</li><li>Properties are accessed with public <b>getter/setter</b> methods (<code>getX()</code>, <code>setX()</code>, <code>isX()</code> for boolean).</li><li>Implements <b>Serializable</b> so its state can be saved.</li><li>Can fire and listen to <b>events</b>.</li></ul><h3>Example</h3><pre>public class Student implements java.io.Serializable {\n    private String name;\n    private int age;\n    public Student() { }\n    public String getName() { return name; }\n    public void setName(String name) { this.name = name; }\n    public int getAge() { return age; }\n    public void setAge(int age) { this.age = age; }\n}</pre>",
+ "quiz": {
+  "q": "Which is NOT a JavaBean rule?",
+  "options": [
+   "Public no-arg constructor",
+   "Public fields",
+   "Getters and setters"
+  ],
+  "answer": 1,
+  "why": "No Private Gate Shuts: fields are PRIVATE."
+ }
+}

@@ -1,0 +1,203 @@
+{
+ "id": "u3.t06.bound-constrained",
+ "topic": "u3.t06",
+ "kind": "lesson",
+ "title": "Bound and Constrained Properties",
+ "subtitle": "Bound and Constrained Properties",
+ "marks": "[2+3]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Using BeanInfo Interface. Beans have properties. Some of them tell others when they change.",
+ "next": "Persistence. How a bean’s state is saved: persistence.",
+ "actors": {
+  "b": {
+   "e": "🫘",
+   "l": "Bean (salary)",
+   "x": 15,
+   "y": 55
+  },
+  "bl": {
+   "e": "📢",
+   "l": "PropertyChangeListener",
+   "x": 70,
+   "y": 30
+  },
+  "vl": {
+   "e": "🛑",
+   "l": "VetoableChangeListener",
+   "x": 70,
+   "y": 78
+  },
+  "ok": {
+   "e": "✅",
+   "l": "changed",
+   "x": 90,
+   "y": 30,
+   "h": 1
+  },
+  "no": {
+   "e": "❌",
+   "l": "veto!",
+   "x": 90,
+   "y": 78,
+   "h": 1
+  }
+ },
+ "scenes": [
+  {
+   "cap": "A bean property changes",
+   "sub": "salary: 1000 → 2000",
+   "show": [
+    "b",
+    "bl",
+    "vl"
+   ],
+   "snd": "pop",
+   "glow": "b"
+  },
+  {
+   "cap": "BOUND: tell others AFTER 📢",
+   "sub": "Fires PropertyChangeEvent to PropertyChangeListener after the value changes.",
+   "show": [
+    "b",
+    "bl",
+    "ok"
+   ],
+   "snd": "whoosh",
+   "glow": "bl",
+   "say": {
+    "bl": "propertyChange()"
+   }
+  },
+  {
+   "cap": "Bound listeners cannot stop it",
+   "sub": "They only get the news.",
+   "show": [
+    "b",
+    "bl",
+    "ok"
+   ],
+   "snd": "ding",
+   "glow": "ok"
+  },
+  {
+   "cap": "CONSTRAINED: ask BEFORE 🛑",
+   "sub": "Fires to VetoableChangeListener before the value is final.",
+   "show": [
+    "b",
+    "vl"
+   ],
+   "snd": "whoosh",
+   "glow": "vl",
+   "say": {
+    "vl": "vetoableChange()"
+   }
+  },
+  {
+   "cap": "Listener can say NO ❌",
+   "sub": "Throws PropertyVetoException → value is not changed.",
+   "show": [
+    "b",
+    "vl",
+    "no"
+   ],
+   "snd": "err",
+   "glow": "no"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick",
+   "html": "<b>B</b>ound = <b>B</b>ehind, <b>C</b>onstrained = <b>C</b>an <b>s</b>top = Bound tells after; Constrained asks before and can veto"
+  },
+  {
+   "label": "Points trick (listeners)",
+   "html": "<b>P</b>lease <b>C</b>hange / <b>V</b>ery <b>C</b>areful = PropertyChangeListener (bound) · VetoableChangeListener (constrained)"
+  },
+  {
+   "label": "Exception trick",
+   "html": "<b>V</b>eto <b>T</b>hrows <b>P</b>VE = PropertyVetoException"
+  }
+ ],
+ "code": {
+  "title": "Program: bound property with PropertyChangeSupport",
+  "lines": [
+   "public class Employee {",
+   "    private int salary;",
+   "    private PropertyChangeSupport pcs = new PropertyChangeSupport(this);",
+   "    public void addPropertyChangeListener(PropertyChangeListener l) {",
+   "        pcs.addPropertyChangeListener(l);",
+   "    }",
+   "    public void setSalary(int newSalary) {",
+   "        int old = salary;",
+   "        salary = newSalary;",
+   "        pcs.firePropertyChange(\"salary\", old, newSalary);",
+   "    }",
+   "    public int getSalary() { return salary; }",
+   "}"
+  ],
+  "note": "(imports java.beans.*)",
+  "steps": [
+   {
+    "l": [
+     "PropertyChangeSupport"
+    ],
+    "say": "A helper that keeps the listener list and fires events.",
+    "snd": "pop",
+    "mem": [
+     "salary = 1000",
+     "pcs (listener list)"
+    ]
+   },
+   {
+    "l": [
+     "addPropertyChangeListener"
+    ],
+    "say": "Other objects register to hear about changes.",
+    "snd": "click",
+    "mem": [
+     "salary = 1000",
+     "listeners: 1"
+    ]
+   },
+   {
+    "l": [
+     "public void setSalary"
+    ],
+    "say": "Someone calls setSalary(2000).",
+    "snd": "tick",
+    "user": "💰 setSalary(2000)"
+   },
+   {
+    "l": [
+     "salary = newSalary"
+    ],
+    "say": "Value changes FIRST…",
+    "snd": "tick",
+    "mem": [
+     "old = 1000",
+     "salary = 2000"
+    ]
+   },
+   {
+    "l": [
+     "firePropertyChange"
+    ],
+    "say": "…THEN listeners are told (bound = after).",
+    "snd": "ding",
+    "con": "propertyChange: salary 1000 → 2000"
+   }
+  ]
+ },
+ "answer_html": "<h3>Definition</h3><p><b>Bound</b> and <b>constrained</b> properties are bean properties that notify other objects when their value changes.</p><table><tr><th>Point</th><th>Bound Property</th><th>Constrained Property</th></tr><tr><td>Listener interface</td><td>PropertyChangeListener</td><td>VetoableChangeListener</td></tr><tr><td>Event class</td><td>PropertyChangeEvent</td><td>PropertyChangeEvent with veto check</td></tr><tr><td>Timing</td><td>After the value changes</td><td>Before the change is finalized</td></tr><tr><td>Rejecting changes</td><td>Cannot stop a change</td><td>Can reject by throwing PropertyVetoException</td></tr><tr><td>Main purpose</td><td>Notify that a value changed</td><td>Validate or restrict a value</td></tr></table><h3>Helper classes</h3><code>PropertyChangeSupport</code> (firePropertyChange) and <code>VetoableChangeSupport</code> (fireVetoableChange).",
+ "quiz": {
+  "q": "Which property can reject a change?",
+  "options": [
+   "Bound",
+   "Constrained",
+   "Indexed"
+  ],
+  "answer": 1,
+  "why": "Constrained = Can stop."
+ }
+}

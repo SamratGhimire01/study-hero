@@ -1,0 +1,124 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Session Tracking (HttpSession) – CACS354</title><style>
+:root{--bg:#f4f6fb;--card:#fff;--ink:#16202c;--mut:#5b6877;--acc:#4f46e5;--g:#16a34a;--o:#ea580c;--line:#dde2ea;--hl:#fff3b0;--code:#0f172a;--codeink:#e2e8f0}
+@media(prefers-color-scheme:dark){:root{--bg:#0f141b;--card:#18202a;--ink:#eaf0f6;--mut:#9aa7b5;--acc:#8b87ff;--line:#2a3441;--hl:#5a4b00}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 system-ui,sans-serif}
+.w{max-width:900px;margin:0 auto;padding:14px}h1{font-size:21px;margin:6px 0}
+.top{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.top button{margin-left:auto}
+.road{display:flex;gap:4px;flex-wrap:wrap;margin:10px 0}
+.road button{flex:1 1 90px;border:2px solid var(--line);background:var(--card);color:var(--ink);padding:8px 6px;border-radius:10px;font:inherit;font-size:14px;cursor:pointer;position:relative}
+.road button.on{border-color:var(--acc);background:var(--acc);color:#fff}.road button.done{border-color:var(--g)}
+.road button small{display:block;font-size:11px;opacity:.8}
+.pg{display:none}.pg.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:12px 0}
+h2{margin:0 0 4px;font-size:20px}h3{margin:14px 0 4px;font-size:14px;color:var(--acc);text-transform:uppercase;letter-spacing:.05em}
+.step{display:inline-block;background:var(--acc);color:#fff;border-radius:50%;width:24px;height:24px;text-align:center;font-size:14px;line-height:24px;margin-right:6px}
+.link{background:var(--bg);border:1px dashed var(--acc);border-radius:10px;padding:8px 12px;margin:8px 0;font-size:15px}
+.stage{position:relative;height:clamp(200px,52vw,270px);border-radius:12px;background:linear-gradient(#e9f0ff,#f9fbff);border:1px solid var(--line);overflow:hidden;color:#16202c}
+@media(prefers-color-scheme:dark){.stage{background:linear-gradient(#1b2740,#141c2b);color:#eaf0f6}}
+.a{position:absolute;transform:translate(-50%,-50%);text-align:center;transition:left 1s ease,top 1s ease,opacity .5s,transform .4s;font-size:clamp(26px,7vw,52px);line-height:1}
+.a small{display:block;font-size:clamp(9px,2.4vw,13px);font-weight:700;margin-top:4px}
+.a.glow{transform:translate(-50%,-50%) scale(1.25);filter:drop-shadow(0 0 10px #facc15)}
+.b{z-index:5;position:absolute;transform:translate(-50%,-100%);background:#fff;color:#111;border:2px solid #333;border-radius:12px;padding:4px 10px;font-size:14px;font-weight:700;max-width:170px;text-align:center;opacity:0;transition:opacity .3s}.b.on{opacity:1}
+.cap{margin:10px 0 2px;font-size:22px;font-weight:800}.sub{color:var(--mut);margin:0 0 8px;min-height:26px}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--acc);transition:width .4s}
+.ctl{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;align-items:center}
+button.p,.ctl button,.top button{border:0;background:var(--acc);color:#fff;padding:9px 16px;border-radius:10px;font:inherit;cursor:pointer}
+.ctl button.s,.top button.s{background:var(--line);color:var(--ink)}
+.dots{display:flex;gap:5px;margin-left:auto}.dots b{width:10px;height:10px;border-radius:50%;background:var(--line)}.dots b.on{background:var(--acc)}
+.mn{background:var(--hl);color:#111;border-radius:12px;padding:12px 14px;margin:10px 0;border-left:6px solid #eab308}
+@media(prefers-color-scheme:dark){.mn{color:#fff}}
+.mn big{font-size:21px;font-weight:800;display:block}.mn b{color:var(--o)}
+table{border-collapse:collapse;width:100%;font-size:15px}td,th{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}th{background:var(--bg)}
+pre{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px;overflow:auto;font:13.5px/1.45 ui-monospace,Menlo,monospace;margin:6px 0}
+ul{padding-left:22px;margin:4px 0}.note{color:var(--mut);font-size:14px}
+.q button{display:block;width:100%;text-align:left;margin:6px 0;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:inherit;cursor:pointer}
+.q button.ok{background:#bbf7d0;color:#064e1f}.q button.no{background:#fecaca;color:#7f1d1d}
+code{background:var(--bg);padding:1px 5px;border-radius:4px;font-size:.9em}
+/* code trace */
+.tr{display:grid;grid-template-columns:1.25fr 1fr;gap:10px}@media(max-width:700px){.tr{grid-template-columns:1fr}}
+.code{background:var(--code);color:var(--codeink);border-radius:10px;padding:8px 0;font:13px/1.7 ui-monospace,Menlo,monospace;max-height:340px;overflow:auto}
+.code div{padding:0 10px;white-space:pre;border-left:4px solid transparent}.code div.on{background:#4338ca;border-left-color:#facc15;color:#fff}
+.code div i{color:#64748b;font-style:normal;display:inline-block;width:26px}
+.side{display:flex;flex-direction:column;gap:8px}
+.user{background:#ffedd5;color:#7c2d12;border:2px solid #fb923c;border-radius:10px;padding:6px 10px;font-weight:700;font-size:15px;display:none}.user.on{display:block}
+.say{background:var(--bg);border:2px solid var(--acc);border-radius:10px;padding:8px 10px;font-weight:600;min-height:64px}
+.win{border:2px solid #475569;border-radius:8px;background:#fff;color:#111;overflow:hidden;font-size:14px}
+.win .tb{background:#475569;color:#fff;padding:3px 8px;display:flex;justify-content:space-between}
+.win .bd{padding:8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;min-height:64px}
+.win.off{border-style:dashed;background:transparent;color:var(--mut);text-align:center;padding:18px}
+.win input{width:90px;border:1px solid #888;padding:2px 4px;font-size:14px;background:#fff;color:#111}.win .bt{border:1px solid #888;background:#e5e7eb;border-radius:4px;padding:2px 8px}
+.mem{font:13px ui-monospace,Menlo,monospace;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 8px;min-height:44px}
+.con{font:13px ui-monospace,monospace;background:#000;color:#4ade80;border-radius:6px;padding:4px 8px;min-height:28px}
+.hint{font-size:13px;color:var(--mut)}
+/* mobile: never scroll sideways */
+.card{min-width:0;overflow-wrap:anywhere}.tr>*{min-width:0}td,th,code,.mn big,.link{overflow-wrap:anywhere;word-break:break-word}
+pre{max-width:100%}table{table-layout:auto}
+.b{white-space:nowrap;font-size:clamp(11px,3.2vw,14px)}
+.nav{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:6px 0}.nav a{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:7px 12px;color:var(--ink);text-decoration:none;font-size:15px}.road{display:none}a{color:var(--acc)}
+.list li{margin:3px 0}.todo{color:var(--mut)}.ok{color:#16a34a;font-weight:700}</style></head><body><div class="w"><div class="nav"><a href="../index.html">☰ Advanced Java Programming</a><a href="u4-cookies.html">◀ Using Cookies</a><a href="u4-introduction-to-jsp.html">Introduction to JSP ▶</a><button class="s" id="snd" onclick="togSnd()">🔊 Sound ON</button></div><div id="road" class="road"></div><div id="pages"></div><p class="note">draft – check against textbook · Source: Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs</p><div class="nav"><a href="../index.html">☰ Advanced Java Programming</a><a href="u4-cookies.html">◀ Using Cookies</a><a href="u4-introduction-to-jsp.html">Introduction to JSP ▶</a><button class="s" id="snd" onclick="togSnd()">🔊 Sound ON</button></div></div><script>const L=[{"tab":"Session Tracking (HttpSession)","sub":"Session Tracking","marks":"[5]","last":"Using Cookies. Cookies store data in the browser. Sessions store it on the server.","next":"Introduction to JSP. Writing HTML in println is hard. JSP makes it easy.","actors":{"u":{"e":"🧑","l":"User","x":10,"y":55},"srv":{"e":"🖥️","l":"Server","x":50,"y":55},"box":{"e":"🗄️","l":"HttpSession (locker)","x":85,"y":55,"h":1},"id":{"e":"🎫","l":"JSESSIONID","x":30,"y":25,"h":1}},"scenes":[{"cap":"HTTP is stateless","sub":"The server forgets you after each request.","show":["u","srv"],"snd":"err"},{"cap":"getSession() opens a locker 🗄️","sub":"Server makes an HttpSession with a unique ID.","show":["u","srv","box"],"snd":"pop","glow":"box","say":{"box":"id=A1B2"}},{"cap":"You get a ticket 🎫","sub":"The ID goes to the browser (cookie JSESSIONID or URL rewriting).","show":["u","srv","box","id"],"snd":"whoosh","glow":"id","mv":{"id":[15,25]}},{"cap":"setAttribute(\"cart\", …)","sub":"Store data in your locker on the server.","show":["u","srv","box"],"snd":"click","glow":"box","say":{"box":"cart: 2 items"}},{"cap":"Next request: show ticket","sub":"Server finds your locker: getAttribute(\"cart\").","show":["u","srv","box","id"],"snd":"ding","glow":"box"},{"cap":"Logout: invalidate()","sub":"Locker is emptied and closed.","show":["u","srv"],"snd":"tick","glow":"srv"}],"mn":[["Topic trick (4 techniques)","<b>C</b>ute <b>U</b>nicorns <b>H</b>ide <b>S</b>ecrets = Cookies · URL rewriting · Hidden form fields · HttpSession"],["Points trick (7 methods)","<b>S</b>am <b>G</b>ets <b>R</b>ice <b>I</b>n <b>I</b>ndia <b>S</b>o <b>I</b>nexpensively = setAttribute · getAttribute · removeAttribute · getId · invalidate · setMaxInactiveInterval · isNew"]],"code":{"title":"Program: count visits with a session","lines":["import java.io.*;","import javax.servlet.*;","import javax.servlet.http.*;","","public class VisitServlet extends HttpServlet {","    protected void doGet(HttpServletRequest req, HttpServletResponse res)","            throws ServletException, IOException {","        HttpSession session = req.getSession();","        Integer count = (Integer) session.getAttribute(\"count\");","        if (count == null) count = 0;","        count++;","        session.setAttribute(\"count\", count);","        res.getWriter().println(\"Visit \" + count + \", session id \" + session.getId());","    }","}"],"note":"(complete servlet)","steps":[{"l":["req.getSession()"],"say":"Get this user’s session (make one if new).","snd":"pop","user":"🌐 First visit","mem":["session id = A1B2 (new)"]},{"l":["getAttribute(\"count\")"],"say":"Nothing saved yet → null → 0.","snd":"tick","mem":["session A1B2","count = null → 0"]},{"l":["count++"],"say":"count = 1.","snd":"tick","mem":["count = 1"]},{"l":["setAttribute"],"say":"Save it in the session (on the server).","snd":"click","mem":["session A1B2: count = 1"]},{"l":["println"],"say":"Reply.","snd":"ding","con":"Visit 1, session id A1B2"},{"l":["req.getSession()"],"say":"Same user comes back → SAME session found by its ID.","snd":"whoosh","user":"🌐 Second visit","mem":["session A1B2: count = 1"]},{"l":["println"],"say":"Now count is 2.","snd":"ding","con":"Visit 2, session id A1B2"}]},"ans":"<h3>Definition</h3><p><b>HttpSession</b> (<code>javax.servlet.http.HttpSession</code>) is an interface used to remember user data across multiple web requests, because HTTP by itself does not remember past requests.</p><h3>Key methods</h3><ul><li><b>setAttribute(String name, Object value)</b> – saves data in the session under a name.</li><li><b>getAttribute(String name)</b> – gets saved data by name (null if not there).</li><li><b>removeAttribute(String name)</b> – deletes saved data by name.</li><li><b>getId()</b> – returns the unique ID of the user’s session.</li><li><b>invalidate()</b> – ends the session and clears all saved data (logout).</li><li><b>setMaxInactiveInterval(int seconds)</b> – how long the session can stay idle before expiring.</li><li><b>isNew()</b> – true if the session was just created.</li></ul><h3>Session tracking techniques</h3>Cookies · URL rewriting · Hidden form fields · HttpSession","q":["Which method ends a session on logout?",["removeAttribute()","invalidate()","getId()"],1,"Sam Gets Rice In India: I = invalidate."]}];
+// ===== sound (made in the browser, no files) =====
+let SOUND=true,AC=null;
+function tone(f,d,type,g,at,f2){const t=AC.currentTime+(at||0),o=AC.createOscillator(),n=AC.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);n.gain.setValueAtTime(g||.12,t);n.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(n);n.connect(AC.destination);o.start(t);o.stop(t+d)}
+function S(k){if(!SOUND||!k)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();AC.resume();
+ ({tick:()=>tone(660,.07,'triangle',.07),click:()=>{tone(200,.06,'square',.1);tone(90,.08,'sine',.12,.02)},whoosh:()=>tone(250,.4,'sawtooth',.04,0,1400),ding:()=>{tone(880,.25,'sine',.14);tone(1320,.4,'sine',.1,.12)},pop:()=>tone(450,.12,'sine',.14,0,900),key:()=>tone(420,.05,'square',.07),err:()=>tone(150,.3,'sawtooth',.08)})[k]()}catch(e){}}
+function togSnd(){SOUND=!SOUND;document.getElementById('snd').textContent=SOUND?'🔊 Sound ON':'🔇 Sound OFF';S('ding')}
+
+// ===== engine =====
+const road=document.getElementById('road'),pages=document.getElementById('pages');
+const PL=[];function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&lt;'.replace('lt','gt'))}
+function winHTML(w){if(!w||!w.vis)return `<div class="win off">🪟 window not on screen yet${w&&w.title?` ("${w.title}" exists in memory)`:''}</div>`;
+ return `<div class="win"><div class="tb"><span>${w.title}</span><span>– □ ✕</span></div><div class="bd">${w.items.map(x=>x.t=='in'?`<input value="${x.v}" readonly>`:x.t=='btn'?`<span class="bt">${x.v}</span>`:`<span>${x.v}</span>`).join('')}</div></div>`}
+L.forEach((t,i)=>{
+ const b=document.createElement('button');b.innerHTML=`${i+1}. ${t.tab}<small>${t.marks}</small>`;b.onclick=()=>show(i);road.appendChild(b);
+ const p=document.createElement('section');p.className='pg';p.id='p'+i;
+ p.innerHTML=`<div class="link">⬅️ <b>Last:</b> ${t.last}<br>📍 <b>Now:</b> ${t.sub}</div>
+ <div class="card"><h2><span class="step">1</span>60-second story <span class="note">${t.marks}</span></h2><div class="stage" id="st${i}"></div><div class="cap" id="cap${i}"></div><p class="sub" id="sub${i}"></p><div class="bar"><i id="bar${i}"></i></div>
+ <div class="ctl"><button onclick="PL[${i}].play()" id="pl${i}">▶ Play</button><button class="s" onclick="PL[${i}].go(-1)">◀ Back</button><button class="s" onclick="PL[${i}].go(1)">Next ▶</button><div class="dots" id="dots${i}"></div></div></div>
+ ${t.code?` <div class="card"><h2><span class="step">2</span>How the code really runs <span class="note">${t.code.title}</span></h2><p class="hint">Yellow line = the line running now. Right side = what you would see.</p>
+ <div class="tr"><div class="code" id="code${i}">${t.code.lines.map((x,k)=>`<div id="c${i}_${k}"><i>${k+1}</i>${esc(x)}</div>`).join('')}</div>
+ <div class="side"><div class="user" id="usr${i}"></div><div class="say" id="say${i}"></div><div id="win${i}"></div><div class="mem" id="mem${i}"></div><div class="con" id="con${i}"></div></div></div>
+ <p class="hint">${t.code.note}</p>
+ <div class="bar" style="margin-top:8px"><i id="cbar${i}"></i></div>
+ <div class="ctl"><button onclick="CT[${i}].play()" id="cpl${i}">▶ Play</button><button class="s" onclick="CT[${i}].go(-1)">◀ Back</button><button class="s" onclick="CT[${i}].go(1)">Next ▶</button><span class="note" id="cnt${i}"></span></div></div>`:''}
+ <div class="card"><h2><span class="step">${t.code?3:2}</span>Memory tricks</h2>${t.mn.map(m=>`<div class="mn"><span class="note" style="color:inherit">${m[0]}</span><big>${m[1]}</big></div>`).join('')}</div>
+ <div class="card"><h2><span class="step">${t.code?4:3}</span>Write this in the exam <span class="note">${t.marks}</span></h2>${t.ans}</div>
+ <div class="card q"><h2><span class="step">${t.code?5:4}</span>Quick check</h2><p><b>${t.q[0]}</b></p>${t.q[1].map((o,k)=>`<button onclick="chk(this,${k==t.q[2]},'${t.q[3].replace(/'/g,"\\'")}')">${o}</button>`).join('')}<p class="note"></p></div>
+ <div class="link">➡️ <b>Next:</b> ${t.next} ${i<L.length-1?`<br><button class="p" style="margin-top:6px" onclick="show(${i+1})">Go to lesson ${i+2} ▶</button>`:''}</div>`;
+ pages.appendChild(p);
+});
+// story players
+L.forEach((t,i)=>{
+ const st=document.getElementById('st'+i),A={};
+ for(const[k,a]of Object.entries(t.actors)){const d=document.createElement('div');d.className='a';d.innerHTML=a.e+(a.l?`<small>${a.l}</small>`:'');d.style.left=a.x+'%';d.style.top=a.y+'%';d.style.opacity=0;st.appendChild(d);const bb=document.createElement('div');bb.className='b';st.appendChild(bb);A[k]={d,b:bb,a}}
+ const dots=document.getElementById('dots'+i);t.scenes.forEach(()=>dots.appendChild(document.createElement('b')));
+ let n=0,timer=null,playing=false;
+ function render(snd){const s=t.scenes[n];
+  for(const k in A){const{d,b,a}=A[k];const on=s.show.includes(k);d.style.opacity=on?1:0;d.classList.toggle('glow',s.glow===k);const pos=(s.mv&&s.mv[k])||[a.x,a.y];d.style.left=pos[0]+'%';d.style.top=pos[1]+'%';const sy=s.say&&s.say[k];b.classList.toggle('on',!!sy&&on);if(sy){b.textContent=sy;b.style.left=pos[0]+'%';b.style.transform='translate('+(pos[0]>75?-92:pos[0]<25?-8:-50)+'%,-100%)';b.style.top=(pos[1]-14)+'%'}}
+  document.getElementById('cap'+i).textContent=s.cap;document.getElementById('sub'+i).textContent=s.sub;[...dots.children].forEach((x,j)=>x.classList.toggle('on',j<=n));document.getElementById('bar'+i).style.width=((n+1)/t.scenes.length*100)+'%';if(snd)S(s.snd)}
+ function stop(){clearTimeout(timer);playing=false;document.getElementById('pl'+i).textContent='▶ Play'}
+ function tick(){render(1);if(n>=t.scenes.length-1){stop();document.getElementById('pl'+i).textContent='↻ Replay';return}timer=setTimeout(()=>{n++;tick()},5200)}
+ PL[i]={go(d){stop();n=Math.max(0,Math.min(t.scenes.length-1,n+d));render(1)},play(){if(playing){stop();return}if(n>=t.scenes.length-1)n=0;playing=true;document.getElementById('pl'+i).textContent='⏸ Pause';tick()},reset(){stop();n=0;render(0)}};PL[i].reset();
+});
+// code tracers
+const CT=[];
+L.forEach((t,i)=>{const c=t.code;if(!c){CT[i]={reset(){},go(){},play(){}};return}let n=0,timer=null,playing=false;
+ const idx=(s,occ)=>{let k=-1,seen=0;for(let j=0;j<c.lines.length;j++){if(c.lines[j].includes(s)){if(seen==(occ||0)){k=j;break}seen++}}return k};
+ c.steps.forEach(s=>{s.idx=s.l.map(x=>idx(x,s.occ));});
+ function render(snd){const s=c.steps[n];let win=null,mem=[],con='';
+  for(let j=0;j<=n;j++){const q=c.steps[j];if(q.win)win=q.win;if(q.mem)mem=q.mem;if(q.con!==undefined)con=q.con}
+  c.lines.forEach((_,k)=>document.getElementById(`c${i}_${k}`).classList.toggle('on',s.idx.includes(k)));
+  const first=document.getElementById(`c${i}_${s.idx[0]}`);if(first){const box=document.getElementById('code'+i);box.scrollTop=first.offsetTop-box.offsetTop-80}
+  const u=document.getElementById('usr'+i);u.textContent=s.user||'';u.classList.toggle('on',!!s.user);
+  document.getElementById('say'+i).textContent=s.say;document.getElementById('win'+i).innerHTML=winHTML(win);
+  document.getElementById('mem'+i).innerHTML='<b>In memory:</b><br>'+(mem.length?mem.map(esc).join('<br>'):'<span class="hint">(nothing yet)</span>');
+  const cn=document.getElementById('con'+i);cn.style.display=con?'block':'none';cn.textContent=con?'> '+con:'';
+  document.getElementById('cbar'+i).style.width=((n+1)/c.steps.length*100)+'%';document.getElementById('cnt'+i).textContent=`Step ${n+1} of ${c.steps.length}`;if(snd)S(s.snd)}
+ function stop(){clearTimeout(timer);playing=false;document.getElementById('cpl'+i).textContent='▶ Play'}
+ function tick(){render(1);if(n>=c.steps.length-1){stop();document.getElementById('cpl'+i).textContent='↻ Replay';return}timer=setTimeout(()=>{n++;tick()},4800)}
+ CT[i]={go(d){stop();n=Math.max(0,Math.min(c.steps.length-1,n+d));render(1)},play(){if(playing){stop();return}if(n>=c.steps.length-1)n=0;playing=true;document.getElementById('cpl'+i).textContent='⏸ Pause';tick()},reset(){stop();n=0;render(0)},steps:c.steps.length};CT[i].reset();
+});
+let seen=new Set();
+function show(i){document.querySelectorAll('.pg').forEach((p,j)=>p.classList.toggle('on',i==j));[...road.children].forEach((b,j)=>{b.classList.toggle('on',i==j)});seen.add(i);[...road.children].forEach((b,j)=>b.classList.toggle('done',seen.has(j)&&j!=i&&j<L.length));PL.forEach((p,j)=>j!=i&&p.reset());CT.forEach((p,j)=>j!=i&&p.reset());window.scrollTo(0,0)}
+function chk(b,ok,msg){b.classList.add(ok?'ok':'no');S(ok?'ding':'err');b.parentElement.querySelector('.note').textContent=ok?'✅ Correct! '+msg:'❌ Try again.'}
+show(0);
+</script></body></html>

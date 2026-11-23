@@ -16,15 +16,15 @@ L.forEach((t,i)=>{
  p.innerHTML=`<div class="link">⬅️ <b>Last:</b> ${t.last}<br>📍 <b>Now:</b> ${t.sub}</div>
  <div class="card"><h2><span class="step">1</span>60-second story <span class="note">${t.marks}</span></h2><div class="stage" id="st${i}"></div><div class="cap" id="cap${i}"></div><p class="sub" id="sub${i}"></p><div class="bar"><i id="bar${i}"></i></div>
  <div class="ctl"><button onclick="PL[${i}].play()" id="pl${i}">▶ Play</button><button class="s" onclick="PL[${i}].go(-1)">◀ Back</button><button class="s" onclick="PL[${i}].go(1)">Next ▶</button><div class="dots" id="dots${i}"></div></div></div>
- <div class="card"><h2><span class="step">2</span>How the code really runs <span class="note">${t.code.title}</span></h2><p class="hint">Yellow line = the line running now. Right side = what you would see.</p>
+ ${t.code?` <div class="card"><h2><span class="step">2</span>How the code really runs <span class="note">${t.code.title}</span></h2><p class="hint">Yellow line = the line running now. Right side = what you would see.</p>
  <div class="tr"><div class="code" id="code${i}">${t.code.lines.map((x,k)=>`<div id="c${i}_${k}"><i>${k+1}</i>${esc(x)}</div>`).join('')}</div>
  <div class="side"><div class="user" id="usr${i}"></div><div class="say" id="say${i}"></div><div id="win${i}"></div><div class="mem" id="mem${i}"></div><div class="con" id="con${i}"></div></div></div>
  <p class="hint">${t.code.note}</p>
  <div class="bar" style="margin-top:8px"><i id="cbar${i}"></i></div>
- <div class="ctl"><button onclick="CT[${i}].play()" id="cpl${i}">▶ Play</button><button class="s" onclick="CT[${i}].go(-1)">◀ Back</button><button class="s" onclick="CT[${i}].go(1)">Next ▶</button><span class="note" id="cnt${i}"></span></div></div>
- <div class="card"><h2><span class="step">3</span>Memory tricks</h2>${t.mn.map(m=>`<div class="mn"><span class="note" style="color:inherit">${m[0]}</span><big>${m[1]}</big></div>`).join('')}</div>
- <div class="card"><h2><span class="step">4</span>Write this in the exam <span class="note">${t.marks}</span></h2>${t.ans}</div>
- <div class="card q"><h2><span class="step">5</span>Quick check</h2><p><b>${t.q[0]}</b></p>${t.q[1].map((o,k)=>`<button onclick="chk(this,${k==t.q[2]},'${t.q[3].replace(/'/g,"\\'")}')">${o}</button>`).join('')}<p class="note"></p></div>
+ <div class="ctl"><button onclick="CT[${i}].play()" id="cpl${i}">▶ Play</button><button class="s" onclick="CT[${i}].go(-1)">◀ Back</button><button class="s" onclick="CT[${i}].go(1)">Next ▶</button><span class="note" id="cnt${i}"></span></div></div>`:''}
+ <div class="card"><h2><span class="step">${t.code?3:2}</span>Memory tricks</h2>${t.mn.map(m=>`<div class="mn"><span class="note" style="color:inherit">${m[0]}</span><big>${m[1]}</big></div>`).join('')}</div>
+ <div class="card"><h2><span class="step">${t.code?4:3}</span>Write this in the exam <span class="note">${t.marks}</span></h2>${t.ans}</div>
+ <div class="card q"><h2><span class="step">${t.code?5:4}</span>Quick check</h2><p><b>${t.q[0]}</b></p>${t.q[1].map((o,k)=>`<button onclick="chk(this,${k==t.q[2]},'${t.q[3].replace(/'/g,"\\'")}')">${o}</button>`).join('')}<p class="note"></p></div>
  <div class="link">➡️ <b>Next:</b> ${t.next} ${i<L.length-1?`<br><button class="p" style="margin-top:6px" onclick="show(${i+1})">Go to lesson ${i+2} ▶</button>`:''}</div>`;
  pages.appendChild(p);
 });
@@ -35,7 +35,7 @@ L.forEach((t,i)=>{
  const dots=document.getElementById('dots'+i);t.scenes.forEach(()=>dots.appendChild(document.createElement('b')));
  let n=0,timer=null,playing=false;
  function render(snd){const s=t.scenes[n];
-  for(const k in A){const{d,b,a}=A[k];const on=s.show.includes(k);d.style.opacity=on?1:0;d.classList.toggle('glow',s.glow===k);const pos=(s.mv&&s.mv[k])||[a.x,a.y];d.style.left=pos[0]+'%';d.style.top=pos[1]+'%';const sy=s.say&&s.say[k];b.classList.toggle('on',!!sy&&on);if(sy){b.textContent=sy;b.style.left=pos[0]+'%';b.style.top=(pos[1]-14)+'%'}}
+  for(const k in A){const{d,b,a}=A[k];const on=s.show.includes(k);d.style.opacity=on?1:0;d.classList.toggle('glow',s.glow===k);const pos=(s.mv&&s.mv[k])||[a.x,a.y];d.style.left=pos[0]+'%';d.style.top=pos[1]+'%';const sy=s.say&&s.say[k];b.classList.toggle('on',!!sy&&on);if(sy){b.textContent=sy;b.style.left=pos[0]+'%';b.style.transform='translate('+(pos[0]>75?-92:pos[0]<25?-8:-50)+'%,-100%)';b.style.top=(pos[1]-14)+'%'}}
   document.getElementById('cap'+i).textContent=s.cap;document.getElementById('sub'+i).textContent=s.sub;[...dots.children].forEach((x,j)=>x.classList.toggle('on',j<=n));document.getElementById('bar'+i).style.width=((n+1)/t.scenes.length*100)+'%';if(snd)S(s.snd)}
  function stop(){clearTimeout(timer);playing=false;document.getElementById('pl'+i).textContent='▶ Play'}
  function tick(){render(1);if(n>=t.scenes.length-1){stop();document.getElementById('pl'+i).textContent='↻ Replay';return}timer=setTimeout(()=>{n++;tick()},5200)}
@@ -43,7 +43,7 @@ L.forEach((t,i)=>{
 });
 // code tracers
 const CT=[];
-L.forEach((t,i)=>{const c=t.code;let n=0,timer=null,playing=false;
+L.forEach((t,i)=>{const c=t.code;if(!c){CT[i]={reset(){},go(){},play(){}};return}let n=0,timer=null,playing=false;
  const idx=(s,occ)=>{let k=-1,seen=0;for(let j=0;j<c.lines.length;j++){if(c.lines[j].includes(s)){if(seen==(occ||0)){k=j;break}seen++}}return k};
  c.steps.forEach(s=>{s.idx=s.l.map(x=>idx(x,s.occ));});
  function render(snd){const s=c.steps[n];let win=null,mem=[],con='';

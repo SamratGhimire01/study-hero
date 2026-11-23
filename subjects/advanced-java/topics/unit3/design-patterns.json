@@ -1,0 +1,127 @@
+{
+ "id": "u3.t04.design-patterns",
+ "topic": "u3.t04",
+ "kind": "lesson",
+ "title": "Properties, Events, and Methods Design Patterns",
+ "subtitle": "Properties, Events, and Methods Design Patterns",
+ "marks": "[5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Introspection. Introspection reads names. Here are the naming rules.",
+ "next": "Using BeanInfo Interface. If names are not enough, write a BeanInfo.",
+ "actors": {
+  "a0": {
+   "e": "🏷️",
+   "l": "Simple",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "✅",
+   "l": "Boolean",
+   "x": 30,
+   "y": 62
+  },
+  "a2": {
+   "e": "🔢",
+   "l": "Indexed",
+   "x": 50,
+   "y": 52
+  },
+  "a3": {
+   "e": "📣",
+   "l": "Events",
+   "x": 70,
+   "y": 62
+  },
+  "a4": {
+   "e": "⚙️",
+   "l": "Methods",
+   "x": 90,
+   "y": 52
+  }
+ },
+ "scenes": [
+  {
+   "cap": "Simple property",
+   "sub": "public T getX() / public void setX(T v)",
+   "show": [
+    "a0"
+   ],
+   "snd": "tick",
+   "glow": "a0"
+  },
+  {
+   "cap": "Boolean property",
+   "sub": "public boolean isX() (or getX)",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "tick",
+   "glow": "a1"
+  },
+  {
+   "cap": "Indexed property",
+   "sub": "T getX(int i), void setX(int i, T v), plus T[] getX()",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "pop",
+   "glow": "a2"
+  },
+  {
+   "cap": "Event pattern",
+   "sub": "addXListener(XListener l) / removeXListener(XListener l)",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "whoosh",
+   "glow": "a3"
+  },
+  {
+   "cap": "Methods",
+   "sub": "Any other public method is exposed as a method.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "ding",
+   "glow": "a4"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick (property methods)",
+   "html": "<b>G</b>et <b>S</b>et <b>I</b>s = getX · setX · isX (boolean)"
+  },
+  {
+   "label": "Points trick (event methods)",
+   "html": "<b>A</b>dd <b>R</b>emove = addXListener · removeXListener"
+  },
+  {
+   "label": "Property kinds",
+   "html": "<b>S</b>imple <b>I</b>ndexed <b>B</b>ound <b>C</b>onstrained = \"Sister In Big City\""
+  }
+ ],
+ "code": null,
+ "answer_html": "<h3>Definition</h3><p><b>Design patterns</b> are naming rules for methods. Introspection uses them to find a bean’s properties, events and methods automatically.</p><table><tr><th>Feature</th><th>Pattern</th><th>Example</th></tr><tr><td>Simple property</td><td>T getX(); void setX(T)</td><td>getName(), setName(String)</td></tr><tr><td>Boolean property</td><td>boolean isX(); void setX(boolean)</td><td>isActive()</td></tr><tr><td>Indexed property</td><td>T getX(int); void setX(int, T)</td><td>getMark(int i)</td></tr><tr><td>Event</td><td>addXListener(); removeXListener()</td><td>addActionListener()</td></tr><tr><td>Method</td><td>any public method</td><td>calculate()</td></tr></table>",
+ "quiz": {
+  "q": "What is the getter name for boolean property \"active\"?",
+  "options": [
+   "getActiveBool()",
+   "isActive()",
+   "activeGet()"
+  ],
+  "answer": 1,
+  "why": "Get Set Is."
+ }
+}

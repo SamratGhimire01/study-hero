@@ -1,0 +1,123 @@
+{
+ "id": "u3.t08.customizers",
+ "topic": "u3.t08",
+ "kind": "lesson",
+ "title": "Customizers",
+ "subtitle": "Customizers",
+ "marks": "[2.5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Persistence. Builder tools edit bean properties. Sometimes a simple property sheet is not enough.",
+ "next": "The Java Beans API. All these classes belong to the JavaBeans API.",
+ "actors": {
+  "a0": {
+   "e": "🧑‍🔧",
+   "l": "Tool",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "🪄",
+   "l": "Customizer",
+   "x": 30,
+   "y": 62
+  },
+  "a2": {
+   "e": "🧩",
+   "l": "Interface",
+   "x": 50,
+   "y": 52
+  },
+  "a3": {
+   "e": "🎯",
+   "l": "setObject",
+   "x": 70,
+   "y": 62
+  },
+  "a4": {
+   "e": "🔗",
+   "l": "BeanDescriptor",
+   "x": 90,
+   "y": 52
+  }
+ },
+ "scenes": [
+  {
+   "cap": "Builder tool",
+   "sub": "Normally shows a plain property sheet.",
+   "show": [
+    "a0"
+   ],
+   "snd": "pop",
+   "glow": "a0"
+  },
+  {
+   "cap": "Customizer = a wizard",
+   "sub": "A GUI panel made by the bean author to set up the bean step by step.",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "whoosh",
+   "glow": "a1"
+  },
+  {
+   "cap": "implements Customizer",
+   "sub": "Usually extends JPanel. Must have a no-arg constructor.",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "tick",
+   "glow": "a2"
+  },
+  {
+   "cap": "setObject(bean)",
+   "sub": "Tool gives the bean to the customizer to edit.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "click",
+   "glow": "a3"
+  },
+  {
+   "cap": "Linked via BeanInfo",
+   "sub": "getBeanDescriptor() returns new BeanDescriptor(Bean.class, MyCustomizer.class).",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "ding",
+   "glow": "a4"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick",
+   "html": "<b>C</b>ustomizer = <b>W</b>izard <b>d</b>ressing <b>t</b>he <b>b</b>ean"
+  },
+  {
+   "label": "Points trick (3 points)",
+   "html": "<b>P</b>enguins <b>S</b>ell <b>B</b>ananas = Panel (extends Component) · setObject(bean) · BeanDescriptor links it"
+  }
+ ],
+ "code": null,
+ "answer_html": "<h3>Definition</h3><p>A <b>Customizer</b> is a GUI class that gives a full, user-friendly editor (wizard) for a bean inside a builder tool, instead of the simple property sheet.</p><h3>Key points</h3><ul><li>Implements <b>java.beans.Customizer</b> and extends <b>Component</b> (usually JPanel).</li><li>Must have a public no-arg constructor.</li><li>Methods: <code>setObject(Object bean)</code>, <code>addPropertyChangeListener()</code>, <code>removePropertyChangeListener()</code>.</li><li>Registered in BeanInfo: <code>new BeanDescriptor(beanClass, customizerClass)</code>.</li><li>Property editors edit ONE property; a customizer edits the WHOLE bean.</li></ul>",
+ "quiz": {
+  "q": "Which method gives the bean to a customizer?",
+  "options": [
+   "setBean()",
+   "setObject()",
+   "getCustomizer()"
+  ],
+  "answer": 1,
+  "why": "Penguins Sell Bananas: S = setObject."
+ }
+}

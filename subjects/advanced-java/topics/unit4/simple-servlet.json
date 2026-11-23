@@ -1,0 +1,223 @@
+{
+ "id": "u4.t03.simple-servlet",
+ "topic": "u4.t03",
+ "kind": "lesson",
+ "title": "A Simple Servlet",
+ "subtitle": "A Simple Servlet",
+ "marks": "[5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "The Life Cycle of a Servlet. We know the life cycle. Now write one.",
+ "next": "The Servlet API. The classes we used come from the Servlet API.",
+ "actors": {
+  "a0": {
+   "e": "🧬",
+   "l": "extends",
+   "x": 10,
+   "y": 52
+  },
+  "a1": {
+   "e": "📬",
+   "l": "doGet",
+   "x": 26,
+   "y": 62
+  },
+  "a2": {
+   "e": "🏷️",
+   "l": "Type",
+   "x": 42,
+   "y": 52
+  },
+  "a3": {
+   "e": "🖊️",
+   "l": "Writer",
+   "x": 58,
+   "y": 62
+  },
+  "a4": {
+   "e": "📄",
+   "l": "println",
+   "x": 74,
+   "y": 52
+  },
+  "a5": {
+   "e": "🗺️",
+   "l": "Map URL",
+   "x": 90,
+   "y": 62
+  }
+ },
+ "scenes": [
+  {
+   "cap": "extends HttpServlet",
+   "sub": "Our class becomes a servlet.",
+   "show": [
+    "a0"
+   ],
+   "snd": "pop",
+   "glow": "a0"
+  },
+  {
+   "cap": "Override doGet(req, res)",
+   "sub": "Runs when the browser asks with GET.",
+   "show": [
+    "a0",
+    "a1"
+   ],
+   "snd": "click",
+   "glow": "a1"
+  },
+  {
+   "cap": "res.setContentType(\"text/html\")",
+   "sub": "Tell the browser: HTML is coming.",
+   "show": [
+    "a0",
+    "a1",
+    "a2"
+   ],
+   "snd": "tick",
+   "glow": "a2"
+  },
+  {
+   "cap": "PrintWriter out = res.getWriter()",
+   "sub": "Our pen to write the reply.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3"
+   ],
+   "snd": "tick",
+   "glow": "a3"
+  },
+  {
+   "cap": "out.println(\"<h1>Hello</h1>\")",
+   "sub": "The page appears in the browser.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4"
+   ],
+   "snd": "ding",
+   "glow": "a4"
+  },
+  {
+   "cap": "@WebServlet(\"/hello\") or web.xml",
+   "sub": "Connects a URL to the servlet.",
+   "show": [
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4",
+    "a5"
+   ],
+   "snd": "whoosh",
+   "glow": "a5"
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick (steps)",
+   "html": "<b>E</b>very <b>D</b>og <b>T</b>akes <b>W</b>alks <b>P</b>roudly = Extend HttpServlet · doGet · Type (setContentType) · Writer · Print"
+  },
+  {
+   "label": "Deploy trick",
+   "html": "<b>U</b>RL <b>M</b>ap = @WebServlet(\"/hello\") or <servlet-mapping> in web.xml"
+  }
+ ],
+ "code": {
+  "title": "Program: HelloServlet",
+  "lines": [
+   "import java.io.*;",
+   "import javax.servlet.*;",
+   "import javax.servlet.http.*;",
+   "import javax.servlet.annotation.WebServlet;",
+   "",
+   "@WebServlet(\"/hello\")",
+   "public class HelloServlet extends HttpServlet {",
+   "    protected void doGet(HttpServletRequest req, HttpServletResponse res)",
+   "            throws ServletException, IOException {",
+   "        res.setContentType(\"text/html\");",
+   "        PrintWriter out = res.getWriter();",
+   "        out.println(\"<h1>Hello, Servlet!</h1>\");",
+   "    }",
+   "}"
+  ],
+  "note": "(complete servlet)",
+  "steps": [
+   {
+    "l": [
+     "@WebServlet"
+    ],
+    "say": "Map the URL /hello to this servlet.",
+    "snd": "tick",
+    "mem": [
+     "/hello → HelloServlet"
+    ]
+   },
+   {
+    "l": [
+     "extends HttpServlet"
+    ],
+    "say": "Become an HTTP servlet.",
+    "snd": "pop"
+   },
+   {
+    "l": [
+     "protected void doGet"
+    ],
+    "say": "Browser opens http://localhost:8080/app/hello → container calls doGet.",
+    "snd": "whoosh",
+    "user": "🌐 You open /hello"
+   },
+   {
+    "l": [
+     "setContentType"
+    ],
+    "say": "Reply type = HTML.",
+    "snd": "tick"
+   },
+   {
+    "l": [
+     "getWriter"
+    ],
+    "say": "Get the pen.",
+    "snd": "tick",
+    "mem": [
+     "out = PrintWriter"
+    ]
+   },
+   {
+    "l": [
+     "out.println"
+    ],
+    "say": "Write the page.",
+    "snd": "ding",
+    "win": {
+     "title": "localhost:8080/app/hello",
+     "vis": 1,
+     "items": [
+      {
+       "t": "lb",
+       "v": "Hello, Servlet!"
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "answer_html": "<h3>Definition</h3><p>A <b>simple servlet</b> is a class that extends <b>HttpServlet</b> and overrides <b>doGet()</b> or <b>doPost()</b> to send an HTML response.</p><h3>Steps</h3><ul><li>Create a class that <b>extends HttpServlet</b>.</li><li>Override <b>doGet(HttpServletRequest, HttpServletResponse)</b>.</li><li>Set content type: <code>res.setContentType(\"text/html\")</code>.</li><li>Get writer: <code>PrintWriter out = res.getWriter()</code>.</li><li>Write HTML with <code>out.println()</code>.</li><li>Map URL with <code>@WebServlet(\"/hello\")</code> or web.xml, deploy on Tomcat.</li></ul>",
+ "quiz": {
+  "q": "Which method gives the PrintWriter?",
+  "options": [
+   "req.getWriter()",
+   "res.getWriter()",
+   "out.getWriter()"
+  ],
+  "answer": 1,
+  "why": "Every Dog Takes Walks: W = Writer from response."
+ }
+}

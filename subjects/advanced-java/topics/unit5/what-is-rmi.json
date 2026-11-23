@@ -1,0 +1,116 @@
+{
+ "id": "u5.t01.what-is-rmi",
+ "topic": "u5.t01",
+ "kind": "lesson",
+ "title": "What is RMI?",
+ "subtitle": "What is RMI?",
+ "marks": "[2.5]",
+ "confidence": "draft – check against textbook",
+ "source": "Core Java Vol I/II (Horstmann), Java Complete Reference (Schildt), Java SE docs",
+ "last": "Java Web Frameworks. Unit 4: browser talks to server. Now: one Java program calls a method in ANOTHER Java program.",
+ "next": "The Roles of Client and Server. There are two sides: client and server.",
+ "actors": {
+  "a": {
+   "e": "💻",
+   "l": "JVM 1 (client)",
+   "x": 15,
+   "y": 55
+  },
+  "b": {
+   "e": "🖥️",
+   "l": "JVM 2 (server)",
+   "x": 85,
+   "y": 55
+  },
+  "obj": {
+   "e": "🧠",
+   "l": "Remote object",
+   "x": 85,
+   "y": 25
+  },
+  "call": {
+   "e": "📞",
+   "l": "add(5,7)",
+   "x": 15,
+   "y": 30,
+   "h": 1
+  }
+ },
+ "scenes": [
+  {
+   "cap": "Two Java programs, two computers",
+   "sub": "Each runs in its own JVM.",
+   "show": [
+    "a",
+    "b",
+    "obj"
+   ],
+   "snd": "pop"
+  },
+  {
+   "cap": "Client wants a method that lives far away",
+   "sub": "The object is on the server.",
+   "show": [
+    "a",
+    "b",
+    "obj"
+   ],
+   "snd": "tick",
+   "glow": "obj"
+  },
+  {
+   "cap": "RMI: call it like a local method 📞",
+   "sub": "Client writes a.add(5,7); RMI does the network work.",
+   "show": [
+    "a",
+    "b",
+    "obj",
+    "call"
+   ],
+   "snd": "whoosh",
+   "glow": "call",
+   "mv": {
+    "call": [
+     60,
+     30
+    ]
+   }
+  },
+  {
+   "cap": "Result comes back",
+   "sub": "12 returns to the client as if it ran locally.",
+   "show": [
+    "a",
+    "b",
+    "obj"
+   ],
+   "snd": "ding",
+   "glow": "a",
+   "say": {
+    "a": "12"
+   }
+  }
+ ],
+ "mnemonics": [
+  {
+   "label": "Topic trick",
+   "html": "<b>R</b>MI = <b>R</b>emote <b>M</b>ethod <b>I</b>nvocation = <b>P</b>hone <b>c</b>all <b>t</b>o <b>a</b>n <b>o</b>bject"
+  },
+  {
+   "label": "Points trick (features)",
+   "html": "<b>J</b>ust <b>O</b>pen <b>S</b>ome <b>R</b>ooms = Java-to-Java only · Objects passed (serialization) · Stub/Skeleton hide network · Registry to find objects"
+  }
+ ],
+ "code": null,
+ "answer_html": "<h3>Definition</h3><p><b>RMI (Remote Method Invocation)</b> lets a Java program in one JVM call a method on an object running in another JVM over a network.</p><h3>Key points</h3><ul><li>Package <b>java.rmi</b>.</li><li>Works only between Java programs (Java-to-Java).</li><li>Uses <b>stub</b> (client) and <b>skeleton</b> (server) to hide network details.</li><li>Objects are passed using <b>serialization</b>.</li><li><b>RMI Registry</b> is used to find remote objects.</li><li>Used for distributed applications (banking, chat, remote calculators).</li></ul><h3>Figure</h3><pre>[Client JVM] --- method call over network ---&gt; [Server JVM: Remote Object]</pre>",
+ "quiz": {
+  "q": "RMI works between…",
+  "options": [
+   "Any two languages",
+   "Java and Java (two JVMs)",
+   "Browser and server"
+  ],
+  "answer": 1,
+  "why": "Just Open Some Rooms: J = Java only."
+ }
+}
